@@ -1,11 +1,32 @@
 import styles from './ohmyui-react.module.css';
 
-export function OhmyuiReact() {
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type ButtonSize = 'sm' | 'md' | 'lg';
+
+export interface ButtonProps {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  disabled?: boolean;
+  label?: string;
+  onClick?: () => void;
+}
+
+export function Button({
+  variant = 'primary',
+  size = 'md',
+  disabled = false,
+  label = '',
+  onClick,
+}: ButtonProps) {
   return (
-    <div className={styles['container']}>
-      <h1>Welcome to OhmyuiReact!</h1>
-    </div>
+    <button
+      className={`${styles['ohmyui-btn']} ${styles[`ohmyui-btn--${variant}`]} ${styles[`ohmyui-btn--${size}`]}`}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      {label}
+    </button>
   );
 }
 
-export default OhmyuiReact;
+export default Button;

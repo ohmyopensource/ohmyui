@@ -1,7 +1,59 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.ohmyui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-md);
+  transition: opacity 0.2s ease;
+}
+
+.ohmyui-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ohmyui-btn--primary {
+  background-color: var(--color-primary-500);
+  color: var(--color-neutral-0);
+}
+
+.ohmyui-btn--primary:hover:not(:disabled) {
+  background-color: var(--color-primary-600);
+}
+
+.ohmyui-btn--secondary {
+  background-color: transparent;
+  color: var(--color-primary-500);
+  border: 2px solid var(--color-primary-500);
+}
+
+.ohmyui-btn--secondary:hover:not(:disabled) {
+  background-color: var(--color-primary-50);
+}
+
+.ohmyui-btn--ghost {
+  background-color: transparent;
+  color: var(--color-primary-500);
+}
+
+.ohmyui-btn--ghost:hover:not(:disabled) {
+  background-color: var(--color-primary-50);
+}
+
+.ohmyui-btn--sm {
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-sm);
+}
+
+.ohmyui-btn--md {
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-md);
+}
+
+.ohmyui-btn--lg {
+  padding: var(--spacing-3) var(--spacing-6);
+  font-size: var(--font-size-lg);
+}
