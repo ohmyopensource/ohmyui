@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'chore'
+
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 10
+    labels:
+      - 'dependencies'
+      - 'chore'
+
+  - package-ecosystem: 'pub'
+    directory: '/packages/ohmyui_flutter'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'dependencies'
+      - 'chore'
