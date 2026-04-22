@@ -1,0 +1,44 @@
+.ohmyui-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.ohmyui-badge--sm {
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--font-size-xs);
+}
+
+.ohmyui-badge--md {
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-sm);
+}
+
+.ohmyui-badge--success {
+  background-color: #dcfce7;
+  color: var(--color-success-700);
+}
+
+.ohmyui-badge--warning {
+  background-color: #fef9c3;
+  color: var(--color-warning-700);
+}
+
+.ohmyui-badge--error {
+  background-color: #fee2e2;
+  color: var(--color-error-700);
+}
+
+.ohmyui-badge--info {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-700);
+}
+
+.ohmyui-badge--neutral {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-700);
+}
