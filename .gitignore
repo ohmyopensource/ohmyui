@@ -137,3 +137,21 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+
+.nx/cache
+.nx/workspace-data
+.angular
+
+vitest.config.*.timestamp*
+
+storybook-static
+
+# VSCode
+.vscode/*
+
+# Storybook build output
+storybook-static/
+
+# Style Dictionary build output
+packages/tokens/build/

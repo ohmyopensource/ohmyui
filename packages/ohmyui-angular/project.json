@@ -1,0 +1,69 @@
+{
+  "name": "ohmyui-angular",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/ohmyui-angular/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "test": {
+      "executor": "@nx/vitest:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "coverage/packages/ohmyui-angular"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "packages/ohmyui-angular/.storybook",
+        "browserTarget": "ohmyui-angular:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/ohmyui-angular",
+        "configDir": "packages/ohmyui-angular/.storybook",
+        "browserTarget": "ohmyui-angular:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c packages/ohmyui-angular/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "dependsOn": ["build-storybook"],
+      "options": {
+        "buildTarget": "ohmyui-angular:build-storybook",
+        "staticFilePath": "dist/storybook/ohmyui-angular",
+        "spa": true
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "ohmyui-angular:build-storybook:ci"
+        }
+      }
+    }
+  }
+}

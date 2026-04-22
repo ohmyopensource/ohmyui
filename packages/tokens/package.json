@@ -1,0 +1,9 @@
+{
+  "name": "@ohmyopensource/tokens",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "OhMyUI! design tokens - source of truth for all platforms",
+  "scripts": {
+    "build": "style-dictionary build --config sd.config.js"
+  }
+}

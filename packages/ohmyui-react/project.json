@@ -1,0 +1,9 @@
+{
+  "name": "ohmyui-react",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/ohmyui-react/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project ohmyui-react --web",
+  "targets": {}
+}
