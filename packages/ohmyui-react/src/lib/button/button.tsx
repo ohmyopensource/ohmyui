@@ -1,4 +1,4 @@
-import styles from './ohmyui-react.module.css';
+import styles from './button.module.css';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';

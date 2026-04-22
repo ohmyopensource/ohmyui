@@ -1,1 +1,1 @@
-export * from './lib/ohmyui-angular/ohmyui-angular';
+export * from './lib/button/button';

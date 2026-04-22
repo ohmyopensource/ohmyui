@@ -1,1 +1,1 @@
-export * from './lib/ohmyui-react';
+export * from './lib/button/button';
