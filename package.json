@@ -27,7 +27,7 @@
     "@oxc-project/runtime": "^0.127.0",
     "@schematics/angular": "~21.2.0",
     "@storybook/angular": "^10.3.5",
-    "@storybook/react-vite": "10.3.5",
+    "@storybook/react-vite": "10.3.6",
     "@swc-node/register": "~1.11.1",
     "@swc/core": "~1.15.5",
     "@swc/helpers": "~0.5.18",
