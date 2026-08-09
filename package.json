@@ -23,7 +23,7 @@
     "@nx/storybook": "^22.6.5",
     "@nx/vite": "22.6.5",
     "@nx/vitest": "22.6.5",
-    "@nx/web": "22.6.5",
+    "@nx/web": "22.7.1",
     "@oxc-project/runtime": "^0.127.0",
     "@schematics/angular": "~21.2.0",
     "@storybook/angular": "^10.3.5",
