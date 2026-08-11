@@ -1,6 +1,13 @@
 <button
-  [class]="'ohmyui-btn ohmyui-btn--' + variant + ' ohmyui-btn--' + size"
-  [disabled]="disabled"
+  [class]="classes"
+  [type]="type"
+  [disabled]="disabled || loading"
+  [attr.aria-busy]="loading || null"
+  [attr.aria-disabled]="disabled || null"
+  (click)="handleClick($event)"
 >
-  {{ label }}
+  @if (loading) {
+  <span class="ohmyui-btn__spinner" aria-hidden="true"></span>
+  }
+  <span class="ohmyui-btn__label">{{ label }}</span>
 </button>

@@ -1,61 +1,378 @@
+/* ─────────────────────────────────────────────
+   OhMyUI — Button
+   ───────────────────────────────────────────── */
+
+/* ── Base ────────────────────────────────────── */
+
 .ohmyui-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: none;
+  gap: var(--spacing-2);
+  border: var(--border-width-sm) solid transparent;
   cursor: pointer;
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-md);
-  transition: opacity 0.2s ease;
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--font-letter-spacing-wide);
+  line-height: var(--font-line-height-none);
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  outline: none;
+  transition:
+    background-color var(--transition-duration-normal)
+      var(--transition-easing-ease-in-out),
+    border-color var(--transition-duration-normal)
+      var(--transition-easing-ease-in-out),
+    color var(--transition-duration-normal) var(--transition-easing-ease-in-out),
+    box-shadow var(--transition-duration-normal)
+      var(--transition-easing-ease-in-out),
+    opacity var(--transition-duration-normal)
+      var(--transition-easing-ease-in-out),
+    transform var(--transition-duration-fast)
+      var(--transition-easing-ease-in-out);
 }
 
-.ohmyui-btn:disabled {
+.ohmyui-btn:active:not(:disabled):not(.ohmyui-btn--loading) {
+  transform: scale(0.97);
+}
+
+/* ── Full width ──────────────────────────────── */
+
+.ohmyui-btn--full {
+  width: 100%;
+}
+
+/* ── Disabled ────────────────────────────────── */
+
+.ohmyui-btn:disabled,
+.ohmyui-btn--loading {
   opacity: 0.5;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
-/* Variants */
-.ohmyui-btn--primary {
-  background-color: var(--color-primary-500);
-  color: var(--color-neutral-0);
+/* ── Focus ring ──────────────────────────────── */
+
+.ohmyui-btn:focus-visible {
+  box-shadow: var(--shadow-focus-primary);
 }
 
-.ohmyui-btn--primary:hover:not(:disabled) {
-  background-color: var(--color-primary-600);
+/* ── Spinner ─────────────────────────────────── */
+
+.ohmyui-btn__spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: var(--border-width-sm) solid currentColor;
+  border-top-color: transparent;
+  border-radius: var(--radius-full);
+  animation: ohmyui-spin var(--transition-duration-slow)
+    var(--transition-easing-linear) infinite;
+  flex-shrink: 0;
 }
 
-.ohmyui-btn--secondary {
-  background-color: transparent;
-  color: var(--color-primary-500);
-  border: 2px solid var(--color-primary-500);
+@keyframes ohmyui-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.ohmyui-btn--secondary:hover:not(:disabled) {
-  background-color: var(--color-primary-50);
+/* ── Radius ──────────────────────────────────── */
+
+.ohmyui-btn--radius-none {
+  border-radius: var(--radius-none);
+}
+.ohmyui-btn--radius-sm {
+  border-radius: var(--radius-sm);
+}
+.ohmyui-btn--radius-md {
+  border-radius: var(--radius-md);
+}
+.ohmyui-btn--radius-lg {
+  border-radius: var(--radius-lg);
+}
+.ohmyui-btn--radius-full {
+  border-radius: var(--radius-full);
 }
 
-.ohmyui-btn--ghost {
-  background-color: transparent;
-  color: var(--color-primary-500);
+/* ── Sizes ───────────────────────────────────── */
+
+.ohmyui-btn--xs {
+  padding: var(--spacing-0-5) var(--spacing-2);
+  font-size: var(--font-size-xs);
+  min-height: 24px;
 }
 
-.ohmyui-btn--ghost:hover:not(:disabled) {
-  background-color: var(--color-primary-50);
-}
-
-/* Sizes */
 .ohmyui-btn--sm {
   padding: var(--spacing-1) var(--spacing-3);
   font-size: var(--font-size-sm);
+  min-height: 32px;
 }
 
 .ohmyui-btn--md {
   padding: var(--spacing-2) var(--spacing-4);
   font-size: var(--font-size-md);
+  min-height: 40px;
 }
 
 .ohmyui-btn--lg {
-  padding: var(--spacing-3) var(--spacing-6);
+  padding: var(--spacing-2-5) var(--spacing-5);
   font-size: var(--font-size-lg);
+  min-height: 48px;
+}
+
+.ohmyui-btn--xl {
+  padding: var(--spacing-3) var(--spacing-6);
+  font-size: var(--font-size-xl);
+  min-height: 56px;
+}
+
+.ohmyui-btn--2xl {
+  padding: var(--spacing-4) var(--spacing-8);
+  font-size: var(--font-size-2xl);
+  min-height: 68px;
+}
+
+/* ════════════════════════════════════════════════
+   VARIANTS — Light mode
+   ════════════════════════════════════════════════ */
+
+/* ── Primary ─────────────────────────────────── */
+
+.ohmyui-btn--primary {
+  background-color: var(--color-primary-500);
+  border-color: var(--color-primary-500);
+  color: var(--color-neutral-900);
+}
+.ohmyui-btn--primary:hover:not(:disabled):not(.ohmyui-btn--loading) {
+  background-color: var(--color-primary-600);
+  border-color: var(--color-primary-600);
+  box-shadow: var(--shadow-md);
+}
+.ohmyui-btn--primary:focus-visible {
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Secondary ───────────────────────────────── */
+
+.ohmyui-btn--secondary {
+  background-color: transparent;
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-700);
+}
+.ohmyui-btn--secondary:hover:not(:disabled):not(.ohmyui-btn--loading) {
+  background-color: var(--color-primary-50);
+  border-color: var(--color-primary-600);
+}
+.ohmyui-btn--secondary:focus-visible {
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Ghost ───────────────────────────────────── */
+
+.ohmyui-btn--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-primary-700);
+}
+.ohmyui-btn--ghost:hover:not(:disabled):not(.ohmyui-btn--loading) {
+  background-color: var(--color-primary-50);
+  border-color: var(--color-primary-100);
+}
+.ohmyui-btn--ghost:focus-visible {
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Confirm ─────────────────────────────────── */
+
+.ohmyui-btn--confirm {
+  background-color: var(--color-success-500);
+  border-color: var(--color-success-500);
+  color: var(--color-neutral-900);
+}
+.ohmyui-btn--confirm:hover:not(:disabled):not(.ohmyui-btn--loading) {
+  background-color: var(--color-success-600);
+  border-color: var(--color-success-600);
+  box-shadow: var(--shadow-md);
+}
+.ohmyui-btn--confirm:focus-visible {
+  box-shadow: var(--shadow-focus-success);
+}
+
+/* ── Warning ─────────────────────────────────── */
+
+.ohmyui-btn--warning {
+  background-color: var(--color-warning-500);
+  border-color: var(--color-warning-500);
+  color: var(--color-neutral-900);
+}
+.ohmyui-btn--warning:hover:not(:disabled):not(.ohmyui-btn--loading) {
+  background-color: var(--color-warning-600);
+  border-color: var(--color-warning-600);
+  box-shadow: var(--shadow-md);
+}
+.ohmyui-btn--warning:focus-visible {
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Danger ──────────────────────────────────── */
+
+.ohmyui-btn--danger {
+  background-color: var(--color-error-500);
+  border-color: var(--color-error-500);
+  color: var(--color-neutral-0);
+}
+.ohmyui-btn--danger:hover:not(:disabled):not(.ohmyui-btn--loading) {
+  background-color: var(--color-error-600);
+  border-color: var(--color-error-600);
+  box-shadow: var(--shadow-md);
+}
+.ohmyui-btn--danger:focus-visible {
+  box-shadow: var(--shadow-focus-error);
+}
+
+/* ── Info ────────────────────────────────────── */
+
+.ohmyui-btn--info {
+  background-color: var(--color-teal-700);
+  border-color: var(--color-teal-700);
+  color: var(--color-neutral-0);
+}
+.ohmyui-btn--info:hover:not(:disabled):not(.ohmyui-btn--loading) {
+  background-color: var(--color-teal-800);
+  border-color: var(--color-teal-800);
+  box-shadow: var(--shadow-md);
+}
+.ohmyui-btn--info:focus-visible {
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Cancel ──────────────────────────────────── */
+
+.ohmyui-btn--cancel {
+  background-color: transparent;
+  border-color: var(--color-neutral-300);
+  color: var(--color-neutral-600);
+}
+.ohmyui-btn--cancel:hover:not(:disabled):not(.ohmyui-btn--loading) {
+  background-color: var(--color-neutral-100);
+  border-color: var(--color-neutral-400);
+  color: var(--color-neutral-700);
+}
+.ohmyui-btn--cancel:focus-visible {
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Link ────────────────────────────────────── */
+
+.ohmyui-btn--link {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-teal-700);
+  padding-left: 0;
+  padding-right: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ohmyui-btn--link:hover:not(:disabled):not(.ohmyui-btn--loading) {
+  color: var(--color-teal-800);
+  text-decoration-thickness: var(--border-width-sm);
+}
+.ohmyui-btn--link:focus-visible {
+  box-shadow: var(--shadow-focus-primary);
+  border-radius: var(--radius-xs);
+}
+
+/* ════════════════════════════════════════════════
+   DARK MODE
+   ════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  .ohmyui-btn:focus-visible {
+    box-shadow: var(--shadow-focus-primary);
+  }
+
+  .ohmyui-btn--primary {
+    background-color: var(--color-primary-400);
+    border-color: var(--color-primary-400);
+    color: var(--color-neutral-900);
+  }
+  .ohmyui-btn--primary:hover:not(:disabled):not(.ohmyui-btn--loading) {
+    background-color: var(--color-primary-300);
+    border-color: var(--color-primary-300);
+  }
+
+  .ohmyui-btn--secondary {
+    border-color: var(--color-primary-400);
+    color: var(--color-primary-300);
+  }
+  .ohmyui-btn--secondary:hover:not(:disabled):not(.ohmyui-btn--loading) {
+    background-color: var(--color-primary-900);
+    border-color: var(--color-primary-300);
+  }
+
+  .ohmyui-btn--ghost {
+    color: var(--color-primary-300);
+  }
+  .ohmyui-btn--ghost:hover:not(:disabled):not(.ohmyui-btn--loading) {
+    background-color: var(--color-primary-900);
+    border-color: var(--color-primary-900);
+  }
+
+  .ohmyui-btn--confirm {
+    background-color: var(--color-success-500);
+    border-color: var(--color-success-500);
+    color: var(--color-neutral-900);
+  }
+  .ohmyui-btn--confirm:hover:not(:disabled):not(.ohmyui-btn--loading) {
+    background-color: var(--color-success-400);
+    border-color: var(--color-success-400);
+  }
+
+  .ohmyui-btn--warning {
+    background-color: var(--color-warning-400);
+    border-color: var(--color-warning-400);
+    color: var(--color-neutral-900);
+  }
+  .ohmyui-btn--warning:hover:not(:disabled):not(.ohmyui-btn--loading) {
+    background-color: var(--color-warning-300);
+    border-color: var(--color-warning-300);
+  }
+
+  .ohmyui-btn--danger {
+    background-color: var(--color-error-500);
+    border-color: var(--color-error-500);
+  }
+  .ohmyui-btn--danger:hover:not(:disabled):not(.ohmyui-btn--loading) {
+    background-color: var(--color-error-400);
+    border-color: var(--color-error-400);
+  }
+
+  .ohmyui-btn--info {
+    background-color: var(--color-teal-600);
+    border-color: var(--color-teal-600);
+  }
+  .ohmyui-btn--info:hover:not(:disabled):not(.ohmyui-btn--loading) {
+    background-color: var(--color-teal-500);
+    border-color: var(--color-teal-500);
+  }
+
+  .ohmyui-btn--cancel {
+    border-color: var(--color-neutral-600);
+    color: var(--color-neutral-400);
+  }
+  .ohmyui-btn--cancel:hover:not(:disabled):not(.ohmyui-btn--loading) {
+    background-color: var(--color-neutral-800);
+    border-color: var(--color-neutral-500);
+    color: var(--color-neutral-300);
+  }
+
+  .ohmyui-btn--link {
+    color: var(--color-teal-400);
+  }
+  .ohmyui-btn--link:hover:not(:disabled):not(.ohmyui-btn--loading) {
+    color: var(--color-teal-300);
+  }
 }
