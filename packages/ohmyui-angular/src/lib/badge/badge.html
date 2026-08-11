@@ -1,5 +1,7 @@
 <span
-  [class]="'ohmyui-badge ohmyui-badge--' + variant + ' ohmyui-badge--' + size"
+  [class]="'ohmyui-badge ohmyui-badge--' + variant + ' ohmyui-badge--' + size + ' ohmyui-badge--' + shape"
 >
-  {{ label }}
+  @if (dot) {
+  <span class="ohmyui-badge__dot" aria-hidden="true"></span>
+  } {{ label }}
 </span>

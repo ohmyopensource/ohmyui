@@ -1,16 +1,55 @@
+/* ─────────────────────────────────────────────
+   OhMyUI — Badge
+   ───────────────────────────────────────────── */
+
+/* ── Base ────────────────────────────────────── */
+
 .ohmyui-badge {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-full);
+  gap: var(--spacing-1);
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-semibold);
   white-space: nowrap;
+  line-height: var(--font-line-height-none);
+  letter-spacing: var(--font-letter-spacing-wide);
+  transition:
+    background-color var(--transition-duration-fast)
+      var(--transition-easing-ease-in-out),
+    color var(--transition-duration-fast) var(--transition-easing-ease-in-out);
 }
 
-/* Sizes */
+/* ── Dot ─────────────────────────────────────── */
+
+.ohmyui-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
+  flex-shrink: 0;
+}
+
+/* ── Shapes ──────────────────────────────────── */
+
+.ohmyui-badge--pill {
+  border-radius: var(--radius-full);
+}
+.ohmyui-badge--rounded {
+  border-radius: var(--radius-md);
+}
+.ohmyui-badge--square {
+  border-radius: var(--radius-xs);
+}
+
+/* ── Sizes ───────────────────────────────────── */
+
+.ohmyui-badge--xs {
+  padding: var(--spacing-px) var(--spacing-1-5);
+  font-size: 10px;
+}
+
 .ohmyui-badge--sm {
-  padding: var(--spacing-1) var(--spacing-2);
+  padding: var(--spacing-0-5) var(--spacing-2);
   font-size: var(--font-size-xs);
 }
 
@@ -19,28 +58,133 @@
   font-size: var(--font-size-sm);
 }
 
-/* Variants */
+.ohmyui-badge--lg {
+  padding: var(--spacing-1-5) var(--spacing-4);
+  font-size: var(--font-size-md);
+}
+
+/* ════════════════════════════════════════════════
+   SOLID VARIANTS — Light mode
+   ════════════════════════════════════════════════ */
+
+.ohmyui-badge--neutral {
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-700);
+}
+
+.ohmyui-badge--primary {
+  background-color: var(--color-primary-200);
+  color: var(--color-primary-800);
+}
+
 .ohmyui-badge--success {
-  background-color: #dcfce7;
-  color: var(--color-success-700);
+  background-color: var(--color-success-200);
+  color: var(--color-success-800);
 }
 
 .ohmyui-badge--warning {
-  background-color: #fef9c3;
-  color: var(--color-warning-700);
+  background-color: var(--color-warning-200);
+  color: var(--color-warning-800);
 }
 
 .ohmyui-badge--error {
-  background-color: #fee2e2;
-  color: var(--color-error-700);
+  background-color: var(--color-error-200);
+  color: var(--color-error-800);
 }
 
 .ohmyui-badge--info {
-  background-color: var(--color-primary-100);
-  color: var(--color-primary-700);
+  background-color: var(--color-info-200);
+  color: var(--color-info-700);
 }
 
-.ohmyui-badge--neutral {
-  background-color: var(--color-neutral-100);
-  color: var(--color-neutral-700);
+.ohmyui-badge--teal {
+  background-color: var(--color-teal-200);
+  color: var(--color-teal-800);
+}
+
+/* ════════════════════════════════════════════════
+   OUTLINE VARIANTS — Light mode
+   ════════════════════════════════════════════════ */
+
+.ohmyui-badge--outline-neutral,
+.ohmyui-badge--outline-primary,
+.ohmyui-badge--outline-success,
+.ohmyui-badge--outline-warning,
+.ohmyui-badge--outline-error,
+.ohmyui-badge--outline-info {
+  background-color: transparent;
+  border: var(--border-width-xs) solid currentColor;
+}
+
+.ohmyui-badge--outline-neutral {
+  color: var(--color-neutral-600);
+}
+.ohmyui-badge--outline-primary {
+  color: var(--color-primary-700);
+}
+.ohmyui-badge--outline-success {
+  color: var(--color-success-700);
+}
+.ohmyui-badge--outline-warning {
+  color: var(--color-warning-700);
+}
+.ohmyui-badge--outline-error {
+  color: var(--color-error-700);
+}
+.ohmyui-badge--outline-info {
+  color: var(--color-info-700);
+}
+
+/* ════════════════════════════════════════════════
+   DARK MODE
+   ════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  .ohmyui-badge--neutral {
+    background-color: var(--color-neutral-700);
+    color: var(--color-neutral-200);
+  }
+  .ohmyui-badge--primary {
+    background-color: var(--color-primary-800);
+    color: var(--color-primary-200);
+  }
+  .ohmyui-badge--success {
+    background-color: var(--color-success-800);
+    color: var(--color-success-200);
+  }
+  .ohmyui-badge--warning {
+    background-color: var(--color-warning-800);
+    color: var(--color-warning-200);
+  }
+  .ohmyui-badge--error {
+    background-color: var(--color-error-800);
+    color: var(--color-error-200);
+  }
+  .ohmyui-badge--info {
+    background-color: var(--color-info-800);
+    color: var(--color-info-200);
+  }
+  .ohmyui-badge--teal {
+    background-color: var(--color-teal-800);
+    color: var(--color-teal-200);
+  }
+
+  .ohmyui-badge--outline-neutral {
+    color: var(--color-neutral-400);
+  }
+  .ohmyui-badge--outline-primary {
+    color: var(--color-primary-300);
+  }
+  .ohmyui-badge--outline-success {
+    color: var(--color-success-400);
+  }
+  .ohmyui-badge--outline-warning {
+    color: var(--color-warning-400);
+  }
+  .ohmyui-badge--outline-error {
+    color: var(--color-error-400);
+  }
+  .ohmyui-badge--outline-info {
+    color: var(--color-info-400);
+  }
 }
