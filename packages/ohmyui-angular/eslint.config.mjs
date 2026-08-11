@@ -1,5 +1,5 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from "eslint-plugin-storybook";
+import storybook from 'eslint-plugin-storybook';
 
 import nx from '@nx/eslint-plugin';
 import baseConfig from '../../eslint.config.mjs';
@@ -15,7 +15,7 @@ export default [
         'error',
         {
           type: 'attribute',
-          prefix: 'lib',
+          prefix: 'ohmyui',
           style: 'camelCase',
         },
       ],
@@ -23,7 +23,7 @@ export default [
         'error',
         {
           type: 'element',
-          prefix: 'lib',
+          prefix: 'ohmyui',
           style: 'kebab-case',
         },
       ],
@@ -31,8 +31,7 @@ export default [
   },
   {
     files: ['**/*.html'],
-    // Override or add rules here
     rules: {},
   },
-  ...storybook.configs["flat/recommended"]
+  ...storybook.configs['flat/recommended'],
 ];
