@@ -1,0 +1,34 @@
+<div [class]="wrapperClass">
+  <label class="ohmyui-switch__row" [attr.for]="inputId">
+    <input
+      [id]="inputId"
+      class="ohmyui-switch__input"
+      type="checkbox"
+      role="switch"
+      [checked]="checked"
+      [disabled]="disabled"
+      [attr.aria-checked]="checked"
+      [attr.aria-describedby]="hint ? hintId : null"
+      (change)="toggle()"
+    />
+
+    <span class="ohmyui-switch__track" aria-hidden="true">
+      <span class="ohmyui-switch__thumb"></span>
+    </span>
+
+    @if (currentLabel) {
+    <span class="ohmyui-switch__label">{{ currentLabel }}</span>
+    }
+  </label>
+
+  @if (hint) {
+  <span
+    [id]="hintId"
+    class="ohmyui-switch__hint"
+    [class.ohmyui-switch__hint--error]="status === 'error'"
+    [class.ohmyui-switch__hint--success]="status === 'success'"
+  >
+    {{ hint }}
+  </span>
+  }
+</div>

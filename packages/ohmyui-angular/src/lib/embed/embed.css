@@ -1,0 +1,202 @@
+/* ─────────────────────────────────────────────
+   OhMyUI — Embed
+   ───────────────────────────────────────────── */
+
+/* ── Base ────────────────────────────────────── */
+
+.ohmyui-embed {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-neutral-100);
+  transition:
+    box-shadow var(--transition-duration-normal)
+      var(--transition-easing-ease-out),
+    border-color var(--transition-duration-normal)
+      var(--transition-easing-ease-out);
+}
+
+/* ── Shapes ──────────────────────────────────── */
+
+.ohmyui-embed--square {
+  border-radius: var(--radius-none);
+}
+.ohmyui-embed--rounded {
+  border-radius: var(--radius-lg);
+}
+
+/* ── Ratios ──────────────────────────────────── */
+
+.ohmyui-embed--ratio-1-1 {
+  aspect-ratio: 1 / 1;
+}
+.ohmyui-embed--ratio-4-3 {
+  aspect-ratio: 4 / 3;
+}
+.ohmyui-embed--ratio-16-9 {
+  aspect-ratio: 16 / 9;
+}
+.ohmyui-embed--ratio-3-4 {
+  aspect-ratio: 3 / 4;
+}
+
+/* ── Variants ────────────────────────────────── */
+
+.ohmyui-embed--flat {
+  box-shadow: none;
+  border: none;
+}
+.ohmyui-embed--bordered {
+  border: var(--border-width-xs) solid var(--color-neutral-200);
+  box-shadow: none;
+}
+.ohmyui-embed--shadow {
+  box-shadow: var(--shadow-sm);
+  border: none;
+}
+.ohmyui-embed--shadow-md {
+  box-shadow: var(--shadow-md);
+  border: none;
+}
+.ohmyui-embed--shadow-lg {
+  box-shadow: var(--shadow-lg);
+  border: none;
+}
+
+/* ── Iframe ──────────────────────────────────── */
+
+.ohmyui-embed__frame {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 0;
+  transition: opacity var(--transition-duration-normal)
+    var(--transition-easing-ease-out);
+}
+
+.ohmyui-embed__frame--visible {
+  opacity: 1;
+}
+
+/* ── Overlay (shared) ────────────────────────── */
+
+.ohmyui-embed__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  background-color: var(--color-neutral-100);
+  z-index: 1;
+}
+
+/* ── Loading ─────────────────────────────────── */
+
+.ohmyui-embed__spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-neutral-400);
+}
+
+.ohmyui-embed__spinner svg {
+  width: 28px;
+  height: 28px;
+  animation: ohmyui-embed-spin 800ms linear infinite;
+}
+
+@keyframes ohmyui-embed-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ohmyui-embed__loading-text {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-400);
+}
+
+/* ── Error ───────────────────────────────────── */
+
+.ohmyui-embed__error {
+  padding: var(--spacing-6);
+  text-align: center;
+  gap: var(--spacing-3);
+}
+
+.ohmyui-embed__error-icon {
+  width: 36px;
+  height: 36px;
+  color: var(--color-neutral-400);
+}
+
+.ohmyui-embed__error-text {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-500);
+  max-width: 280px;
+  line-height: var(--font-line-height-normal);
+}
+
+.ohmyui-embed__error-link {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-teal-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-duration-fast)
+    var(--transition-easing-ease-out);
+}
+
+.ohmyui-embed__error-link:hover {
+  color: var(--color-teal-700);
+}
+
+/* ════════════════════════════════════════════════
+   DARK MODE
+   ════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  .ohmyui-embed {
+    background-color: var(--color-neutral-800);
+  }
+
+  .ohmyui-embed--bordered {
+    border-color: var(--color-neutral-600);
+  }
+
+  .ohmyui-embed__overlay {
+    background-color: var(--color-neutral-800);
+  }
+
+  .ohmyui-embed__spinner {
+    color: var(--color-neutral-500);
+  }
+  .ohmyui-embed__loading-text {
+    color: var(--color-neutral-500);
+  }
+  .ohmyui-embed__error-icon {
+    color: var(--color-neutral-500);
+  }
+  .ohmyui-embed__error-text {
+    color: var(--color-neutral-400);
+  }
+  .ohmyui-embed__error-link {
+    color: var(--color-teal-400);
+  }
+  .ohmyui-embed__error-link:hover {
+    color: var(--color-teal-300);
+  }
+}

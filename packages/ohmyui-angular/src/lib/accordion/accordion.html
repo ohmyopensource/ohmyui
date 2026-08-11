@@ -1,0 +1,43 @@
+<div [class]="getWrapperClass()">
+  @for (item of items; track trackById($index, item)) {
+  <div [class]="getItemClass(item)">
+    <button
+      class="ohmyui-accordion__trigger"
+      type="button"
+      [attr.aria-expanded]="isOpen(item.id)"
+      [attr.aria-disabled]="item.disabled || null"
+      [disabled]="item.disabled"
+      (click)="toggle(item)"
+      (keydown)="onKeydown($event, item)"
+    >
+      <span class="ohmyui-accordion__title">{{ item.title }}</span>
+
+      @if (item.badge) {
+      <ohmyui-badge
+        class="ohmyui-accordion__badge"
+        [variant]="item.badgeVariant ?? 'neutral'"
+        size="sm"
+        shape="pill"
+        [label]="item.badge"
+      />
+      }
+
+      <span class="ohmyui-accordion__chevron" aria-hidden="true">
+        <svg lucideChevronDown [size]="iconSize"></svg>
+      </span>
+    </button>
+
+    <div
+      class="ohmyui-accordion__panel"
+      [class.ohmyui-accordion__panel--open]="isOpen(item.id)"
+      role="region"
+      [attr.aria-hidden]="!isOpen(item.id)"
+    >
+      <!-- inner div carries padding so grid can collapse to true 0 -->
+      <div class="ohmyui-accordion__content">
+        <div class="ohmyui-accordion__content-inner">{{ item.content }}</div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

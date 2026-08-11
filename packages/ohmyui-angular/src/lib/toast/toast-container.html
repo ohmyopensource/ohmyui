@@ -1,0 +1,12 @@
+@for (position of positions; track position) { @if
+(toastsForPosition(position).length > 0) {
+<div
+  [class]="'ohmyui-toast-container ohmyui-toast-container--' + position"
+  aria-live="polite"
+  aria-atomic="false"
+>
+  @for (toast of toastsForPosition(position); track trackById($index, toast)) {
+  <ohmyui-toast-item [toast]="toast" (dismiss)="dismiss($event)" />
+  }
+</div>
+} }

@@ -1,0 +1,186 @@
+/* ─────────────────────────────────────────────
+   OhMyUI — Checkbox
+   ───────────────────────────────────────────── */
+
+.ohmyui-checkbox {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.ohmyui-checkbox--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── Row ─────────────────────────────────────── */
+
+.ohmyui-checkbox__row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ── Hidden native input ─────────────────────── */
+
+.ohmyui-checkbox__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ── Custom box ──────────────────────────────── */
+
+.ohmyui-checkbox__box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  border: var(--border-width-sm) solid var(--color-neutral-300);
+  background-color: var(--color-neutral-0);
+  color: var(--color-neutral-0);
+  transition:
+    background-color var(--transition-duration-fast)
+      var(--transition-easing-ease-out),
+    border-color var(--transition-duration-fast)
+      var(--transition-easing-ease-out),
+    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-out);
+}
+
+.ohmyui-checkbox__box svg {
+  width: 70%;
+  height: 70%;
+}
+
+/* ── Sizes ───────────────────────────────────── */
+
+.ohmyui-checkbox--sm .ohmyui-checkbox__box {
+  width: 14px;
+  height: 14px;
+}
+.ohmyui-checkbox--md .ohmyui-checkbox__box {
+  width: 18px;
+  height: 18px;
+}
+.ohmyui-checkbox--lg .ohmyui-checkbox__box {
+  width: 22px;
+  height: 22px;
+}
+
+.ohmyui-checkbox--sm .ohmyui-checkbox__label {
+  font-size: var(--font-size-sm);
+}
+.ohmyui-checkbox--md .ohmyui-checkbox__label {
+  font-size: var(--font-size-md);
+}
+.ohmyui-checkbox--lg .ohmyui-checkbox__label {
+  font-size: var(--font-size-lg);
+}
+
+/* ── Checked / indeterminate ─────────────────── */
+
+.ohmyui-checkbox__input:checked ~ .ohmyui-checkbox__box,
+.ohmyui-checkbox__input:indeterminate ~ .ohmyui-checkbox__box {
+  background-color: var(--color-primary-500);
+  border-color: var(--color-primary-500);
+}
+
+/* ── Focus ───────────────────────────────────── */
+
+.ohmyui-checkbox__input:focus-visible ~ .ohmyui-checkbox__box {
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Hover ───────────────────────────────────── */
+
+.ohmyui-checkbox__row:hover .ohmyui-checkbox__box {
+  border-color: var(--color-primary-400);
+}
+
+/* ── Status: error ───────────────────────────── */
+
+.ohmyui-checkbox--error .ohmyui-checkbox__box {
+  border-color: var(--color-error-500);
+}
+.ohmyui-checkbox--error
+  .ohmyui-checkbox__input:checked
+  ~ .ohmyui-checkbox__box {
+  background-color: var(--color-error-500);
+  border-color: var(--color-error-500);
+}
+.ohmyui-checkbox--error
+  .ohmyui-checkbox__input:focus-visible
+  ~ .ohmyui-checkbox__box {
+  box-shadow: var(--shadow-focus-error);
+}
+
+/* ── Status: success ─────────────────────────── */
+
+.ohmyui-checkbox--success
+  .ohmyui-checkbox__input:checked
+  ~ .ohmyui-checkbox__box {
+  background-color: var(--color-success-600);
+  border-color: var(--color-success-600);
+}
+.ohmyui-checkbox--success
+  .ohmyui-checkbox__input:focus-visible
+  ~ .ohmyui-checkbox__box {
+  box-shadow: var(--shadow-focus-success);
+}
+
+/* ── Variant: filled ─────────────────────────── */
+
+.ohmyui-checkbox--filled .ohmyui-checkbox__box {
+  background-color: var(--color-neutral-100);
+}
+
+/* ── Label & hint ────────────────────────────── */
+
+.ohmyui-checkbox__label {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-700);
+  line-height: var(--font-line-height-tight);
+}
+
+.ohmyui-checkbox__hint {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-neutral-500);
+  padding-left: calc(18px + var(--spacing-2));
+}
+.ohmyui-checkbox--sm .ohmyui-checkbox__hint {
+  padding-left: calc(14px + var(--spacing-2));
+}
+.ohmyui-checkbox--lg .ohmyui-checkbox__hint {
+  padding-left: calc(22px + var(--spacing-2));
+}
+.ohmyui-checkbox__hint--error {
+  color: var(--color-error-600);
+}
+.ohmyui-checkbox__hint--success {
+  color: var(--color-success-700);
+}
+
+/* ── Dark mode ───────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .ohmyui-checkbox__box {
+    background-color: var(--color-neutral-800);
+    border-color: var(--color-neutral-500);
+  }
+  .ohmyui-checkbox__label {
+    color: var(--color-neutral-200);
+  }
+  .ohmyui-checkbox__hint {
+    color: var(--color-neutral-400);
+  }
+  .ohmyui-checkbox--filled .ohmyui-checkbox__box {
+    background-color: var(--color-neutral-700);
+  }
+}

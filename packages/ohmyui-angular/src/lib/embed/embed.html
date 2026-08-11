@@ -1,0 +1,46 @@
+<div [class]="wrapperClass" [style.height.px]="height || null">
+  <!-- Loading overlay -->
+  @if (state === 'loading') {
+  <div class="ohmyui-embed__overlay" aria-hidden="true">
+    <span class="ohmyui-embed__spinner">
+      <svg lucideLoader aria-hidden="true"></svg>
+    </span>
+    <span class="ohmyui-embed__loading-text">Loading...</span>
+  </div>
+  }
+
+  <!-- Error overlay -->
+  @if (state === 'error') {
+  <div class="ohmyui-embed__overlay ohmyui-embed__error" role="alert">
+    <svg lucideFrame aria-hidden="true" class="ohmyui-embed__error-icon"></svg>
+    <p class="ohmyui-embed__error-text">{{ errorMessage }}</p>
+    @if (src) {
+    <a
+      [href]="src"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="ohmyui-embed__error-link"
+    >
+      Open in new tab
+    </a>
+    }
+  </div>
+  }
+
+  <!-- Iframe -->
+  @if (safeUrl) {
+  <iframe
+    class="ohmyui-embed__frame"
+    [class.ohmyui-embed__frame--visible]="state === 'loaded'"
+    [src]="safeUrl"
+    [title]="title || 'Embedded content'"
+    [attr.sandbox]="sandboxAttr"
+    [attr.allow]="allowAttr || null"
+    [attr.allowfullscreen]="allowFullscreen ? true : null"
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    (load)="onLoad()"
+    (error)="onError()"
+  ></iframe>
+  }
+</div>

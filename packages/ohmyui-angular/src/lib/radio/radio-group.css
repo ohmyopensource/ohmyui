@@ -1,0 +1,229 @@
+/* ─────────────────────────────────────────────
+   OhMyUI — Radio Group
+   ───────────────────────────────────────────── */
+
+.ohmyui-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-1-5);
+  width: 100%;
+}
+
+.ohmyui-radio-group--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.ohmyui-radio-group__label {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-700);
+}
+
+/* ── Options container ───────────────────────── */
+
+.ohmyui-radio-group__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.ohmyui-radio-group--horizontal .ohmyui-radio-group__options {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+}
+
+/* ── Single option row ───────────────────────── */
+
+.ohmyui-radio-group__option {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.ohmyui-radio-group__option--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── Hidden native input ─────────────────────── */
+
+.ohmyui-radio__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ── Custom dot ──────────────────────────────── */
+
+.ohmyui-radio__dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  border: var(--border-width-sm) solid var(--color-neutral-300);
+  background-color: var(--color-neutral-0);
+  transition:
+    border-color var(--transition-duration-fast)
+      var(--transition-easing-ease-out),
+    background-color var(--transition-duration-fast)
+      var(--transition-easing-ease-out),
+    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-out);
+}
+
+.ohmyui-radio__dot-inner {
+  border-radius: var(--radius-full);
+  background-color: var(--color-neutral-0);
+  transform: scale(0);
+  transition: transform var(--transition-duration-fast)
+    var(--transition-easing-spring);
+}
+
+/* ── Sizes ───────────────────────────────────── */
+
+.ohmyui-radio-group--sm .ohmyui-radio__dot {
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+}
+.ohmyui-radio-group--sm .ohmyui-radio__dot-inner {
+  width: 6px;
+  height: 6px;
+}
+.ohmyui-radio-group--sm .ohmyui-radio__label {
+  font-size: var(--font-size-sm);
+}
+
+.ohmyui-radio-group--md .ohmyui-radio__dot {
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+.ohmyui-radio-group--md .ohmyui-radio__dot-inner {
+  width: 8px;
+  height: 8px;
+}
+.ohmyui-radio-group--md .ohmyui-radio__label {
+  font-size: var(--font-size-md);
+}
+
+.ohmyui-radio-group--lg .ohmyui-radio__dot {
+  width: 22px;
+  height: 22px;
+  margin-top: 0;
+}
+.ohmyui-radio-group--lg .ohmyui-radio__dot-inner {
+  width: 10px;
+  height: 10px;
+}
+.ohmyui-radio-group--lg .ohmyui-radio__label {
+  font-size: var(--font-size-lg);
+}
+
+/* ── Checked state ───────────────────────────── */
+
+.ohmyui-radio__input:checked ~ .ohmyui-radio__dot {
+  border-color: var(--color-primary-500);
+  background-color: var(--color-primary-500);
+}
+.ohmyui-radio__input:checked ~ .ohmyui-radio__dot .ohmyui-radio__dot-inner {
+  transform: scale(1);
+}
+
+/* ── Focus ───────────────────────────────────── */
+
+.ohmyui-radio__input:focus-visible ~ .ohmyui-radio__dot {
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Hover ───────────────────────────────────── */
+
+.ohmyui-radio-group__option:hover .ohmyui-radio__dot {
+  border-color: var(--color-primary-400);
+}
+
+/* ── Status: error ───────────────────────────── */
+
+.ohmyui-radio-group--error .ohmyui-radio__dot {
+  border-color: var(--color-error-500);
+}
+.ohmyui-radio-group--error .ohmyui-radio__input:checked ~ .ohmyui-radio__dot {
+  border-color: var(--color-error-500);
+  background-color: var(--color-error-500);
+}
+.ohmyui-radio-group--error
+  .ohmyui-radio__input:focus-visible
+  ~ .ohmyui-radio__dot {
+  box-shadow: var(--shadow-focus-error);
+}
+
+/* ── Status: success ─────────────────────────── */
+
+.ohmyui-radio-group--success .ohmyui-radio__input:checked ~ .ohmyui-radio__dot {
+  border-color: var(--color-success-600);
+  background-color: var(--color-success-600);
+}
+
+/* ── Content ─────────────────────────────────── */
+
+.ohmyui-radio__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+}
+
+.ohmyui-radio__label {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-700);
+  line-height: var(--font-line-height-tight);
+}
+
+.ohmyui-radio__hint {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-neutral-500);
+  line-height: var(--font-line-height-normal);
+}
+
+/* ── Group hint ──────────────────────────────── */
+
+.ohmyui-radio-group__hint {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-neutral-500);
+}
+.ohmyui-radio-group__hint--error {
+  color: var(--color-error-600);
+}
+.ohmyui-radio-group__hint--success {
+  color: var(--color-success-700);
+}
+
+/* ── Dark mode ───────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .ohmyui-radio-group__label {
+    color: var(--color-neutral-300);
+  }
+  .ohmyui-radio__dot {
+    background-color: var(--color-neutral-800);
+    border-color: var(--color-neutral-500);
+  }
+  .ohmyui-radio__label {
+    color: var(--color-neutral-200);
+  }
+  .ohmyui-radio__hint {
+    color: var(--color-neutral-400);
+  }
+  .ohmyui-radio-group__hint {
+    color: var(--color-neutral-400);
+  }
+}

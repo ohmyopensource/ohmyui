@@ -1,0 +1,123 @@
+<div class="ohmyui-select">
+  <!-- Label — uses span to avoid label-has-associated-control since trigger is a div -->
+  @if (label) {
+  <span
+    [id]="labelId"
+    class="ohmyui-select__label"
+    [class.ohmyui-select__label--disabled]="disabled"
+  >
+    {{ label }}
+  </span>
+  }
+
+  <!-- Trigger -->
+  <div
+    [class]="triggerClass"
+    role="combobox"
+    [attr.aria-expanded]="isOpen"
+    [attr.aria-controls]="listboxId"
+    [attr.aria-labelledby]="label ? labelId : null"
+    [attr.aria-describedby]="hint ? hintId : null"
+    [attr.aria-disabled]="disabled || null"
+    [attr.aria-busy]="loading || null"
+    [tabindex]="disabled ? -1 : 0"
+    (click)="toggle()"
+    (keydown.enter)="toggle()"
+    (keydown.space)="toggle()"
+  >
+    <span class="ohmyui-select__display">{{ displayLabel }}</span>
+
+    <span class="ohmyui-select__icons">
+      @if (loading) {
+      <span
+        class="ohmyui-select__icon ohmyui-select__icon--spin"
+        aria-hidden="true"
+      >
+        <svg lucideLoader></svg>
+      </span>
+      } @else { @if (clearable && hasValue && !disabled) {
+      <button
+        class="ohmyui-select__clear"
+        type="button"
+        aria-label="Clear selection"
+        (click)="clear($event)"
+      >
+        <svg lucideX></svg>
+      </button>
+      }
+      <span
+        class="ohmyui-select__icon ohmyui-select__icon--chevron"
+        [class.ohmyui-select__icon--open]="isOpen"
+        aria-hidden="true"
+      >
+        <svg lucideChevronDown></svg>
+      </span>
+      }
+    </span>
+  </div>
+
+  <!-- Dropdown -->
+  @if (isOpen) {
+  <div
+    [id]="listboxId"
+    class="ohmyui-select__dropdown"
+    [style.max-height.px]="maxHeight"
+    role="listbox"
+    [attr.aria-multiselectable]="multiple || null"
+    [attr.aria-labelledby]="label ? labelId : null"
+  >
+    @if (searchable) {
+    <div class="ohmyui-select__search-wrap">
+      <span class="ohmyui-select__search-icon" aria-hidden="true">
+        <svg lucideSearch></svg>
+      </span>
+      <input
+        class="ohmyui-select__search"
+        type="text"
+        placeholder="Search..."
+        [(ngModel)]="searchQuery"
+        (click)="$event.stopPropagation()"
+        aria-label="Search options"
+        autocomplete="off"
+      />
+    </div>
+    } @if (filteredOptions.length === 0) {
+    <div class="ohmyui-select__empty" role="status">No options found</div>
+    } @else { @for (group of groups; track group) { @if (group) {
+    <div class="ohmyui-select__group-label" role="presentation">
+      {{ group }}
+    </div>
+    } @for (option of optionsForGroup(group); track trackByValue($index,
+    option)) {
+    <div
+      class="ohmyui-select__option"
+      [class.ohmyui-select__option--selected]="isSelected(option)"
+      [class.ohmyui-select__option--disabled]="option.disabled"
+      role="option"
+      [attr.aria-selected]="isSelected(option)"
+      [attr.aria-disabled]="option.disabled || null"
+      [tabindex]="option.disabled ? -1 : 0"
+      (click)="select(option)"
+      (keydown.enter)="select(option)"
+      (keydown.space)="select(option)"
+    >
+      <span class="ohmyui-select__option-label">{{ option.label }}</span>
+      @if (isSelected(option)) {
+      <span class="ohmyui-select__option-check" aria-hidden="true">
+        <svg lucideCheck></svg>
+      </span>
+      }
+    </div>
+    } } }
+  </div>
+  } @if (hint) {
+  <span
+    [id]="hintId"
+    class="ohmyui-select__hint"
+    [class.ohmyui-select__hint--error]="status === 'error'"
+    [class.ohmyui-select__hint--success]="status === 'success'"
+  >
+    {{ hint }}
+  </span>
+  }
+</div>

@@ -1,0 +1,40 @@
+<div [class]="wrapperClass">
+  <label class="ohmyui-checkbox__row" [attr.for]="inputId">
+    <!-- Hidden native input for form compatibility -->
+    <input
+      [id]="inputId"
+      class="ohmyui-checkbox__input"
+      type="checkbox"
+      [checked]="checked"
+      [disabled]="disabled"
+      [indeterminate]="indeterminate"
+      [attr.aria-describedby]="hint ? hintId : null"
+      [attr.aria-checked]="indeterminate ? 'mixed' : checked"
+      (change)="toggle()"
+    />
+
+    <!-- Custom visual box -->
+    <span class="ohmyui-checkbox__box" aria-hidden="true">
+      @if (indeterminate) {
+      <svg lucideMinus></svg>
+      } @else if (checked) {
+      <svg lucideCheck></svg>
+      }
+    </span>
+
+    @if (label) {
+    <span class="ohmyui-checkbox__label">{{ label }}</span>
+    }
+  </label>
+
+  @if (hint) {
+  <span
+    [id]="hintId"
+    class="ohmyui-checkbox__hint"
+    [class.ohmyui-checkbox__hint--error]="status === 'error'"
+    [class.ohmyui-checkbox__hint--success]="status === 'success'"
+  >
+    {{ hint }}
+  </span>
+  }
+</div>

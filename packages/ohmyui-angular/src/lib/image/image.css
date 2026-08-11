@@ -1,0 +1,232 @@
+/* ─────────────────────────────────────────────
+   OhMyUI — Image
+   ───────────────────────────────────────────── */
+
+/* ── Base ────────────────────────────────────── */
+
+.ohmyui-image {
+  position: relative;
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--color-neutral-100);
+  width: 100%;
+  transition:
+    box-shadow var(--transition-duration-normal)
+      var(--transition-easing-ease-out),
+    border-color var(--transition-duration-normal)
+      var(--transition-easing-ease-out);
+}
+
+/* ── Shapes ──────────────────────────────────── */
+
+.ohmyui-image--square {
+  border-radius: var(--radius-none);
+}
+.ohmyui-image--rounded {
+  border-radius: var(--radius-lg);
+}
+.ohmyui-image--circle {
+  border-radius: var(--radius-full);
+}
+
+/* ── Aspect ratios ───────────────────────────── */
+
+.ohmyui-image--ratio-1-1 {
+  aspect-ratio: 1 / 1;
+}
+.ohmyui-image--ratio-4-3 {
+  aspect-ratio: 4 / 3;
+}
+.ohmyui-image--ratio-16-9 {
+  aspect-ratio: 16 / 9;
+}
+.ohmyui-image--ratio-3-4 {
+  aspect-ratio: 3 / 4;
+}
+.ohmyui-image--ratio-auto {
+  aspect-ratio: auto;
+}
+
+/* ── Variants ────────────────────────────────── */
+
+.ohmyui-image--flat {
+  box-shadow: none;
+  border: none;
+}
+
+.ohmyui-image--bordered {
+  border: var(--border-width-xs) solid var(--color-neutral-200);
+  box-shadow: none;
+}
+
+.ohmyui-image--shadow {
+  box-shadow: var(--shadow-sm);
+  border: none;
+}
+
+.ohmyui-image--shadow-md {
+  box-shadow: var(--shadow-md);
+  border: none;
+}
+
+.ohmyui-image--shadow-lg {
+  box-shadow: var(--shadow-lg);
+  border: none;
+}
+
+/* ── Image element ───────────────────────────── */
+
+.ohmyui-image__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity var(--transition-duration-normal)
+    var(--transition-easing-ease-out);
+}
+
+.ohmyui-image__img--visible {
+  opacity: 1;
+}
+
+.ohmyui-image__img--cover {
+  object-fit: cover;
+}
+.ohmyui-image__img--contain {
+  object-fit: contain;
+}
+
+/* ── Overlay (loading + error) ───────────────── */
+
+.ohmyui-image__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  background-color: var(--color-neutral-100);
+}
+
+/* ── Loading spinner ─────────────────────────── */
+
+.ohmyui-image__spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-neutral-400);
+}
+
+.ohmyui-image__spinner svg {
+  width: 28px;
+  height: 28px;
+  animation: ohmyui-spin var(--transition-duration-slower, 1000ms)
+    var(--transition-easing-linear) infinite;
+}
+
+@keyframes ohmyui-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Error placeholder ───────────────────────── */
+
+.ohmyui-image__placeholder {
+  color: var(--color-neutral-400);
+  gap: var(--spacing-2);
+}
+
+.ohmyui-image__placeholder svg {
+  width: 32px;
+  height: 32px;
+}
+
+.ohmyui-image__placeholder-text {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-400);
+}
+
+/* ── Caption ─────────────────────────────────── */
+
+.ohmyui-image__caption {
+  display: block;
+  padding: var(--spacing-2) var(--spacing-1) 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-500);
+  line-height: var(--font-line-height-normal);
+  text-align: center;
+
+  /* caption lives outside the overflow:hidden figure */
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+  margin-top: var(--spacing-2);
+}
+
+/* caption needs figure to not clip it */
+.ohmyui-image:has(.ohmyui-image__caption) {
+  overflow: visible;
+}
+
+.ohmyui-image:has(.ohmyui-image__caption) .ohmyui-image__overlay,
+.ohmyui-image:has(.ohmyui-image__caption) .ohmyui-image__img {
+  /* keep media clipped, not the caption */
+  border-radius: inherit;
+}
+
+/* ── Screen reader only ──────────────────────── */
+
+.ohmyui-image__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ════════════════════════════════════════════════
+   DARK MODE
+   ════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  .ohmyui-image {
+    background-color: var(--color-neutral-700);
+  }
+
+  .ohmyui-image--bordered {
+    border-color: var(--color-neutral-600);
+  }
+
+  .ohmyui-image__overlay {
+    background-color: var(--color-neutral-700);
+  }
+
+  .ohmyui-image__spinner {
+    color: var(--color-neutral-500);
+  }
+
+  .ohmyui-image__placeholder {
+    color: var(--color-neutral-500);
+  }
+
+  .ohmyui-image__placeholder-text {
+    color: var(--color-neutral-500);
+  }
+
+  .ohmyui-image__caption {
+    color: var(--color-neutral-400);
+  }
+}

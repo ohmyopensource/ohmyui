@@ -1,0 +1,381 @@
+/* ─────────────────────────────────────────────
+   OhMyUI — Modal
+   ───────────────────────────────────────────── */
+
+/* ── Overlay ─────────────────────────────────── */
+
+.ohmyui-modal__overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: var(--z-overlay);
+  animation: ohmyui-overlay-in 280ms var(--transition-easing-ease-out) forwards;
+}
+
+.ohmyui-modal__overlay--out {
+  animation: ohmyui-overlay-out 220ms var(--transition-easing-ease-in) forwards;
+}
+
+@keyframes ohmyui-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes ohmyui-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ── Wrapper ─────────────────────────────────── */
+
+.ohmyui-modal__wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  pointer-events: none;
+}
+
+/* ── Panel base ──────────────────────────────── */
+
+.ohmyui-modal__panel {
+  pointer-events: all;
+  background-color: var(--color-neutral-0);
+  box-shadow: var(--shadow-2xl);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+/* ── Sizes ───────────────────────────────────── */
+
+.ohmyui-modal__panel--sm {
+  width: 100%;
+  max-width: 400px;
+}
+.ohmyui-modal__panel--md {
+  width: 100%;
+  max-width: 560px;
+}
+.ohmyui-modal__panel--lg {
+  width: 100%;
+  max-width: 768px;
+}
+.ohmyui-modal__panel--xl {
+  width: 100%;
+  max-width: 1024px;
+}
+.ohmyui-modal__panel--fullscreen {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100vh;
+  border-radius: 0 !important;
+}
+
+/* ── Position: center ────────────────────────── */
+
+.ohmyui-modal__wrapper:has(.ohmyui-modal__panel--center) {
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4);
+}
+.ohmyui-modal__panel--center {
+  border-radius: var(--radius-xl);
+  animation: ohmyui-center-in 320ms var(--transition-easing-spring) forwards;
+}
+.ohmyui-modal__panel--center.ohmyui-modal__panel--out {
+  animation: ohmyui-center-out 220ms var(--transition-easing-ease-in) forwards;
+}
+
+@keyframes ohmyui-center-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+@keyframes ohmyui-center-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+}
+
+/* ── Position: top ───────────────────────────── */
+
+.ohmyui-modal__wrapper:has(.ohmyui-modal__panel--top) {
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--spacing-6) var(--spacing-4) var(--spacing-4);
+}
+.ohmyui-modal__panel--top {
+  border-radius: var(--radius-xl);
+  animation: ohmyui-top-in 300ms var(--transition-easing-spring) forwards;
+}
+.ohmyui-modal__panel--top.ohmyui-modal__panel--out {
+  animation: ohmyui-top-out 200ms var(--transition-easing-ease-in) forwards;
+}
+
+@keyframes ohmyui-top-in {
+  from {
+    opacity: 0;
+    transform: translateY(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ohmyui-top-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+
+/* ── Position: bottom (sheet) ────────────────── */
+
+.ohmyui-modal__wrapper:has(.ohmyui-modal__panel--bottom) {
+  align-items: flex-end;
+  justify-content: center;
+}
+.ohmyui-modal__panel--bottom {
+  width: 100%;
+  max-width: 100%;
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  max-height: 85vh;
+  animation: ohmyui-bottom-in 340ms var(--transition-easing-spring) forwards;
+}
+.ohmyui-modal__panel--bottom.ohmyui-modal__panel--out {
+  animation: ohmyui-bottom-out 220ms var(--transition-easing-ease-in) forwards;
+}
+
+@keyframes ohmyui-bottom-in {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ohmyui-bottom-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+/* ── Position: left (drawer) ─────────────────── */
+
+.ohmyui-modal__wrapper:has(.ohmyui-modal__panel--left) {
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.ohmyui-modal__panel--left {
+  height: 100%;
+  max-height: 100vh;
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  animation: ohmyui-left-in 320ms var(--transition-easing-spring) forwards;
+}
+.ohmyui-modal__panel--left.ohmyui-modal__panel--out {
+  animation: ohmyui-left-out 220ms var(--transition-easing-ease-in) forwards;
+}
+
+@keyframes ohmyui-left-in {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes ohmyui-left-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+/* ── Position: right (drawer) ────────────────── */
+
+.ohmyui-modal__wrapper:has(.ohmyui-modal__panel--right) {
+  align-items: stretch;
+  justify-content: flex-end;
+}
+.ohmyui-modal__panel--right {
+  height: 100%;
+  max-height: 100vh;
+  border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+  animation: ohmyui-right-in 320ms var(--transition-easing-spring) forwards;
+}
+.ohmyui-modal__panel--right.ohmyui-modal__panel--out {
+  animation: ohmyui-right-out 220ms var(--transition-easing-ease-in) forwards;
+}
+
+@keyframes ohmyui-right-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes ohmyui-right-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* ── Header ──────────────────────────────────── */
+
+.ohmyui-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-5) var(--spacing-6);
+  border-bottom: var(--border-width-xs) solid var(--color-neutral-200);
+  flex-shrink: 0;
+}
+
+.ohmyui-modal__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-900);
+  margin: 0;
+  line-height: var(--font-line-height-tight);
+}
+
+/* ── Close button ────────────────────────────── */
+
+.ohmyui-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  color: var(--color-neutral-500);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition:
+    background-color var(--transition-duration-fast)
+      var(--transition-easing-ease-out),
+    color var(--transition-duration-fast) var(--transition-easing-ease-out);
+}
+.ohmyui-modal__close:hover {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-700);
+}
+.ohmyui-modal__close:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Body ────────────────────────────────────── */
+
+.ohmyui-modal__body {
+  padding: var(--spacing-6);
+  overflow-y: auto;
+  flex: 1;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  color: var(--color-neutral-700);
+  line-height: var(--font-line-height-normal);
+}
+
+/* ── Footer ──────────────────────────────────── */
+
+.ohmyui-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4) var(--spacing-6);
+  border-top: var(--border-width-xs) solid var(--color-neutral-200);
+  flex-shrink: 0;
+}
+
+.ohmyui-modal__footer--slot:empty {
+  display: none;
+}
+
+/* ════════════════════════════════════════════════
+   DARK MODE
+   ════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  .ohmyui-modal__overlay {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .ohmyui-modal__panel {
+    background-color: var(--color-neutral-800);
+  }
+
+  .ohmyui-modal__title {
+    color: var(--color-neutral-50);
+  }
+
+  .ohmyui-modal__header,
+  .ohmyui-modal__footer {
+    border-color: var(--color-neutral-700);
+  }
+
+  .ohmyui-modal__body {
+    color: var(--color-neutral-300);
+  }
+
+  .ohmyui-modal__close {
+    color: var(--color-neutral-400);
+  }
+  .ohmyui-modal__close:hover {
+    background-color: var(--color-neutral-700);
+    color: var(--color-neutral-200);
+  }
+}

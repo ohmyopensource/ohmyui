@@ -1,0 +1,57 @@
+@if (isVisible) {
+<div [class]="overlayClass" (click)="onOverlayClick()" aria-hidden="true"></div>
+
+<div
+  class="ohmyui-modal__wrapper"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="title || 'Dialog'"
+  (keydown.tab)="onKeydownTab($event)"
+>
+  <div #modalPanel [class]="panelClass">
+    @if (title || closable) {
+    <div class="ohmyui-modal__header">
+      @if (title) {
+      <h2 class="ohmyui-modal__title">{{ title }}</h2>
+      } @if (closable) {
+      <button
+        class="ohmyui-modal__close"
+        type="button"
+        aria-label="Close"
+        (click)="requestClose()"
+      >
+        <svg lucideX [size]="18" aria-hidden="true"></svg>
+      </button>
+      }
+    </div>
+    }
+
+    <div class="ohmyui-modal__body">
+      <ng-content select="[slot=body]" />
+    </div>
+
+    <!-- Custom footer via slot -->
+    <div class="ohmyui-modal__footer ohmyui-modal__footer--slot">
+      <ng-content select="[slot=actions]" />
+    </div>
+
+    <!-- Predefined footer when confirmLabel is set -->
+    @if (hasFooter) {
+    <div class="ohmyui-modal__footer">
+      <ohmyui-button
+        [variant]="'cancel'"
+        size="md"
+        [label]="cancelLabel"
+        (clicked)="requestClose()"
+      />
+      <ohmyui-button
+        [variant]="confirmVariant"
+        size="md"
+        [label]="confirmLabel"
+        (clicked)="onConfirm()"
+      />
+    </div>
+    }
+  </div>
+</div>
+}

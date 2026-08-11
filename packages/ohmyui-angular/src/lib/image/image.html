@@ -1,0 +1,50 @@
+<figure [class]="wrapperClass" [attr.role]="caption ? 'figure' : null">
+  <!-- Hidden long description for screen readers -->
+  @if (description) {
+  <span [id]="descriptionId" class="ohmyui-image__sr-only"
+    >{{ description }}</span
+  >
+  }
+
+  <!-- Actual image — always in DOM so browser can start loading -->
+  @if (src) {
+  <img
+    [class]="imgClass"
+    [src]="src"
+    [alt]="alt"
+    [attr.loading]="lazy ? 'lazy' : 'eager'"
+    [attr.decoding]="'async'"
+    [attr.width]="width || null"
+    [attr.height]="height || null"
+    [attr.aria-describedby]="description ? descriptionId : null"
+    (load)="onLoad()"
+    (error)="onError()"
+  />
+  }
+
+  <!-- Loading skeleton -->
+  @if (state === 'loading') {
+  <div class="ohmyui-image__overlay" aria-hidden="true">
+    <span class="ohmyui-image__spinner">
+      <svg lucideLoader aria-hidden="true"></svg>
+    </span>
+  </div>
+  }
+
+  <!-- Error placeholder -->
+  @if (state === 'error') {
+  <div
+    class="ohmyui-image__overlay ohmyui-image__placeholder"
+    role="img"
+    [attr.aria-label]="alt || 'Image unavailable'"
+  >
+    <svg lucideImageOff aria-hidden="true"></svg>
+    <span class="ohmyui-image__placeholder-text">Image unavailable</span>
+  </div>
+  }
+
+  <!-- Caption -->
+  @if (caption) {
+  <figcaption class="ohmyui-image__caption">{{ caption }}</figcaption>
+  }
+</figure>

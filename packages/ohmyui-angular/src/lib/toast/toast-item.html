@@ -1,0 +1,39 @@
+<div [class]="toastClass" role="alert" aria-live="assertive">
+  <!-- Icon -->
+  <span class="ohmyui-toast__icon" aria-hidden="true">
+    @switch (toast.type) { @case ('success') {
+    <svg lucideCircleCheck aria-hidden="true"></svg> } @case ('error') {
+    <svg lucideCircleX aria-hidden="true"></svg> } @case ('warning') {
+    <svg lucideTriangleAlert aria-hidden="true"></svg> } @case ('info') {
+    <svg lucideInfo aria-hidden="true"></svg> } @case ('neutral') {
+    <svg lucideBell aria-hidden="true"></svg> } }
+  </span>
+
+  <!-- Content -->
+  <div class="ohmyui-toast__content">
+    @if (toast.title) {
+    <p class="ohmyui-toast__title">{{ toast.title }}</p>
+    } @if (toast.message) {
+    <p class="ohmyui-toast__message">{{ toast.message }}</p>
+    }
+  </div>
+
+  <!-- Close button -->
+  @if (toast.closable) {
+  <button
+    class="ohmyui-toast__close"
+    type="button"
+    aria-label="Dismiss"
+    (click)="onDismiss()"
+  >
+    <svg lucideX aria-hidden="true"></svg>
+  </button>
+  }
+
+  <!-- Progress bar -->
+  @if (toast.duration > 0) {
+  <div class="ohmyui-toast__progress">
+    <div class="ohmyui-toast__progress-bar" [style.width.%]="progress"></div>
+  </div>
+  }
+</div>

@@ -1,0 +1,476 @@
+/* ─────────────────────────────────────────────
+   OhMyUI — Select
+   ───────────────────────────────────────────── */
+
+/* ── Wrapper ─────────────────────────────────── */
+
+.ohmyui-select {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1-5);
+  position: relative;
+  width: 100%;
+}
+
+/* ── Label ───────────────────────────────────── */
+
+.ohmyui-select__label {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-700);
+  line-height: var(--font-line-height-tight);
+}
+
+.ohmyui-select__label--disabled {
+  opacity: 0.5;
+}
+
+/* ── Trigger base ────────────────────────────── */
+
+.ohmyui-select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  width: 100%;
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-800);
+  outline: none;
+  user-select: none;
+  transition:
+    border-color var(--transition-duration-fast)
+      var(--transition-easing-ease-out),
+    background-color var(--transition-duration-fast)
+      var(--transition-easing-ease-out),
+    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-out);
+}
+
+.ohmyui-select__trigger--placeholder .ohmyui-select__display {
+  color: var(--color-neutral-400);
+}
+
+.ohmyui-select__trigger--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.ohmyui-select__trigger--loading {
+  cursor: wait;
+  pointer-events: none;
+}
+
+/* ── Sizes ───────────────────────────────────── */
+
+.ohmyui-select__trigger--xs {
+  padding: var(--spacing-0-5) var(--spacing-2);
+  font-size: var(--font-size-xs);
+  min-height: 24px;
+  border-radius: var(--radius-sm);
+}
+.ohmyui-select__trigger--sm {
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-sm);
+  min-height: 32px;
+  border-radius: var(--radius-md);
+}
+.ohmyui-select__trigger--md {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-md);
+  min-height: 40px;
+  border-radius: var(--radius-md);
+}
+.ohmyui-select__trigger--lg {
+  padding: var(--spacing-2-5) var(--spacing-4);
+  font-size: var(--font-size-lg);
+  min-height: 48px;
+  border-radius: var(--radius-lg);
+}
+.ohmyui-select__trigger--xl {
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-xl);
+  min-height: 56px;
+  border-radius: var(--radius-lg);
+}
+
+/* ── Variant: default ────────────────────────── */
+
+.ohmyui-select__trigger--default {
+  background-color: var(--color-neutral-0);
+  border: var(--border-width-xs) solid var(--color-neutral-300);
+}
+.ohmyui-select__trigger--default:hover:not(.ohmyui-select__trigger--disabled) {
+  border-color: var(--color-neutral-400);
+}
+.ohmyui-select__trigger--default.ohmyui-select__trigger--open,
+.ohmyui-select__trigger--default:focus-visible {
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Variant: filled ─────────────────────────── */
+
+.ohmyui-select__trigger--filled {
+  background-color: var(--color-neutral-100);
+  border: var(--border-width-xs) solid transparent;
+}
+.ohmyui-select__trigger--filled:hover:not(.ohmyui-select__trigger--disabled) {
+  background-color: var(--color-neutral-200);
+}
+.ohmyui-select__trigger--filled.ohmyui-select__trigger--open,
+.ohmyui-select__trigger--filled:focus-visible {
+  background-color: var(--color-neutral-0);
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Variant: ghost ──────────────────────────── */
+
+.ohmyui-select__trigger--ghost {
+  background-color: transparent;
+  border: var(--border-width-xs) solid transparent;
+}
+.ohmyui-select__trigger--ghost:hover:not(.ohmyui-select__trigger--disabled) {
+  background-color: var(--color-neutral-50);
+}
+.ohmyui-select__trigger--ghost.ohmyui-select__trigger--open,
+.ohmyui-select__trigger--ghost:focus-visible {
+  background-color: var(--color-neutral-50);
+  border-color: var(--color-primary-400);
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ── Status: error ───────────────────────────── */
+
+.ohmyui-select__trigger--error {
+  border-color: var(--color-error-500) !important;
+}
+.ohmyui-select__trigger--error:focus-visible,
+.ohmyui-select__trigger--error.ohmyui-select__trigger--open {
+  box-shadow: var(--shadow-focus-error);
+}
+
+/* ── Status: success ─────────────────────────── */
+
+.ohmyui-select__trigger--success {
+  border-color: var(--color-success-600) !important;
+}
+.ohmyui-select__trigger--success:focus-visible,
+.ohmyui-select__trigger--success.ohmyui-select__trigger--open {
+  box-shadow: var(--shadow-focus-success);
+}
+
+/* ── Display text ────────────────────────────── */
+
+.ohmyui-select__display {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Icons ───────────────────────────────────── */
+
+.ohmyui-select__icons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  flex-shrink: 0;
+}
+
+.ohmyui-select__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-neutral-400);
+}
+
+.ohmyui-select__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ohmyui-select__icon--chevron {
+  transition: transform var(--transition-duration-normal)
+    var(--transition-easing-spring);
+}
+.ohmyui-select__icon--open {
+  transform: rotate(180deg);
+}
+
+.ohmyui-select__icon--spin svg {
+  animation: ohmyui-select-spin 600ms linear infinite;
+}
+@keyframes ohmyui-select-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Clear button ────────────────────────────── */
+
+.ohmyui-select__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-neutral-400);
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background-color var(--transition-duration-fast)
+      var(--transition-easing-ease-out),
+    color var(--transition-duration-fast) var(--transition-easing-ease-out);
+}
+.ohmyui-select__clear:hover {
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-600);
+}
+.ohmyui-select__clear svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ── Dropdown ────────────────────────────────── */
+
+.ohmyui-select__dropdown {
+  position: absolute;
+  top: calc(100% + var(--spacing-1));
+  left: 0;
+  right: 0;
+  z-index: var(--z-dropdown);
+  background-color: var(--color-neutral-0);
+  border: var(--border-width-xs) solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow-y: auto;
+  animation: ohmyui-select-in 180ms var(--transition-easing-spring) forwards;
+}
+
+@keyframes ohmyui-select-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Search ──────────────────────────────────── */
+
+.ohmyui-select__search-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-bottom: var(--border-width-xs) solid var(--color-neutral-100);
+  position: sticky;
+  top: 0;
+  background-color: var(--color-neutral-0);
+  z-index: 1;
+}
+
+.ohmyui-select__search-icon {
+  display: flex;
+  color: var(--color-neutral-400);
+  flex-shrink: 0;
+}
+.ohmyui-select__search-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ohmyui-select__search {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-800);
+}
+.ohmyui-select__search::placeholder {
+  color: var(--color-neutral-400);
+}
+
+/* ── Group label ─────────────────────────────── */
+
+.ohmyui-select__group-label {
+  padding: var(--spacing-2) var(--spacing-3) var(--spacing-1);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: var(--font-letter-spacing-wider);
+}
+
+/* ── Option ──────────────────────────────────── */
+
+.ohmyui-select__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  color: var(--color-neutral-700);
+  cursor: pointer;
+  transition: background-color var(--transition-duration-fast)
+    var(--transition-easing-ease-out);
+}
+.ohmyui-select__option:hover:not(.ohmyui-select__option--disabled) {
+  background-color: var(--color-neutral-50);
+}
+.ohmyui-select__option--selected {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-800);
+  font-weight: var(--font-weight-semibold);
+}
+.ohmyui-select__option--selected:hover {
+  background-color: var(--color-primary-100) !important;
+}
+.ohmyui-select__option--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ohmyui-select__option-label {
+  flex: 1;
+}
+
+.ohmyui-select__option-check {
+  display: flex;
+  color: var(--color-primary-600);
+  flex-shrink: 0;
+}
+.ohmyui-select__option-check svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── Empty state ─────────────────────────────── */
+
+.ohmyui-select__empty {
+  padding: var(--spacing-4) var(--spacing-3);
+  text-align: center;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-400);
+}
+
+/* ── Hint ────────────────────────────────────── */
+
+.ohmyui-select__hint {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-neutral-500);
+  line-height: var(--font-line-height-normal);
+}
+.ohmyui-select__hint--error {
+  color: var(--color-error-600);
+}
+.ohmyui-select__hint--success {
+  color: var(--color-success-700);
+}
+
+/* ════════════════════════════════════════════════
+   DARK MODE
+   ════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  .ohmyui-select__label {
+    color: var(--color-neutral-300);
+  }
+
+  .ohmyui-select__trigger {
+    color: var(--color-neutral-100);
+  }
+  .ohmyui-select__trigger--placeholder .ohmyui-select__display {
+    color: var(--color-neutral-500);
+  }
+
+  .ohmyui-select__trigger--default {
+    background-color: var(--color-neutral-800);
+    border-color: var(--color-neutral-600);
+  }
+  .ohmyui-select__trigger--default:hover:not(
+      .ohmyui-select__trigger--disabled
+    ) {
+    border-color: var(--color-neutral-500);
+  }
+  .ohmyui-select__trigger--default.ohmyui-select__trigger--open {
+    background-color: var(--color-neutral-800);
+    border-color: var(--color-primary-400);
+  }
+
+  .ohmyui-select__trigger--filled {
+    background-color: var(--color-neutral-700);
+  }
+  .ohmyui-select__trigger--filled:hover:not(.ohmyui-select__trigger--disabled) {
+    background-color: var(--color-neutral-600);
+  }
+  .ohmyui-select__trigger--filled.ohmyui-select__trigger--open {
+    background-color: var(--color-neutral-800);
+    border-color: var(--color-primary-400);
+  }
+
+  .ohmyui-select__trigger--ghost:hover {
+    background-color: var(--color-neutral-800);
+  }
+
+  .ohmyui-select__dropdown {
+    background-color: var(--color-neutral-800);
+    border-color: var(--color-neutral-600);
+  }
+
+  .ohmyui-select__search-wrap {
+    background-color: var(--color-neutral-800);
+    border-color: var(--color-neutral-700);
+  }
+  .ohmyui-select__search {
+    color: var(--color-neutral-100);
+  }
+
+  .ohmyui-select__option {
+    color: var(--color-neutral-200);
+  }
+  .ohmyui-select__option:hover:not(.ohmyui-select__option--disabled) {
+    background-color: var(--color-neutral-700);
+  }
+  .ohmyui-select__option--selected {
+    background-color: var(--color-primary-900);
+    color: var(--color-primary-200);
+  }
+  .ohmyui-select__option--selected:hover {
+    background-color: var(--color-primary-800) !important;
+  }
+  .ohmyui-select__option-check {
+    color: var(--color-primary-400);
+  }
+
+  .ohmyui-select__clear:hover {
+    background-color: var(--color-neutral-700);
+    color: var(--color-neutral-200);
+  }
+
+  .ohmyui-select__hint {
+    color: var(--color-neutral-400);
+  }
+  .ohmyui-select__hint--error {
+    color: var(--color-error-400);
+  }
+  .ohmyui-select__hint--success {
+    color: var(--color-success-400);
+  }
+}

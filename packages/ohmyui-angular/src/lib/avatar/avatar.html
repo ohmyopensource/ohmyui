@@ -1,0 +1,27 @@
+<!-- outer wrapper: position relative so status dot sits outside overflow:hidden -->
+<span [class]="wrapperClass">
+  <span [class]="avatarClass">
+    @if (resolvedVariant === 'image') {
+    <img
+      [src]="src"
+      [alt]="alt || name"
+      class="ohmyui-avatar__img"
+      (error)="onImageError()"
+    />
+    } @if (resolvedVariant === 'initials') {
+    <span class="ohmyui-avatar__initials">{{ initials }}</span>
+    } @if (resolvedVariant === 'icon') {
+    <span class="ohmyui-avatar__icon" aria-hidden="true">
+      <svg lucideUser></svg>
+    </span>
+    }
+  </span>
+
+  <!-- status dot lives on the wrapper, not inside avatar, so it's never clipped -->
+  @if (status !== 'none') {
+  <span
+    [class]="'ohmyui-avatar__status ohmyui-avatar__status--' + status"
+    [attr.aria-label]="status"
+  ></span>
+  }
+</span>

@@ -1,0 +1,54 @@
+<div [class]="groupClass">
+  @if (label) {
+  <span class="ohmyui-radio-group__label">{{ label }}</span>
+  }
+
+  <div
+    class="ohmyui-radio-group__options"
+    role="radiogroup"
+    [attr.aria-labelledby]="label ? groupId + '-label' : null"
+    [attr.aria-describedby]="hint ? hintId : null"
+  >
+    @for (option of options; track trackByValue($index, option)) {
+    <label
+      class="ohmyui-radio-group__option"
+      [class.ohmyui-radio-group__option--selected]="isSelected(option)"
+      [class.ohmyui-radio-group__option--disabled]="option.disabled || disabled"
+      [attr.for]="optionId(option)"
+    >
+      <input
+        [id]="optionId(option)"
+        class="ohmyui-radio__input"
+        type="radio"
+        [name]="groupId"
+        [value]="option.value"
+        [checked]="isSelected(option)"
+        [disabled]="option.disabled || disabled"
+        (change)="select(option)"
+      />
+
+      <span class="ohmyui-radio__dot" aria-hidden="true">
+        <span class="ohmyui-radio__dot-inner"></span>
+      </span>
+
+      <span class="ohmyui-radio__content">
+        <span class="ohmyui-radio__label">{{ option.label }}</span>
+        @if (option.hint) {
+        <span class="ohmyui-radio__hint">{{ option.hint }}</span>
+        }
+      </span>
+    </label>
+    }
+  </div>
+
+  @if (hint) {
+  <span
+    [id]="hintId"
+    class="ohmyui-radio-group__hint"
+    [class.ohmyui-radio-group__hint--error]="status === 'error'"
+    [class.ohmyui-radio-group__hint--success]="status === 'success'"
+  >
+    {{ hint }}
+  </span>
+  }
+</div>
