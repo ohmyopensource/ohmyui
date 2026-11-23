@@ -1,0 +1,89 @@
+/**
+ * @file link.css
+ * @description Styling for LinkComponent including color variants, sizing
+ * system, and trailing icon layout.
+ * Consuma i design token generati da packages/tokens.
+ */
+
+/* Host */
+:host {
+  display: contents;
+
+  /*
+   * Component-tier: usati solo dal colore di BASE (non hover) di primary/
+   * secondary — stesso pattern già visto in Email/Button/Badge/Text: il
+   * ruolo "dark" ridefinito in dark mode è troppo scuro per restare
+   * leggibile come testo. L'hover usa già il ruolo "text" (theme-aware
+   * di suo) e non necessita di alcun fix.
+   */
+  --link-primary-color: var(--color-primary-dark);
+  --link-secondary-color: var(--color-secondary-dark);
+}
+:host-context(.dark-theme) {
+  --link-primary-color: var(--color-primary-light);
+  --link-secondary-color: var(--color-secondary-light);
+}
+
+/* Base Link */
+.ohmyui-inline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition-duration-normal) var(--transition-easing-ease-in-out);
+}
+.ohmyui-inline-link__text {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--transition-duration-normal) var(--transition-easing-ease-in-out);
+}
+.ohmyui-inline-link:hover .ohmyui-inline-link__text {
+  text-decoration-color: currentColor;
+}
+
+/* Size Variants */
+.ohmyui-inline-link--sm {
+  font-size: 0.75rem;
+}
+.ohmyui-inline-link--md {
+  font-size: 0.875rem;
+}
+.ohmyui-inline-link--lg {
+  font-size: 1rem;
+}
+
+/* Icon */
+.ohmyui-inline-link__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Color Variants */
+.ohmyui-inline-link--primary {
+  color: var(--link-primary-color);
+}
+.ohmyui-inline-link--secondary {
+  color: var(--link-secondary-color);
+}
+.ohmyui-inline-link--neutral {
+  color: var(--color-neutral-600);
+}
+.ohmyui-inline-link--ghost {
+  color: var(--color-neutral-500);
+}
+
+/* Hover */
+.ohmyui-inline-link--primary:hover {
+  color: var(--color-primary-text);
+}
+.ohmyui-inline-link--secondary:hover {
+  color: var(--color-secondary-text);
+}
+.ohmyui-inline-link--neutral:hover {
+  color: var(--color-neutral-900);
+}
+.ohmyui-inline-link--ghost:hover {
+  color: var(--color-neutral-700);
+}

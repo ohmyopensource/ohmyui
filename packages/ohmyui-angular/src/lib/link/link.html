@@ -1,0 +1,26 @@
+<!--
+@file link.html
+@description Template for LinkComponent rendering either an internal
+Angular router link or an external hyperlink, with an optional trailing
+icon shown only for external links.
+-->
+@if (mode === 'internal') {
+  <a [routerLink]="href" [ngClass]="linkClasses">
+    <span class="ohmyui-inline-link__text">{{ label }}</span>
+  </a>
+}
+@if (mode === 'external') {
+  <a
+    [href]="href"
+    [target]="target"
+    [rel]="externalRel"
+    [ngClass]="linkClasses"
+    [attr.aria-label]="accessibleLabel">
+    <span class="ohmyui-inline-link__text">{{ label }}</span>
+    @if (displayExternalIcon) {
+      <span class="ohmyui-inline-link__icon" aria-hidden="true">
+        <svg [lucideIcon]="externalIcon" [size]="iconSize"></svg>
+      </span>
+    }
+  </a>
+}
