@@ -1,378 +1,540 @@
-/* ─────────────────────────────────────────────
-   OhMyUI — Button
-   ───────────────────────────────────────────── */
+/**
+ * @file button.css
+ * @description Styling for ButtonComponent including button variants,
+ * sizing system, interaction states, accessibility, ripple effects,
+ * success feedback states, and dark theme support.
+ * Consuma i design token generati da packages/tokens (variables.css + theme-dark.css).
+ */
 
-/* ── Base ────────────────────────────────────── */
+/* Host */
+:host {
+  display: contents;
 
+  /*
+   * Component-tier tokens: mappano i ruoli semantici (packages/tokens) sulle
+   * variabili specifiche del Button. Un solo punto di override per un
+   * consumer che voglia ridefinire il Button senza toccare tutto il brand.
+   */
+  --btn-primary-g1: var(--color-primary-light);
+  --btn-primary-g2: var(--color-primary-dark);
+  --btn-primary-text: var(--color-primary-text);
+  --btn-primary-shadow: var(--color-primary-shadow);
+  --btn-primary-focus: var(--color-primary-focus);
+
+  --btn-secondary-g1: var(--color-secondary-light);
+  --btn-secondary-g2: var(--color-secondary-dark);
+  --btn-secondary-text: var(--color-secondary-text);
+  --btn-secondary-shadow: var(--color-secondary-shadow);
+  --btn-secondary-focus: var(--color-secondary-focus);
+
+  --btn-tertiary-g1: var(--color-tertiary-light);
+  --btn-tertiary-g2: var(--color-tertiary-dark);
+  --btn-tertiary-text: var(--color-tertiary-text);
+  --btn-tertiary-shadow: var(--color-tertiary-shadow);
+  --btn-tertiary-focus: var(--color-tertiary-focus);
+
+  --btn-success-g1: var(--color-success-light);
+  --btn-success-g2: var(--color-success-dark);
+  --btn-success-text: var(--color-success-text);
+  --btn-success-shadow: var(--color-success-shadow);
+  --btn-success-focus: var(--color-success-focus);
+
+  --btn-warning-g1: var(--color-warning-light);
+  --btn-warning-g2: var(--color-warning-dark);
+  --btn-warning-text: var(--color-warning-text);
+  --btn-warning-shadow: var(--color-warning-shadow);
+  --btn-warning-focus: var(--color-warning-focus);
+
+  --btn-error-g1: var(--color-error-light);
+  --btn-error-g2: var(--color-error-dark);
+  --btn-error-text: var(--color-error-text);
+  --btn-error-shadow: var(--color-error-shadow);
+  --btn-error-focus: var(--color-error-focus);
+
+  --btn-info-g1: var(--color-info-light);
+  --btn-info-g2: var(--color-info-dark);
+  --btn-info-text: var(--color-info-text);
+  --btn-info-shadow: var(--color-info-shadow);
+  --btn-info-focus: var(--color-info-focus);
+
+  /*
+   * Ghost/outline background: nell'originale OMU --btn-ghost-g1 e
+   * --btn-outline-g1 erano referenziati in .btn--ghost/.btn--outline ma MAI
+   * definiti nei token globali — variabile non risolta, browser ignora la
+   * proprietà. Qui li definiamo esplicitamente come trasparenti (l'intento
+   * visivo era chiaramente "nessun riempimento").
+   */
+  --btn-ghost-g1: transparent;
+  --btn-ghost-text: var(--color-neutral-500);
+  --btn-ghost-border: var(--color-neutral-300);
+  --btn-ghost-hover-bg: var(--color-ghost-hover-bg);
+  --btn-ghost-shadow: var(--color-ghost-shadow);
+  --btn-ghost-focus: var(--color-ghost-focus);
+
+  --btn-outline-g1: transparent;
+  --btn-outline-text: var(--color-primary-dark);
+  --btn-outline-border: var(--color-primary-dark);
+  --btn-outline-hover-bg: var(--color-outline-hover-bg);
+  --btn-outline-shadow: var(--color-outline-shadow);
+  --btn-outline-focus: var(--color-outline-focus);
+
+  --btn-flat-text: var(--color-primary-dark);
+  --btn-flat-hover-bg: var(--color-flat-hover-bg);
+  --btn-flat-focus: var(--color-flat-focus);
+
+  --btn-disabled-g1: var(--color-neutral-200);
+  --btn-disabled-g2: var(--color-neutral-300);
+  --btn-disabled-text: var(--color-neutral-400);
+
+  --btn-succeeded-g1: var(--color-success-light);
+  --btn-succeeded-g2: var(--color-success-dark);
+  --btn-succeeded-text: var(--color-success-text);
+  --btn-succeeded-shadow: var(--color-success-shadow);
+
+  --btn-succeeded-ghost-text: var(--color-success-dark);
+  --btn-succeeded-ghost-border: var(--color-success-dark);
+  /* Nessun token dedicato per questo sfondo: derivato al volo dal colore
+     semantico invece di aggiungere un token per un solo, singolo uso. */
+  --btn-succeeded-ghost-bg: color-mix(
+    in srgb,
+    var(--color-success-dark) 8%,
+    transparent
+  );
+
+  --btn-radius: var(--border-radius-md);
+  --btn-transition: var(--transition-duration-normal)
+    var(--transition-easing-ease-in-out);
+}
+
+/*
+ * Dark theme — outline e flat vanno corretti esplicitamente: usano il ruolo
+ * "dark" della palette (pensato per contrasto su sfondo chiaro), che in dark
+ * mode ridefinito diventa troppo scuro per restare leggibile come testo.
+ * Stesso problema già risolto in badge.css, qui applicato da subito.
+ * Vedi badge.css per il perché di :host-context invece di ".dark-theme X".
+ */
+:host-context(.dark-theme) {
+  --btn-outline-text: var(--color-primary-light);
+  --btn-outline-border: var(--color-primary-light);
+  --btn-flat-text: var(--color-primary-light);
+}
+
+/* Base Button */
 .ohmyui-btn {
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-2);
-  border: var(--border-width-sm) solid transparent;
-  cursor: pointer;
-  font-family: var(--font-family-body);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: var(--font-letter-spacing-wide);
-  line-height: var(--font-line-height-none);
+  gap: 0.5em;
+  width: 100%;
+  min-width: 0;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   white-space: nowrap;
   text-decoration: none;
-  user-select: none;
+  line-height: 1;
+  border: none;
+  border-radius: var(--btn-radius);
   outline: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
   transition:
-    background-color var(--transition-duration-normal)
-      var(--transition-easing-ease-in-out),
-    border-color var(--transition-duration-normal)
-      var(--transition-easing-ease-in-out),
-    color var(--transition-duration-normal) var(--transition-easing-ease-in-out),
-    box-shadow var(--transition-duration-normal)
-      var(--transition-easing-ease-in-out),
-    opacity var(--transition-duration-normal)
-      var(--transition-easing-ease-in-out),
-    transform var(--transition-duration-fast)
-      var(--transition-easing-ease-in-out);
+    box-shadow var(--btn-transition),
+    transform var(--btn-transition),
+    filter var(--btn-transition),
+    opacity var(--btn-transition);
+  user-select: none;
 }
 
-.ohmyui-btn:active:not(:disabled):not(.ohmyui-btn--loading) {
-  transform: scale(0.97);
+/* Size Variants */
+.ohmyui-btn--xs {
+  padding: 0.35em 0.75em;
+  font-size: 0.7rem;
+  min-height: 28px;
+}
+.ohmyui-btn--sm {
+  padding: 0.45em 1em;
+  font-size: 0.8rem;
+  min-height: 34px;
+}
+.ohmyui-btn--md {
+  padding: 0.6em 1.4em;
+  font-size: 0.9rem;
+  min-height: 42px;
+}
+.ohmyui-btn--lg {
+  padding: 0.75em 1.8em;
+  font-size: 1rem;
+  min-height: 52px;
 }
 
-/* ── Full width ──────────────────────────────── */
-
-.ohmyui-btn--full {
+/* Layout Modifiers */
+.ohmyui-btn--full-width {
   width: 100%;
 }
+.ohmyui-btn--rounded-none {
+  --btn-radius: var(--border-radius-none);
+}
+.ohmyui-btn--rounded-sm {
+  --btn-radius: var(--border-radius-sm);
+}
+.ohmyui-btn--rounded-md {
+  --btn-radius: var(--border-radius-md);
+}
+.ohmyui-btn--rounded-lg {
+  --btn-radius: var(--border-radius-lg);
+}
+.ohmyui-btn--rounded-full {
+  --btn-radius: var(--border-radius-full);
+}
 
-/* ── Disabled ────────────────────────────────── */
+/* Color Variants */
+.ohmyui-btn--primary {
+  background: linear-gradient(
+    135deg,
+    var(--btn-primary-g1),
+    var(--btn-primary-g2)
+  );
+  color: var(--btn-primary-text);
+  box-shadow: 0 4px 14px var(--btn-primary-shadow);
+}
+.ohmyui-btn--secondary {
+  background: linear-gradient(
+    135deg,
+    var(--btn-secondary-g1),
+    var(--btn-secondary-g2)
+  );
+  color: var(--btn-secondary-text);
+  box-shadow: 0 4px 14px var(--btn-secondary-shadow);
+}
+.ohmyui-btn--tertiary {
+  background: linear-gradient(
+    135deg,
+    var(--btn-tertiary-g1),
+    var(--btn-tertiary-g2)
+  );
+  color: var(--btn-tertiary-text);
+  box-shadow: 0 4px 14px var(--btn-tertiary-shadow);
+}
+.ohmyui-btn--success {
+  background: linear-gradient(
+    135deg,
+    var(--btn-success-g1),
+    var(--btn-success-g2)
+  );
+  color: var(--btn-success-text);
+  box-shadow: 0 4px 14px var(--btn-success-shadow);
+}
+.ohmyui-btn--warning {
+  background: linear-gradient(
+    135deg,
+    var(--btn-warning-g1),
+    var(--btn-warning-g2)
+  );
+  color: var(--btn-warning-text);
+  box-shadow: 0 4px 14px var(--btn-warning-shadow);
+}
+.ohmyui-btn--error {
+  background: linear-gradient(135deg, var(--btn-error-g1), var(--btn-error-g2));
+  color: var(--btn-error-text);
+  box-shadow: 0 4px 14px var(--btn-error-shadow);
+}
+.ohmyui-btn--info {
+  background: linear-gradient(135deg, var(--btn-info-g1), var(--btn-info-g2));
+  color: var(--btn-info-text);
+  box-shadow: 0 4px 14px var(--btn-info-shadow);
+}
+.ohmyui-btn--ghost {
+  background: var(--btn-ghost-g1);
+  color: var(--btn-ghost-text);
+  border: 1.5px solid var(--btn-ghost-border);
+  box-shadow: 0 2px 8px var(--btn-ghost-shadow);
+}
+.ohmyui-btn--outline {
+  background: var(--btn-outline-g1);
+  color: var(--btn-outline-text);
+  border: 1.5px solid var(--btn-outline-border);
+  box-shadow: 0 2px 8px var(--btn-outline-shadow);
+}
+.ohmyui-btn--outline-error {
+  background: transparent;
+  color: var(--color-error-dark);
+  border: 1.5px solid var(--color-error-dark);
+  box-shadow: 0 2px 8px var(--btn-error-shadow);
+}
+.ohmyui-btn--outline-error:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  background: var(--color-error-light);
+  transform: translateY(-1px);
+}
+.ohmyui-btn--outline-error:focus-visible {
+  outline: 3px solid var(--btn-error-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--flat {
+  background: transparent;
+  color: var(--btn-flat-text);
+  box-shadow: none;
+}
 
-.ohmyui-btn:disabled,
-.ohmyui-btn--loading {
-  opacity: 0.5;
+/* Hover States */
+.ohmyui-btn--primary:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
+.ohmyui-btn--secondary:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover,
+.ohmyui-btn--tertiary:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover,
+.ohmyui-btn--success:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
+.ohmyui-btn--warning:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
+.ohmyui-btn--error:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
+.ohmyui-btn--info:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
+  filter: brightness(1.07);
+  transform: translateY(-2px);
+}
+.ohmyui-btn--primary:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  box-shadow: 0 8px 24px var(--btn-primary-shadow);
+}
+.ohmyui-btn--secondary:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  box-shadow: 0 8px 24px var(--btn-secondary-shadow);
+}
+.ohmyui-btn--tertiary:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  box-shadow: 0 8px 24px var(--btn-tertiary-shadow);
+}
+.ohmyui-btn--success:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  box-shadow: 0 8px 24px var(--btn-success-shadow);
+}
+.ohmyui-btn--warning:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  box-shadow: 0 8px 24px var(--btn-warning-shadow);
+}
+.ohmyui-btn--error:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
+  box-shadow: 0 8px 24px var(--btn-error-shadow);
+}
+.ohmyui-btn--info:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
+  box-shadow: 0 8px 24px var(--btn-info-shadow);
+}
+
+/* Ghost, Outline & Flat hover */
+.ohmyui-btn--ghost:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
+  background: var(--btn-ghost-hover-bg);
+  transform: translateY(-1px);
+}
+.ohmyui-btn--outline:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  background: var(--btn-outline-hover-bg);
+  transform: translateY(-1px);
+}
+.ohmyui-btn--flat:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
+  background: var(--btn-flat-hover-bg);
+}
+
+/* Active State */
+.ohmyui-btn:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):active {
+  transform: translateY(1px) scale(0.97);
+  filter: brightness(0.95);
+  box-shadow: none !important;
+  transition-duration: 80ms;
+}
+
+/* Focus States */
+.ohmyui-btn--primary:focus-visible {
+  outline: 3px solid var(--btn-primary-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--secondary:focus-visible {
+  outline: 3px solid var(--btn-secondary-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--tertiary:focus-visible {
+  outline: 3px solid var(--btn-tertiary-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--success:focus-visible {
+  outline: 3px solid var(--btn-success-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--warning:focus-visible {
+  outline: 3px solid var(--btn-warning-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--error:focus-visible {
+  outline: 3px solid var(--btn-error-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--info:focus-visible {
+  outline: 3px solid var(--btn-info-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--ghost:focus-visible {
+  outline: 3px solid var(--btn-ghost-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--outline:focus-visible {
+  outline: 3px solid var(--btn-outline-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--flat:focus-visible {
+  outline: 3px solid var(--btn-flat-focus);
+  outline-offset: 3px;
+}
+
+/* Disabled State */
+.ohmyui-btn--disabled,
+.ohmyui-btn[disabled] {
+  background: linear-gradient(
+    135deg,
+    var(--btn-disabled-g1),
+    var(--btn-disabled-g2)
+  ) !important;
+  color: var(--btn-disabled-text) !important;
+  box-shadow: none !important;
+  border: none !important;
   cursor: not-allowed;
+  opacity: 0.75;
   pointer-events: none;
 }
 
-/* ── Focus ring ──────────────────────────────── */
-
-.ohmyui-btn:focus-visible {
-  box-shadow: var(--shadow-focus-primary);
+/* Loading State */
+.ohmyui-btn--loading {
+  cursor: wait;
+  pointer-events: none;
 }
 
-/* ── Spinner ─────────────────────────────────── */
-
+/* Spinner */
 .ohmyui-btn__spinner {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  border: var(--border-width-sm) solid currentColor;
-  border-top-color: transparent;
-  border-radius: var(--radius-full);
-  animation: ohmyui-spin var(--transition-duration-slow)
-    var(--transition-easing-linear) infinite;
+  display: flex;
+  align-items: center;
+  animation: ohmyui-btn-spin 0.8s linear infinite;
   flex-shrink: 0;
 }
-
-@keyframes ohmyui-spin {
+@keyframes ohmyui-btn-spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-/* ── Radius ──────────────────────────────────── */
-
-.ohmyui-btn--radius-none {
-  border-radius: var(--radius-none);
+/* Content Elements */
+.ohmyui-btn__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
-.ohmyui-btn--radius-sm {
-  border-radius: var(--radius-sm);
+.ohmyui-btn__label {
+  display: inline-block;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.ohmyui-btn--radius-md {
-  border-radius: var(--radius-md);
+.ohmyui-btn--icon-only {
+  aspect-ratio: 1 / 1;
+  padding: 0;
 }
-.ohmyui-btn--radius-lg {
-  border-radius: var(--radius-lg);
+.ohmyui-btn--icon-only.ohmyui-btn--xs {
+  width: 28px;
 }
-.ohmyui-btn--radius-full {
-  border-radius: var(--radius-full);
+.ohmyui-btn--icon-only.ohmyui-btn--sm {
+  width: 34px;
 }
-
-/* ── Sizes ───────────────────────────────────── */
-
-.ohmyui-btn--xs {
-  padding: var(--spacing-0-5) var(--spacing-2);
-  font-size: var(--font-size-xs);
-  min-height: 24px;
+.ohmyui-btn--icon-only.ohmyui-btn--md {
+  width: 42px;
 }
-
-.ohmyui-btn--sm {
-  padding: var(--spacing-1) var(--spacing-3);
-  font-size: var(--font-size-sm);
-  min-height: 32px;
+.ohmyui-btn--icon-only.ohmyui-btn--lg {
+  width: 52px;
 }
-
-.ohmyui-btn--md {
-  padding: var(--spacing-2) var(--spacing-4);
-  font-size: var(--font-size-md);
-  min-height: 40px;
+.ohmyui-btn--icon-only .ohmyui-btn__label {
+  display: none;
 }
 
-.ohmyui-btn--lg {
-  padding: var(--spacing-2-5) var(--spacing-5);
-  font-size: var(--font-size-lg);
-  min-height: 48px;
+/* Ripple Effect */
+.ohmyui-btn__ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255, 255, 255, 0.35);
+  animation: ohmyui-btn-ripple 550ms linear forwards;
+  pointer-events: none;
 }
-
-.ohmyui-btn--xl {
-  padding: var(--spacing-3) var(--spacing-6);
-  font-size: var(--font-size-xl);
-  min-height: 56px;
-}
-
-.ohmyui-btn--2xl {
-  padding: var(--spacing-4) var(--spacing-8);
-  font-size: var(--font-size-2xl);
-  min-height: 68px;
-}
-
-/* ════════════════════════════════════════════════
-   VARIANTS — Light mode
-   ════════════════════════════════════════════════ */
-
-/* ── Primary ─────────────────────────────────── */
-
-.ohmyui-btn--primary {
-  background-color: var(--color-primary-500);
-  border-color: var(--color-primary-500);
-  color: var(--color-neutral-900);
-}
-.ohmyui-btn--primary:hover:not(:disabled):not(.ohmyui-btn--loading) {
-  background-color: var(--color-primary-600);
-  border-color: var(--color-primary-600);
-  box-shadow: var(--shadow-md);
-}
-.ohmyui-btn--primary:focus-visible {
-  box-shadow: var(--shadow-focus-primary);
-}
-
-/* ── Secondary ───────────────────────────────── */
-
-.ohmyui-btn--secondary {
-  background-color: transparent;
-  border-color: var(--color-primary-500);
-  color: var(--color-primary-700);
-}
-.ohmyui-btn--secondary:hover:not(:disabled):not(.ohmyui-btn--loading) {
-  background-color: var(--color-primary-50);
-  border-color: var(--color-primary-600);
-}
-.ohmyui-btn--secondary:focus-visible {
-  box-shadow: var(--shadow-focus-primary);
-}
-
-/* ── Ghost ───────────────────────────────────── */
-
-.ohmyui-btn--ghost {
-  background-color: transparent;
-  border-color: transparent;
-  color: var(--color-primary-700);
-}
-.ohmyui-btn--ghost:hover:not(:disabled):not(.ohmyui-btn--loading) {
-  background-color: var(--color-primary-50);
-  border-color: var(--color-primary-100);
-}
-.ohmyui-btn--ghost:focus-visible {
-  box-shadow: var(--shadow-focus-primary);
-}
-
-/* ── Confirm ─────────────────────────────────── */
-
-.ohmyui-btn--confirm {
-  background-color: var(--color-success-500);
-  border-color: var(--color-success-500);
-  color: var(--color-neutral-900);
-}
-.ohmyui-btn--confirm:hover:not(:disabled):not(.ohmyui-btn--loading) {
-  background-color: var(--color-success-600);
-  border-color: var(--color-success-600);
-  box-shadow: var(--shadow-md);
-}
-.ohmyui-btn--confirm:focus-visible {
-  box-shadow: var(--shadow-focus-success);
-}
-
-/* ── Warning ─────────────────────────────────── */
-
-.ohmyui-btn--warning {
-  background-color: var(--color-warning-500);
-  border-color: var(--color-warning-500);
-  color: var(--color-neutral-900);
-}
-.ohmyui-btn--warning:hover:not(:disabled):not(.ohmyui-btn--loading) {
-  background-color: var(--color-warning-600);
-  border-color: var(--color-warning-600);
-  box-shadow: var(--shadow-md);
-}
-.ohmyui-btn--warning:focus-visible {
-  box-shadow: var(--shadow-focus-primary);
-}
-
-/* ── Danger ──────────────────────────────────── */
-
-.ohmyui-btn--danger {
-  background-color: var(--color-error-500);
-  border-color: var(--color-error-500);
-  color: var(--color-neutral-0);
-}
-.ohmyui-btn--danger:hover:not(:disabled):not(.ohmyui-btn--loading) {
-  background-color: var(--color-error-600);
-  border-color: var(--color-error-600);
-  box-shadow: var(--shadow-md);
-}
-.ohmyui-btn--danger:focus-visible {
-  box-shadow: var(--shadow-focus-error);
-}
-
-/* ── Info ────────────────────────────────────── */
-
-.ohmyui-btn--info {
-  background-color: var(--color-teal-700);
-  border-color: var(--color-teal-700);
-  color: var(--color-neutral-0);
-}
-.ohmyui-btn--info:hover:not(:disabled):not(.ohmyui-btn--loading) {
-  background-color: var(--color-teal-800);
-  border-color: var(--color-teal-800);
-  box-shadow: var(--shadow-md);
-}
-.ohmyui-btn--info:focus-visible {
-  box-shadow: var(--shadow-focus-primary);
-}
-
-/* ── Cancel ──────────────────────────────────── */
-
-.ohmyui-btn--cancel {
-  background-color: transparent;
-  border-color: var(--color-neutral-300);
-  color: var(--color-neutral-600);
-}
-.ohmyui-btn--cancel:hover:not(:disabled):not(.ohmyui-btn--loading) {
-  background-color: var(--color-neutral-100);
-  border-color: var(--color-neutral-400);
-  color: var(--color-neutral-700);
-}
-.ohmyui-btn--cancel:focus-visible {
-  box-shadow: var(--shadow-focus-primary);
-}
-
-/* ── Link ────────────────────────────────────── */
-
-.ohmyui-btn--link {
-  background-color: transparent;
-  border-color: transparent;
-  color: var(--color-teal-700);
-  padding-left: 0;
-  padding-right: 0;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.ohmyui-btn--link:hover:not(:disabled):not(.ohmyui-btn--loading) {
-  color: var(--color-teal-800);
-  text-decoration-thickness: var(--border-width-sm);
-}
-.ohmyui-btn--link:focus-visible {
-  box-shadow: var(--shadow-focus-primary);
-  border-radius: var(--radius-xs);
-}
-
-/* ════════════════════════════════════════════════
-   DARK MODE
-   ════════════════════════════════════════════════ */
-
-@media (prefers-color-scheme: dark) {
-  .ohmyui-btn:focus-visible {
-    box-shadow: var(--shadow-focus-primary);
+@keyframes ohmyui-btn-ripple {
+  to {
+    transform: scale(3.5);
+    opacity: 0;
   }
+}
+.ohmyui-btn--ghost .ohmyui-btn__ripple,
+.ohmyui-btn--outline .ohmyui-btn__ripple,
+.ohmyui-btn--outline-error .ohmyui-btn__ripple,
+.ohmyui-btn--flat .ohmyui-btn__ripple {
+  background: rgba(80, 100, 130, 0.18);
+}
 
-  .ohmyui-btn--primary {
-    background-color: var(--color-primary-400);
-    border-color: var(--color-primary-400);
-    color: var(--color-neutral-900);
+/* Responsive - Media Queries */
+@media (max-width: 480px) {
+  .ohmyui-btn--lg {
+    padding: 0.65em 1.4em;
+    font-size: 0.95rem;
   }
-  .ohmyui-btn--primary:hover:not(:disabled):not(.ohmyui-btn--loading) {
-    background-color: var(--color-primary-300);
-    border-color: var(--color-primary-300);
+  .ohmyui-btn--md {
+    padding: 0.55em 1.1em;
+    font-size: 0.85rem;
   }
+  .ohmyui-btn:hover {
+    transform: none !important;
+  }
+  .ohmyui-btn:active {
+    transform: scale(0.96) !important;
+    transition-duration: 60ms !important;
+  }
+}
 
-  .ohmyui-btn--secondary {
-    border-color: var(--color-primary-400);
-    color: var(--color-primary-300);
+/* Succeeded State */
+.ohmyui-btn--succeeded-filled {
+  background: linear-gradient(
+    135deg,
+    var(--btn-succeeded-g1),
+    var(--btn-succeeded-g2)
+  );
+  color: var(--btn-succeeded-text);
+  box-shadow: 0 4px 14px var(--btn-succeeded-shadow);
+  cursor: not-allowed;
+  pointer-events: none;
+  animation: ohmyui-btn-succeeded-in var(--transition-duration-slow)
+    var(--transition-easing-ease-in-out) forwards;
+}
+.ohmyui-btn--succeeded-ghost {
+  background: var(--btn-succeeded-ghost-bg);
+  color: var(--btn-succeeded-ghost-text);
+  border: 1.5px solid var(--btn-succeeded-ghost-border);
+  box-shadow: none;
+  cursor: not-allowed;
+  pointer-events: none;
+  animation: ohmyui-btn-succeeded-in var(--transition-duration-slow)
+    var(--transition-easing-ease-in-out) forwards;
+}
+@keyframes ohmyui-btn-succeeded-in {
+  0% {
+    transform: scale(0.97);
+    opacity: 0.7;
   }
-  .ohmyui-btn--secondary:hover:not(:disabled):not(.ohmyui-btn--loading) {
-    background-color: var(--color-primary-900);
-    border-color: var(--color-primary-300);
+  60% {
+    transform: scale(1.02);
   }
-
-  .ohmyui-btn--ghost {
-    color: var(--color-primary-300);
-  }
-  .ohmyui-btn--ghost:hover:not(:disabled):not(.ohmyui-btn--loading) {
-    background-color: var(--color-primary-900);
-    border-color: var(--color-primary-900);
-  }
-
-  .ohmyui-btn--confirm {
-    background-color: var(--color-success-500);
-    border-color: var(--color-success-500);
-    color: var(--color-neutral-900);
-  }
-  .ohmyui-btn--confirm:hover:not(:disabled):not(.ohmyui-btn--loading) {
-    background-color: var(--color-success-400);
-    border-color: var(--color-success-400);
-  }
-
-  .ohmyui-btn--warning {
-    background-color: var(--color-warning-400);
-    border-color: var(--color-warning-400);
-    color: var(--color-neutral-900);
-  }
-  .ohmyui-btn--warning:hover:not(:disabled):not(.ohmyui-btn--loading) {
-    background-color: var(--color-warning-300);
-    border-color: var(--color-warning-300);
-  }
-
-  .ohmyui-btn--danger {
-    background-color: var(--color-error-500);
-    border-color: var(--color-error-500);
-  }
-  .ohmyui-btn--danger:hover:not(:disabled):not(.ohmyui-btn--loading) {
-    background-color: var(--color-error-400);
-    border-color: var(--color-error-400);
-  }
-
-  .ohmyui-btn--info {
-    background-color: var(--color-teal-600);
-    border-color: var(--color-teal-600);
-  }
-  .ohmyui-btn--info:hover:not(:disabled):not(.ohmyui-btn--loading) {
-    background-color: var(--color-teal-500);
-    border-color: var(--color-teal-500);
-  }
-
-  .ohmyui-btn--cancel {
-    border-color: var(--color-neutral-600);
-    color: var(--color-neutral-400);
-  }
-  .ohmyui-btn--cancel:hover:not(:disabled):not(.ohmyui-btn--loading) {
-    background-color: var(--color-neutral-800);
-    border-color: var(--color-neutral-500);
-    color: var(--color-neutral-300);
-  }
-
-  .ohmyui-btn--link {
-    color: var(--color-teal-400);
-  }
-  .ohmyui-btn--link:hover:not(:disabled):not(.ohmyui-btn--loading) {
-    color: var(--color-teal-300);
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }

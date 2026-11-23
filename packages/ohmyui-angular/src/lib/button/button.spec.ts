@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ButtonComponent } from './button';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { ButtonComponent } from './button';
 
 describe('ButtonComponent', () => {
   let component: ButtonComponent;
@@ -9,108 +10,104 @@ describe('ButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ButtonComponent],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ButtonComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have default inputs', () => {
-    expect(component.variant).toBe('primary');
-    expect(component.size).toBe('md');
-    expect(component.radius).toBe('md');
-    expect(component.disabled).toBe(false);
-    expect(component.loading).toBe(false);
-    expect(component.fullWidth).toBe(false);
-    expect(component.label).toBe('');
-    expect(component.type).toBe('button');
-  });
-
-  it('should apply correct classes', () => {
-    component.variant = 'danger';
-    component.size = 'lg';
-    component.radius = 'full';
-    const classes = component.classes;
-    expect(classes).toContain('ohmyui-btn--danger');
-    expect(classes).toContain('ohmyui-btn--lg');
-    expect(classes).toContain('ohmyui-btn--radius-full');
-  });
-
-  it('should include full-width class when fullWidth is true', () => {
-    component.fullWidth = true;
-    expect(component.classes).toContain('ohmyui-btn--full');
-  });
-
-  it('should include loading class when loading is true', () => {
-    component.loading = true;
-    expect(component.classes).toContain('ohmyui-btn--loading');
-  });
-
-  it('should render label in the DOM', () => {
-    component.label = 'Conferma';
+  it('should default to primary variant, md size, md rounded, button mode', () => {
     fixture.detectChanges();
-    const el: HTMLElement = fixture.nativeElement;
-    expect(el.textContent).toContain('Conferma');
+    expect(component.classes['ohmyui-btn--primary']).toBe(true);
+    expect(component.classes['ohmyui-btn--md']).toBe(true);
+    expect(component.classes['ohmyui-btn--rounded-md']).toBe(true);
+    expect(component.mode).toBe('button');
   });
 
-  it('should disable the button when disabled is true', () => {
+  it('should render the label', () => {
+    component.label = 'Save';
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Save');
+  });
+
+  it('should be inert when disabled, loading, or succeeded', () => {
+    expect(component.isInert).toBe(false);
     component.disabled = true;
-    fixture.detectChanges();
-    const btn: HTMLButtonElement =
-      fixture.nativeElement.querySelector('button');
-    expect(btn.disabled).toBe(true);
-  });
-
-  it('should disable the button when loading is true', () => {
+    expect(component.isInert).toBe(true);
+    component.disabled = false;
     component.loading = true;
-    fixture.detectChanges();
-    const btn: HTMLButtonElement =
-      fixture.nativeElement.querySelector('button');
-    expect(btn.disabled).toBe(true);
-  });
-
-  it('should emit clicked event on click', () => {
-    const spy = vi.fn();
-    component.clicked.subscribe(spy);
-    fixture.detectChanges();
-    fixture.nativeElement.querySelector('button').click();
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it('should not emit clicked when disabled', () => {
-    const spy = vi.fn();
-    component.clicked.subscribe(spy);
-    component.disabled = true;
-    fixture.detectChanges();
-    component.handleClick(new MouseEvent('click'));
-    expect(spy).not.toHaveBeenCalled();
-  });
-
-  it('should not emit clicked when loading', () => {
-    const spy = vi.fn();
-    component.clicked.subscribe(spy);
-    component.loading = true;
-    fixture.detectChanges();
-    component.handleClick(new MouseEvent('click'));
-    expect(spy).not.toHaveBeenCalled();
-  });
-
-  it('should show spinner when loading', () => {
-    component.loading = true;
-    fixture.detectChanges();
-    const spinner = fixture.nativeElement.querySelector('.ohmyui-btn__spinner');
-    expect(spinner).toBeTruthy();
-  });
-
-  it('should not show spinner when not loading', () => {
+    expect(component.isInert).toBe(true);
     component.loading = false;
+    component.succeeded = true;
+    expect(component.isInert).toBe(true);
+  });
+
+  it('should emit clicked when interactive', () => {
     fixture.detectChanges();
-    const spinner = fixture.nativeElement.querySelector('.ohmyui-btn__spinner');
-    expect(spinner).toBeNull();
+    const emitSpy = vi.spyOn(component.clicked, 'emit');
+    const button: HTMLButtonElement =
+      fixture.nativeElement.querySelector('button');
+    button.click();
+    expect(emitSpy).toHaveBeenCalled();
+  });
+
+  it('should not emit clicked when inert', () => {
+    component.disabled = true;
+    fixture.detectChanges();
+    const emitSpy = vi.spyOn(component.clicked, 'emit');
+    const button: HTMLButtonElement =
+      fixture.nativeElement.querySelector('button');
+    button.click();
+    expect(emitSpy).not.toHaveBeenCalled();
+  });
+
+  it('should prefer succeededLabel over label when succeeded', () => {
+    component.label = 'Save';
+    component.succeededLabel = 'Saved!';
+    expect(component.displayLabel).toBe('Save');
+    component.succeeded = true;
+    expect(component.displayLabel).toBe('Saved!');
+  });
+
+  it('should fall back to label when succeeded without succeededLabel', () => {
+    component.label = 'Save';
+    component.succeeded = true;
+    expect(component.displayLabel).toBe('Save');
+  });
+
+  it('should parse query params from href for router mode', () => {
+    component.href = '/products?category=shoes&sort=price';
+    expect(component.routerPath).toBe('/products');
+    expect(component.routerQueryParams).toEqual({
+      category: 'shoes',
+      sort: 'price',
+    });
+  });
+
+  it('should return null query params when href has no query string', () => {
+    component.href = '/products';
+    expect(component.routerQueryParams).toBeNull();
+  });
+
+  it('should use noopener noreferrer rel only when target is _blank', () => {
+    expect(component.externalRel).toBe('');
+    component.target = '_blank';
+    expect(component.externalRel).toBe('noopener noreferrer');
+  });
+
+  it('should not create a ripple when inert', () => {
+    component.disabled = true;
+    fixture.detectChanges();
+    const button: HTMLButtonElement =
+      fixture.nativeElement.querySelector('button');
+    const event = new MouseEvent('click', { clientX: 10, clientY: 10 });
+    Object.defineProperty(event, 'currentTarget', { value: button });
+    component.onRipple(event);
+    expect(button.querySelector('.ohmyui-btn__ripple')).toBeNull();
   });
 });
