@@ -1,0 +1,68 @@
+/**
+ * @file checkbox-group.css
+ * @description Styling for CheckboxGroupComponent. Azzera lo stile di
+ * default del <fieldset> nativo (bordo, padding, min-width) per lasciare
+ * campo libero al design system.
+ */
+
+:host {
+  display: block;
+
+  /* Vedi checkbox.css per il perche' di questo pattern (dark-theme text fix). */
+  --checkbox-group-error-text: var(--color-error-dark);
+}
+:host-context(.dark-theme) {
+  --checkbox-group-error-text: var(--color-error-light);
+}
+
+.ohmyui-checkbox-group {
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  font-family: inherit;
+}
+
+.ohmyui-checkbox-group__legend {
+  padding: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-default);
+}
+.ohmyui-checkbox-group__required {
+  color: var(--checkbox-group-error-text);
+  margin-left: 0.15em;
+}
+
+.ohmyui-checkbox-group__description {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.ohmyui-checkbox-group__items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.ohmyui-checkbox-group--horizontal .ohmyui-checkbox-group__items {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.25em;
+}
+
+.ohmyui-checkbox-group__error {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--checkbox-group-error-text);
+}
+
+/* Disabled fieldset: il browser applica automaticamente lo stato ai figli,
+   qui aggiungiamo solo un'indicazione visiva sul gruppo stesso. */
+.ohmyui-checkbox-group:disabled,
+.ohmyui-checkbox-group[disabled] {
+  opacity: 0.7;
+}

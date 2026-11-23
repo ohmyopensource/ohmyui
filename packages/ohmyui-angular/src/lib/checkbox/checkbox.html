@@ -1,40 +1,50 @@
-<div [class]="wrapperClass">
-  <label class="ohmyui-checkbox__row" [attr.for]="inputId">
-    <!-- Hidden native input for form compatibility -->
+<!--
+@file checkbox.html
+@description Template for CheckboxComponent. Uses a real native
+<input type="checkbox"> (visually customized, not visually hidden) so
+keyboard interaction, screen readers, and native form submission work
+without any custom re-implementation.
+-->
+<div [ngClass]="classes">
+  <label [for]="inputId" class="ohmyui-checkbox__control">
     <input
+      #nativeCheckbox
       [id]="inputId"
-      class="ohmyui-checkbox__input"
       type="checkbox"
+      class="ohmyui-checkbox__input"
       [checked]="checked"
       [disabled]="disabled"
-      [indeterminate]="indeterminate"
-      [attr.aria-describedby]="hint ? hintId : null"
-      [attr.aria-checked]="indeterminate ? 'mixed' : checked"
-      (change)="toggle()"
+      [required]="required"
+      [name]="name"
+      [value]="value"
+      [attr.aria-label]="ariaLabel || null"
+      [attr.aria-describedby]="description ? inputId + '-description' : (error && errorMessage ? inputId + '-error' : null)"
+      [attr.aria-invalid]="error ? 'true' : null"
+      (change)="onNativeChange($event)"
+      (blur)="onNativeBlur()"
     />
-
-    <!-- Custom visual box -->
     <span class="ohmyui-checkbox__box" aria-hidden="true">
       @if (indeterminate) {
-      <svg lucideMinus></svg>
+      <svg [lucideIcon]="indeterminateIcon" [size]="iconSize"></svg>
       } @else if (checked) {
-      <svg lucideCheck></svg>
+      <svg [lucideIcon]="checkIcon" [size]="iconSize"></svg>
       }
     </span>
-
     @if (label) {
-    <span class="ohmyui-checkbox__label">{{ label }}</span>
+    <span class="ohmyui-checkbox__label">
+      {{ label }} @if (required) {
+      <span class="ohmyui-checkbox__required" aria-hidden="true">*</span>
+      }
+    </span>
     }
   </label>
-
-  @if (hint) {
-  <span
-    [id]="hintId"
-    class="ohmyui-checkbox__hint"
-    [class.ohmyui-checkbox__hint--error]="status === 'error'"
-    [class.ohmyui-checkbox__hint--success]="status === 'success'"
-  >
-    {{ hint }}
-  </span>
+  @if (description) {
+  <p class="ohmyui-checkbox__description" [id]="inputId + '-description'">
+    {{ description }}
+  </p>
+  } @if (error && errorMessage) {
+  <p class="ohmyui-checkbox__error" [id]="inputId + '-error'" role="alert">
+    {{ errorMessage }}
+  </p>
   }
 </div>

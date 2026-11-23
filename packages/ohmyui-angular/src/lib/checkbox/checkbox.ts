@@ -1,23 +1,55 @@
+/**
+ * @file checkbox.ts
+ * @description Accessible checkbox component built on top of a native
+ * `<input type="checkbox">`, styled visually while preserving native
+ * keyboard/screen-reader/form behavior. Supports semantic variants,
+ * indeterminate state, validation feedback, and Angular Reactive Forms
+ * integration via ControlValueAccessor.
+ */
 import {
   Component,
   Input,
   Output,
   EventEmitter,
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
   forwardRef,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { LucideCheck, LucideMinus } from '@lucide/angular';
+import { CommonModule } from '@angular/common';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import {
+  LucideDynamicIcon,
+  LucideIconData,
+  LucideCheck,
+  LucideMinus,
+} from '@lucide/angular';
 
-export type CheckboxSize = 'sm' | 'md' | 'lg';
-export type CheckboxVariant = 'default' | 'filled';
-export type CheckboxStatus = 'default' | 'error' | 'success';
+/** Available accent variants for the checked/indeterminate state. */
+export type CheckboxVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info'
+  | 'neutral';
+/** Available checkbox sizes. */
+export type CheckboxSize = 'xs' | 'sm' | 'md' | 'lg';
+/** Position of the label relative to the checkbox control. */
+export type CheckboxLabelPosition = 'left' | 'right';
+
+let nextCheckboxId = 0;
 
 @Component({
   selector: 'ohmyui-checkbox',
   standalone: true,
-  imports: [LucideCheck, LucideMinus],
+  imports: [CommonModule, LucideDynamicIcon],
   templateUrl: './checkbox.html',
   styleUrl: './checkbox.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -26,57 +58,139 @@ export type CheckboxStatus = 'default' | 'error' | 'success';
     },
   ],
 })
-export class CheckboxComponent implements ControlValueAccessor {
-  @Input() label = '';
-  @Input() hint = '';
-  @Input() size: CheckboxSize = 'md';
-  @Input() variant: CheckboxVariant = 'default';
-  @Input() status: CheckboxStatus = 'default';
-  @Input() disabled = false;
-  @Input() indeterminate = false;
-  @Input() checked = false;
+export class CheckboxComponent implements ControlValueAccessor, AfterViewInit {
+  @ViewChild('nativeCheckbox')
+  private nativeCheckbox?: ElementRef<HTMLInputElement>;
 
+  readonly checkIcon: LucideIconData = LucideCheck.icon;
+  readonly indeterminateIcon: LucideIconData = LucideMinus.icon;
+  readonly inputId = `ohmyui-checkbox-${++nextCheckboxId}`;
+
+  /** Label displayed next to the checkbox. */
+  @Input() label = '';
+  /** Optional helper text displayed below the label. */
+  @Input() description = '';
+  /** Visual variant applied when the checkbox is checked or indeterminate. */
+  @Input() variant: CheckboxVariant = 'primary';
+  /** Checkbox size. */
+  @Input() size: CheckboxSize = 'md';
+  /** Position of the label relative to the checkbox control. */
+  @Input() labelPosition: CheckboxLabelPosition = 'right';
+  /** Marks the checkbox as required in a form. */
+  @Input() required = false;
+  /** Disables user interaction with the checkbox. */
+  @Input() disabled = false;
+  /** Displays validation error styling. */
+  @Input() error = false;
+  /** Error message displayed below the checkbox when `error` is true. */
+  @Input() errorMessage = '';
+  /** Native form `name` attribute. */
+  @Input() name = '';
+  /** Native form `value` attribute. */
+  @Input() value = '';
+  /** Accessible label announced by assistive technologies, overrides `label`. */
+  @Input() ariaLabel = '';
+
+  /** Checked state of the checkbox. */
+  @Input()
+  get checked(): boolean {
+    return this._checked;
+  }
+  set checked(value: boolean) {
+    this._checked = value;
+  }
+  private _checked = false;
+
+  /**
+   * Indeterminate ("mixed") state, typically used by a parent "select all"
+   * checkbox when only some of its children are checked. Purely visual:
+   * does not affect `checked`.
+   */
+  @Input()
+  get indeterminate(): boolean {
+    return this._indeterminate;
+  }
+  set indeterminate(value: boolean) {
+    this._indeterminate = value;
+    this.syncIndeterminate();
+  }
+  private _indeterminate = false;
+
+  /** Emitted whenever the checked state changes via user interaction. */
   @Output() checkedChange = new EventEmitter<boolean>();
 
-  inputId = `ohmyui-checkbox-${Math.random().toString(36).slice(2, 7)}`;
-  hintId = `ohmyui-checkbox-hint-${Math.random().toString(36).slice(2, 7)}`;
-
+  // Placeholder no-op richiesti da ControlValueAccessor: Angular li sovrascrive
+  // con registerOnChange/registerOnTouched prima che vengano mai invocati
+  // realmente. A differenza di un'action dimenticata, qui non c'e' nulla di
+  // significativo da eseguire finche' non vengono assegnati.
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private onChange = (_: boolean) => {};
+  private onChangeFn: (value: boolean) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private onTouched = () => {};
+  private onTouchedFn: () => void = () => {};
 
-  get wrapperClass(): string {
-    return [
-      'ohmyui-checkbox',
-      `ohmyui-checkbox--${this.size}`,
-      `ohmyui-checkbox--${this.variant}`,
-      `ohmyui-checkbox--${this.status}`,
-      this.disabled ? 'ohmyui-checkbox--disabled' : '',
-    ]
-      .filter(Boolean)
-      .join(' ');
+  ngAfterViewInit(): void {
+    this.syncIndeterminate();
   }
 
-  toggle(): void {
-    if (this.disabled) return;
-    this.checked = !this.checked;
-    this.indeterminate = false;
-    this.checkedChange.emit(this.checked);
-    this.onChange(this.checked);
-    this.onTouched();
+  /** Returns the CSS classes required for the current checkbox configuration. */
+  get classes(): Record<string, boolean> {
+    return {
+      'ohmyui-checkbox': true,
+      [`ohmyui-checkbox--${this.variant}`]: true,
+      [`ohmyui-checkbox--${this.size}`]: true,
+      'ohmyui-checkbox--label-left': this.labelPosition === 'left',
+      'ohmyui-checkbox--disabled': this.disabled,
+      'ohmyui-checkbox--error': this.error,
+      'ohmyui-checkbox--checked': this.checked && !this.indeterminate,
+      'ohmyui-checkbox--indeterminate': this.indeterminate,
+    };
   }
 
-  writeValue(val: boolean): void {
-    this.checked = !!val;
+  /** Returns the icon size in pixels associated with the current checkbox size. */
+  get iconSize(): number {
+    const map: Record<CheckboxSize, number> = {
+      xs: 10,
+      sm: 12,
+      md: 14,
+      lg: 16,
+    };
+    return map[this.size];
   }
-  registerOnChange(fn: (_: boolean) => void): void {
-    this.onChange = fn;
+
+  /** Handles the native `change` event fired by the underlying input. */
+  onNativeChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this._checked = target.checked;
+    // A user interaction always resolves an indeterminate state, matching
+    // native browser behavior for tri-state "select all" checkboxes.
+    this._indeterminate = false;
+    this.onChangeFn(this._checked);
+    this.checkedChange.emit(this._checked);
+  }
+
+  /** Handles the native `blur` event, required by ControlValueAccessor. */
+  onNativeBlur(): void {
+    this.onTouchedFn();
+  }
+
+  /** Syncs the `indeterminate` DOM property, which has no HTML attribute equivalent. */
+  private syncIndeterminate(): void {
+    if (this.nativeCheckbox) {
+      this.nativeCheckbox.nativeElement.indeterminate = this._indeterminate;
+    }
+  }
+
+  // ── ControlValueAccessor ────────────────────────────────────────────────
+  writeValue(value: boolean): void {
+    this._checked = !!value;
+  }
+  registerOnChange(fn: (value: boolean) => void): void {
+    this.onChangeFn = fn;
   }
   registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
+    this.onTouchedFn = fn;
   }
-  setDisabledState(disabled: boolean): void {
-    this.disabled = disabled;
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 }

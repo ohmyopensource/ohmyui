@@ -1,0 +1,29 @@
+<!--
+@file checkbox-group.html
+@description Native <fieldset>/<legend> wrapper. `disabled` on the
+<fieldset> automatically disables every native <input> nested inside the
+projected content — including each projected ohmyui-checkbox — with zero
+manual coordination between parent and children.
+-->
+<fieldset
+  [ngClass]="classes"
+  [disabled]="disabled"
+  [attr.aria-describedby]="description ? groupId + '-description' : (error && errorMessage ? groupId + '-error' : null)">
+  @if (label) {
+    <legend class="ohmyui-checkbox-group__legend">
+      {{ label }}
+      @if (required) {
+        <span class="ohmyui-checkbox-group__required" aria-hidden="true">*</span>
+      }
+    </legend>
+  }
+  @if (description) {
+    <p class="ohmyui-checkbox-group__description" [id]="groupId + '-description'">{{ description }}</p>
+  }
+  <div class="ohmyui-checkbox-group__items">
+    <ng-content></ng-content>
+  </div>
+  @if (error && errorMessage) {
+    <p class="ohmyui-checkbox-group__error" [id]="groupId + '-error'" role="alert">{{ errorMessage }}</p>
+  }
+</fieldset>
