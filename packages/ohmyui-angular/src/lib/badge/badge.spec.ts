@@ -1,6 +1,6 @@
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BadgeComponent } from './badge';
-import { describe, it, expect, beforeEach } from 'vitest';
 
 describe('BadgeComponent', () => {
   let component: BadgeComponent;
@@ -13,71 +13,59 @@ describe('BadgeComponent', () => {
 
     fixture = TestBed.createComponent(BadgeComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have default inputs', () => {
-    expect(component.variant).toBe('neutral');
-    expect(component.size).toBe('md');
-    expect(component.shape).toBe('pill');
-    expect(component.label).toBe('');
-    expect(component.dot).toBe(false);
-  });
-
-  it('should render label', () => {
-    component.label = 'In progress';
+  it('should default to primary variant, md size, pill shape', () => {
     fixture.detectChanges();
-    const el: HTMLElement = fixture.nativeElement;
-    expect(el.textContent).toContain('In progress');
+    expect(component.classes['ohmyui-badge--primary']).toBe(true);
+    expect(component.classes['ohmyui-badge--md']).toBe(true);
+    expect(component.classes['ohmyui-badge--pill']).toBe(true);
   });
 
-  it('should apply variant class', () => {
-    component.variant = 'success';
+  it('should render the label', () => {
+    component.label = 'New';
     fixture.detectChanges();
-    const span: HTMLElement =
-      fixture.nativeElement.querySelector('.ohmyui-badge');
-    expect(span.classList.contains('ohmyui-badge--success')).toBe(true);
+    expect(fixture.nativeElement.textContent).toContain('New');
   });
 
-  it('should apply size class', () => {
-    component.size = 'lg';
+  it('should switch to count mode when count > 0', () => {
+    component.count = 5;
     fixture.detectChanges();
-    const span: HTMLElement =
-      fixture.nativeElement.querySelector('.ohmyui-badge');
-    expect(span.classList.contains('ohmyui-badge--lg')).toBe(true);
+    expect(component.isCountMode).toBe(true);
+    expect(fixture.nativeElement.textContent).toContain('5');
   });
 
-  it('should apply shape class', () => {
-    component.shape = 'square';
-    fixture.detectChanges();
-    const span: HTMLElement =
-      fixture.nativeElement.querySelector('.ohmyui-badge');
-    expect(span.classList.contains('ohmyui-badge--square')).toBe(true);
+  it('should cap the count at maxCount', () => {
+    component.count = 150;
+    component.maxCount = 99;
+    expect(component.displayCount).toBe('99+');
   });
 
-  it('should apply outline variant class', () => {
-    component.variant = 'outline-error';
-    fixture.detectChanges();
-    const span: HTMLElement =
-      fixture.nativeElement.querySelector('.ohmyui-badge');
-    expect(span.classList.contains('ohmyui-badge--outline-error')).toBe(true);
-  });
-
-  it('should show dot element when dot is true', () => {
+  it('should be dot-only when dot is true and there is no label/count', () => {
     component.dot = true;
-    fixture.detectChanges();
-    const dot = fixture.nativeElement.querySelector('.ohmyui-badge__dot');
-    expect(dot).toBeTruthy();
+    expect(component.isDotOnly).toBe(true);
   });
 
-  it('should not show dot element when dot is false', () => {
-    component.dot = false;
+  it('should not be dot-only when a label is present', () => {
+    component.dot = true;
+    component.label = 'Online';
+    expect(component.isDotOnly).toBe(false);
+  });
+
+  it('should emit removed when the remove button is clicked', () => {
+    component.removable = true;
     fixture.detectChanges();
-    const dot = fixture.nativeElement.querySelector('.ohmyui-badge__dot');
-    expect(dot).toBeNull();
+    const emitSpy = vi.spyOn(component.removed, 'emit');
+
+    const removeButton: HTMLButtonElement = fixture.nativeElement.querySelector(
+      '.ohmyui-badge__remove',
+    );
+    removeButton.click();
+
+    expect(emitSpy).toHaveBeenCalled();
   });
 });

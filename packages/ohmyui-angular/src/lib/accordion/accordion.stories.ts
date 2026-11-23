@@ -65,7 +65,7 @@ const itemsWithBadges: AccordionItem[] = [
     content:
       'Learn how to extend tokens, create custom variants, and contribute.',
     badge: 'Pro',
-    badgeVariant: 'teal',
+    badgeVariant: 'info',
   },
 ];
 

@@ -1,7 +1,48 @@
+<!--
+@file badge.html
+@description Template for BadgeComponent supporting label, count,
+icons, dot mode, and removable action.
+-->
 <span
-  [class]="'ohmyui-badge ohmyui-badge--' + variant + ' ohmyui-badge--' + size + ' ohmyui-badge--' + shape"
+  [ngClass]="classes"
+  [attr.aria-label]="ariaLabel || label || null"
+  [attr.role]="removable ? 'status' : null"
 >
-  @if (dot) {
+  <!-- Status dot (standalone) -->
+  @if (isDotOnly) {
   <span class="ohmyui-badge__dot" aria-hidden="true"></span>
-  } {{ label }}
+  }
+  <!-- Status dot (inline mode) -->
+  @if (dot && !isDotOnly) {
+  <span class="ohmyui-badge__dot" aria-hidden="true"></span>
+  }
+  <!-- Left icon -->
+  @if (icon && iconPosition === 'left' && !isCountMode) {
+  <span class="ohmyui-badge__icon ohmyui-badge__icon--left" aria-hidden="true">
+    <svg [lucideIcon]="icon" [size]="iconSize"></svg>
+  </span>
+  }
+  <!-- Content -->
+  @if (!isDotOnly) { @if (isCountMode) {
+  <span class="ohmyui-badge__count">{{ displayCount }}</span>
+  } @else {
+  <span class="ohmyui-badge__label">{{ label }}</span>
+  } }
+  <!-- Right icon -->
+  @if (icon && iconPosition === 'right' && !isCountMode) {
+  <span class="ohmyui-badge__icon ohmyui-badge__icon--right" aria-hidden="true">
+    <svg [lucideIcon]="icon" [size]="iconSize"></svg>
+  </span>
+  }
+  <!-- Remove action -->
+  @if (removable) {
+  <button
+    class="ohmyui-badge__remove"
+    type="button"
+    [attr.aria-label]="'Rimuovi ' + (label || 'badge')"
+    (click)="onRemove($event)"
+  >
+    <svg [lucideIcon]="closeIcon" [size]="closeSize"></svg>
+  </button>
+  }
 </span>

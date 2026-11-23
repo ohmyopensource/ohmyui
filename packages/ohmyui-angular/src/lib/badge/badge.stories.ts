@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { LucideHeart, LucideStar } from '@lucide/angular';
 import { BadgeComponent } from './badge';
 
 const meta: Meta<BadgeComponent> = {
@@ -8,206 +9,193 @@ const meta: Meta<BadgeComponent> = {
     variant: {
       control: 'select',
       options: [
-        'neutral',
         'primary',
+        'secondary',
+        'tertiary',
         'success',
         'warning',
         'error',
         'info',
-        'teal',
-        'outline-neutral',
-        'outline-primary',
-        'outline-success',
-        'outline-warning',
-        'outline-error',
-        'outline-info',
+        'ghost',
+        'outline',
+        'flat',
+        'neutral',
       ],
     },
-    size: { control: 'select', options: ['xs', 'sm', 'md', 'lg'] },
-    shape: { control: 'select', options: ['pill', 'rounded', 'square'] },
+    size: {
+      control: 'select',
+      options: ['xs', 'sm', 'md', 'lg'],
+    },
+    shape: {
+      control: 'select',
+      options: ['pill', 'rounded', 'square'],
+    },
+    iconPosition: { control: 'select', options: ['left', 'right'] },
     label: { control: 'text' },
+    count: { control: 'number' },
+    maxCount: { control: 'number' },
     dot: { control: 'boolean' },
+    removable: { control: 'boolean' },
   },
 };
-
 export default meta;
 type Story = StoryObj<BadgeComponent>;
 
-/* ── Playground ──────────────────────────────── */
-
+/* Playground */
 export const Playground: Story = {
-  args: {
-    variant: 'primary',
-    size: 'md',
-    shape: 'pill',
-    label: 'Badge',
-    dot: false,
-  },
+  args: { variant: 'primary', size: 'md', shape: 'pill', label: 'Badge' },
 };
 
-/* ── Solid variants ──────────────────────────── */
-
-export const Neutral: Story = {
-  args: { variant: 'neutral', size: 'md', shape: 'pill', label: 'Neutral' },
-};
-
+/* Variants */
 export const Primary: Story = {
-  args: { variant: 'primary', size: 'md', shape: 'pill', label: 'Primary' },
+  args: { variant: 'primary', label: 'Primary' },
 };
-
+export const Secondary: Story = {
+  args: { variant: 'secondary', label: 'Secondary' },
+};
+export const Tertiary: Story = {
+  args: { variant: 'tertiary', label: 'Tertiary' },
+};
 export const Success: Story = {
-  args: { variant: 'success', size: 'md', shape: 'pill', label: 'Success' },
+  args: { variant: 'success', label: 'Success' },
 };
-
 export const Warning: Story = {
-  args: { variant: 'warning', size: 'md', shape: 'pill', label: 'Warning' },
+  args: { variant: 'warning', label: 'Warning' },
 };
-
 export const Error: Story = {
-  args: { variant: 'error', size: 'md', shape: 'pill', label: 'Error' },
+  args: { variant: 'error', label: 'Error' },
 };
-
 export const Info: Story = {
-  args: { variant: 'info', size: 'md', shape: 'pill', label: 'Info' },
+  args: { variant: 'info', label: 'Info' },
+};
+export const Neutral: Story = {
+  args: { variant: 'neutral', label: 'Neutral' },
+};
+export const Ghost: Story = {
+  args: { variant: 'ghost', label: 'Ghost' },
+};
+export const Outline: Story = {
+  args: { variant: 'outline', label: 'Outline' },
+};
+export const Flat: Story = {
+  args: { variant: 'flat', label: 'Flat' },
 };
 
-export const Teal: Story = {
-  args: { variant: 'teal', size: 'md', shape: 'pill', label: 'Teal' },
-};
-
-/* ── Outline variants ────────────────────────── */
-
-export const OutlineNeutral: Story = {
-  name: 'Outline / Neutral',
-  args: {
-    variant: 'outline-neutral',
-    size: 'md',
-    shape: 'pill',
-    label: 'Neutral',
-  },
-};
-
-export const OutlinePrimary: Story = {
-  name: 'Outline / Primary',
-  args: {
-    variant: 'outline-primary',
-    size: 'md',
-    shape: 'pill',
-    label: 'Primary',
-  },
-};
-
-export const OutlineSuccess: Story = {
-  name: 'Outline / Success',
-  args: {
-    variant: 'outline-success',
-    size: 'md',
-    shape: 'pill',
-    label: 'Success',
-  },
-};
-
-export const OutlineWarning: Story = {
-  name: 'Outline / Warning',
-  args: {
-    variant: 'outline-warning',
-    size: 'md',
-    shape: 'pill',
-    label: 'Warning',
-  },
-};
-
-export const OutlineError: Story = {
-  name: 'Outline / Error',
-  args: { variant: 'outline-error', size: 'md', shape: 'pill', label: 'Error' },
-};
-
-export const OutlineInfo: Story = {
-  name: 'Outline / Info',
-  args: { variant: 'outline-info', size: 'md', shape: 'pill', label: 'Info' },
-};
-
-/* ── Sizes ───────────────────────────────────── */
-
+/* Sizes */
 export const SizeXs: Story = {
   name: 'Size / XS',
-  args: { variant: 'primary', size: 'xs', shape: 'pill', label: 'Extra small' },
+  args: { variant: 'primary', size: 'xs', label: 'Extra small' },
 };
-
 export const SizeSm: Story = {
   name: 'Size / SM',
-  args: { variant: 'primary', size: 'sm', shape: 'pill', label: 'Small' },
+  args: { variant: 'primary', size: 'sm', label: 'Small' },
 };
-
 export const SizeMd: Story = {
   name: 'Size / MD',
-  args: { variant: 'primary', size: 'md', shape: 'pill', label: 'Medium' },
+  args: { variant: 'primary', size: 'md', label: 'Medium' },
 };
-
 export const SizeLg: Story = {
   name: 'Size / LG',
-  args: { variant: 'primary', size: 'lg', shape: 'pill', label: 'Large' },
+  args: { variant: 'primary', size: 'lg', label: 'Large' },
 };
 
-/* ── Shapes ──────────────────────────────────── */
-
+/* Shapes */
 export const ShapePill: Story = {
   name: 'Shape / Pill',
-  args: { variant: 'primary', size: 'md', shape: 'pill', label: 'Pill' },
+  args: { variant: 'primary', shape: 'pill', label: 'Pill' },
 };
-
 export const ShapeRounded: Story = {
   name: 'Shape / Rounded',
-  args: { variant: 'primary', size: 'md', shape: 'rounded', label: 'Rounded' },
+  args: { variant: 'primary', shape: 'rounded', label: 'Rounded' },
 };
-
 export const ShapeSquare: Story = {
   name: 'Shape / Square',
-  args: { variant: 'primary', size: 'md', shape: 'square', label: 'Square' },
+  args: { variant: 'primary', shape: 'square', label: 'Square' },
 };
 
-/* ── Dot ─────────────────────────────────────── */
-
-export const WithDotSuccess: Story = {
-  name: 'Dot / Success',
+/* States */
+export const WithIconLeft: Story = {
+  name: 'With icon (left)',
+  args: {
+    variant: 'primary',
+    label: 'Featured',
+    icon: LucideStar.icon,
+    iconPosition: 'left',
+  },
+};
+export const WithIconRight: Story = {
+  name: 'With icon (right)',
   args: {
     variant: 'success',
-    size: 'md',
-    shape: 'pill',
-    label: 'Online',
-    dot: true,
+    label: 'Liked',
+    icon: LucideHeart.icon,
+    iconPosition: 'right',
   },
 };
-
-export const WithDotWarning: Story = {
-  name: 'Dot / Warning',
-  args: {
-    variant: 'warning',
-    size: 'md',
-    shape: 'pill',
-    label: 'Pending',
-    dot: true,
-  },
+export const Count: Story = {
+  args: { variant: 'error', count: 5 },
+};
+export const CountCapped: Story = {
+  name: 'Count (capped)',
+  args: { variant: 'error', count: 150, maxCount: 99 },
+};
+export const Removable: Story = {
+  args: { variant: 'secondary', label: 'Removable', removable: true },
+};
+export const Dot: Story = {
+  args: { variant: 'success', dot: true, label: 'Online' },
+};
+export const DotOnly: Story = {
+  name: 'Dot only',
+  args: { variant: 'success', dot: true },
 };
 
-export const WithDotError: Story = {
-  name: 'Dot / Error',
-  args: {
-    variant: 'error',
-    size: 'md',
-    shape: 'pill',
-    label: 'Offline',
-    dot: true,
+/* Accessibility */
+export const AccessibleDotOnly: Story = {
+  name: 'Accessibility / Dot without visible text',
+  args: { variant: 'success', dot: true, ariaLabel: 'Stato: online' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Un badge "dot-only" non ha testo visibile: il componente calcola `aria-label` come `ariaLabel || label || null`, quindi senza un `ariaLabel` esplicito il badge risulterebbe invisibile a uno screen reader. Impostare sempre `ariaLabel` quando si usa `dot` senza `label`.',
+      },
+    },
   },
 };
-
-export const WithDotNeutral: Story = {
-  name: 'Dot / Neutral',
-  args: {
-    variant: 'neutral',
-    size: 'md',
-    shape: 'pill',
-    label: 'Idle',
-    dot: true,
+export const AccessibleRemovable: Story = {
+  name: 'Accessibility / Removable announces status',
+  args: { variant: 'secondary', label: 'React', removable: true },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Quando `removable` è true, il badge riceve `role="status"` per annunciare eventuali cambiamenti agli screen reader. Il pulsante di rimozione ha un `aria-label` dedicato ("Rimuovi " + label), indipendente dal testo visivo (una semplice "×").',
+      },
+    },
+  },
+};
+export const AccessibleCount: Story = {
+  name: 'Accessibility / Descriptive label for counters',
+  args: { variant: 'error', count: 12, ariaLabel: '12 notifiche non lette' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'In modalità contatore il testo visivo è solo il numero ("12"). Un numero isolato non è sempre comprensibile fuori contesto: fornire un `ariaLabel` descrittivo (es. "12 notifiche non lette") rende l\'annuncio dello screen reader autoesplicativo.',
+      },
+    },
+  },
+};
+export const AccessibleIcon: Story = {
+  name: 'Accessibility / Icon is decorative only',
+  args: { variant: 'warning', label: 'In revisione', icon: LucideStar.icon },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'L\'icona è sempre marcata `aria-hidden="true"` nel template: è puramente decorativa. Il significato deve passare sempre dal testo (`label`) o da `ariaLabel` — mai affidarsi all\'icona da sola per comunicare informazioni.',
+      },
+    },
   },
 };
