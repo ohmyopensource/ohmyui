@@ -5,5 +5,8 @@
   "description": "OhMyUI! design tokens - source of truth for all platforms",
   "scripts": {
     "build": "style-dictionary build --config sd.config.js && style-dictionary build --config sd.dark.config.js"
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.8.0"
   }
 }

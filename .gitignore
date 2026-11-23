@@ -10,6 +10,9 @@ node_modules/
 jspm_packages/
 bower_components/
 
+package-lock.json
+yarn.lock
+
 
 # ================================
 # Build outputs
