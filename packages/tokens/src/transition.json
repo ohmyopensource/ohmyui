@@ -2,9 +2,9 @@
   "transition": {
     "duration": {
       "instant": { "value": "50ms", "type": "other" },
-      "fast": { "value": "100ms", "type": "other" },
+      "fast": { "value": "150ms", "type": "other" },
       "normal": { "value": "200ms", "type": "other" },
-      "slow": { "value": "300ms", "type": "other" },
+      "slow": { "value": "350ms", "type": "other" },
       "slower": { "value": "500ms", "type": "other" }
     },
     "easing": {

@@ -1,0 +1,91 @@
+{
+  "color": {
+    "primary": {
+      "light": { "value": "{color.primary.300}", "type": "color" },
+      "dark": { "value": "{color.primary.600}", "type": "color" },
+      "text": { "value": "#1a3a4a", "type": "color" },
+      "shadow": { "value": "rgba(91, 168, 212, 0.35)", "type": "color" },
+      "focus": { "value": "rgba(91, 168, 212, 0.5)", "type": "color" }
+    },
+    "secondary": {
+      "light": { "value": "{color.secondary.300}", "type": "color" },
+      "dark": { "value": "{color.secondary.600}", "type": "color" },
+      "text": { "value": "#2a1a4a", "type": "color" },
+      "shadow": { "value": "rgba(155, 130, 212, 0.35)", "type": "color" },
+      "focus": { "value": "rgba(155, 130, 212, 0.5)", "type": "color" }
+    },
+    "tertiary": {
+      "light": { "value": "{color.tertiary.300}", "type": "color" },
+      "dark": { "value": "{color.tertiary.600}", "type": "color" },
+      "text": { "value": "#4a1a2a", "type": "color" },
+      "shadow": { "value": "rgba(212, 122, 155, 0.35)", "type": "color" },
+      "focus": { "value": "rgba(212, 122, 155, 0.5)", "type": "color" }
+    },
+    "success": {
+      "light": { "value": "{color.success.300}", "type": "color" },
+      "dark": { "value": "{color.success.600}", "type": "color" },
+      "text": { "value": "#1a4a30", "type": "color" },
+      "shadow": { "value": "rgba(93, 196, 144, 0.35)", "type": "color" },
+      "focus": { "value": "rgba(93, 196, 144, 0.5)", "type": "color" }
+    },
+    "warning": {
+      "light": { "value": "{color.warning.300}", "type": "color" },
+      "dark": { "value": "{color.warning.600}", "type": "color" },
+      "text": { "value": "#4a2e00", "type": "color" },
+      "shadow": { "value": "rgba(212, 168, 74, 0.35)", "type": "color" },
+      "focus": { "value": "rgba(212, 168, 74, 0.5)", "type": "color" }
+    },
+    "error": {
+      "light": { "value": "{color.error.300}", "type": "color" },
+      "dark": { "value": "{color.error.600}", "type": "color" },
+      "text": { "value": "#4a1010", "type": "color" },
+      "shadow": { "value": "rgba(212, 92, 92, 0.35)", "type": "color" },
+      "focus": { "value": "rgba(212, 92, 92, 0.5)", "type": "color" }
+    },
+    "info": {
+      "light": { "value": "{color.info.300}", "type": "color" },
+      "dark": { "value": "{color.info.600}", "type": "color" },
+      "text": { "value": "#1a2a4a", "type": "color" },
+      "shadow": { "value": "rgba(92, 124, 212, 0.35)", "type": "color" },
+      "focus": { "value": "rgba(92, 124, 212, 0.5)", "type": "color" }
+    },
+    "ghost": {
+      "text": { "value": "{color.neutral.500}", "type": "color" },
+      "border": { "value": "{color.neutral.300}", "type": "color" },
+      "hover-bg": { "value": "rgba(100, 110, 130, 0.08)", "type": "color" },
+      "shadow": { "value": "rgba(100, 110, 130, 0.12)", "type": "color" },
+      "focus": { "value": "rgba(100, 110, 130, 0.3)", "type": "color" }
+    },
+    "outline": {
+      "text": { "value": "{color.primary.600}", "type": "color" },
+      "border": { "value": "{color.primary.600}", "type": "color" },
+      "hover-bg": { "value": "rgba(91, 168, 212, 0.08)", "type": "color" },
+      "shadow": { "value": "rgba(91, 168, 212, 0.2)", "type": "color" },
+      "focus": { "value": "rgba(91, 168, 212, 0.4)", "type": "color" }
+    },
+    "flat": {
+      "text": { "value": "{color.primary.600}", "type": "color" },
+      "hover-bg": { "value": "rgba(91, 168, 212, 0.08)", "type": "color" },
+      "focus": { "value": "rgba(91, 168, 212, 0.3)", "type": "color" }
+    },
+    "disabled": {
+      "g1": { "value": "{color.neutral.200}", "type": "color" },
+      "g2": { "value": "{color.neutral.300}", "type": "color" },
+      "text": { "value": "{color.neutral.400}", "type": "color" }
+    },
+    "text": {
+      "default": { "value": "{color.neutral.900}", "type": "color" },
+      "muted": { "value": "{color.neutral.500}", "type": "color" },
+      "subtle": { "value": "{color.neutral.400}", "type": "color" },
+      "inverse": { "value": "{color.neutral.0}", "type": "color" }
+    },
+    "surface": {
+      "default": { "value": "{color.neutral.100}", "type": "color" },
+      "subtle": { "value": "{color.neutral.50}", "type": "color" }
+    },
+    "border": {
+      "default": { "value": "{color.neutral.200}", "type": "color" },
+      "strong": { "value": "{color.neutral.300}", "type": "color" }
+    }
+  }
+}
