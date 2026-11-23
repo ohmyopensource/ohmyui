@@ -1,0 +1,44 @@
+<!--
+@file tabs.html
+@description Template for TabsComponent providing accessible tab navigation
+with support for icons, badges, multiple visual styles, and active state
+indicators. Implementa il "roving tabindex": solo la tab attiva (o la prima
+abilitata, se nessuna e' attiva) e' raggiungibile con Tab da tastiera; le
+altre si raggiungono con le frecce, come da pattern WAI-ARIA tablist.
+-->
+<div
+  [class]="wrapperClasses"
+  role="tablist"
+  [attr.aria-label]="'Navigazione tab'"
+  [attr.aria-orientation]="vertical ? 'vertical' : 'horizontal'">
+  @for (tab of tabs; track trackById($index, tab)) {
+    <button
+      #tabButton
+      [class]="tabClasses(tab)"
+      type="button"
+      role="tab"
+      [attr.aria-selected]="isActive(tab)"
+      [attr.aria-disabled]="tab.disabled ? 'true' : null"
+      [attr.tabindex]="isTabStop(tab) ? 0 : -1"
+      [attr.aria-label]="tab.label"
+      (click)="selectTab(tab)"
+      (keydown)="onKeydown($event, $index)">
+      <!-- Icon -->
+      @if (tab.icon) {
+        <span class="ohmyui-tabs__icon" aria-hidden="true">
+          <svg [lucideIcon]="tab.icon" [size]="iconSize"></svg>
+        </span>
+      }
+      <!-- Label -->
+      <span class="ohmyui-tabs__label">{{ tab.label }}</span>
+      <!-- Badge -->
+      @if (tab.badge !== undefined && tab.badge !== null) {
+        <span [class]="badgeClasses(tab)">{{ tab.badge }}</span>
+      }
+      <!-- Active indicator -->
+      @if (tabStyle === 'line' || tabStyle === 'underline') {
+        <span class="ohmyui-tabs__indicator" aria-hidden="true"></span>
+      }
+    </button>
+  }
+</div>
