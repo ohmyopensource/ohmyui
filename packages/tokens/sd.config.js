@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync } from 'fs';
+import { copyFileSync, mkdirSync, rmSync } from 'fs';
 import { join } from 'path';
 import StyleDictionary from 'style-dictionary';
 
