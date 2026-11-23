@@ -1,0 +1,332 @@
+/**
+ * @file input.css
+ * @description Styling for InputComponent including layout structure, size
+ * system, input variants, validation states, icon handling, and dark mode
+ * support. Consuma i design token generati da packages/tokens.
+ *
+ * NOTA sul dark theme: qui non tutti i colori hanno bisogno di un override
+ * esplicito. Dove l'originale usava lo STESSO step della scala neutral in
+ * entrambi i temi, referenziare il token direttamente basta — si inverte
+ * da solo correttamente. Dove l'originale usava (o avrebbe dovuto usare)
+ * step DIVERSI tra i due temi per una ragione di contrasto reale, è stato
+ * introdotto un token component-tier con override esplicito via
+ * :host-context(.dark-theme). Ogni scelta è stata verificata calcolando la
+ * luminanza reale dei colori coinvolti, non a intuito.
+ */
+
+:host {
+  --input-field-bg: var(--color-neutral-0);
+  --input-field-border: var(--color-neutral-300);
+  --input-placeholder-color: var(--color-neutral-400);
+  --input-disabled-border: var(--color-neutral-200);
+  --input-icon-color: var(--color-neutral-400);
+  --input-icon-btn-hover-bg: var(--color-neutral-100);
+  --input-icon-btn-hover-text: var(--color-neutral-600);
+  --input-hint-color: var(--color-neutral-400);
+
+  /* Bordo di variante/focus/validazione: usa il ruolo "dark" (pensato per
+     contrasto su sfondo chiaro) — stesso pattern già risolto in Button/
+     Badge/Email/Link, qui applicato a tutte le 6 varianti insieme. */
+  --input-primary-border: var(--color-primary-dark);
+  --input-secondary-border: var(--color-secondary-dark);
+  --input-success-border: var(--color-success-dark);
+  --input-warning-border: var(--color-warning-dark);
+  --input-error-border: var(--color-error-dark);
+  --input-info-border: var(--color-info-dark);
+}
+:host-context(.dark-theme) {
+  --input-field-bg: var(--color-neutral-100);
+  --input-field-border: var(--color-neutral-600);
+  --input-placeholder-color: var(--color-neutral-500);
+  --input-disabled-border: var(--color-neutral-500);
+  --input-icon-color: var(--color-neutral-500);
+  --input-icon-btn-hover-bg: var(--color-neutral-600);
+  --input-icon-btn-hover-text: var(--color-neutral-200);
+  --input-hint-color: var(--color-neutral-500);
+
+  --input-primary-border: var(--color-primary-light);
+  --input-secondary-border: var(--color-secondary-light);
+  --input-success-border: var(--color-success-light);
+  --input-warning-border: var(--color-warning-light);
+  --input-error-border: var(--color-error-light);
+  --input-info-border: var(--color-info-light);
+}
+
+/* Wrapper */
+.ohmyui-input-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: inherit;
+}
+.ohmyui-input-wrapper--full {
+  width: 100%;
+}
+
+/* Label — nessun override dark: neutral-600 si inverte gia' correttamente
+   da solo (verificato: l'override manuale dell'originale, neutral-300,
+   dava MENO contrasto del semplice auto-cascade, quindi rimosso). */
+.ohmyui-input-wrapper__label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-neutral-600);
+  line-height: 1.3;
+  cursor: pointer;
+}
+.ohmyui-input-wrapper__label--required::after {
+  content: ' *';
+  color: var(--color-error-dark);
+}
+
+/* Field Base */
+.ohmyui-input-wrapper__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--input-field-bg);
+  border: 1.5px solid var(--input-field-border);
+  border-radius: var(--border-radius-md);
+  transition:
+    border-color var(--transition-duration-fast) var(--transition-easing-ease-in-out),
+    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-in-out),
+    background var(--transition-duration-fast);
+  overflow: hidden;
+}
+
+/* Size System */
+.ohmyui-input-wrapper__field--sm {
+  min-height: 34px;
+}
+.ohmyui-input-wrapper__field--md {
+  min-height: 42px;
+}
+.ohmyui-input-wrapper__field--lg {
+  min-height: 52px;
+}
+
+/* Input Base */
+.ohmyui-input-wrapper__input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  color: var(--color-neutral-800);
+  line-height: 1.5;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Input Spacing */
+.ohmyui-input-wrapper__field--sm .ohmyui-input-wrapper__input {
+  padding: 0.35em 0.75em;
+  font-size: 0.8rem;
+}
+.ohmyui-input-wrapper__field--md .ohmyui-input-wrapper__input {
+  padding: 0.55em 0.9em;
+  font-size: 0.875rem;
+}
+.ohmyui-input-wrapper__field--lg .ohmyui-input-wrapper__input {
+  padding: 0.65em 1em;
+  font-size: 1rem;
+}
+.ohmyui-input-wrapper__field--icon-left .ohmyui-input-wrapper__input {
+  padding-left: 2.5em;
+}
+.ohmyui-input-wrapper__field--icon-right .ohmyui-input-wrapper__input {
+  padding-right: 2.5em;
+}
+.ohmyui-input-wrapper__field--has-prefix .ohmyui-input-wrapper__input {
+  padding-left: 0.4em;
+}
+.ohmyui-input-wrapper__field--sm.ohmyui-input-wrapper__field--icon-left .ohmyui-input-wrapper__input {
+  padding-left: 2.2em;
+}
+.ohmyui-input-wrapper__field--sm.ohmyui-input-wrapper__field--icon-right .ohmyui-input-wrapper__input {
+  padding-right: 2.2em;
+}
+.ohmyui-input-wrapper__field--lg.ohmyui-input-wrapper__field--icon-left .ohmyui-input-wrapper__input {
+  padding-left: 2.8em;
+}
+.ohmyui-input-wrapper__field--lg.ohmyui-input-wrapper__field--icon-right .ohmyui-input-wrapper__input {
+  padding-right: 2.8em;
+}
+.ohmyui-input-wrapper__input::placeholder {
+  color: var(--input-placeholder-color);
+}
+
+/* Variants (textarea / select) */
+.ohmyui-input-wrapper__input--textarea {
+  resize: vertical;
+  min-height: 100px;
+  align-self: stretch;
+  padding: 0.65em 0.9em !important;
+}
+.ohmyui-input-wrapper__input--select {
+  cursor: pointer;
+  padding-right: 2.5em !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa0ad' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75em center;
+  -webkit-appearance: none;
+  appearance: none;
+}
+/* Freccia select: variante piu' chiara per restare visibile su sfondo scuro
+   (stroke = hex esatto del token --color-neutral-600 in dark-theme). Un
+   data-URI SVG non puo' referenziare custom property CSS, quindi qui la
+   duplicazione hardcoded e' un compromesso tecnico necessario, non un
+   valore inventato: combacia deliberatamente col token. */
+:host-context(.dark-theme) .ohmyui-input-wrapper__input--select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c8d0e0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Focus States */
+.ohmyui-input-wrapper__field--primary.ohmyui-input-wrapper__field--focused {
+  border-color: var(--input-primary-border);
+  box-shadow: 0 0 0 3px var(--color-primary-focus);
+}
+.ohmyui-input-wrapper__field--secondary.ohmyui-input-wrapper__field--focused {
+  border-color: var(--input-secondary-border);
+  box-shadow: 0 0 0 3px var(--color-secondary-focus);
+}
+.ohmyui-input-wrapper__field--success.ohmyui-input-wrapper__field--focused,
+.ohmyui-input-wrapper__field--primary.ohmyui-input-wrapper__field--success.ohmyui-input-wrapper__field--focused {
+  border-color: var(--input-success-border);
+  box-shadow: 0 0 0 3px var(--color-success-focus);
+}
+.ohmyui-input-wrapper__field--warning.ohmyui-input-wrapper__field--focused {
+  border-color: var(--input-warning-border);
+  box-shadow: 0 0 0 3px var(--color-warning-focus);
+}
+.ohmyui-input-wrapper__field--error.ohmyui-input-wrapper__field--focused {
+  border-color: var(--input-error-border);
+  box-shadow: 0 0 0 3px var(--color-error-focus);
+}
+.ohmyui-input-wrapper__field--info.ohmyui-input-wrapper__field--focused {
+  border-color: var(--input-info-border);
+  box-shadow: 0 0 0 3px var(--color-info-focus);
+}
+
+/* Validation States — color-mix riferisce --input-field-bg (theme-aware)
+   invece di "white" hardcoded, cosi' il tint resta corretto anche al buio */
+.ohmyui-input-wrapper__field--success {
+  border-color: var(--input-success-border);
+  background: color-mix(in srgb, var(--color-success-light) 15%, var(--input-field-bg));
+}
+.ohmyui-input-wrapper__field--error {
+  border-color: var(--input-error-border);
+  background: color-mix(in srgb, var(--color-error-light) 15%, var(--input-field-bg));
+}
+
+/* Disabled / Readonly */
+.ohmyui-input-wrapper__field--disabled {
+  background: var(--color-neutral-100);
+  border-color: var(--input-disabled-border);
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.65;
+}
+.ohmyui-input-wrapper__field--readonly {
+  background: var(--color-neutral-100);
+  border-color: var(--input-disabled-border);
+}
+.ohmyui-input-wrapper__field--readonly .ohmyui-input-wrapper__input {
+  cursor: default;
+}
+
+/* Icons */
+.ohmyui-input-wrapper__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  color: var(--input-icon-color);
+  flex-shrink: 0;
+  pointer-events: none;
+}
+.ohmyui-input-wrapper__icon--left {
+  left: 0.75em;
+}
+.ohmyui-input-wrapper__icon--right {
+  right: 0.75em;
+}
+.ohmyui-input-wrapper__icon--status.ohmyui-input-wrapper__icon--right {
+  color: inherit;
+}
+.ohmyui-input-wrapper__field--success .ohmyui-input-wrapper__icon--status {
+  color: var(--input-success-border);
+}
+.ohmyui-input-wrapper__field--error .ohmyui-input-wrapper__icon--status {
+  color: var(--input-error-border);
+}
+.ohmyui-input-wrapper__icon--btn {
+  pointer-events: all;
+  cursor: pointer;
+  padding: 0.2em;
+  border-radius: var(--border-radius-none);
+  border: none;
+  background: transparent;
+  transition:
+    color var(--transition-duration-fast),
+    background var(--transition-duration-fast);
+}
+.ohmyui-input-wrapper__icon--btn:hover {
+  color: var(--input-icon-btn-hover-text);
+  background: var(--input-icon-btn-hover-bg);
+}
+.ohmyui-input-wrapper__icon--btn:focus-visible {
+  outline: 2px solid var(--color-primary-focus);
+  outline-offset: 1px;
+}
+
+/* Prefix / Suffix — nessun override dark su bg/testo: neutral-100 e
+   neutral-500 si invertono gia' correttamente da soli (stessa verifica
+   fatta per label/field-bg). Solo il bordo usa un token component-tier,
+   perche' l'originale sceglieva deliberatamente uno step diverso (200 vs
+   500) per un motivo di contrasto reale contro lo sfondo scuro. */
+.ohmyui-input-wrapper__prefix,
+.ohmyui-input-wrapper__suffix {
+  display: flex;
+  align-items: center;
+  padding: 0 0.65em;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-neutral-500);
+  background: var(--color-neutral-100);
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-right: 1.5px solid var(--input-disabled-border);
+}
+.ohmyui-input-wrapper__suffix {
+  border-right: none;
+  border-left: 1.5px solid var(--input-disabled-border);
+}
+
+/* Hint Text */
+.ohmyui-input-wrapper__hint {
+  font-size: 0.75rem;
+  color: var(--input-hint-color);
+  line-height: 1.4;
+}
+.ohmyui-input-wrapper__hint--error {
+  color: var(--input-error-border);
+  font-weight: 500;
+}
+.ohmyui-input-wrapper__hint--success {
+  color: var(--input-success-border);
+  font-weight: 500;
+}
+
+/* Hover States */
+.ohmyui-input-wrapper__field:not(.ohmyui-input-wrapper__field--disabled):not(.ohmyui-input-wrapper__field--focused):hover {
+  border-color: var(--color-neutral-400);
+}
+.ohmyui-input-wrapper__field--error:not(.ohmyui-input-wrapper__field--disabled):hover {
+  border-color: var(--input-error-border);
+}
+.ohmyui-input-wrapper__field--success:not(.ohmyui-input-wrapper__field--disabled):hover {
+  border-color: var(--input-success-border);
+}
