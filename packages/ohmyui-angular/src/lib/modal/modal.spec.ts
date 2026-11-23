@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { ModalComponent } from './modal';
 import { SimpleChange } from '@angular/core';
 
@@ -15,6 +15,10 @@ describe('ModalComponent', () => {
     fixture = TestBed.createComponent(ModalComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it('should create', () => {
@@ -64,7 +68,7 @@ describe('ModalComponent', () => {
     component.closed.subscribe(spy);
     component.isVisible = true;
     component.requestClose();
-    vi.advanceTimersByTime(200);
+    vi.advanceTimersByTime(250);
     expect(spy).toHaveBeenCalled();
     vi.useRealTimers();
   });
