@@ -1,0 +1,462 @@
+/**
+ * @file pagination.css
+ * @description Component stylesheet based on global design tokens. Handles
+ * layout, navigation controls, variants, emphasis modes, and responsive
+ * behavior. Consuma i design token generati da packages/tokens.
+ *
+ * NOTA sul dark theme: stessa metodologia usata per Text/Input — verificata
+ * la luminanza reale di ogni override. Molti override dell'originale
+ * peggioravano il contrasto rispetto al semplice auto-cascade dei token
+ * (stesso bug sistematico trovato altrove) e sono stati rimossi; altri
+ * erano correzioni legittime e sono stati tenuti come token component-tier.
+ */
+
+:host {
+  --pagination-field-bg: var(--color-neutral-100);
+  --pagination-field-border: var(--color-neutral-300);
+  --pagination-btn-hover-bg: var(--color-neutral-100);
+  --pagination-btn-hover-border: var(--color-neutral-300);
+  --pagination-btn-hover-color: var(--color-neutral-600);
+  --pagination-ellipsis-color: var(--color-neutral-400);
+
+  --pagination-minimal-primary: var(--color-primary-dark);
+  --pagination-minimal-secondary: var(--color-secondary-dark);
+  --pagination-minimal-tertiary: var(--color-tertiary-dark);
+  --pagination-minimal-success: var(--color-success-dark);
+  --pagination-minimal-warning: var(--color-warning-dark);
+  --pagination-minimal-error: var(--color-error-dark);
+  --pagination-minimal-info: var(--color-info-dark);
+}
+:host-context(.dark-theme) {
+  --pagination-field-border: var(--color-neutral-500);
+  --pagination-btn-hover-bg: var(--color-neutral-600);
+  --pagination-btn-hover-border: var(--color-neutral-500);
+  --pagination-btn-hover-color: var(--color-neutral-200);
+  --pagination-ellipsis-color: var(--color-neutral-500);
+
+  /*
+   * "minimal" mostra il colore della pagina attiva come solo testo, senza
+   * sfondo: usa il ruolo "dark" (pensato per contrasto su chiaro), che in
+   * dark mode ridefinito e' troppo scuro per restare leggibile — stesso
+   * pattern gia' risolto in Button/Badge/Email/Link/Input. L'originale
+   * copriva solo "primary"; qui completato per tutte le 7 varianti.
+   */
+  --pagination-minimal-primary: var(--color-primary-light);
+  --pagination-minimal-secondary: var(--color-secondary-light);
+  --pagination-minimal-tertiary: var(--color-tertiary-light);
+  --pagination-minimal-success: var(--color-success-light);
+  --pagination-minimal-warning: var(--color-warning-light);
+  --pagination-minimal-error: var(--color-error-light);
+  --pagination-minimal-info: var(--color-info-light);
+}
+
+/* Layout */
+.ohmyui-pagination {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+  font-family: inherit;
+  font-weight: 500;
+  user-select: none;
+}
+.ohmyui-pagination--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Info — nessun override dark: neutral-500/600 si invertono gia' bene da
+   soli (verificato: gli override manuali dell'originale davano MENO
+   contrasto del semplice auto-cascade). */
+.ohmyui-pagination__info {
+  font-size: 0.8rem;
+  color: var(--color-neutral-500);
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.2rem;
+}
+.ohmyui-pagination__info-range,
+.ohmyui-pagination__info-total {
+  font-weight: 700;
+  color: var(--color-neutral-600);
+}
+.ohmyui-pagination__info--empty {
+  font-style: italic;
+}
+
+/* Page size */
+.ohmyui-pagination__size-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--color-neutral-500);
+}
+.ohmyui-pagination__size-select {
+  appearance: none;
+  background: var(--pagination-field-bg);
+  border: 1.5px solid var(--pagination-field-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-neutral-600);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color var(--transition-duration-fast) var(--transition-easing-ease-in-out),
+    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-in-out);
+  padding: 0.3em 1.8em 0.3em 0.6em;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa0ad' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5em center;
+}
+:host-context(.dark-theme) .ohmyui-pagination__size-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c8d0e0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+.ohmyui-pagination__size-select:focus {
+  border-color: var(--color-primary-dark);
+  box-shadow: 0 0 0 3px var(--color-primary-focus);
+}
+
+/* Controls */
+.ohmyui-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+/* Buttons — nessun override dark sul colore base: neutral-500 si inverte
+   gia' bene da solo. Hover invece resta un token component-tier: e' un
+   effetto "flash chiaro" voluto (stesso pattern gia' usato in Input). */
+.ohmyui-pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1.5px solid transparent;
+  border-radius: var(--border-radius-sm);
+  color: var(--color-neutral-500);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1;
+  outline: none;
+  transition:
+    background var(--transition-duration-fast) var(--transition-easing-ease-in-out),
+    border-color var(--transition-duration-fast) var(--transition-easing-ease-in-out),
+    color var(--transition-duration-fast) var(--transition-easing-ease-in-out),
+    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-in-out),
+    transform var(--transition-duration-fast) var(--transition-easing-ease-in-out);
+}
+.ohmyui-pagination__btn:not(:disabled):hover {
+  background: var(--pagination-btn-hover-bg);
+  border-color: var(--pagination-btn-hover-border);
+  color: var(--pagination-btn-hover-color);
+  transform: translateY(-1px);
+}
+.ohmyui-pagination__btn:not(:disabled):active {
+  transform: translateY(0) scale(0.95);
+}
+.ohmyui-pagination__btn:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+.ohmyui-pagination__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.ohmyui-pagination__btn--icon {
+  padding: 0.4em;
+}
+.ohmyui-pagination__btn--page {
+  min-width: 2.2em;
+  padding: 0.35em 0.5em;
+  font-size: inherit;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Active state (emphasis: filled) — light/dark/text/shadow sono tutti
+   theme-aware di loro (ridefiniti in packages/tokens/src/semantic-dark.json):
+   nessun fix necessario, si adattano da soli. */
+.ohmyui-pagination--primary .ohmyui-pagination__btn--active {
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark));
+  border-color: var(--color-primary-dark);
+  color: var(--color-primary-text);
+  box-shadow: 0 2px 8px var(--color-primary-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--secondary .ohmyui-pagination__btn--active {
+  background: linear-gradient(135deg, var(--color-secondary-light), var(--color-secondary-dark));
+  border-color: var(--color-secondary-dark);
+  color: var(--color-secondary-text);
+  box-shadow: 0 2px 8px var(--color-secondary-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--tertiary .ohmyui-pagination__btn--active {
+  background: linear-gradient(135deg, var(--color-tertiary-light), var(--color-tertiary-dark));
+  border-color: var(--color-tertiary-dark);
+  color: var(--color-tertiary-text);
+  box-shadow: 0 2px 8px var(--color-tertiary-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--success .ohmyui-pagination__btn--active {
+  background: linear-gradient(135deg, var(--color-success-light), var(--color-success-dark));
+  border-color: var(--color-success-dark);
+  color: var(--color-success-text);
+  box-shadow: 0 2px 8px var(--color-success-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--warning .ohmyui-pagination__btn--active {
+  background: linear-gradient(135deg, var(--color-warning-light), var(--color-warning-dark));
+  border-color: var(--color-warning-dark);
+  color: var(--color-warning-text);
+  box-shadow: 0 2px 8px var(--color-warning-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--error .ohmyui-pagination__btn--active {
+  background: linear-gradient(135deg, var(--color-error-light), var(--color-error-dark));
+  border-color: var(--color-error-dark);
+  color: var(--color-error-text);
+  box-shadow: 0 2px 8px var(--color-error-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--info .ohmyui-pagination__btn--active {
+  background: linear-gradient(135deg, var(--color-info-light), var(--color-info-dark));
+  border-color: var(--color-info-dark);
+  color: var(--color-info-text);
+  box-shadow: 0 2px 8px var(--color-info-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Misc */
+.ohmyui-pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.2em;
+  color: var(--pagination-ellipsis-color);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: default;
+}
+.ohmyui-pagination__mobile-info {
+  display: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-neutral-500);
+  min-width: 4em;
+  text-align: center;
+}
+.ohmyui-pagination__jump {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--color-neutral-500);
+}
+.ohmyui-pagination__jump-input {
+  width: 4em;
+  padding: 0.3em 0.5em;
+  background: var(--pagination-field-bg);
+  border: 1.5px solid var(--pagination-field-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-neutral-600);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: inherit;
+  text-align: center;
+  outline: none;
+  transition:
+    border-color var(--transition-duration-fast) var(--transition-easing-ease-in-out),
+    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-in-out);
+  -moz-appearance: textfield;
+}
+.ohmyui-pagination__jump-input::-webkit-outer-spin-button,
+.ohmyui-pagination__jump-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.ohmyui-pagination__jump-input:focus {
+  border-color: var(--color-primary-dark);
+  box-shadow: 0 0 0 3px var(--color-primary-focus);
+}
+
+/* Sizes */
+.ohmyui-pagination--xs {
+  font-size: 0.7rem;
+  gap: 0.3rem;
+}
+.ohmyui-pagination--xs .ohmyui-pagination__btn--icon {
+  padding: 0.25em;
+}
+.ohmyui-pagination--xs .ohmyui-pagination__btn--page {
+  min-width: 1.8em;
+  padding: 0.25em 0.4em;
+}
+.ohmyui-pagination--xs .ohmyui-pagination__size-select,
+.ohmyui-pagination--xs .ohmyui-pagination__jump-input {
+  font-size: 0.7rem;
+}
+.ohmyui-pagination--sm {
+  font-size: 0.8rem;
+  gap: 0.35rem;
+}
+.ohmyui-pagination--sm .ohmyui-pagination__btn--icon {
+  padding: 0.3em;
+}
+.ohmyui-pagination--sm .ohmyui-pagination__btn--page {
+  min-width: 2em;
+  padding: 0.3em 0.45em;
+}
+.ohmyui-pagination--sm .ohmyui-pagination__size-select,
+.ohmyui-pagination--sm .ohmyui-pagination__jump-input {
+  font-size: 0.8rem;
+}
+.ohmyui-pagination--md {
+  font-size: 0.875rem;
+}
+.ohmyui-pagination--lg {
+  font-size: 1rem;
+  gap: 0.6rem;
+}
+.ohmyui-pagination--lg .ohmyui-pagination__btn--icon {
+  padding: 0.5em;
+}
+.ohmyui-pagination--lg .ohmyui-pagination__btn--page {
+  min-width: 2.5em;
+  padding: 0.45em 0.6em;
+}
+
+/* Responsive - Media Queries */
+@media (max-width: 768px) {
+  .ohmyui-pagination {
+    gap: 0.4rem;
+    font-size: 0.82rem;
+  }
+  .ohmyui-pagination__info {
+    display: none;
+  }
+  .ohmyui-pagination__size-text {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .ohmyui-pagination {
+    justify-content: center;
+    gap: 0.4rem;
+  }
+  .ohmyui-pagination__pages {
+    display: none;
+  }
+  .ohmyui-pagination__mobile-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 5em;
+    flex: 1;
+  }
+  .ohmyui-pagination__size-label {
+    display: none;
+  }
+  .ohmyui-pagination__jump {
+    display: none;
+  }
+  .ohmyui-pagination__info {
+    display: none;
+  }
+  .ohmyui-pagination__controls {
+    gap: 0.6rem;
+  }
+  .ohmyui-pagination__btn--icon {
+    padding: 0.6em;
+    min-width: 2.4em;
+    min-height: 2.4em;
+    background: var(--pagination-field-bg);
+    border: 1.5px solid var(--color-neutral-200);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-neutral-600);
+  }
+  .ohmyui-pagination--hide-first-last-mobile .ohmyui-pagination__btn--first-last {
+    display: none;
+  }
+}
+
+/* Emphasis Variants - Soft */
+.ohmyui-pagination--soft .ohmyui-pagination__btn--active {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary-dark);
+  color: var(--color-primary-text);
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--soft.ohmyui-pagination--secondary .ohmyui-pagination__btn--active {
+  background: var(--color-secondary-light);
+  border-color: var(--color-secondary-dark);
+  color: var(--color-secondary-text);
+}
+.ohmyui-pagination--soft.ohmyui-pagination--tertiary .ohmyui-pagination__btn--active {
+  background: var(--color-tertiary-light);
+  border-color: var(--color-tertiary-dark);
+  color: var(--color-tertiary-text);
+}
+.ohmyui-pagination--soft.ohmyui-pagination--success .ohmyui-pagination__btn--active {
+  background: var(--color-success-light);
+  border-color: var(--color-success-dark);
+  color: var(--color-success-text);
+}
+.ohmyui-pagination--soft.ohmyui-pagination--warning .ohmyui-pagination__btn--active {
+  background: var(--color-warning-light);
+  border-color: var(--color-warning-dark);
+  color: var(--color-warning-text);
+}
+.ohmyui-pagination--soft.ohmyui-pagination--error .ohmyui-pagination__btn--active {
+  background: var(--color-error-light);
+  border-color: var(--color-error-dark);
+  color: var(--color-error-text);
+}
+.ohmyui-pagination--soft.ohmyui-pagination--info .ohmyui-pagination__btn--active {
+  background: var(--color-info-light);
+  border-color: var(--color-info-dark);
+  color: var(--color-info-text);
+}
+
+/* Emphasis Variants - Minimal — usa i token component-tier definiti sopra,
+   gia' corretti per il dark theme su tutte le 7 varianti. */
+.ohmyui-pagination--minimal .ohmyui-pagination__btn--active {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--pagination-minimal-primary);
+  font-weight: 800;
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--secondary .ohmyui-pagination__btn--active {
+  color: var(--pagination-minimal-secondary);
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--tertiary .ohmyui-pagination__btn--active {
+  color: var(--pagination-minimal-tertiary);
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--success .ohmyui-pagination__btn--active {
+  color: var(--pagination-minimal-success);
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--warning .ohmyui-pagination__btn--active {
+  color: var(--pagination-minimal-warning);
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--error .ohmyui-pagination__btn--active {
+  color: var(--pagination-minimal-error);
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--info .ohmyui-pagination__btn--active {
+  color: var(--pagination-minimal-info);
+}
