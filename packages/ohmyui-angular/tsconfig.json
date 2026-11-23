@@ -21,7 +21,6 @@
   },
   "files": [],
   "include": [],
-  "exclude": ["../**/*.spec.ts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"
