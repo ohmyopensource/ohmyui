@@ -8,7 +8,12 @@ import { CheckboxComponent } from './checkbox';
   standalone: true,
   imports: [CheckboxGroupComponent, CheckboxComponent],
   template: `
-    <ohmyui-checkbox-group [label]="label" [disabled]="disabled" [error]="error" [errorMessage]="errorMessage">
+    <ohmyui-checkbox-group
+      [label]="label"
+      [disabled]="disabled"
+      [error]="error"
+      [errorMessage]="errorMessage"
+    >
       <ohmyui-checkbox label="Email"></ohmyui-checkbox>
       <ohmyui-checkbox label="SMS"></ohmyui-checkbox>
     </ohmyui-checkbox-group>
@@ -34,7 +39,9 @@ describe('CheckboxGroupComponent', () => {
 
   it('should create', () => {
     fixture.detectChanges();
-    const group = fixture.debugElement.query((el) => el.name === 'ohmyui-checkbox-group');
+    const group = fixture.debugElement.query(
+      (el) => el.name === 'ohmyui-checkbox-group',
+    );
     expect(group).toBeTruthy();
   });
 
@@ -46,25 +53,28 @@ describe('CheckboxGroupComponent', () => {
 
   it('should render every projected checkbox', () => {
     fixture.detectChanges();
-    const checkboxes = fixture.nativeElement.querySelectorAll('ohmyui-checkbox');
+    const checkboxes =
+      fixture.nativeElement.querySelectorAll('ohmyui-checkbox');
     expect(checkboxes.length).toBe(2);
   });
 
   it('should disable every projected checkbox input via native fieldset cascade', () => {
     fixture.componentInstance.disabled = true;
     fixture.detectChanges();
-    const inputs: NodeListOf<HTMLInputElement> = fixture.nativeElement.querySelectorAll(
-      'input[type="checkbox"]',
-    );
+    const inputs: NodeListOf<HTMLInputElement> =
+      fixture.nativeElement.querySelectorAll('input[type="checkbox"]');
     expect(inputs.length).toBe(2);
-    inputs.forEach((input) => expect(input.disabled).toBe(true));
+    // `disabled` only reflects the input's own attribute; a disabled
+    // <fieldset> ancestor is exposed through the :disabled state.
+    inputs.forEach((input) => expect(input.matches(':disabled')).toBe(true));
   });
 
   it('should render the error message with role alert when in error state', () => {
     fixture.componentInstance.error = true;
     fixture.componentInstance.errorMessage = 'Seleziona almeno una opzione.';
     fixture.detectChanges();
-    const errorEl: HTMLElement = fixture.nativeElement.querySelector('[role="alert"]');
+    const errorEl: HTMLElement =
+      fixture.nativeElement.querySelector('[role="alert"]');
     expect(errorEl.textContent).toContain('Seleziona almeno una opzione.');
   });
 });
