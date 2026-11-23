@@ -1,0 +1,88 @@
+/**
+ * @file email.css
+ * @description Styling for EmailComponent including color variants, sizing
+ * system, icon layout, and hover/underline interaction states.
+ * Consuma i design token generati da packages/tokens.
+ */
+
+/* Host */
+:host {
+  display: contents;
+
+  /*
+   * Component-tier: usati solo dal colore di BASE (non hover) di primary/
+   * secondary. Usano il ruolo "dark" della palette (pensato per contrasto
+   * su sfondo chiaro), che in dark mode ridefinito diventa troppo scuro per
+   * restare leggibile come testo — override sotto via :host-context.
+   * L'hover invece usa già il ruolo "text", genuinamente theme-aware
+   * (definito diversamente per light/dark in packages/tokens): non
+   * necessita di alcun fix.
+   */
+  --email-primary-color: var(--color-primary-dark);
+  --email-secondary-color: var(--color-secondary-dark);
+}
+:host-context(.dark-theme) {
+  --email-primary-color: var(--color-primary-light);
+  --email-secondary-color: var(--color-secondary-light);
+}
+
+/* Base Link */
+.ohmyui-email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition-duration-normal) var(--transition-easing-ease-in-out);
+}
+
+/* Size Variants */
+.ohmyui-email-link--sm {
+  font-size: 0.75rem;
+}
+.ohmyui-email-link--md {
+  font-size: 0.875rem;
+}
+.ohmyui-email-link--lg {
+  font-size: 1rem;
+}
+
+/* Icon */
+.ohmyui-email-link__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Color Variants */
+.ohmyui-email-link--primary {
+  color: var(--email-primary-color);
+}
+.ohmyui-email-link--secondary {
+  color: var(--email-secondary-color);
+}
+.ohmyui-email-link--neutral {
+  color: var(--color-neutral-600);
+}
+.ohmyui-email-link--ghost {
+  color: var(--color-neutral-500);
+}
+
+/* Hover */
+.ohmyui-email-link--primary:hover {
+  color: var(--color-primary-text);
+}
+.ohmyui-email-link--secondary:hover {
+  color: var(--color-secondary-text);
+}
+.ohmyui-email-link--neutral:hover {
+  color: var(--color-neutral-900);
+}
+.ohmyui-email-link--ghost:hover {
+  color: var(--color-neutral-700);
+}
+
+/* Underline on hover */
+.ohmyui-email-link--underline:hover .ohmyui-email-link__text {
+  text-decoration: underline;
+}
