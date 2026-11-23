@@ -17,7 +17,21 @@
       ]
     },
     "build-storybook": {
-      "cache": true
+      "cache": true,
+      "dependsOn": [
+        {
+          "projects": ["tokens"],
+          "target": "build"
+        }
+      ]
+    },
+    "storybook": {
+      "dependsOn": [
+        {
+          "projects": ["tokens"],
+          "target": "build"
+        }
+      ]
     }
   },
   "generators": {
