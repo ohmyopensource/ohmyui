@@ -1,26 +1,87 @@
 version: 2
 updates:
-  - package-ecosystem: 'github-actions'
-    directory: '/'
-    schedule:
-      interval: 'weekly'
-    labels:
-      - 'dependencies'
-      - 'chore'
-
   - package-ecosystem: 'npm'
     directory: '/'
+    target-branch: 'dev'
     schedule:
       interval: 'weekly'
+      day: 'monday'
     open-pull-requests-limit: 10
     labels:
       - 'dependencies'
       - 'chore'
+    commit-message:
+      prefix: 'build'
+      include: 'scope'
+    groups:
+      nx:
+        patterns:
+          - 'nx'
+          - '@nx/*'
+      angular:
+        patterns:
+          - '@angular/*'
+          - '@angular-devkit/*'
+          - '@schematics/angular'
+          - 'angular-eslint'
+          - 'ng-packagr'
+      storybook:
+        patterns:
+          - 'storybook'
+          - '@storybook/*'
+          - 'eslint-plugin-storybook'
+      testing:
+        patterns:
+          - '@analogjs/*'
+          - 'vitest'
+          - '@vitest/*'
+          - 'vite'
+          - 'jsdom'
+      dev-dependencies:
+        dependency-type: 'development'
+        update-types:
+          - 'minor'
+          - 'patch'
+    ignore:
+      - dependency-name: 'nx'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@nx/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@angular/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@angular-devkit/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@schematics/angular'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'angular-eslint'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'ng-packagr'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'typescript'
+        update-types: ['version-update:semver-major']
 
   - package-ecosystem: 'pub'
     directory: '/packages/ohmyui_flutter'
+    target-branch: 'dev'
     schedule:
       interval: 'weekly'
+      day: 'monday'
     labels:
       - 'dependencies'
       - 'chore'
+    commit-message:
+      prefix: 'build'
+      include: 'scope'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    target-branch: 'dev'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    labels:
+      - 'dependencies'
+      - 'chore'
+    commit-message:
+      prefix: 'ci'
+      include: 'scope'
