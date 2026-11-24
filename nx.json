@@ -60,5 +60,23 @@
         "watchDepsTargetName": "watch-deps"
       }
     }
-  ]
+  ],
+  "release": {
+    "projects": ["ohmyui-angular", "tokens"],
+    "projectsRelationship": "fixed",
+    "releaseTagPattern": "v{version}",
+    "version": {
+      "conventionalCommits": true
+    },
+    "changelog": {
+      "workspaceChangelog": {
+        "file": "{workspaceRoot}/CHANGELOG.md",
+        "createRelease": false
+      },
+      "projectChangelogs": false
+    },
+    "git": {
+      "commitMessage": "chore(release): v{version}"
+    }
+  }
 }
