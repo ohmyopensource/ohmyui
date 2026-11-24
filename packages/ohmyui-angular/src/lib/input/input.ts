@@ -20,7 +20,12 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
 import {
   LucideDynamicIcon,
   LucideIconData,
@@ -44,16 +49,31 @@ let nextInputId = 0;
  * Supported input rendering modes. Determines both HTML element type and
  * internal behavior (e.g. text field, textarea, select, password toggle).
  */
-export type InputType = 'text' | 'email' | 'password' | 'tel' | 'number' | 'url' | 'search' | 'textarea' | 'select';
+export type InputType =
+  | 'text'
+  | 'email'
+  | 'password'
+  | 'tel'
+  | 'number'
+  | 'url'
+  | 'search'
+  | 'textarea'
+  | 'select';
 /** Defines the visual size scale of the input component. */
 export type InputSize = 'sm' | 'md' | 'lg';
 /** Defines the visual accent variant used for focus, borders and states. */
-export type InputVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info';
+export type InputVariant =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info';
 /** Represents the semantic validation state of the input. */
 export type InputStatus = 'default' | 'success' | 'error';
 
 /** Option model used by select-type inputs. */
-export interface SelectOption {
+export interface InputSelectOption {
   label: string;
   value: string | number;
   disabled?: boolean;
@@ -100,7 +120,7 @@ export class InputComponent implements ControlValueAccessor {
   /** Success message used to indicate valid state. */
   @Input() successMessage = '';
   /** Options used when rendering a select input. */
-  @Input() options: SelectOption[] = [];
+  @Input() options: InputSelectOption[] = [];
   /** Placeholder displayed for select inputs. */
   @Input() selectPlaceholder = 'Seleziona';
   /** Visual variant used for focus and semantic coloring. */
@@ -188,7 +208,9 @@ export class InputComponent implements ControlValueAccessor {
 
   /** Handles native input event and propagates value changes. */
   onInput(event: Event): void {
-    const val = (event.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement).value;
+    const val = (
+      event.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    ).value;
     this.value = val;
     this.onChange(val);
     this.inputChange.emit(val);
@@ -236,7 +258,8 @@ export class InputComponent implements ControlValueAccessor {
    * <textarea>/<select> invece, gestiti da branch separati). Rimosso.
    */
   get effectiveType(): string {
-    if (this.type === 'password') return this.showPassword() ? 'text' : 'password';
+    if (this.type === 'password')
+      return this.showPassword() ? 'text' : 'password';
     return this.type;
   }
 
@@ -267,12 +290,19 @@ export class InputComponent implements ControlValueAccessor {
    * aria-describedby — condiviso da input, textarea e select.
    */
   get describedById(): string | null {
-    return this.hint || this.errorMessage || this.successMessage ? `${this.inputId}-hint` : null;
+    return this.hint || this.errorMessage || this.successMessage
+      ? `${this.inputId}-hint`
+      : null;
   }
 
   /** Computes wrapper container classes. */
   get wrapperClasses(): string {
-    return ['ohmyui-input-wrapper', this.fullWidth ? 'ohmyui-input-wrapper--full' : ''].filter(Boolean).join(' ');
+    return [
+      'ohmyui-input-wrapper',
+      this.fullWidth ? 'ohmyui-input-wrapper--full' : '',
+    ]
+      .filter(Boolean)
+      .join(' ');
   }
 
   /** Computes input field classes based on state and configuration. */
@@ -286,7 +316,10 @@ export class InputComponent implements ControlValueAccessor {
       this.disabled ? 'ohmyui-input-wrapper__field--disabled' : '',
       this.readonly ? 'ohmyui-input-wrapper__field--readonly' : '',
       this.iconLeft ? 'ohmyui-input-wrapper__field--icon-left' : '',
-      this.iconRight || this.showClearBtn || this.showPasswordToggle || this.suffix
+      this.iconRight ||
+      this.showClearBtn ||
+      this.showPasswordToggle ||
+      this.suffix
         ? 'ohmyui-input-wrapper__field--icon-right'
         : '',
       this.prefix ? 'ohmyui-input-wrapper__field--has-prefix' : '',
