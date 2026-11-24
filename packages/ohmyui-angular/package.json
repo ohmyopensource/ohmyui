@@ -1,13 +1,34 @@
 {
-  "name": "ohmyui-angular",
-  "version": "1.0.0",
-  "description": "This library was generated with [Nx](https://nx.dev).",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "@ohmyopensource/ohmyui-angular",
+  "version": "0.0.0",
+  "description": "Angular components of OhMyUI!, the OhMyOpenSource! design system.",
+  "keywords": [
+    "angular",
+    "components",
+    "design-system",
+    "ui",
+    "ohmyui"
+  ],
+  "homepage": "https://github.com/ohmyopensource/ohmyui#readme",
+  "bugs": {
+    "url": "https://github.com/ohmyopensource/ohmyui/issues"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ohmyopensource/ohmyui.git",
+    "directory": "packages/ohmyui-angular"
+  },
+  "license": "AGPL-3.0-only",
+  "author": "OhMyOpenSource!",
+  "sideEffects": false,
+  "peerDependencies": {
+    "@angular/common": "^21.0.0 || ^22.0.0",
+    "@angular/core": "^21.0.0 || ^22.0.0",
+    "@angular/forms": "^21.0.0 || ^22.0.0",
+    "@angular/router": "^21.0.0 || ^22.0.0",
+    "@lucide/angular": "^1.16.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
 }

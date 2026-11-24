@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "ohmyui-angular": ["packages/ohmyui-angular/src/index.ts"],
+      "@ohmyopensource/ohmyui-angular": [
+        "packages/ohmyui-angular/src/index.ts"
+      ],
       "ohmyui-react": ["packages/ohmyui-react/src/index.ts"]
     }
   },
