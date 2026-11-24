@@ -18,7 +18,7 @@
     "url": "git+https://github.com/ohmyopensource/ohmyui.git",
     "directory": "packages/ohmyui-angular"
   },
-  "license": "AGPL-3.0-only",
+  "license": "MPL-2.0",
   "author": "OhMyOpenSource!",
   "sideEffects": false,
   "peerDependencies": {

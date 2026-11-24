@@ -16,3 +16,9 @@ For full documentation, component guides, token references, and tutorials, see t
 For contribution rules, commit conventions, code of conduct, and organizational standards, refer to the **OhMyOpenSource! Guidelines** repository:
 
 [Guidelines](https://github.com/ohmyopensource/ohmyopensource-guidelines)
+
+## License
+
+OhMyUI! is released under the [Mozilla Public License 2.0](LICENSE).
+
+The bundled fonts are distributed under the SIL Open Font License 1.1: [Outfit](packages/tokens/src/fonts/Outfit-OFL.txt) and [Quicksand](packages/tokens/src/fonts/Quicksand-OFL.txt).

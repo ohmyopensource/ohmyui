@@ -2,6 +2,7 @@
   "name": "ohmyui",
   "version": "0.0.0",
   "private": true,
+  "license": "MPL-2.0",
   "devDependencies": {
     "@analogjs/vite-plugin-angular": "^2.9.8",
     "@analogjs/vitest-angular": "^2.9.8",

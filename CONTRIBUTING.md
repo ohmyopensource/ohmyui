@@ -47,4 +47,4 @@ Open an issue using the **Feature request** template. Describe the component, wh
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [AGPL-3.0 License](LICENSE).
+By contributing, you agree that your contributions will be licensed under the [Mozilla Public License 2.0](LICENSE).

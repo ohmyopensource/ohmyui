@@ -28,7 +28,7 @@ const baseItems: AccordionItem[] = [
     id: '2',
     title: 'Is it free to use?',
     content:
-      'Yes, OhMyUI is completely free and open-source, released under the MIT license. You can use it in personal and commercial projects without any restrictions.',
+      'Yes. OhMyUI is free and open source under the Mozilla Public License 2.0, so you can use it in personal and commercial projects.',
   },
   {
     id: '3',

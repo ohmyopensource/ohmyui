@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "description": "OhMyUI! design tokens - source of truth for all platforms",
+  "license": "MPL-2.0 AND OFL-1.1",
   "scripts": {
     "build": "style-dictionary build --config sd.config.js && style-dictionary build --config sd.dark.config.js"
   },
