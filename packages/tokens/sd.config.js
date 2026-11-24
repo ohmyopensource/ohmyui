@@ -8,6 +8,8 @@ const FONT_FILES = [
   'Quicksand-VariableFont_wght.woff2',
   'Quicksand-VariableFont_wght.ttf',
   'fonts.css',
+  'Outfit-OFL.txt',
+  'Quicksand-OFL.txt',
 ];
 
 StyleDictionary.registerAction({
