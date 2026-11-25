@@ -11,7 +11,7 @@ updates:
       - 'dependencies'
       - 'chore'
     commit-message:
-      prefix: 'build'
+      prefix: 'chore'
       include: 'scope'
     groups:
       nx:
@@ -70,7 +70,7 @@ updates:
       - 'dependencies'
       - 'chore'
     commit-message:
-      prefix: 'build'
+      prefix: 'chore'
       include: 'scope'
 
   - package-ecosystem: 'github-actions'
@@ -79,6 +79,42 @@ updates:
     schedule:
       interval: 'weekly'
       day: 'monday'
+    labels:
+      - 'dependencies'
+      - 'chore'
+    commit-message:
+      prefix: 'ci'
+      include: 'scope'
+
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 0
+    labels:
+      - 'dependencies'
+      - 'chore'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+
+  - package-ecosystem: 'pub'
+    directory: '/packages/ohmyui_flutter'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 0
+    labels:
+      - 'dependencies'
+      - 'chore'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 0
     labels:
       - 'dependencies'
       - 'chore'
