@@ -69,10 +69,7 @@
       "conventionalCommits": true
     },
     "changelog": {
-      "workspaceChangelog": {
-        "file": "{workspaceRoot}/CHANGELOG.md",
-        "createRelease": false
-      },
+      "workspaceChangelog": false,
       "projectChangelogs": false
     },
     "git": {
