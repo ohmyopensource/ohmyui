@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest a new component or improvement to an existing one
-labels: enhancement, status:needs-triage
+labels: ['enhancement', 'status: needs triage']
 assignees: ''
 ---
 

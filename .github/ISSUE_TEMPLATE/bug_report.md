@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Report a broken or incorrect component
-labels: bug, status:needs-triage
+labels: ['bug', 'status: needs triage']
 assignees: ''
 ---
 
