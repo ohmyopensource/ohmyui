@@ -8,7 +8,7 @@ OhMyUI! is the design system of OhMyOpenSource!. This repository is an Nx monore
 
 | Package                          | Folder                    | Contents                                                                                                                        |
 | -------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `@ohmyopensource/tokens`         | `packages/tokens`         | Design tokens generated with Style Dictionary: CSS custom properties for the light and dark theme, Dart constants and the fonts |
+| `@ohmyopensource/ohmyui-tokens`  | `packages/ohmyui-tokens`  | Design tokens generated with Style Dictionary: CSS custom properties for the light and dark theme, Dart constants and the fonts |
 | `@ohmyopensource/ohmyui-angular` | `packages/ohmyui-angular` | Angular components                                                                                                              |
 | `ohmyui-react`                   | `packages/ohmyui-react`   | React components, at an early stage: Button and Badge                                                                           |
 | `ohmyui_flutter`                 | `packages/ohmyui_flutter` | Flutter widgets, at an early stage: Button and Badge                                                                            |
@@ -42,4 +42,4 @@ Read the [OhMyOpenSource! guidelines](https://github.com/ohmyopensource/ohmyopen
 
 OhMyUI! is released under the [Mozilla Public License 2.0](LICENSE).
 
-The bundled fonts are distributed under the SIL Open Font License 1.1: [Outfit](packages/tokens/src/fonts/Outfit-OFL.txt) and [Quicksand](packages/tokens/src/fonts/Quicksand-OFL.txt).
+The bundled fonts are distributed under the SIL Open Font License 1.1: [Outfit](packages/ohmyui-tokens/src/fonts/Outfit-OFL.txt) and [Quicksand](packages/ohmyui-tokens/src/fonts/Quicksand-OFL.txt).

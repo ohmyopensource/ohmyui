@@ -9,7 +9,7 @@ const config: StorybookConfig = {
     name: getAbsolutePath('@storybook/angular'),
     options: {},
   },
-  staticDirs: [{ from: '../../tokens/build/css', to: '/tokens' }],
+  staticDirs: [{ from: '../../ohmyui-tokens/build/css', to: '/tokens' }],
 };
 
 export default config;

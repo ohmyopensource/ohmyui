@@ -14,7 +14,7 @@ const config: StorybookConfig = {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
-  staticDirs: [{ from: '../../tokens/build/css', to: '/tokens' }],
+  staticDirs: [{ from: '../../ohmyui-tokens/build/css', to: '/tokens' }],
   viteFinal: async (config) =>
     mergeConfig(config, {
       plugins: [react(), nxViteTsPaths()],

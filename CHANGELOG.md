@@ -5,10 +5,17 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 Versions 0.x are development releases: the public API can change from one minor
-version to the next. `@ohmyopensource/ohmyui-angular` and `@ohmyopensource/tokens`
-are released together and share one version number.
+version to the next. `@ohmyopensource/ohmyui-angular` and
+`@ohmyopensource/ohmyui-tokens` are released together and share one version
+number.
 
 ## [Unreleased]
+
+### Changed
+
+- The tokens package is renamed from `@ohmyopensource/tokens` to
+  `@ohmyopensource/ohmyui-tokens`, following the package names of the other
+  OhMyOpenSource! libraries, and moves to `packages/ohmyui-tokens`.
 
 ## [0.1.0] - 2026-11-24
 

@@ -20,7 +20,7 @@
       "cache": true,
       "dependsOn": [
         {
-          "projects": ["tokens"],
+          "projects": ["ohmyui-tokens"],
           "target": "build"
         }
       ]
@@ -28,7 +28,7 @@
     "storybook": {
       "dependsOn": [
         {
-          "projects": ["tokens"],
+          "projects": ["ohmyui-tokens"],
           "target": "build"
         }
       ]
@@ -62,7 +62,7 @@
     }
   ],
   "release": {
-    "projects": ["ohmyui-angular", "tokens"],
+    "projects": ["ohmyui-angular", "ohmyui-tokens"],
     "projectsRelationship": "fixed",
     "releaseTagPattern": "v{version}",
     "version": {

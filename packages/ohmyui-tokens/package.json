@@ -1,5 +1,5 @@
 {
-  "name": "@ohmyopensource/tokens",
+  "name": "@ohmyopensource/ohmyui-tokens",
   "version": "0.1.0",
   "type": "module",
   "description": "OhMyUI! design tokens - source of truth for all platforms",

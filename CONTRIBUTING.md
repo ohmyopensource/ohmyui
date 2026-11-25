@@ -58,7 +58,7 @@ pnpm install
 | `pnpm nx storybook ohmyui-react`      | Starts Storybook for the React components                                |
 | `pnpm nx test ohmyui-angular`         | Runs the unit tests of the Angular library                               |
 | `pnpm nx build ohmyui-angular`        | Builds the Angular library and checks every template in strict mode      |
-| `pnpm nx build tokens`                | Generates the CSS and Dart tokens in `packages/tokens/build`             |
+| `pnpm nx build ohmyui-tokens`         | Generates the CSS and Dart tokens in `packages/ohmyui-tokens/build`      |
 | `pnpm nx run-many -t lint test build` | Runs lint, tests and builds of every project, as the CI does             |
 
 For the Flutter package, run `flutter analyze` and `flutter test` in `packages/ohmyui_flutter`.

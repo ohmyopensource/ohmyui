@@ -24,7 +24,7 @@ build/Release/
 # ================================
 # Style Dictionary
 # ================================
-packages/tokens/build/
+packages/ohmyui-tokens/build/
 
 # ================================
 # Storybook
