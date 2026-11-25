@@ -1,21 +1,42 @@
 # OhMyUI!
 
-This repository contains the **source code of OhMyUI!**, the open source design system by **OhMyOpenSource!** .
-It includes design tokens, UI components for Angular and React, and Flutter widgets.
+Design system with design tokens and components for Angular, React and Flutter.
 
-> **Note:** This repository does not contain documentation, contribution guides, or architecture explanations.
+## What it is
 
-## Documentation
+OhMyUI! is the design system of OhMyOpenSource!. This repository is an Nx monorepo, managed with pnpm, that holds the source code of every package:
 
-For full documentation, component guides, token references, and tutorials, see the **OhMyUI! Docs** repository:
+| Package                          | Folder                    | Contents                                                                                                                        |
+| -------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `@ohmyopensource/tokens`         | `packages/tokens`         | Design tokens generated with Style Dictionary: CSS custom properties for the light and dark theme, Dart constants and the fonts |
+| `@ohmyopensource/ohmyui-angular` | `packages/ohmyui-angular` | Angular components                                                                                                              |
+| `ohmyui-react`                   | `packages/ohmyui-react`   | React components, at an early stage: Button and Badge                                                                           |
+| `ohmyui_flutter`                 | `packages/ohmyui_flutter` | Flutter widgets, at an early stage: Button and Badge                                                                            |
 
-[OhMyUI! Documentation](https://github.com/ohmyopensource/ohmyui-docs)
+No package is published to a registry yet. The user documentation is written in the [ohmyui-docs](https://github.com/ohmyopensource/ohmyui-docs) repository, and the changes of every version are listed in the [changelog](CHANGELOG.md).
 
-## Guidelines
+## Getting started
 
-For contribution rules, commit conventions, code of conduct, and organizational standards, refer to the **OhMyOpenSource! Guidelines** repository:
+Requirements: Node.js 24, pnpm 10 and, only for the Flutter package, Flutter 3.44.
 
-[Guidelines](https://github.com/ohmyopensource/ohmyopensource-guidelines)
+```bash
+pnpm install
+pnpm nx storybook ohmyui-angular
+```
+
+The second command builds the tokens and starts Storybook with the Angular components.
+
+## Running the checks
+
+```bash
+pnpm nx run-many -t lint test build
+```
+
+This runs lint, unit tests and builds of every project, as the CI does. For the Flutter package, run `flutter analyze` and `flutter test` in `packages/ohmyui_flutter`. The other commands are listed in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Contributing
+
+Read the [OhMyOpenSource! guidelines](https://github.com/ohmyopensource/ohmyopensource-guidelines) and [CONTRIBUTING.md](CONTRIBUTING.md), which explains how to add a component.
 
 ## License
 
