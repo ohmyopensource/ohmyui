@@ -87,5 +87,19 @@
       "default": { "value": "{color.neutral.200}", "type": "color" },
       "strong": { "value": "{color.neutral.300}", "type": "color" }
     }
+  },
+  "shadow": {
+    "focus-primary": {
+      "value": "0 0 0 3px {color.primary.focus}",
+      "type": "shadow"
+    },
+    "focus-error": {
+      "value": "0 0 0 3px {color.error.focus}",
+      "type": "shadow"
+    },
+    "focus-success": {
+      "value": "0 0 0 3px {color.success.focus}",
+      "type": "shadow"
+    }
   }
 }

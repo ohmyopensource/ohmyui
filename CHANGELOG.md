@@ -18,6 +18,7 @@ number.
   already do (for example `--ohmyui-badge-ghost-text`,
   `--ohmyui-input-select-arrow`, `--ohmyui-text-code-bg`), so they can be
   customized for each theme.
+- `--ohmyui-font-weight-extrabold` (800) completes the font weight scale.
 
 ### Changed
 
@@ -33,12 +34,25 @@ number.
 - The two radius scales are merged into one, `--ohmyui-radius-*`: `none` (0),
   `xs` (4px), `sm` (6px), `md` (10px), `lg` (16px), `xl` (24px) and `full`.
   `--border-radius-*` and `--radius-*` no longer exist.
+- The font size tokens, from `--ohmyui-font-size-xs` to
+  `--ohmyui-font-size-6xl`, are in `rem` instead of `px`, so text follows the
+  font size set in the browser. With the default root font size of 16px the
+  sizes do not change (`xs` is `0.6875rem`, that is 11px).
+- `--ohmyui-font-family-mono` is the monospace font of the operating system
+  (`ui-monospace`, SF Mono, Menlo, Consolas or Liberation Mono, with
+  `monospace` as the last fallback) instead of JetBrains Mono, which the
+  package does not bundle.
 
 ### Fixed
 
 - Text: in the dark theme, the `code` variant with the `gradient` option shows
   the gradient, as in the light theme. Before, the dark background of the
   variant covered it.
+- The focus shadows `--ohmyui-shadow-focus-primary`,
+  `--ohmyui-shadow-focus-error` and `--ohmyui-shadow-focus-success` use the
+  focus colors of the semantic tokens (`--ohmyui-color-primary-focus`,
+  `--ohmyui-color-error-focus` and `--ohmyui-color-success-focus`), also in the
+  dark theme. Before, they kept the colors of an earlier palette.
 
 ## [0.1.0] - 2026-11-24
 

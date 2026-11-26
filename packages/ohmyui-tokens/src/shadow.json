@@ -22,18 +22,6 @@
     "inner": {
       "value": "inset 0 2px 4px 0 rgba(0,0,0,0.05)",
       "type": "shadow"
-    },
-    "focus-primary": {
-      "value": "0 0 0 3px rgba(245,183,0,0.40)",
-      "type": "shadow"
-    },
-    "focus-error": {
-      "value": "0 0 0 3px rgba(239,68,68,0.40)",
-      "type": "shadow"
-    },
-    "focus-success": {
-      "value": "0 0 0 3px rgba(158,228,147,0.40)",
-      "type": "shadow"
     }
   }
 }

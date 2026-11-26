@@ -22,6 +22,9 @@ export default {
       transformGroup: 'css',
       prefix: 'ohmyui',
       buildPath: 'build/css/',
+      options: {
+        outputReferences: true,
+      },
       files: [
         {
           destination: 'theme-dark.css',
