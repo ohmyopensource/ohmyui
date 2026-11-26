@@ -79,7 +79,7 @@ For the Flutter package, run `flutter analyze` and `flutter test` in `packages/o
 
 ## Key rules
 
-- **Use design tokens** — never hardcode colors, spacing or typography. Use `var(--token-name)` in CSS and `OhMyUITokens.*` in Dart.
+- **Use design tokens** — never hardcode colors, spacing or typography. Use the `--ohmyui-*` custom properties in CSS and `OhMyUITokens.*` in Dart.
 - **One component per PR** — keep PRs focused and easy to review.
 - **Follow commit conventions** — see [commit conventions](https://github.com/ohmyopensource/ohmyopensource-guidelines/blob/main/git/commit-conventions.md).
 - **Never push to `main` or `dev` directly** — always open a Pull Request.

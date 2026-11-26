@@ -1,125 +1,101 @@
 /**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+/**
  * @file button.css
- * @description Styling for ButtonComponent including button variants,
- * sizing system, interaction states, accessibility, ripple effects,
- * success feedback states, and dark theme support.
- * Consuma i design token generati da packages/tokens (variables.css + theme-dark.css).
+ * @description Styles of ButtonComponent (`ohmyui-button`): a button, an
+ * internal link or an external link in eleven variants, four sizes and five
+ * corner radii, with an optional icon, an icon-only layout, loading and
+ * succeeded states and a ripple on click.
  */
 
 /* Host */
 :host {
   display: contents;
-
-  /*
-   * Component-tier tokens: mappano i ruoli semantici (packages/tokens) sulle
-   * variabili specifiche del Button. Un solo punto di override per un
-   * consumer che voglia ridefinire il Button senza toccare tutto il brand.
-   */
-  --btn-primary-g1: var(--color-primary-light);
-  --btn-primary-g2: var(--color-primary-dark);
-  --btn-primary-text: var(--color-primary-text);
-  --btn-primary-shadow: var(--color-primary-shadow);
-  --btn-primary-focus: var(--color-primary-focus);
-
-  --btn-secondary-g1: var(--color-secondary-light);
-  --btn-secondary-g2: var(--color-secondary-dark);
-  --btn-secondary-text: var(--color-secondary-text);
-  --btn-secondary-shadow: var(--color-secondary-shadow);
-  --btn-secondary-focus: var(--color-secondary-focus);
-
-  --btn-tertiary-g1: var(--color-tertiary-light);
-  --btn-tertiary-g2: var(--color-tertiary-dark);
-  --btn-tertiary-text: var(--color-tertiary-text);
-  --btn-tertiary-shadow: var(--color-tertiary-shadow);
-  --btn-tertiary-focus: var(--color-tertiary-focus);
-
-  --btn-success-g1: var(--color-success-light);
-  --btn-success-g2: var(--color-success-dark);
-  --btn-success-text: var(--color-success-text);
-  --btn-success-shadow: var(--color-success-shadow);
-  --btn-success-focus: var(--color-success-focus);
-
-  --btn-warning-g1: var(--color-warning-light);
-  --btn-warning-g2: var(--color-warning-dark);
-  --btn-warning-text: var(--color-warning-text);
-  --btn-warning-shadow: var(--color-warning-shadow);
-  --btn-warning-focus: var(--color-warning-focus);
-
-  --btn-error-g1: var(--color-error-light);
-  --btn-error-g2: var(--color-error-dark);
-  --btn-error-text: var(--color-error-text);
-  --btn-error-shadow: var(--color-error-shadow);
-  --btn-error-focus: var(--color-error-focus);
-
-  --btn-info-g1: var(--color-info-light);
-  --btn-info-g2: var(--color-info-dark);
-  --btn-info-text: var(--color-info-text);
-  --btn-info-shadow: var(--color-info-shadow);
-  --btn-info-focus: var(--color-info-focus);
-
-  /*
-   * Ghost/outline background: nell'originale OMU --btn-ghost-g1 e
-   * --btn-outline-g1 erano referenziati in .btn--ghost/.btn--outline ma MAI
-   * definiti nei token globali — variabile non risolta, browser ignora la
-   * proprietà. Qui li definiamo esplicitamente come trasparenti (l'intento
-   * visivo era chiaramente "nessun riempimento").
-   */
-  --btn-ghost-g1: transparent;
-  --btn-ghost-text: var(--color-neutral-500);
-  --btn-ghost-border: var(--color-neutral-300);
-  --btn-ghost-hover-bg: var(--color-ghost-hover-bg);
-  --btn-ghost-shadow: var(--color-ghost-shadow);
-  --btn-ghost-focus: var(--color-ghost-focus);
-
-  --btn-outline-g1: transparent;
-  --btn-outline-text: var(--color-primary-dark);
-  --btn-outline-border: var(--color-primary-dark);
-  --btn-outline-hover-bg: var(--color-outline-hover-bg);
-  --btn-outline-shadow: var(--color-outline-shadow);
-  --btn-outline-focus: var(--color-outline-focus);
-
-  --btn-flat-text: var(--color-primary-dark);
-  --btn-flat-hover-bg: var(--color-flat-hover-bg);
-  --btn-flat-focus: var(--color-flat-focus);
-
-  --btn-disabled-g1: var(--color-neutral-200);
-  --btn-disabled-g2: var(--color-neutral-300);
-  --btn-disabled-text: var(--color-neutral-400);
-
-  --btn-succeeded-g1: var(--color-success-light);
-  --btn-succeeded-g2: var(--color-success-dark);
-  --btn-succeeded-text: var(--color-success-text);
-  --btn-succeeded-shadow: var(--color-success-shadow);
-
-  --btn-succeeded-ghost-text: var(--color-success-dark);
-  --btn-succeeded-ghost-border: var(--color-success-dark);
-  /* Nessun token dedicato per questo sfondo: derivato al volo dal colore
-     semantico invece di aggiungere un token per un solo, singolo uso. */
-  --btn-succeeded-ghost-bg: color-mix(
+  --ohmyui-button-primary-g1: var(--ohmyui-color-primary-light);
+  --ohmyui-button-primary-g2: var(--ohmyui-color-primary-dark);
+  --ohmyui-button-primary-text: var(--ohmyui-color-primary-text);
+  --ohmyui-button-primary-shadow: var(--ohmyui-color-primary-shadow);
+  --ohmyui-button-primary-focus: var(--ohmyui-color-primary-focus);
+  --ohmyui-button-secondary-g1: var(--ohmyui-color-secondary-light);
+  --ohmyui-button-secondary-g2: var(--ohmyui-color-secondary-dark);
+  --ohmyui-button-secondary-text: var(--ohmyui-color-secondary-text);
+  --ohmyui-button-secondary-shadow: var(--ohmyui-color-secondary-shadow);
+  --ohmyui-button-secondary-focus: var(--ohmyui-color-secondary-focus);
+  --ohmyui-button-tertiary-g1: var(--ohmyui-color-tertiary-light);
+  --ohmyui-button-tertiary-g2: var(--ohmyui-color-tertiary-dark);
+  --ohmyui-button-tertiary-text: var(--ohmyui-color-tertiary-text);
+  --ohmyui-button-tertiary-shadow: var(--ohmyui-color-tertiary-shadow);
+  --ohmyui-button-tertiary-focus: var(--ohmyui-color-tertiary-focus);
+  --ohmyui-button-success-g1: var(--ohmyui-color-success-light);
+  --ohmyui-button-success-g2: var(--ohmyui-color-success-dark);
+  --ohmyui-button-success-text: var(--ohmyui-color-success-text);
+  --ohmyui-button-success-shadow: var(--ohmyui-color-success-shadow);
+  --ohmyui-button-success-focus: var(--ohmyui-color-success-focus);
+  --ohmyui-button-warning-g1: var(--ohmyui-color-warning-light);
+  --ohmyui-button-warning-g2: var(--ohmyui-color-warning-dark);
+  --ohmyui-button-warning-text: var(--ohmyui-color-warning-text);
+  --ohmyui-button-warning-shadow: var(--ohmyui-color-warning-shadow);
+  --ohmyui-button-warning-focus: var(--ohmyui-color-warning-focus);
+  --ohmyui-button-error-g1: var(--ohmyui-color-error-light);
+  --ohmyui-button-error-g2: var(--ohmyui-color-error-dark);
+  --ohmyui-button-error-text: var(--ohmyui-color-error-text);
+  --ohmyui-button-error-shadow: var(--ohmyui-color-error-shadow);
+  --ohmyui-button-error-focus: var(--ohmyui-color-error-focus);
+  --ohmyui-button-info-g1: var(--ohmyui-color-info-light);
+  --ohmyui-button-info-g2: var(--ohmyui-color-info-dark);
+  --ohmyui-button-info-text: var(--ohmyui-color-info-text);
+  --ohmyui-button-info-shadow: var(--ohmyui-color-info-shadow);
+  --ohmyui-button-info-focus: var(--ohmyui-color-info-focus);
+  --ohmyui-button-ghost-g1: transparent;
+  --ohmyui-button-ghost-text: var(--ohmyui-color-neutral-500);
+  --ohmyui-button-ghost-border: var(--ohmyui-color-neutral-300);
+  --ohmyui-button-ghost-hover-bg: var(--ohmyui-color-ghost-hover-bg);
+  --ohmyui-button-ghost-shadow: var(--ohmyui-color-ghost-shadow);
+  --ohmyui-button-ghost-focus: var(--ohmyui-color-ghost-focus);
+  --ohmyui-button-outline-g1: transparent;
+  --ohmyui-button-outline-text: var(--ohmyui-color-primary-dark);
+  --ohmyui-button-outline-border: var(--ohmyui-color-primary-dark);
+  --ohmyui-button-outline-hover-bg: var(--ohmyui-color-outline-hover-bg);
+  --ohmyui-button-outline-shadow: var(--ohmyui-color-outline-shadow);
+  --ohmyui-button-outline-focus: var(--ohmyui-color-outline-focus);
+  --ohmyui-button-flat-text: var(--ohmyui-color-primary-dark);
+  --ohmyui-button-flat-hover-bg: var(--ohmyui-color-flat-hover-bg);
+  --ohmyui-button-flat-focus: var(--ohmyui-color-flat-focus);
+  --ohmyui-button-disabled-g1: var(--ohmyui-color-neutral-200);
+  --ohmyui-button-disabled-g2: var(--ohmyui-color-neutral-300);
+  --ohmyui-button-disabled-text: var(--ohmyui-color-neutral-400);
+  --ohmyui-button-succeeded-g1: var(--ohmyui-color-success-light);
+  --ohmyui-button-succeeded-g2: var(--ohmyui-color-success-dark);
+  --ohmyui-button-succeeded-text: var(--ohmyui-color-success-text);
+  --ohmyui-button-succeeded-shadow: var(--ohmyui-color-success-shadow);
+  --ohmyui-button-succeeded-ghost-text: var(--ohmyui-color-success-dark);
+  --ohmyui-button-succeeded-ghost-border: var(--ohmyui-color-success-dark);
+  --ohmyui-button-succeeded-ghost-bg: color-mix(
     in srgb,
-    var(--color-success-dark) 8%,
+    var(--ohmyui-color-success-dark) 8%,
     transparent
   );
-
-  --btn-radius: var(--border-radius-md);
-  --btn-transition: var(--transition-duration-normal)
-    var(--transition-easing-ease-in-out);
+  --ohmyui-button-radius: var(--ohmyui-radius-md);
+  --ohmyui-button-transition: var(--ohmyui-transition-duration-normal)
+    var(--ohmyui-transition-easing-ease-in-out);
 }
 
-/*
- * Dark theme — outline e flat vanno corretti esplicitamente: usano il ruolo
- * "dark" della palette (pensato per contrasto su sfondo chiaro), che in dark
- * mode ridefinito diventa troppo scuro per restare leggibile come testo.
- * Stesso problema già risolto in badge.css, qui applicato da subito.
- * Vedi badge.css per il perché di :host-context invece di ".dark-theme X".
- */
+/* Dark theme */
 :host-context(.dark-theme) {
-  --btn-outline-text: var(--color-primary-light);
-  --btn-outline-border: var(--color-primary-light);
-  --btn-flat-text: var(--color-primary-light);
+  --ohmyui-button-outline-text: var(--ohmyui-color-primary-light);
+  --ohmyui-button-outline-border: var(--ohmyui-color-primary-light);
+  --ohmyui-button-flat-text: var(--ohmyui-color-primary-light);
 }
 
-/* Base Button */
+/* Base */
 .ohmyui-btn {
   display: inline-flex;
   align-items: center;
@@ -134,21 +110,55 @@
   text-decoration: none;
   line-height: 1;
   border: none;
-  border-radius: var(--btn-radius);
+  border-radius: var(--ohmyui-button-radius);
   outline: none;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
   transition:
-    box-shadow var(--btn-transition),
-    transform var(--btn-transition),
-    filter var(--btn-transition),
-    opacity var(--btn-transition);
+    box-shadow var(--ohmyui-button-transition),
+    transform var(--ohmyui-button-transition),
+    filter var(--ohmyui-button-transition),
+    opacity var(--ohmyui-button-transition);
   user-select: none;
 }
 
-/* Size Variants */
+/* Icon */
+.ohmyui-btn__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Label */
+.ohmyui-btn__label {
+  display: inline-block;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Spinner */
+.ohmyui-btn__spinner {
+  display: flex;
+  align-items: center;
+  animation: ohmyui-btn-spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+/* Ripple */
+.ohmyui-btn__ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255, 255, 255, 0.35);
+  animation: ohmyui-btn-ripple 550ms linear forwards;
+  pointer-events: none;
+}
+
+/* Sizes */
 .ohmyui-btn--xs {
   padding: 0.35em 0.75em;
   font-size: 0.7rem;
@@ -170,276 +180,29 @@
   min-height: 52px;
 }
 
-/* Layout Modifiers */
+/* Rounded */
+.ohmyui-btn--rounded-none {
+  --ohmyui-button-radius: var(--ohmyui-radius-none);
+}
+.ohmyui-btn--rounded-sm {
+  --ohmyui-button-radius: var(--ohmyui-radius-sm);
+}
+.ohmyui-btn--rounded-md {
+  --ohmyui-button-radius: var(--ohmyui-radius-md);
+}
+.ohmyui-btn--rounded-lg {
+  --ohmyui-button-radius: var(--ohmyui-radius-lg);
+}
+.ohmyui-btn--rounded-full {
+  --ohmyui-button-radius: var(--ohmyui-radius-full);
+}
+
+/* Full width */
 .ohmyui-btn--full-width {
   width: 100%;
 }
-.ohmyui-btn--rounded-none {
-  --btn-radius: var(--border-radius-none);
-}
-.ohmyui-btn--rounded-sm {
-  --btn-radius: var(--border-radius-sm);
-}
-.ohmyui-btn--rounded-md {
-  --btn-radius: var(--border-radius-md);
-}
-.ohmyui-btn--rounded-lg {
-  --btn-radius: var(--border-radius-lg);
-}
-.ohmyui-btn--rounded-full {
-  --btn-radius: var(--border-radius-full);
-}
 
-/* Color Variants */
-.ohmyui-btn--primary {
-  background: linear-gradient(
-    135deg,
-    var(--btn-primary-g1),
-    var(--btn-primary-g2)
-  );
-  color: var(--btn-primary-text);
-  box-shadow: 0 4px 14px var(--btn-primary-shadow);
-}
-.ohmyui-btn--secondary {
-  background: linear-gradient(
-    135deg,
-    var(--btn-secondary-g1),
-    var(--btn-secondary-g2)
-  );
-  color: var(--btn-secondary-text);
-  box-shadow: 0 4px 14px var(--btn-secondary-shadow);
-}
-.ohmyui-btn--tertiary {
-  background: linear-gradient(
-    135deg,
-    var(--btn-tertiary-g1),
-    var(--btn-tertiary-g2)
-  );
-  color: var(--btn-tertiary-text);
-  box-shadow: 0 4px 14px var(--btn-tertiary-shadow);
-}
-.ohmyui-btn--success {
-  background: linear-gradient(
-    135deg,
-    var(--btn-success-g1),
-    var(--btn-success-g2)
-  );
-  color: var(--btn-success-text);
-  box-shadow: 0 4px 14px var(--btn-success-shadow);
-}
-.ohmyui-btn--warning {
-  background: linear-gradient(
-    135deg,
-    var(--btn-warning-g1),
-    var(--btn-warning-g2)
-  );
-  color: var(--btn-warning-text);
-  box-shadow: 0 4px 14px var(--btn-warning-shadow);
-}
-.ohmyui-btn--error {
-  background: linear-gradient(135deg, var(--btn-error-g1), var(--btn-error-g2));
-  color: var(--btn-error-text);
-  box-shadow: 0 4px 14px var(--btn-error-shadow);
-}
-.ohmyui-btn--info {
-  background: linear-gradient(135deg, var(--btn-info-g1), var(--btn-info-g2));
-  color: var(--btn-info-text);
-  box-shadow: 0 4px 14px var(--btn-info-shadow);
-}
-.ohmyui-btn--ghost {
-  background: var(--btn-ghost-g1);
-  color: var(--btn-ghost-text);
-  border: 1.5px solid var(--btn-ghost-border);
-  box-shadow: 0 2px 8px var(--btn-ghost-shadow);
-}
-.ohmyui-btn--outline {
-  background: var(--btn-outline-g1);
-  color: var(--btn-outline-text);
-  border: 1.5px solid var(--btn-outline-border);
-  box-shadow: 0 2px 8px var(--btn-outline-shadow);
-}
-.ohmyui-btn--outline-error {
-  background: transparent;
-  color: var(--color-error-dark);
-  border: 1.5px solid var(--color-error-dark);
-  box-shadow: 0 2px 8px var(--btn-error-shadow);
-}
-.ohmyui-btn--outline-error:not(.ohmyui-btn--disabled):not(
-    .ohmyui-btn--loading
-  ):hover {
-  background: var(--color-error-light);
-  transform: translateY(-1px);
-}
-.ohmyui-btn--outline-error:focus-visible {
-  outline: 3px solid var(--btn-error-focus);
-  outline-offset: 3px;
-}
-.ohmyui-btn--flat {
-  background: transparent;
-  color: var(--btn-flat-text);
-  box-shadow: none;
-}
-
-/* Hover States */
-.ohmyui-btn--primary:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
-.ohmyui-btn--secondary:not(.ohmyui-btn--disabled):not(
-    .ohmyui-btn--loading
-  ):hover,
-.ohmyui-btn--tertiary:not(.ohmyui-btn--disabled):not(
-    .ohmyui-btn--loading
-  ):hover,
-.ohmyui-btn--success:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
-.ohmyui-btn--warning:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
-.ohmyui-btn--error:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
-.ohmyui-btn--info:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
-  filter: brightness(1.07);
-  transform: translateY(-2px);
-}
-.ohmyui-btn--primary:not(.ohmyui-btn--disabled):not(
-    .ohmyui-btn--loading
-  ):hover {
-  box-shadow: 0 8px 24px var(--btn-primary-shadow);
-}
-.ohmyui-btn--secondary:not(.ohmyui-btn--disabled):not(
-    .ohmyui-btn--loading
-  ):hover {
-  box-shadow: 0 8px 24px var(--btn-secondary-shadow);
-}
-.ohmyui-btn--tertiary:not(.ohmyui-btn--disabled):not(
-    .ohmyui-btn--loading
-  ):hover {
-  box-shadow: 0 8px 24px var(--btn-tertiary-shadow);
-}
-.ohmyui-btn--success:not(.ohmyui-btn--disabled):not(
-    .ohmyui-btn--loading
-  ):hover {
-  box-shadow: 0 8px 24px var(--btn-success-shadow);
-}
-.ohmyui-btn--warning:not(.ohmyui-btn--disabled):not(
-    .ohmyui-btn--loading
-  ):hover {
-  box-shadow: 0 8px 24px var(--btn-warning-shadow);
-}
-.ohmyui-btn--error:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
-  box-shadow: 0 8px 24px var(--btn-error-shadow);
-}
-.ohmyui-btn--info:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
-  box-shadow: 0 8px 24px var(--btn-info-shadow);
-}
-
-/* Ghost, Outline & Flat hover */
-.ohmyui-btn--ghost:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
-  background: var(--btn-ghost-hover-bg);
-  transform: translateY(-1px);
-}
-.ohmyui-btn--outline:not(.ohmyui-btn--disabled):not(
-    .ohmyui-btn--loading
-  ):hover {
-  background: var(--btn-outline-hover-bg);
-  transform: translateY(-1px);
-}
-.ohmyui-btn--flat:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
-  background: var(--btn-flat-hover-bg);
-}
-
-/* Active State */
-.ohmyui-btn:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):active {
-  transform: translateY(1px) scale(0.97);
-  filter: brightness(0.95);
-  box-shadow: none !important;
-  transition-duration: 80ms;
-}
-
-/* Focus States */
-.ohmyui-btn--primary:focus-visible {
-  outline: 3px solid var(--btn-primary-focus);
-  outline-offset: 3px;
-}
-.ohmyui-btn--secondary:focus-visible {
-  outline: 3px solid var(--btn-secondary-focus);
-  outline-offset: 3px;
-}
-.ohmyui-btn--tertiary:focus-visible {
-  outline: 3px solid var(--btn-tertiary-focus);
-  outline-offset: 3px;
-}
-.ohmyui-btn--success:focus-visible {
-  outline: 3px solid var(--btn-success-focus);
-  outline-offset: 3px;
-}
-.ohmyui-btn--warning:focus-visible {
-  outline: 3px solid var(--btn-warning-focus);
-  outline-offset: 3px;
-}
-.ohmyui-btn--error:focus-visible {
-  outline: 3px solid var(--btn-error-focus);
-  outline-offset: 3px;
-}
-.ohmyui-btn--info:focus-visible {
-  outline: 3px solid var(--btn-info-focus);
-  outline-offset: 3px;
-}
-.ohmyui-btn--ghost:focus-visible {
-  outline: 3px solid var(--btn-ghost-focus);
-  outline-offset: 3px;
-}
-.ohmyui-btn--outline:focus-visible {
-  outline: 3px solid var(--btn-outline-focus);
-  outline-offset: 3px;
-}
-.ohmyui-btn--flat:focus-visible {
-  outline: 3px solid var(--btn-flat-focus);
-  outline-offset: 3px;
-}
-
-/* Disabled State */
-.ohmyui-btn--disabled,
-.ohmyui-btn[disabled] {
-  background: linear-gradient(
-    135deg,
-    var(--btn-disabled-g1),
-    var(--btn-disabled-g2)
-  ) !important;
-  color: var(--btn-disabled-text) !important;
-  box-shadow: none !important;
-  border: none !important;
-  cursor: not-allowed;
-  opacity: 0.75;
-  pointer-events: none;
-}
-
-/* Loading State */
-.ohmyui-btn--loading {
-  cursor: wait;
-  pointer-events: none;
-}
-
-/* Spinner */
-.ohmyui-btn__spinner {
-  display: flex;
-  align-items: center;
-  animation: ohmyui-btn-spin 0.8s linear infinite;
-  flex-shrink: 0;
-}
-@keyframes ohmyui-btn-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Content Elements */
-.ohmyui-btn__icon {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-.ohmyui-btn__label {
-  display: inline-block;
-  flex-shrink: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+/* Icon only */
 .ohmyui-btn--icon-only {
   aspect-ratio: 1 / 1;
   padding: 0;
@@ -460,20 +223,92 @@
   display: none;
 }
 
-/* Ripple Effect */
-.ohmyui-btn__ripple {
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  background: rgba(255, 255, 255, 0.35);
-  animation: ohmyui-btn-ripple 550ms linear forwards;
-  pointer-events: none;
+/* Variants */
+.ohmyui-btn--primary {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-button-primary-g1),
+    var(--ohmyui-button-primary-g2)
+  );
+  color: var(--ohmyui-button-primary-text);
+  box-shadow: 0 4px 14px var(--ohmyui-button-primary-shadow);
 }
-@keyframes ohmyui-btn-ripple {
-  to {
-    transform: scale(3.5);
-    opacity: 0;
-  }
+.ohmyui-btn--secondary {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-button-secondary-g1),
+    var(--ohmyui-button-secondary-g2)
+  );
+  color: var(--ohmyui-button-secondary-text);
+  box-shadow: 0 4px 14px var(--ohmyui-button-secondary-shadow);
+}
+.ohmyui-btn--tertiary {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-button-tertiary-g1),
+    var(--ohmyui-button-tertiary-g2)
+  );
+  color: var(--ohmyui-button-tertiary-text);
+  box-shadow: 0 4px 14px var(--ohmyui-button-tertiary-shadow);
+}
+.ohmyui-btn--success {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-button-success-g1),
+    var(--ohmyui-button-success-g2)
+  );
+  color: var(--ohmyui-button-success-text);
+  box-shadow: 0 4px 14px var(--ohmyui-button-success-shadow);
+}
+.ohmyui-btn--warning {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-button-warning-g1),
+    var(--ohmyui-button-warning-g2)
+  );
+  color: var(--ohmyui-button-warning-text);
+  box-shadow: 0 4px 14px var(--ohmyui-button-warning-shadow);
+}
+.ohmyui-btn--error {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-button-error-g1),
+    var(--ohmyui-button-error-g2)
+  );
+  color: var(--ohmyui-button-error-text);
+  box-shadow: 0 4px 14px var(--ohmyui-button-error-shadow);
+}
+.ohmyui-btn--info {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-button-info-g1),
+    var(--ohmyui-button-info-g2)
+  );
+  color: var(--ohmyui-button-info-text);
+  box-shadow: 0 4px 14px var(--ohmyui-button-info-shadow);
+}
+.ohmyui-btn--ghost {
+  background: var(--ohmyui-button-ghost-g1);
+  color: var(--ohmyui-button-ghost-text);
+  border: 1.5px solid var(--ohmyui-button-ghost-border);
+  box-shadow: 0 2px 8px var(--ohmyui-button-ghost-shadow);
+}
+.ohmyui-btn--outline {
+  background: var(--ohmyui-button-outline-g1);
+  color: var(--ohmyui-button-outline-text);
+  border: 1.5px solid var(--ohmyui-button-outline-border);
+  box-shadow: 0 2px 8px var(--ohmyui-button-outline-shadow);
+}
+.ohmyui-btn--outline-error {
+  background: transparent;
+  color: var(--ohmyui-color-error-dark);
+  border: 1.5px solid var(--ohmyui-color-error-dark);
+  box-shadow: 0 2px 8px var(--ohmyui-button-error-shadow);
+}
+.ohmyui-btn--flat {
+  background: transparent;
+  color: var(--ohmyui-button-flat-text);
+  box-shadow: none;
 }
 .ohmyui-btn--ghost .ohmyui-btn__ripple,
 .ohmyui-btn--outline .ohmyui-btn__ripple,
@@ -482,7 +317,164 @@
   background: rgba(80, 100, 130, 0.18);
 }
 
-/* Responsive - Media Queries */
+/* States */
+.ohmyui-btn--primary:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
+.ohmyui-btn--secondary:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover,
+.ohmyui-btn--tertiary:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover,
+.ohmyui-btn--success:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
+.ohmyui-btn--warning:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
+.ohmyui-btn--error:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
+.ohmyui-btn--info:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
+  filter: brightness(1.07);
+  transform: translateY(-2px);
+}
+.ohmyui-btn--primary:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  box-shadow: 0 8px 24px var(--ohmyui-button-primary-shadow);
+}
+.ohmyui-btn--secondary:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  box-shadow: 0 8px 24px var(--ohmyui-button-secondary-shadow);
+}
+.ohmyui-btn--tertiary:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  box-shadow: 0 8px 24px var(--ohmyui-button-tertiary-shadow);
+}
+.ohmyui-btn--success:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  box-shadow: 0 8px 24px var(--ohmyui-button-success-shadow);
+}
+.ohmyui-btn--warning:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  box-shadow: 0 8px 24px var(--ohmyui-button-warning-shadow);
+}
+.ohmyui-btn--error:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
+  box-shadow: 0 8px 24px var(--ohmyui-button-error-shadow);
+}
+.ohmyui-btn--info:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
+  box-shadow: 0 8px 24px var(--ohmyui-button-info-shadow);
+}
+.ohmyui-btn--ghost:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
+  background: var(--ohmyui-button-ghost-hover-bg);
+  transform: translateY(-1px);
+}
+.ohmyui-btn--outline:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  background: var(--ohmyui-button-outline-hover-bg);
+  transform: translateY(-1px);
+}
+.ohmyui-btn--outline-error:not(.ohmyui-btn--disabled):not(
+    .ohmyui-btn--loading
+  ):hover {
+  background: var(--ohmyui-color-error-light);
+  transform: translateY(-1px);
+}
+.ohmyui-btn--flat:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
+  background: var(--ohmyui-button-flat-hover-bg);
+}
+.ohmyui-btn:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):active {
+  transform: translateY(1px) scale(0.97);
+  filter: brightness(0.95);
+  box-shadow: none !important;
+  transition-duration: 80ms;
+}
+.ohmyui-btn--primary:focus-visible {
+  outline: 3px solid var(--ohmyui-button-primary-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--secondary:focus-visible {
+  outline: 3px solid var(--ohmyui-button-secondary-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--tertiary:focus-visible {
+  outline: 3px solid var(--ohmyui-button-tertiary-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--success:focus-visible {
+  outline: 3px solid var(--ohmyui-button-success-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--warning:focus-visible {
+  outline: 3px solid var(--ohmyui-button-warning-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--error:focus-visible {
+  outline: 3px solid var(--ohmyui-button-error-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--info:focus-visible {
+  outline: 3px solid var(--ohmyui-button-info-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--ghost:focus-visible {
+  outline: 3px solid var(--ohmyui-button-ghost-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--outline:focus-visible {
+  outline: 3px solid var(--ohmyui-button-outline-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--outline-error:focus-visible {
+  outline: 3px solid var(--ohmyui-button-error-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--flat:focus-visible {
+  outline: 3px solid var(--ohmyui-button-flat-focus);
+  outline-offset: 3px;
+}
+.ohmyui-btn--disabled,
+.ohmyui-btn[disabled] {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-button-disabled-g1),
+    var(--ohmyui-button-disabled-g2)
+  ) !important;
+  color: var(--ohmyui-button-disabled-text) !important;
+  box-shadow: none !important;
+  border: none !important;
+  cursor: not-allowed;
+  opacity: 0.75;
+  pointer-events: none;
+}
+.ohmyui-btn--loading {
+  cursor: wait;
+  pointer-events: none;
+}
+.ohmyui-btn--succeeded-filled {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-button-succeeded-g1),
+    var(--ohmyui-button-succeeded-g2)
+  );
+  color: var(--ohmyui-button-succeeded-text);
+  box-shadow: 0 4px 14px var(--ohmyui-button-succeeded-shadow);
+  cursor: not-allowed;
+  pointer-events: none;
+  animation: ohmyui-btn-succeeded-in var(--ohmyui-transition-duration-slow)
+    var(--ohmyui-transition-easing-ease-in-out) forwards;
+}
+.ohmyui-btn--succeeded-ghost {
+  background: var(--ohmyui-button-succeeded-ghost-bg);
+  color: var(--ohmyui-button-succeeded-ghost-text);
+  border: 1.5px solid var(--ohmyui-button-succeeded-ghost-border);
+  box-shadow: none;
+  cursor: not-allowed;
+  pointer-events: none;
+  animation: ohmyui-btn-succeeded-in var(--ohmyui-transition-duration-slow)
+    var(--ohmyui-transition-easing-ease-in-out) forwards;
+}
+
+/* Responsive */
 @media (max-width: 480px) {
   .ohmyui-btn--lg {
     padding: 0.65em 1.4em;
@@ -501,29 +493,17 @@
   }
 }
 
-/* Succeeded State */
-.ohmyui-btn--succeeded-filled {
-  background: linear-gradient(
-    135deg,
-    var(--btn-succeeded-g1),
-    var(--btn-succeeded-g2)
-  );
-  color: var(--btn-succeeded-text);
-  box-shadow: 0 4px 14px var(--btn-succeeded-shadow);
-  cursor: not-allowed;
-  pointer-events: none;
-  animation: ohmyui-btn-succeeded-in var(--transition-duration-slow)
-    var(--transition-easing-ease-in-out) forwards;
+/* Animations */
+@keyframes ohmyui-btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
-.ohmyui-btn--succeeded-ghost {
-  background: var(--btn-succeeded-ghost-bg);
-  color: var(--btn-succeeded-ghost-text);
-  border: 1.5px solid var(--btn-succeeded-ghost-border);
-  box-shadow: none;
-  cursor: not-allowed;
-  pointer-events: none;
-  animation: ohmyui-btn-succeeded-in var(--transition-duration-slow)
-    var(--transition-easing-ease-in-out) forwards;
+@keyframes ohmyui-btn-ripple {
+  to {
+    transform: scale(3.5);
+    opacity: 0;
+  }
 }
 @keyframes ohmyui-btn-succeeded-in {
   0% {

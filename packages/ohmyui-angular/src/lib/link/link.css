@@ -1,48 +1,60 @@
 /**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+/**
  * @file link.css
- * @description Styling for LinkComponent including color variants, sizing
- * system, and trailing icon layout.
- * Consuma i design token generati da packages/tokens.
+ * @description Styles of LinkComponent (`ohmyui-link`): an inline link,
+ * internal or external, in four color variants and three sizes, with an
+ * optional trailing icon for external links.
  */
 
 /* Host */
 :host {
   display: contents;
-
-  /*
-   * Component-tier: usati solo dal colore di BASE (non hover) di primary/
-   * secondary — stesso pattern già visto in Email/Button/Badge/Text: il
-   * ruolo "dark" ridefinito in dark mode è troppo scuro per restare
-   * leggibile come testo. L'hover usa già il ruolo "text" (theme-aware
-   * di suo) e non necessita di alcun fix.
-   */
-  --link-primary-color: var(--color-primary-dark);
-  --link-secondary-color: var(--color-secondary-dark);
+  --ohmyui-link-primary-color: var(--ohmyui-color-primary-dark);
+  --ohmyui-link-secondary-color: var(--ohmyui-color-secondary-dark);
 }
+
+/* Dark theme */
 :host-context(.dark-theme) {
-  --link-primary-color: var(--color-primary-light);
-  --link-secondary-color: var(--color-secondary-light);
+  --ohmyui-link-primary-color: var(--ohmyui-color-primary-light);
+  --ohmyui-link-secondary-color: var(--ohmyui-color-secondary-light);
 }
 
-/* Base Link */
+/* Base */
 .ohmyui-inline-link {
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
   font-weight: 500;
   text-decoration: none;
-  transition: color var(--transition-duration-normal) var(--transition-easing-ease-in-out);
+  transition: color var(--ohmyui-transition-duration-normal)
+    var(--ohmyui-transition-easing-ease-in-out);
 }
+
+/* Text */
 .ohmyui-inline-link__text {
   text-decoration: underline;
   text-decoration-color: transparent;
-  transition: text-decoration-color var(--transition-duration-normal) var(--transition-easing-ease-in-out);
-}
-.ohmyui-inline-link:hover .ohmyui-inline-link__text {
-  text-decoration-color: currentColor;
+  transition: text-decoration-color var(--ohmyui-transition-duration-normal)
+    var(--ohmyui-transition-easing-ease-in-out);
 }
 
-/* Size Variants */
+/* Icon */
+.ohmyui-inline-link__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Sizes */
 .ohmyui-inline-link--sm {
   font-size: 0.75rem;
 }
@@ -53,37 +65,33 @@
   font-size: 1rem;
 }
 
-/* Icon */
-.ohmyui-inline-link__icon {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-/* Color Variants */
+/* Variants */
 .ohmyui-inline-link--primary {
-  color: var(--link-primary-color);
+  color: var(--ohmyui-link-primary-color);
 }
 .ohmyui-inline-link--secondary {
-  color: var(--link-secondary-color);
+  color: var(--ohmyui-link-secondary-color);
 }
 .ohmyui-inline-link--neutral {
-  color: var(--color-neutral-600);
+  color: var(--ohmyui-color-neutral-600);
 }
 .ohmyui-inline-link--ghost {
-  color: var(--color-neutral-500);
+  color: var(--ohmyui-color-neutral-500);
 }
 
-/* Hover */
+/* States */
+.ohmyui-inline-link:hover .ohmyui-inline-link__text {
+  text-decoration-color: currentColor;
+}
 .ohmyui-inline-link--primary:hover {
-  color: var(--color-primary-text);
+  color: var(--ohmyui-color-primary-text);
 }
 .ohmyui-inline-link--secondary:hover {
-  color: var(--color-secondary-text);
+  color: var(--ohmyui-color-secondary-text);
 }
 .ohmyui-inline-link--neutral:hover {
-  color: var(--color-neutral-900);
+  color: var(--ohmyui-color-neutral-900);
 }
 .ohmyui-inline-link--ghost:hover {
-  color: var(--color-neutral-700);
+  color: var(--ohmyui-color-neutral-700);
 }

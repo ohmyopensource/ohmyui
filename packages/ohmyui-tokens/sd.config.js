@@ -1,3 +1,21 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+/**
+ * @file sd.config.js
+ * @description Style Dictionary configuration of the light theme and of the
+ * shared tokens. It writes the CSS custom properties on :root
+ * (build/css/variables.css), the Dart class (build/dart/tokens.dart) and the
+ * fonts. The dark theme is built by sd.dark.config.js.
+ */
+
 import { copyFileSync, mkdirSync, rmSync } from 'fs';
 import { join } from 'path';
 import StyleDictionary from 'style-dictionary';
@@ -12,6 +30,10 @@ const FONT_FILES = [
   'Quicksand-OFL.txt',
 ];
 
+/**
+ * Copies the font files and their licenses to build/css/fonts, and removes
+ * them when the build is cleaned.
+ */
 StyleDictionary.registerAction({
   name: 'copy-fonts',
   do: () => {
@@ -32,6 +54,7 @@ export default {
   source: [
     'src/border.json',
     'src/colors.json',
+    'src/radius.json',
     'src/semantic.json',
     'src/shadow.json',
     'src/spacing.json',
@@ -42,6 +65,7 @@ export default {
   platforms: {
     css: {
       transformGroup: 'css',
+      prefix: 'ohmyui',
       buildPath: 'build/css/',
       options: {
         outputReferences: true,

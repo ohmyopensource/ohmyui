@@ -11,11 +11,34 @@ number.
 
 ## [Unreleased]
 
+### Added
+
+- Badge, Input, Pagination and Text expose the colors that change in the dark
+  theme as custom properties of the component, like the other components
+  already do (for example `--ohmyui-badge-ghost-text`,
+  `--ohmyui-input-select-arrow`, `--ohmyui-text-code-bg`), so they can be
+  customized for each theme.
+
 ### Changed
 
 - The tokens package is renamed from `@ohmyopensource/tokens` to
   `@ohmyopensource/ohmyui-tokens`, following the package names of the other
   OhMyOpenSource! libraries, and moves to `packages/ohmyui-tokens`.
+- Every CSS custom property has the `--ohmyui-` prefix, so it cannot collide
+  with the variables of other libraries in the same page: the design tokens
+  (`--color-primary-300` becomes `--ohmyui-color-primary-300`) and the custom
+  properties declared by the components, which take the name of the component
+  (`--btn-*` becomes `--ohmyui-button-*`, `--pagination-btn-*` becomes
+  `--ohmyui-pagination-button-*`).
+- The two radius scales are merged into one, `--ohmyui-radius-*`: `none` (0),
+  `xs` (4px), `sm` (6px), `md` (10px), `lg` (16px), `xl` (24px) and `full`.
+  `--border-radius-*` and `--radius-*` no longer exist.
+
+### Fixed
+
+- Text: in the dark theme, the `code` variant with the `gradient` option shows
+  the gradient, as in the light theme. Before, the dark background of the
+  variant covered it.
 
 ## [0.1.0] - 2026-11-24
 

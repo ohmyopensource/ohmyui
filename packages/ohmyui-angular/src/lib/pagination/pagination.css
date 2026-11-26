@@ -1,56 +1,61 @@
 /**
- * @file pagination.css
- * @description Component stylesheet based on global design tokens. Handles
- * layout, navigation controls, variants, emphasis modes, and responsive
- * behavior. Consuma i design token generati da packages/tokens.
+ * Copyright 2026 The OhMyOpenSource! Authors
  *
- * NOTA sul dark theme: stessa metodologia usata per Text/Input — verificata
- * la luminanza reale di ogni override. Molti override dell'originale
- * peggioravano il contrasto rispetto al semplice auto-cascade dei token
- * (stesso bug sistematico trovato altrove) e sono stati rimossi; altri
- * erano correzioni legittime e sono stati tenuti come token component-tier.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file pagination.css
+ * @description Styles of PaginationComponent (`ohmyui-pagination`): page
+ * navigation with first, previous, next and last buttons, a page size
+ * selector, a jump-to-page field and a range summary, in seven variants,
+ * three emphasis styles and four sizes. On small screens the page list
+ * becomes a compact current/total indicator.
+ */
+
+/* Host */
 :host {
-  --pagination-field-bg: var(--color-neutral-100);
-  --pagination-field-border: var(--color-neutral-300);
-  --pagination-btn-hover-bg: var(--color-neutral-100);
-  --pagination-btn-hover-border: var(--color-neutral-300);
-  --pagination-btn-hover-color: var(--color-neutral-600);
-  --pagination-ellipsis-color: var(--color-neutral-400);
-
-  --pagination-minimal-primary: var(--color-primary-dark);
-  --pagination-minimal-secondary: var(--color-secondary-dark);
-  --pagination-minimal-tertiary: var(--color-tertiary-dark);
-  --pagination-minimal-success: var(--color-success-dark);
-  --pagination-minimal-warning: var(--color-warning-dark);
-  --pagination-minimal-error: var(--color-error-dark);
-  --pagination-minimal-info: var(--color-info-dark);
+  --ohmyui-pagination-field-bg: var(--ohmyui-color-neutral-100);
+  --ohmyui-pagination-field-border: var(--ohmyui-color-neutral-300);
+  --ohmyui-pagination-button-hover-bg: var(--ohmyui-color-neutral-100);
+  --ohmyui-pagination-button-hover-border: var(--ohmyui-color-neutral-300);
+  --ohmyui-pagination-button-hover-color: var(--ohmyui-color-neutral-600);
+  --ohmyui-pagination-ellipsis-color: var(--ohmyui-color-neutral-400);
+  --ohmyui-pagination-minimal-primary: var(--ohmyui-color-primary-dark);
+  --ohmyui-pagination-minimal-secondary: var(--ohmyui-color-secondary-dark);
+  --ohmyui-pagination-minimal-tertiary: var(--ohmyui-color-tertiary-dark);
+  --ohmyui-pagination-minimal-success: var(--ohmyui-color-success-dark);
+  --ohmyui-pagination-minimal-warning: var(--ohmyui-color-warning-dark);
+  --ohmyui-pagination-minimal-error: var(--ohmyui-color-error-dark);
+  --ohmyui-pagination-minimal-info: var(--ohmyui-color-info-dark);
+  /* Keep the arrow stroke equal to --ohmyui-color-neutral-400: a data URI
+     cannot read custom properties. */
+  --ohmyui-pagination-select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa0ad' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
+
+/* Dark theme */
 :host-context(.dark-theme) {
-  --pagination-field-border: var(--color-neutral-500);
-  --pagination-btn-hover-bg: var(--color-neutral-600);
-  --pagination-btn-hover-border: var(--color-neutral-500);
-  --pagination-btn-hover-color: var(--color-neutral-200);
-  --pagination-ellipsis-color: var(--color-neutral-500);
-
-  /*
-   * "minimal" mostra il colore della pagina attiva come solo testo, senza
-   * sfondo: usa il ruolo "dark" (pensato per contrasto su chiaro), che in
-   * dark mode ridefinito e' troppo scuro per restare leggibile — stesso
-   * pattern gia' risolto in Button/Badge/Email/Link/Input. L'originale
-   * copriva solo "primary"; qui completato per tutte le 7 varianti.
-   */
-  --pagination-minimal-primary: var(--color-primary-light);
-  --pagination-minimal-secondary: var(--color-secondary-light);
-  --pagination-minimal-tertiary: var(--color-tertiary-light);
-  --pagination-minimal-success: var(--color-success-light);
-  --pagination-minimal-warning: var(--color-warning-light);
-  --pagination-minimal-error: var(--color-error-light);
-  --pagination-minimal-info: var(--color-info-light);
+  --ohmyui-pagination-field-border: var(--ohmyui-color-neutral-500);
+  --ohmyui-pagination-button-hover-bg: var(--ohmyui-color-neutral-600);
+  --ohmyui-pagination-button-hover-border: var(--ohmyui-color-neutral-500);
+  --ohmyui-pagination-button-hover-color: var(--ohmyui-color-neutral-200);
+  --ohmyui-pagination-ellipsis-color: var(--ohmyui-color-neutral-500);
+  --ohmyui-pagination-minimal-primary: var(--ohmyui-color-primary-light);
+  --ohmyui-pagination-minimal-secondary: var(--ohmyui-color-secondary-light);
+  --ohmyui-pagination-minimal-tertiary: var(--ohmyui-color-tertiary-light);
+  --ohmyui-pagination-minimal-success: var(--ohmyui-color-success-light);
+  --ohmyui-pagination-minimal-warning: var(--ohmyui-color-warning-light);
+  --ohmyui-pagination-minimal-error: var(--ohmyui-color-error-light);
+  --ohmyui-pagination-minimal-info: var(--ohmyui-color-info-light);
+  /* Keep the arrow stroke equal to the dark --ohmyui-color-neutral-600. */
+  --ohmyui-pagination-select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c8d0e0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
 
-/* Layout */
+/* Base */
 .ohmyui-pagination {
   display: flex;
   align-items: center;
@@ -62,30 +67,6 @@
   font-weight: 500;
   user-select: none;
 }
-.ohmyui-pagination--disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-/* Info — nessun override dark: neutral-500/600 si invertono gia' bene da
-   soli (verificato: gli override manuali dell'originale davano MENO
-   contrasto del semplice auto-cascade). */
-.ohmyui-pagination__info {
-  font-size: 0.8rem;
-  color: var(--color-neutral-500);
-  white-space: nowrap;
-  width: 100%;
-  text-align: center;
-  margin-top: 0.2rem;
-}
-.ohmyui-pagination__info-range,
-.ohmyui-pagination__info-total {
-  font-weight: 700;
-  color: var(--color-neutral-600);
-}
-.ohmyui-pagination__info--empty {
-  font-style: italic;
-}
 
 /* Page size */
 .ohmyui-pagination__size-label {
@@ -93,32 +74,27 @@
   align-items: center;
   gap: 0.4rem;
   font-size: 0.8rem;
-  color: var(--color-neutral-500);
+  color: var(--ohmyui-color-neutral-500);
 }
 .ohmyui-pagination__size-select {
   appearance: none;
-  background: var(--pagination-field-bg);
-  border: 1.5px solid var(--pagination-field-border);
-  border-radius: var(--border-radius-sm);
-  color: var(--color-neutral-600);
+  background: var(--ohmyui-pagination-field-bg);
+  border: 1.5px solid var(--ohmyui-pagination-field-border);
+  border-radius: var(--ohmyui-radius-sm);
+  color: var(--ohmyui-color-neutral-600);
   font-family: inherit;
   font-weight: 600;
   cursor: pointer;
   outline: none;
   transition:
-    border-color var(--transition-duration-fast) var(--transition-easing-ease-in-out),
-    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-in-out);
+    border-color var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out),
+    box-shadow var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out);
   padding: 0.3em 1.8em 0.3em 0.6em;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa0ad' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-image: var(--ohmyui-pagination-select-arrow);
   background-repeat: no-repeat;
   background-position: right 0.5em center;
-}
-:host-context(.dark-theme) .ohmyui-pagination__size-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c8d0e0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-}
-.ohmyui-pagination__size-select:focus {
-  border-color: var(--color-primary-dark);
-  box-shadow: 0 0 0 3px var(--color-primary-focus);
 }
 
 /* Controls */
@@ -128,45 +104,31 @@
   gap: 0.2rem;
 }
 
-/* Buttons — nessun override dark sul colore base: neutral-500 si inverte
-   gia' bene da solo. Hover invece resta un token component-tier: e' un
-   effetto "flash chiaro" voluto (stesso pattern gia' usato in Input). */
+/* Button */
 .ohmyui-pagination__btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: transparent;
   border: 1.5px solid transparent;
-  border-radius: var(--border-radius-sm);
-  color: var(--color-neutral-500);
+  border-radius: var(--ohmyui-radius-sm);
+  color: var(--ohmyui-color-neutral-500);
   cursor: pointer;
   font-family: inherit;
   font-weight: 600;
   line-height: 1;
   outline: none;
   transition:
-    background var(--transition-duration-fast) var(--transition-easing-ease-in-out),
-    border-color var(--transition-duration-fast) var(--transition-easing-ease-in-out),
-    color var(--transition-duration-fast) var(--transition-easing-ease-in-out),
-    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-in-out),
-    transform var(--transition-duration-fast) var(--transition-easing-ease-in-out);
-}
-.ohmyui-pagination__btn:not(:disabled):hover {
-  background: var(--pagination-btn-hover-bg);
-  border-color: var(--pagination-btn-hover-border);
-  color: var(--pagination-btn-hover-color);
-  transform: translateY(-1px);
-}
-.ohmyui-pagination__btn:not(:disabled):active {
-  transform: translateY(0) scale(0.95);
-}
-.ohmyui-pagination__btn:focus-visible {
-  outline: 3px solid var(--color-primary-focus);
-  outline-offset: 2px;
-}
-.ohmyui-pagination__btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
+    background var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out),
+    border-color var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out),
+    color var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out),
+    box-shadow var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out),
+    transform var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out);
 }
 .ohmyui-pagination__btn--icon {
   padding: 0.4em;
@@ -175,110 +137,56 @@
   min-width: 2.2em;
   padding: 0.35em 0.5em;
   font-size: inherit;
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--ohmyui-radius-sm);
 }
 
-/* Active state (emphasis: filled) — light/dark/text/shadow sono tutti
-   theme-aware di loro (ridefiniti in packages/tokens/src/semantic-dark.json):
-   nessun fix necessario, si adattano da soli. */
-.ohmyui-pagination--primary .ohmyui-pagination__btn--active {
-  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark));
-  border-color: var(--color-primary-dark);
-  color: var(--color-primary-text);
-  box-shadow: 0 2px 8px var(--color-primary-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--secondary .ohmyui-pagination__btn--active {
-  background: linear-gradient(135deg, var(--color-secondary-light), var(--color-secondary-dark));
-  border-color: var(--color-secondary-dark);
-  color: var(--color-secondary-text);
-  box-shadow: 0 2px 8px var(--color-secondary-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--tertiary .ohmyui-pagination__btn--active {
-  background: linear-gradient(135deg, var(--color-tertiary-light), var(--color-tertiary-dark));
-  border-color: var(--color-tertiary-dark);
-  color: var(--color-tertiary-text);
-  box-shadow: 0 2px 8px var(--color-tertiary-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--success .ohmyui-pagination__btn--active {
-  background: linear-gradient(135deg, var(--color-success-light), var(--color-success-dark));
-  border-color: var(--color-success-dark);
-  color: var(--color-success-text);
-  box-shadow: 0 2px 8px var(--color-success-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--warning .ohmyui-pagination__btn--active {
-  background: linear-gradient(135deg, var(--color-warning-light), var(--color-warning-dark));
-  border-color: var(--color-warning-dark);
-  color: var(--color-warning-text);
-  box-shadow: 0 2px 8px var(--color-warning-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--error .ohmyui-pagination__btn--active {
-  background: linear-gradient(135deg, var(--color-error-light), var(--color-error-dark));
-  border-color: var(--color-error-dark);
-  color: var(--color-error-text);
-  box-shadow: 0 2px 8px var(--color-error-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--info .ohmyui-pagination__btn--active {
-  background: linear-gradient(135deg, var(--color-info-light), var(--color-info-dark));
-  border-color: var(--color-info-dark);
-  color: var(--color-info-text);
-  box-shadow: 0 2px 8px var(--color-info-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-
-/* Misc */
+/* Ellipsis */
 .ohmyui-pagination__ellipsis {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 2.2em;
-  color: var(--pagination-ellipsis-color);
+  color: var(--ohmyui-pagination-ellipsis-color);
   font-weight: 700;
   letter-spacing: 0.05em;
   cursor: default;
 }
+
+/* Mobile info */
 .ohmyui-pagination__mobile-info {
   display: none;
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--color-neutral-500);
+  color: var(--ohmyui-color-neutral-500);
   min-width: 4em;
   text-align: center;
 }
+
+/* Jump to page */
 .ohmyui-pagination__jump {
   display: flex;
   align-items: center;
   gap: 0.4rem;
   font-size: 0.8rem;
-  color: var(--color-neutral-500);
+  color: var(--ohmyui-color-neutral-500);
 }
 .ohmyui-pagination__jump-input {
   width: 4em;
   padding: 0.3em 0.5em;
-  background: var(--pagination-field-bg);
-  border: 1.5px solid var(--pagination-field-border);
-  border-radius: var(--border-radius-sm);
-  color: var(--color-neutral-600);
+  background: var(--ohmyui-pagination-field-bg);
+  border: 1.5px solid var(--ohmyui-pagination-field-border);
+  border-radius: var(--ohmyui-radius-sm);
+  color: var(--ohmyui-color-neutral-600);
   font-family: inherit;
   font-weight: 600;
   font-size: inherit;
   text-align: center;
   outline: none;
   transition:
-    border-color var(--transition-duration-fast) var(--transition-easing-ease-in-out),
-    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-in-out);
+    border-color var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out),
+    box-shadow var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out);
   -moz-appearance: textfield;
 }
 .ohmyui-pagination__jump-input::-webkit-outer-spin-button,
@@ -286,9 +194,23 @@
   -webkit-appearance: none;
   margin: 0;
 }
-.ohmyui-pagination__jump-input:focus {
-  border-color: var(--color-primary-dark);
-  box-shadow: 0 0 0 3px var(--color-primary-focus);
+
+/* Info */
+.ohmyui-pagination__info {
+  font-size: 0.8rem;
+  color: var(--ohmyui-color-neutral-500);
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.2rem;
+}
+.ohmyui-pagination__info-range,
+.ohmyui-pagination__info-total {
+  font-weight: 700;
+  color: var(--ohmyui-color-neutral-600);
+}
+.ohmyui-pagination__info--empty {
+  font-style: italic;
 }
 
 /* Sizes */
@@ -337,7 +259,200 @@
   padding: 0.45em 0.6em;
 }
 
-/* Responsive - Media Queries */
+/* States */
+.ohmyui-pagination__btn:not(:disabled):hover {
+  background: var(--ohmyui-pagination-button-hover-bg);
+  border-color: var(--ohmyui-pagination-button-hover-border);
+  color: var(--ohmyui-pagination-button-hover-color);
+  transform: translateY(-1px);
+}
+.ohmyui-pagination__btn:not(:disabled):active {
+  transform: translateY(0) scale(0.95);
+}
+.ohmyui-pagination__size-select:focus {
+  border-color: var(--ohmyui-color-primary-dark);
+  box-shadow: 0 0 0 3px var(--ohmyui-color-primary-focus);
+}
+.ohmyui-pagination__btn:focus-visible {
+  outline: 3px solid var(--ohmyui-color-primary-focus);
+  outline-offset: 2px;
+}
+.ohmyui-pagination__jump-input:focus {
+  border-color: var(--ohmyui-color-primary-dark);
+  box-shadow: 0 0 0 3px var(--ohmyui-color-primary-focus);
+}
+.ohmyui-pagination--primary .ohmyui-pagination__btn--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-primary-light),
+    var(--ohmyui-color-primary-dark)
+  );
+  border-color: var(--ohmyui-color-primary-dark);
+  color: var(--ohmyui-color-primary-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-primary-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--secondary .ohmyui-pagination__btn--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-secondary-light),
+    var(--ohmyui-color-secondary-dark)
+  );
+  border-color: var(--ohmyui-color-secondary-dark);
+  color: var(--ohmyui-color-secondary-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-secondary-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--tertiary .ohmyui-pagination__btn--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-tertiary-light),
+    var(--ohmyui-color-tertiary-dark)
+  );
+  border-color: var(--ohmyui-color-tertiary-dark);
+  color: var(--ohmyui-color-tertiary-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-tertiary-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--success .ohmyui-pagination__btn--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-success-light),
+    var(--ohmyui-color-success-dark)
+  );
+  border-color: var(--ohmyui-color-success-dark);
+  color: var(--ohmyui-color-success-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-success-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--warning .ohmyui-pagination__btn--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-warning-light),
+    var(--ohmyui-color-warning-dark)
+  );
+  border-color: var(--ohmyui-color-warning-dark);
+  color: var(--ohmyui-color-warning-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-warning-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--error .ohmyui-pagination__btn--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-error-light),
+    var(--ohmyui-color-error-dark)
+  );
+  border-color: var(--ohmyui-color-error-dark);
+  color: var(--ohmyui-color-error-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-error-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--info .ohmyui-pagination__btn--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-info-light),
+    var(--ohmyui-color-info-dark)
+  );
+  border-color: var(--ohmyui-color-info-dark);
+  color: var(--ohmyui-color-info-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-info-shadow);
+  cursor: default;
+  pointer-events: none;
+}
+/* Keep the soft and minimal rules after the filled ones: they override them. */
+.ohmyui-pagination--soft .ohmyui-pagination__btn--active {
+  background: var(--ohmyui-color-primary-light);
+  border-color: var(--ohmyui-color-primary-dark);
+  color: var(--ohmyui-color-primary-text);
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--soft.ohmyui-pagination--secondary
+  .ohmyui-pagination__btn--active {
+  background: var(--ohmyui-color-secondary-light);
+  border-color: var(--ohmyui-color-secondary-dark);
+  color: var(--ohmyui-color-secondary-text);
+}
+.ohmyui-pagination--soft.ohmyui-pagination--tertiary
+  .ohmyui-pagination__btn--active {
+  background: var(--ohmyui-color-tertiary-light);
+  border-color: var(--ohmyui-color-tertiary-dark);
+  color: var(--ohmyui-color-tertiary-text);
+}
+.ohmyui-pagination--soft.ohmyui-pagination--success
+  .ohmyui-pagination__btn--active {
+  background: var(--ohmyui-color-success-light);
+  border-color: var(--ohmyui-color-success-dark);
+  color: var(--ohmyui-color-success-text);
+}
+.ohmyui-pagination--soft.ohmyui-pagination--warning
+  .ohmyui-pagination__btn--active {
+  background: var(--ohmyui-color-warning-light);
+  border-color: var(--ohmyui-color-warning-dark);
+  color: var(--ohmyui-color-warning-text);
+}
+.ohmyui-pagination--soft.ohmyui-pagination--error
+  .ohmyui-pagination__btn--active {
+  background: var(--ohmyui-color-error-light);
+  border-color: var(--ohmyui-color-error-dark);
+  color: var(--ohmyui-color-error-text);
+}
+.ohmyui-pagination--soft.ohmyui-pagination--info
+  .ohmyui-pagination__btn--active {
+  background: var(--ohmyui-color-info-light);
+  border-color: var(--ohmyui-color-info-dark);
+  color: var(--ohmyui-color-info-text);
+}
+.ohmyui-pagination--minimal .ohmyui-pagination__btn--active {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--ohmyui-pagination-minimal-primary);
+  font-weight: 800;
+  cursor: default;
+  pointer-events: none;
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--secondary
+  .ohmyui-pagination__btn--active {
+  color: var(--ohmyui-pagination-minimal-secondary);
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--tertiary
+  .ohmyui-pagination__btn--active {
+  color: var(--ohmyui-pagination-minimal-tertiary);
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--success
+  .ohmyui-pagination__btn--active {
+  color: var(--ohmyui-pagination-minimal-success);
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--warning
+  .ohmyui-pagination__btn--active {
+  color: var(--ohmyui-pagination-minimal-warning);
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--error
+  .ohmyui-pagination__btn--active {
+  color: var(--ohmyui-pagination-minimal-error);
+}
+.ohmyui-pagination--minimal.ohmyui-pagination--info
+  .ohmyui-pagination__btn--active {
+  color: var(--ohmyui-pagination-minimal-info);
+}
+.ohmyui-pagination__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.ohmyui-pagination--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .ohmyui-pagination {
     gap: 0.4rem;
@@ -381,82 +496,13 @@
     padding: 0.6em;
     min-width: 2.4em;
     min-height: 2.4em;
-    background: var(--pagination-field-bg);
-    border: 1.5px solid var(--color-neutral-200);
-    border-radius: var(--border-radius-sm);
-    color: var(--color-neutral-600);
+    background: var(--ohmyui-pagination-field-bg);
+    border: 1.5px solid var(--ohmyui-color-neutral-200);
+    border-radius: var(--ohmyui-radius-sm);
+    color: var(--ohmyui-color-neutral-600);
   }
-  .ohmyui-pagination--hide-first-last-mobile .ohmyui-pagination__btn--first-last {
+  .ohmyui-pagination--hide-first-last-mobile
+    .ohmyui-pagination__btn--first-last {
     display: none;
   }
-}
-
-/* Emphasis Variants - Soft */
-.ohmyui-pagination--soft .ohmyui-pagination__btn--active {
-  background: var(--color-primary-light);
-  border-color: var(--color-primary-dark);
-  color: var(--color-primary-text);
-  box-shadow: none;
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--soft.ohmyui-pagination--secondary .ohmyui-pagination__btn--active {
-  background: var(--color-secondary-light);
-  border-color: var(--color-secondary-dark);
-  color: var(--color-secondary-text);
-}
-.ohmyui-pagination--soft.ohmyui-pagination--tertiary .ohmyui-pagination__btn--active {
-  background: var(--color-tertiary-light);
-  border-color: var(--color-tertiary-dark);
-  color: var(--color-tertiary-text);
-}
-.ohmyui-pagination--soft.ohmyui-pagination--success .ohmyui-pagination__btn--active {
-  background: var(--color-success-light);
-  border-color: var(--color-success-dark);
-  color: var(--color-success-text);
-}
-.ohmyui-pagination--soft.ohmyui-pagination--warning .ohmyui-pagination__btn--active {
-  background: var(--color-warning-light);
-  border-color: var(--color-warning-dark);
-  color: var(--color-warning-text);
-}
-.ohmyui-pagination--soft.ohmyui-pagination--error .ohmyui-pagination__btn--active {
-  background: var(--color-error-light);
-  border-color: var(--color-error-dark);
-  color: var(--color-error-text);
-}
-.ohmyui-pagination--soft.ohmyui-pagination--info .ohmyui-pagination__btn--active {
-  background: var(--color-info-light);
-  border-color: var(--color-info-dark);
-  color: var(--color-info-text);
-}
-
-/* Emphasis Variants - Minimal — usa i token component-tier definiti sopra,
-   gia' corretti per il dark theme su tutte le 7 varianti. */
-.ohmyui-pagination--minimal .ohmyui-pagination__btn--active {
-  background: transparent;
-  border-color: transparent;
-  box-shadow: none;
-  color: var(--pagination-minimal-primary);
-  font-weight: 800;
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--secondary .ohmyui-pagination__btn--active {
-  color: var(--pagination-minimal-secondary);
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--tertiary .ohmyui-pagination__btn--active {
-  color: var(--pagination-minimal-tertiary);
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--success .ohmyui-pagination__btn--active {
-  color: var(--pagination-minimal-success);
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--warning .ohmyui-pagination__btn--active {
-  color: var(--pagination-minimal-warning);
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--error .ohmyui-pagination__btn--active {
-  color: var(--pagination-minimal-error);
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--info .ohmyui-pagination__btn--active {
-  color: var(--pagination-minimal-info);
 }

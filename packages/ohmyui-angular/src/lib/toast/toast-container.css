@@ -1,52 +1,60 @@
-/* ─────────────────────────────────────────────
-   OhMyUI — Toast Container
-   ───────────────────────────────────────────── */
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
 
+/**
+ * @file toast-container.css
+ * @description Styles of ToastContainerComponent (`ohmyui-toast-container`):
+ * the fixed stack that holds the toasts, in one of six screen positions.
+ * At the bottom positions the stack grows upwards.
+ */
+
+/* Base */
 .ohmyui-toast-container {
   position: fixed;
-  z-index: var(--z-toast);
+  z-index: var(--ohmyui-z-toast);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--ohmyui-spacing-2);
   pointer-events: none;
-  padding: var(--spacing-4);
+  padding: var(--ohmyui-spacing-4);
 }
 
-/* ── Positions ───────────────────────────────── */
-
+/* Positions */
 .ohmyui-toast-container--top-right {
   top: 0;
   right: 0;
   align-items: flex-end;
 }
-
 .ohmyui-toast-container--top-left {
   top: 0;
   left: 0;
   align-items: flex-start;
 }
-
 .ohmyui-toast-container--top-center {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   align-items: center;
 }
-
 .ohmyui-toast-container--bottom-right {
   bottom: 0;
   right: 0;
   align-items: flex-end;
   flex-direction: column-reverse;
 }
-
 .ohmyui-toast-container--bottom-left {
   bottom: 0;
   left: 0;
   align-items: flex-start;
   flex-direction: column-reverse;
 }
-
 .ohmyui-toast-container--bottom-center {
   bottom: 0;
   left: 50%;

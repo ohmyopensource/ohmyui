@@ -1,30 +1,39 @@
-/* ─────────────────────────────────────────────
-   OhMyUI — Switch
-   ───────────────────────────────────────────── */
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
 
+/**
+ * @file switch.css
+ * @description Styles of SwitchComponent (`ohmyui-switch`): an on/off toggle
+ * with a label, which can change with the state, and an optional hint, in
+ * three sizes, with error and success states. The native checkbox stays
+ * hidden and the track follows its checked and focus state. The dark colors
+ * follow the system color scheme.
+ */
+
+/* Base */
 .ohmyui-switch {
   display: inline-flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--ohmyui-spacing-1);
 }
 
-.ohmyui-switch--disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-/* ── Row ─────────────────────────────────────── */
-
+/* Row */
 .ohmyui-switch__row {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-3);
+  gap: var(--ohmyui-spacing-3);
   cursor: pointer;
   user-select: none;
 }
 
-/* ── Hidden native input ─────────────────────── */
-
+/* Input */
 .ohmyui-switch__input {
   position: absolute;
   opacity: 0;
@@ -33,34 +42,47 @@
   pointer-events: none;
 }
 
-/* ── Track ───────────────────────────────────── */
-
+/* Track */
 .ohmyui-switch__track {
   position: relative;
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  border-radius: var(--radius-full);
-  background-color: var(--color-neutral-300);
+  border-radius: var(--ohmyui-radius-full);
+  background-color: var(--ohmyui-color-neutral-300);
   transition:
-    background-color var(--transition-duration-normal)
-      var(--transition-easing-ease-out),
-    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-out);
+    background-color var(--ohmyui-transition-duration-normal)
+      var(--ohmyui-transition-easing-ease-out),
+    box-shadow var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-out);
 }
 
-/* ── Thumb ───────────────────────────────────── */
-
+/* Thumb */
 .ohmyui-switch__thumb {
   position: absolute;
-  border-radius: var(--radius-full);
-  background-color: var(--color-neutral-0);
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-duration-normal)
-    var(--transition-easing-spring);
+  border-radius: var(--ohmyui-radius-full);
+  background-color: var(--ohmyui-color-neutral-0);
+  box-shadow: var(--ohmyui-shadow-sm);
+  transition: transform var(--ohmyui-transition-duration-normal)
+    var(--ohmyui-transition-easing-spring);
 }
 
-/* ── Sizes ───────────────────────────────────── */
+/* Label */
+.ohmyui-switch__label {
+  font-family: var(--ohmyui-font-family-body);
+  font-weight: var(--ohmyui-font-weight-medium);
+  color: var(--ohmyui-color-neutral-700);
+  line-height: var(--ohmyui-font-line-height-tight);
+}
 
+/* Hint */
+.ohmyui-switch__hint {
+  font-family: var(--ohmyui-font-family-body);
+  font-size: var(--ohmyui-font-size-xs);
+  color: var(--ohmyui-color-neutral-500);
+}
+
+/* Sizes */
 .ohmyui-switch--sm .ohmyui-switch__track {
   width: 32px;
   height: 18px;
@@ -71,9 +93,8 @@
   left: 3px;
 }
 .ohmyui-switch--sm .ohmyui-switch__label {
-  font-size: var(--font-size-sm);
+  font-size: var(--ohmyui-font-size-sm);
 }
-
 .ohmyui-switch--md .ohmyui-switch__track {
   width: 44px;
   height: 24px;
@@ -84,9 +105,8 @@
   left: 3px;
 }
 .ohmyui-switch--md .ohmyui-switch__label {
-  font-size: var(--font-size-md);
+  font-size: var(--ohmyui-font-size-md);
 }
-
 .ohmyui-switch--lg .ohmyui-switch__track {
   width: 56px;
   height: 30px;
@@ -97,11 +117,21 @@
   left: 4px;
 }
 .ohmyui-switch--lg .ohmyui-switch__label {
-  font-size: var(--font-size-lg);
+  font-size: var(--ohmyui-font-size-lg);
 }
 
-/* ── Checked state — thumb slides right ──────── */
-
+/* States */
+.ohmyui-switch__row:hover .ohmyui-switch__track {
+  background-color: var(--ohmyui-color-neutral-400);
+}
+.ohmyui-switch__row:hover
+  .ohmyui-switch__input:checked
+  ~ .ohmyui-switch__track {
+  background-color: var(--ohmyui-color-primary-600);
+}
+.ohmyui-switch__input:focus-visible ~ .ohmyui-switch__track {
+  box-shadow: var(--ohmyui-shadow-focus-primary);
+}
 .ohmyui-switch--sm
   .ohmyui-switch__input:checked
   ~ .ohmyui-switch__track
@@ -120,87 +150,51 @@
   .ohmyui-switch__thumb {
   transform: translateX(26px);
 }
-
 .ohmyui-switch__input:checked ~ .ohmyui-switch__track {
-  background-color: var(--color-primary-500);
+  background-color: var(--ohmyui-color-primary-500);
 }
-
-/* ── Focus ───────────────────────────────────── */
-
-.ohmyui-switch__input:focus-visible ~ .ohmyui-switch__track {
-  box-shadow: var(--shadow-focus-primary);
-}
-
-/* ── Hover ───────────────────────────────────── */
-
-.ohmyui-switch__row:hover .ohmyui-switch__track {
-  background-color: var(--color-neutral-400);
-}
-.ohmyui-switch__row:hover
-  .ohmyui-switch__input:checked
-  ~ .ohmyui-switch__track {
-  background-color: var(--color-primary-600);
-}
-
-/* ── Status: error ───────────────────────────── */
-
 .ohmyui-switch--error .ohmyui-switch__input:checked ~ .ohmyui-switch__track {
-  background-color: var(--color-error-500);
+  background-color: var(--ohmyui-color-error-500);
 }
 .ohmyui-switch--error
   .ohmyui-switch__input:focus-visible
   ~ .ohmyui-switch__track {
-  box-shadow: var(--shadow-focus-error);
+  box-shadow: var(--ohmyui-shadow-focus-error);
 }
-
-/* ── Status: success ─────────────────────────── */
-
 .ohmyui-switch--success .ohmyui-switch__input:checked ~ .ohmyui-switch__track {
-  background-color: var(--color-success-600);
+  background-color: var(--ohmyui-color-success-600);
 }
 .ohmyui-switch--success
   .ohmyui-switch__input:focus-visible
   ~ .ohmyui-switch__track {
-  box-shadow: var(--shadow-focus-success);
-}
-
-/* ── Label & hint ────────────────────────────── */
-
-.ohmyui-switch__label {
-  font-family: var(--font-family-body);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-neutral-700);
-  line-height: var(--font-line-height-tight);
-}
-
-.ohmyui-switch__hint {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-xs);
-  color: var(--color-neutral-500);
+  box-shadow: var(--ohmyui-shadow-focus-success);
 }
 .ohmyui-switch__hint--error {
-  color: var(--color-error-600);
+  color: var(--ohmyui-color-error-600);
 }
 .ohmyui-switch__hint--success {
-  color: var(--color-success-700);
+  color: var(--ohmyui-color-success-700);
+}
+.ohmyui-switch--disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-/* ── Dark mode ───────────────────────────────── */
-
+/* System color scheme */
 @media (prefers-color-scheme: dark) {
   .ohmyui-switch__track {
-    background-color: var(--color-neutral-600);
+    background-color: var(--ohmyui-color-neutral-600);
   }
   .ohmyui-switch__thumb {
-    background-color: var(--color-neutral-200);
+    background-color: var(--ohmyui-color-neutral-200);
   }
   .ohmyui-switch__label {
-    color: var(--color-neutral-200);
+    color: var(--ohmyui-color-neutral-200);
   }
   .ohmyui-switch__hint {
-    color: var(--color-neutral-400);
+    color: var(--ohmyui-color-neutral-400);
   }
   .ohmyui-switch__row:hover .ohmyui-switch__track {
-    background-color: var(--color-neutral-500);
+    background-color: var(--ohmyui-color-neutral-500);
   }
 }

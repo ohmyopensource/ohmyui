@@ -1,59 +1,71 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+/**
+ * @file button.module.css
+ * @description Styles of the React Button component: a native button in
+ * three variants (primary, secondary, ghost) and three sizes.
+ */
+
+/* Base */
 .ohmyui-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: none;
   cursor: pointer;
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-md);
-  transition: opacity 0.2s ease;
+  font-family: var(--ohmyui-font-family-body);
+  font-weight: var(--ohmyui-font-weight-medium);
+  border-radius: var(--ohmyui-radius-md);
+  transition: opacity var(--ohmyui-transition-duration-normal)
+    var(--ohmyui-transition-easing-ease);
 }
 
+/* Sizes */
+.ohmyui-btn--sm {
+  padding: var(--ohmyui-spacing-1) var(--ohmyui-spacing-3);
+  font-size: var(--ohmyui-font-size-sm);
+}
+.ohmyui-btn--md {
+  padding: var(--ohmyui-spacing-2) var(--ohmyui-spacing-4);
+  font-size: var(--ohmyui-font-size-md);
+}
+.ohmyui-btn--lg {
+  padding: var(--ohmyui-spacing-3) var(--ohmyui-spacing-6);
+  font-size: var(--ohmyui-font-size-lg);
+}
+
+/* Variants */
+.ohmyui-btn--primary {
+  background-color: var(--ohmyui-color-primary-500);
+  color: var(--ohmyui-color-neutral-0);
+}
+.ohmyui-btn--secondary {
+  background-color: transparent;
+  color: var(--ohmyui-color-primary-500);
+  border: var(--ohmyui-border-width-sm) solid var(--ohmyui-color-primary-500);
+}
+.ohmyui-btn--ghost {
+  background-color: transparent;
+  color: var(--ohmyui-color-primary-500);
+}
+
+/* States */
+.ohmyui-btn--primary:hover:not(:disabled) {
+  background-color: var(--ohmyui-color-primary-600);
+}
+.ohmyui-btn--secondary:hover:not(:disabled),
+.ohmyui-btn--ghost:hover:not(:disabled) {
+  background-color: var(--ohmyui-color-primary-50);
+}
 .ohmyui-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.ohmyui-btn--primary {
-  background-color: var(--color-primary-500);
-  color: var(--color-neutral-0);
-}
-
-.ohmyui-btn--primary:hover:not(:disabled) {
-  background-color: var(--color-primary-600);
-}
-
-.ohmyui-btn--secondary {
-  background-color: transparent;
-  color: var(--color-primary-500);
-  border: 2px solid var(--color-primary-500);
-}
-
-.ohmyui-btn--secondary:hover:not(:disabled) {
-  background-color: var(--color-primary-50);
-}
-
-.ohmyui-btn--ghost {
-  background-color: transparent;
-  color: var(--color-primary-500);
-}
-
-.ohmyui-btn--ghost:hover:not(:disabled) {
-  background-color: var(--color-primary-50);
-}
-
-.ohmyui-btn--sm {
-  padding: var(--spacing-1) var(--spacing-3);
-  font-size: var(--font-size-sm);
-}
-
-.ohmyui-btn--md {
-  padding: var(--spacing-2) var(--spacing-4);
-  font-size: var(--font-size-md);
-}
-
-.ohmyui-btn--lg {
-  padding: var(--spacing-3) var(--spacing-6);
-  font-size: var(--font-size-lg);
 }

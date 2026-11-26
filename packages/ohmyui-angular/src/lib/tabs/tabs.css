@@ -1,70 +1,69 @@
 /**
- * @file tabs.css
- * @description Tabs component styling supporting multiple visual styles
- * (line, pill, card, underline), variants, sizes, badges, icons, and dark
- * theme. Consuma i design token generati da packages/tokens.
+ * Copyright 2026 The OhMyOpenSource! Authors
  *
- * NOTA sul dark theme: due categorie di correzioni rispetto all'originale.
- * (1) line/underline avevano UN SOLO override dark non scoped alla
- * variante — con variant="success" il testo attivo in dark mode tornava
- * comunque "primary". Corretto con token component-tier per tutte le 7
- * varianti, stesso pattern gia' usato altrove nella libreria.
- * (2) pill/card avevano override che rendevano il contenitore PIU' CHIARO
- * in dark mode (stesso bug sistematico trovato in Input/Pagination/Text) —
- * qui ridisegnato per restare coerentemente scuro come il resto della
- * libreria, con relativo fix di contrasto sul testo delle tab inattive.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file tabs.css
+ * @description Styles of TabsComponent (`ohmyui-tabs`): a tab list in four
+ * styles (line, pill, card, underline), seven variants and three sizes,
+ * horizontal or vertical, with optional icons and badges.
+ */
+
+/* Host */
 :host {
-  --tabs-line-active-primary: var(--color-primary-dark);
-  --tabs-line-active-secondary: var(--color-secondary-dark);
-  --tabs-line-active-tertiary: var(--color-tertiary-dark);
-  --tabs-line-active-success: var(--color-success-dark);
-  --tabs-line-active-warning: var(--color-warning-dark);
-  --tabs-line-active-error: var(--color-error-dark);
-  --tabs-line-active-info: var(--color-info-dark);
-
-  --tabs-card-active-primary: var(--color-primary-dark);
-  --tabs-card-active-secondary: var(--color-secondary-dark);
-  --tabs-card-active-tertiary: var(--color-tertiary-dark);
-  --tabs-card-active-success: var(--color-success-dark);
-  --tabs-card-active-warning: var(--color-warning-dark);
-  --tabs-card-active-error: var(--color-error-dark);
-  --tabs-card-active-info: var(--color-info-dark);
-
-  --tabs-pill-bg: var(--color-neutral-100);
-  --tabs-pill-border: var(--color-neutral-200);
-  --tabs-card-bg-inactive: var(--color-neutral-100);
-  --tabs-card-bg-active: var(--color-neutral-0);
-  --tabs-card-border: var(--color-neutral-200);
-  --tabs-card-text-inactive: var(--color-neutral-500);
+  --ohmyui-tabs-line-active-primary: var(--ohmyui-color-primary-dark);
+  --ohmyui-tabs-line-active-secondary: var(--ohmyui-color-secondary-dark);
+  --ohmyui-tabs-line-active-tertiary: var(--ohmyui-color-tertiary-dark);
+  --ohmyui-tabs-line-active-success: var(--ohmyui-color-success-dark);
+  --ohmyui-tabs-line-active-warning: var(--ohmyui-color-warning-dark);
+  --ohmyui-tabs-line-active-error: var(--ohmyui-color-error-dark);
+  --ohmyui-tabs-line-active-info: var(--ohmyui-color-info-dark);
+  --ohmyui-tabs-card-active-primary: var(--ohmyui-color-primary-dark);
+  --ohmyui-tabs-card-active-secondary: var(--ohmyui-color-secondary-dark);
+  --ohmyui-tabs-card-active-tertiary: var(--ohmyui-color-tertiary-dark);
+  --ohmyui-tabs-card-active-success: var(--ohmyui-color-success-dark);
+  --ohmyui-tabs-card-active-warning: var(--ohmyui-color-warning-dark);
+  --ohmyui-tabs-card-active-error: var(--ohmyui-color-error-dark);
+  --ohmyui-tabs-card-active-info: var(--ohmyui-color-info-dark);
+  --ohmyui-tabs-pill-bg: var(--ohmyui-color-neutral-100);
+  --ohmyui-tabs-pill-border: var(--ohmyui-color-neutral-200);
+  --ohmyui-tabs-card-bg-inactive: var(--ohmyui-color-neutral-100);
+  --ohmyui-tabs-card-bg-active: var(--ohmyui-color-neutral-0);
+  --ohmyui-tabs-card-border: var(--ohmyui-color-neutral-200);
+  --ohmyui-tabs-card-text-inactive: var(--ohmyui-color-neutral-500);
 }
+
+/* Dark theme */
 :host-context(.dark-theme) {
-  --tabs-line-active-primary: var(--color-primary-light);
-  --tabs-line-active-secondary: var(--color-secondary-light);
-  --tabs-line-active-tertiary: var(--color-tertiary-light);
-  --tabs-line-active-success: var(--color-success-light);
-  --tabs-line-active-warning: var(--color-warning-light);
-  --tabs-line-active-error: var(--color-error-light);
-  --tabs-line-active-info: var(--color-info-light);
-
-  --tabs-card-active-primary: var(--color-primary-light);
-  --tabs-card-active-secondary: var(--color-secondary-light);
-  --tabs-card-active-tertiary: var(--color-tertiary-light);
-  --tabs-card-active-success: var(--color-success-light);
-  --tabs-card-active-warning: var(--color-warning-light);
-  --tabs-card-active-error: var(--color-error-light);
-  --tabs-card-active-info: var(--color-info-light);
-
-  --tabs-pill-bg: var(--color-neutral-200);
-  --tabs-pill-border: var(--color-neutral-500);
-  --tabs-card-bg-inactive: var(--color-neutral-200);
-  --tabs-card-bg-active: var(--color-neutral-300);
-  --tabs-card-border: var(--color-neutral-500);
-  --tabs-card-text-inactive: var(--color-neutral-500);
+  --ohmyui-tabs-line-active-primary: var(--ohmyui-color-primary-light);
+  --ohmyui-tabs-line-active-secondary: var(--ohmyui-color-secondary-light);
+  --ohmyui-tabs-line-active-tertiary: var(--ohmyui-color-tertiary-light);
+  --ohmyui-tabs-line-active-success: var(--ohmyui-color-success-light);
+  --ohmyui-tabs-line-active-warning: var(--ohmyui-color-warning-light);
+  --ohmyui-tabs-line-active-error: var(--ohmyui-color-error-light);
+  --ohmyui-tabs-line-active-info: var(--ohmyui-color-info-light);
+  --ohmyui-tabs-card-active-primary: var(--ohmyui-color-primary-light);
+  --ohmyui-tabs-card-active-secondary: var(--ohmyui-color-secondary-light);
+  --ohmyui-tabs-card-active-tertiary: var(--ohmyui-color-tertiary-light);
+  --ohmyui-tabs-card-active-success: var(--ohmyui-color-success-light);
+  --ohmyui-tabs-card-active-warning: var(--ohmyui-color-warning-light);
+  --ohmyui-tabs-card-active-error: var(--ohmyui-color-error-light);
+  --ohmyui-tabs-card-active-info: var(--ohmyui-color-info-light);
+  --ohmyui-tabs-pill-bg: var(--ohmyui-color-neutral-200);
+  --ohmyui-tabs-pill-border: var(--ohmyui-color-neutral-500);
+  --ohmyui-tabs-card-bg-inactive: var(--ohmyui-color-neutral-200);
+  --ohmyui-tabs-card-bg-active: var(--ohmyui-color-neutral-300);
+  --ohmyui-tabs-card-border: var(--ohmyui-color-neutral-500);
+  --ohmyui-tabs-card-text-inactive: var(--ohmyui-color-neutral-500);
 }
 
-/* Base Layout */
+/* Base */
 .ohmyui-tabs {
   display: flex;
   align-items: stretch;
@@ -79,8 +78,7 @@
   display: none;
 }
 
-/* Tab base — nessun override dark: neutral-500/200 si invertono gia' bene
-   da soli (verificato). */
+/* Tab */
 .ohmyui-tabs__tab {
   display: inline-flex;
   align-items: center;
@@ -96,25 +94,48 @@
   outline: none;
   flex-shrink: 0;
   transition:
-    color var(--transition-duration-fast) var(--transition-easing-ease-in-out),
-    background var(--transition-duration-fast) var(--transition-easing-ease-in-out),
-    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-in-out);
+    color var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out),
+    background var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out),
+    box-shadow var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-in-out);
 }
 .ohmyui-tabs__tab--full {
   flex: 1;
 }
-.ohmyui-tabs__tab:focus-visible {
-  outline: 2px solid var(--color-primary-focus);
-  outline-offset: -2px;
-  border-radius: var(--border-radius-sm);
-}
-.ohmyui-tabs__tab--disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  pointer-events: none;
+
+/* Icon */
+.ohmyui-tabs__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
-/* Size System */
+/* Label */
+.ohmyui-tabs__label {
+  line-height: 1;
+}
+
+/* Badge */
+.ohmyui-tabs__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4em;
+  height: 1.4em;
+  padding: 0 0.35em;
+  border-radius: var(--ohmyui-radius-full);
+  font-size: 0.7em;
+  font-weight: 700;
+  background: var(--ohmyui-color-neutral-200);
+  color: var(--ohmyui-color-neutral-500);
+  transition:
+    background var(--ohmyui-transition-duration-fast),
+    color var(--ohmyui-transition-duration-fast);
+}
+
+/* Sizes */
 .ohmyui-tabs--sm .ohmyui-tabs__tab {
   padding: 0.45em 0.85em;
   font-size: 0.78rem;
@@ -128,48 +149,16 @@
   font-size: 1rem;
 }
 
-/* Elements (icon / label / badge) — badge non ha bisogno di override dark:
-   neutral-200/500 si invertono gia' bene da soli. */
-.ohmyui-tabs__label {
-  line-height: 1;
-}
-.ohmyui-tabs__icon {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-.ohmyui-tabs__badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.4em;
-  height: 1.4em;
-  padding: 0 0.35em;
-  border-radius: var(--border-radius-full);
-  font-size: 0.7em;
-  font-weight: 700;
-  background: var(--color-neutral-200);
-  color: var(--color-neutral-500);
-  transition:
-    background var(--transition-duration-fast),
-    color var(--transition-duration-fast);
-}
-
-/* Style: Line */
+/* Styles */
 .ohmyui-tabs--line {
-  border-bottom: 2px solid var(--color-neutral-200);
+  border-bottom: 2px solid var(--ohmyui-color-neutral-200);
   gap: 0;
 }
 .ohmyui-tabs--line .ohmyui-tabs__tab {
-  color: var(--color-neutral-500);
+  color: var(--ohmyui-color-neutral-500);
   border-radius: 0;
   margin-bottom: -2px;
 }
-.ohmyui-tabs--line .ohmyui-tabs__tab:hover:not(.ohmyui-tabs__tab--disabled):not(.ohmyui-tabs__tab--active) {
-  color: var(--color-neutral-700);
-}
-
-/* Style: Indicator */
 .ohmyui-tabs--line .ohmyui-tabs__indicator {
   position: absolute;
   bottom: -2px;
@@ -178,208 +167,40 @@
   height: 2px;
   border-radius: 2px 2px 0 0;
   background: transparent;
-  transition: background var(--transition-duration-fast);
+  transition: background var(--ohmyui-transition-duration-fast);
 }
-.ohmyui-tabs--line .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-primary);
-}
-.ohmyui-tabs--line.ohmyui-tabs--secondary .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-secondary);
-}
-.ohmyui-tabs--line.ohmyui-tabs--tertiary .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-tertiary);
-}
-.ohmyui-tabs--line.ohmyui-tabs--success .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-success);
-}
-.ohmyui-tabs--line.ohmyui-tabs--warning .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-warning);
-}
-.ohmyui-tabs--line.ohmyui-tabs--error .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-error);
-}
-.ohmyui-tabs--line.ohmyui-tabs--info .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-info);
-}
-.ohmyui-tabs--line .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-primary);
-  font-weight: 600;
-}
-.ohmyui-tabs--line.ohmyui-tabs--secondary .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-secondary);
-}
-.ohmyui-tabs--line.ohmyui-tabs--tertiary .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-tertiary);
-}
-.ohmyui-tabs--line.ohmyui-tabs--success .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-success);
-}
-.ohmyui-tabs--line.ohmyui-tabs--warning .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-warning);
-}
-.ohmyui-tabs--line.ohmyui-tabs--error .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-error);
-}
-.ohmyui-tabs--line.ohmyui-tabs--info .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-info);
-}
-.ohmyui-tabs--line .ohmyui-tabs__tab--active .ohmyui-tabs__badge {
-  background: var(--tabs-line-active-primary);
-  color: white;
-}
-.ohmyui-tabs--line.ohmyui-tabs--secondary .ohmyui-tabs__tab--active .ohmyui-tabs__badge {
-  background: var(--tabs-line-active-secondary);
-}
-.ohmyui-tabs--line.ohmyui-tabs--success .ohmyui-tabs__tab--active .ohmyui-tabs__badge {
-  background: var(--tabs-line-active-success);
-}
-.ohmyui-tabs--line.ohmyui-tabs--error .ohmyui-tabs__tab--active .ohmyui-tabs__badge {
-  background: var(--tabs-line-active-error);
-}
-.ohmyui-tabs--line.ohmyui-tabs--info .ohmyui-tabs__tab--active .ohmyui-tabs__badge {
-  background: var(--tabs-line-active-info);
-}
-
-/* Style: Pill — contenitore sempre scuro in dark mode (token component-tier),
-   coerente col resto della libreria. Hover non ha bisogno di override: si
-   inverte gia' bene da solo. */
 .ohmyui-tabs--pill {
-  background: var(--tabs-pill-bg);
-  border-radius: var(--border-radius-lg);
+  background: var(--ohmyui-tabs-pill-bg);
+  border-radius: var(--ohmyui-radius-lg);
   padding: 4px;
   gap: 2px;
-  border: 1.5px solid var(--tabs-pill-border);
+  border: 1.5px solid var(--ohmyui-tabs-pill-border);
 }
 .ohmyui-tabs--pill .ohmyui-tabs__tab {
-  color: var(--color-neutral-500);
-  border-radius: var(--border-radius-md);
+  color: var(--ohmyui-color-neutral-500);
+  border-radius: var(--ohmyui-radius-md);
 }
-.ohmyui-tabs--pill .ohmyui-tabs__tab:hover:not(.ohmyui-tabs__tab--disabled):not(.ohmyui-tabs__tab--active) {
-  background: var(--color-neutral-200);
-  color: var(--color-neutral-600);
-}
-.ohmyui-tabs--pill .ohmyui-tabs__tab--active {
-  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark));
-  color: var(--color-primary-text);
-  box-shadow: 0 2px 8px var(--color-primary-shadow);
-  font-weight: 600;
-}
-.ohmyui-tabs--pill.ohmyui-tabs--secondary .ohmyui-tabs__tab--active {
-  background: linear-gradient(135deg, var(--color-secondary-light), var(--color-secondary-dark));
-  color: var(--color-secondary-text);
-  box-shadow: 0 2px 8px var(--color-secondary-shadow);
-}
-.ohmyui-tabs--pill.ohmyui-tabs--tertiary .ohmyui-tabs__tab--active {
-  background: linear-gradient(135deg, var(--color-tertiary-light), var(--color-tertiary-dark));
-  color: var(--color-tertiary-text);
-  box-shadow: 0 2px 8px var(--color-tertiary-shadow);
-}
-.ohmyui-tabs--pill.ohmyui-tabs--success .ohmyui-tabs__tab--active {
-  background: linear-gradient(135deg, var(--color-success-light), var(--color-success-dark));
-  color: var(--color-success-text);
-  box-shadow: 0 2px 8px var(--color-success-shadow);
-}
-.ohmyui-tabs--pill.ohmyui-tabs--warning .ohmyui-tabs__tab--active {
-  background: linear-gradient(135deg, var(--color-warning-light), var(--color-warning-dark));
-  color: var(--color-warning-text);
-  box-shadow: 0 2px 8px var(--color-warning-shadow);
-}
-.ohmyui-tabs--pill.ohmyui-tabs--error .ohmyui-tabs__tab--active {
-  background: linear-gradient(135deg, var(--color-error-light), var(--color-error-dark));
-  color: var(--color-error-text);
-  box-shadow: 0 2px 8px var(--color-error-shadow);
-}
-.ohmyui-tabs--pill.ohmyui-tabs--info .ohmyui-tabs__tab--active {
-  background: linear-gradient(135deg, var(--color-info-light), var(--color-info-dark));
-  color: var(--color-info-text);
-  box-shadow: 0 2px 8px var(--color-info-shadow);
-}
-.ohmyui-tabs--pill .ohmyui-tabs__tab--active .ohmyui-tabs__badge {
-  background: rgba(255, 255, 255, 0.3);
-  color: inherit;
-}
-
-/* Style: Card — ridisegnato per restare scuro in dark mode (vedi nota
-   d'apertura). Testo inattivo con token dedicato per garantire contrasto
-   contro lo sfondo scuro corretto (non era coperto nell'originale). */
 .ohmyui-tabs--card {
   gap: 4px;
   align-items: flex-end;
-  border-bottom: 1.5px solid var(--tabs-card-border);
+  border-bottom: 1.5px solid var(--ohmyui-tabs-card-border);
 }
 .ohmyui-tabs--card .ohmyui-tabs__tab {
-  color: var(--tabs-card-text-inactive);
-  background: var(--tabs-card-bg-inactive);
-  border: 1.5px solid var(--tabs-card-border);
+  color: var(--ohmyui-tabs-card-text-inactive);
+  background: var(--ohmyui-tabs-card-bg-inactive);
+  border: 1.5px solid var(--ohmyui-tabs-card-border);
   border-bottom: none;
-  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+  border-radius: var(--ohmyui-radius-md) var(--ohmyui-radius-md) 0 0;
   margin-bottom: -1.5px;
 }
-.ohmyui-tabs--card .ohmyui-tabs__tab:hover:not(.ohmyui-tabs__tab--disabled):not(.ohmyui-tabs__tab--active) {
-  background: var(--tabs-card-bg-active);
-  color: var(--color-neutral-600);
-}
-.ohmyui-tabs--card .ohmyui-tabs__tab--active {
-  background: var(--tabs-card-bg-active);
-  border-color: var(--tabs-card-border);
-  border-bottom-color: var(--tabs-card-bg-active);
-  color: var(--tabs-card-active-primary);
-  font-weight: 600;
-}
-.ohmyui-tabs--card.ohmyui-tabs--secondary .ohmyui-tabs__tab--active {
-  color: var(--tabs-card-active-secondary);
-}
-.ohmyui-tabs--card.ohmyui-tabs--tertiary .ohmyui-tabs__tab--active {
-  color: var(--tabs-card-active-tertiary);
-}
-.ohmyui-tabs--card.ohmyui-tabs--success .ohmyui-tabs__tab--active {
-  color: var(--tabs-card-active-success);
-}
-.ohmyui-tabs--card.ohmyui-tabs--warning .ohmyui-tabs__tab--active {
-  color: var(--tabs-card-active-warning);
-}
-.ohmyui-tabs--card.ohmyui-tabs--error .ohmyui-tabs__tab--active {
-  color: var(--tabs-card-active-error);
-}
-.ohmyui-tabs--card.ohmyui-tabs--info .ohmyui-tabs__tab--active {
-  color: var(--tabs-card-active-info);
-}
-.ohmyui-tabs--card .ohmyui-tabs__tab--active .ohmyui-tabs__badge {
-  background: var(--tabs-card-active-primary);
-  color: white;
-}
-
-/* Style: Underline */
 .ohmyui-tabs--underline {
   gap: 0;
-  border-bottom: 1px solid var(--color-neutral-200);
+  border-bottom: 1px solid var(--ohmyui-color-neutral-200);
 }
 .ohmyui-tabs--underline .ohmyui-tabs__tab {
-  color: var(--color-neutral-400);
+  color: var(--ohmyui-color-neutral-400);
   border-radius: 0;
   margin-bottom: -1px;
-}
-.ohmyui-tabs--underline .ohmyui-tabs__tab:hover:not(.ohmyui-tabs__tab--disabled):not(.ohmyui-tabs__tab--active) {
-  color: var(--color-neutral-600);
-}
-.ohmyui-tabs--underline .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-primary);
-  font-weight: 700;
-}
-.ohmyui-tabs--underline.ohmyui-tabs--secondary .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-secondary);
-}
-.ohmyui-tabs--underline.ohmyui-tabs--success .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-success);
-}
-.ohmyui-tabs--underline.ohmyui-tabs--warning .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-warning);
-}
-.ohmyui-tabs--underline.ohmyui-tabs--error .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-error);
-}
-.ohmyui-tabs--underline.ohmyui-tabs--info .ohmyui-tabs__tab--active {
-  color: var(--tabs-line-active-info);
 }
 .ohmyui-tabs--underline .ohmyui-tabs__indicator {
   position: absolute;
@@ -390,55 +211,31 @@
   border-radius: 2px 2px 0 0;
   background: transparent;
   transition:
-    background var(--transition-duration-fast),
-    left var(--transition-duration-normal),
-    right var(--transition-duration-normal);
-}
-.ohmyui-tabs--underline .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-primary);
-  left: 0;
-  right: 0;
-}
-.ohmyui-tabs--underline.ohmyui-tabs--secondary .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-secondary);
-}
-.ohmyui-tabs--underline.ohmyui-tabs--success .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-success);
-}
-.ohmyui-tabs--underline.ohmyui-tabs--warning .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-warning);
-}
-.ohmyui-tabs--underline.ohmyui-tabs--error .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-error);
-}
-.ohmyui-tabs--underline.ohmyui-tabs--info .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
-  background: var(--tabs-line-active-info);
+    background var(--ohmyui-transition-duration-fast),
+    left var(--ohmyui-transition-duration-normal),
+    right var(--ohmyui-transition-duration-normal);
 }
 
-/* Style: Vertical */
+/* Vertical */
 .ohmyui-tabs--vertical {
   flex-direction: column;
   border-bottom: none;
   align-items: stretch;
   overflow-x: visible;
 }
-
-/* Vertical + pill */
 .ohmyui-tabs--vertical.ohmyui-tabs--pill {
-  border-radius: var(--border-radius-lg);
+  border-radius: var(--ohmyui-radius-lg);
   padding: 4px;
   gap: 2px;
 }
 .ohmyui-tabs--vertical.ohmyui-tabs--pill .ohmyui-tabs__tab {
   justify-content: flex-start;
   text-align: left;
-  border-radius: var(--border-radius-md);
+  border-radius: var(--ohmyui-radius-md);
 }
-
-/* Vertical + line */
 .ohmyui-tabs--vertical.ohmyui-tabs--line {
   border-bottom: none;
-  border-left: 2px solid var(--color-neutral-200);
+  border-left: 2px solid var(--ohmyui-color-neutral-200);
   gap: 0;
 }
 .ohmyui-tabs--vertical.ohmyui-tabs--line .ohmyui-tabs__tab {
@@ -454,4 +251,267 @@
   width: 2px;
   height: 100%;
   border-radius: 0 2px 2px 0;
+}
+
+/* States */
+.ohmyui-tabs--line
+  .ohmyui-tabs__tab:hover:not(.ohmyui-tabs__tab--disabled):not(
+    .ohmyui-tabs__tab--active
+  ) {
+  color: var(--ohmyui-color-neutral-700);
+}
+.ohmyui-tabs--pill
+  .ohmyui-tabs__tab:hover:not(.ohmyui-tabs__tab--disabled):not(
+    .ohmyui-tabs__tab--active
+  ) {
+  background: var(--ohmyui-color-neutral-200);
+  color: var(--ohmyui-color-neutral-600);
+}
+.ohmyui-tabs--card
+  .ohmyui-tabs__tab:hover:not(.ohmyui-tabs__tab--disabled):not(
+    .ohmyui-tabs__tab--active
+  ) {
+  background: var(--ohmyui-tabs-card-bg-active);
+  color: var(--ohmyui-color-neutral-600);
+}
+.ohmyui-tabs--underline
+  .ohmyui-tabs__tab:hover:not(.ohmyui-tabs__tab--disabled):not(
+    .ohmyui-tabs__tab--active
+  ) {
+  color: var(--ohmyui-color-neutral-600);
+}
+.ohmyui-tabs__tab:focus-visible {
+  outline: 2px solid var(--ohmyui-color-primary-focus);
+  outline-offset: -2px;
+  border-radius: var(--ohmyui-radius-sm);
+}
+.ohmyui-tabs--line .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-primary);
+}
+.ohmyui-tabs--line.ohmyui-tabs--secondary
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-secondary);
+}
+.ohmyui-tabs--line.ohmyui-tabs--tertiary
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-tertiary);
+}
+.ohmyui-tabs--line.ohmyui-tabs--success
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-success);
+}
+.ohmyui-tabs--line.ohmyui-tabs--warning
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-warning);
+}
+.ohmyui-tabs--line.ohmyui-tabs--error
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-error);
+}
+.ohmyui-tabs--line.ohmyui-tabs--info
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-info);
+}
+.ohmyui-tabs--line .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-primary);
+  font-weight: 600;
+}
+.ohmyui-tabs--line.ohmyui-tabs--secondary .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-secondary);
+}
+.ohmyui-tabs--line.ohmyui-tabs--tertiary .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-tertiary);
+}
+.ohmyui-tabs--line.ohmyui-tabs--success .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-success);
+}
+.ohmyui-tabs--line.ohmyui-tabs--warning .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-warning);
+}
+.ohmyui-tabs--line.ohmyui-tabs--error .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-error);
+}
+.ohmyui-tabs--line.ohmyui-tabs--info .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-info);
+}
+.ohmyui-tabs--line .ohmyui-tabs__tab--active .ohmyui-tabs__badge {
+  background: var(--ohmyui-tabs-line-active-primary);
+  color: white;
+}
+.ohmyui-tabs--line.ohmyui-tabs--secondary
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__badge {
+  background: var(--ohmyui-tabs-line-active-secondary);
+}
+.ohmyui-tabs--line.ohmyui-tabs--success
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__badge {
+  background: var(--ohmyui-tabs-line-active-success);
+}
+.ohmyui-tabs--line.ohmyui-tabs--error
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__badge {
+  background: var(--ohmyui-tabs-line-active-error);
+}
+.ohmyui-tabs--line.ohmyui-tabs--info
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__badge {
+  background: var(--ohmyui-tabs-line-active-info);
+}
+.ohmyui-tabs--pill .ohmyui-tabs__tab--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-primary-light),
+    var(--ohmyui-color-primary-dark)
+  );
+  color: var(--ohmyui-color-primary-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-primary-shadow);
+  font-weight: 600;
+}
+.ohmyui-tabs--pill.ohmyui-tabs--secondary .ohmyui-tabs__tab--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-secondary-light),
+    var(--ohmyui-color-secondary-dark)
+  );
+  color: var(--ohmyui-color-secondary-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-secondary-shadow);
+}
+.ohmyui-tabs--pill.ohmyui-tabs--tertiary .ohmyui-tabs__tab--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-tertiary-light),
+    var(--ohmyui-color-tertiary-dark)
+  );
+  color: var(--ohmyui-color-tertiary-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-tertiary-shadow);
+}
+.ohmyui-tabs--pill.ohmyui-tabs--success .ohmyui-tabs__tab--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-success-light),
+    var(--ohmyui-color-success-dark)
+  );
+  color: var(--ohmyui-color-success-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-success-shadow);
+}
+.ohmyui-tabs--pill.ohmyui-tabs--warning .ohmyui-tabs__tab--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-warning-light),
+    var(--ohmyui-color-warning-dark)
+  );
+  color: var(--ohmyui-color-warning-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-warning-shadow);
+}
+.ohmyui-tabs--pill.ohmyui-tabs--error .ohmyui-tabs__tab--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-error-light),
+    var(--ohmyui-color-error-dark)
+  );
+  color: var(--ohmyui-color-error-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-error-shadow);
+}
+.ohmyui-tabs--pill.ohmyui-tabs--info .ohmyui-tabs__tab--active {
+  background: linear-gradient(
+    135deg,
+    var(--ohmyui-color-info-light),
+    var(--ohmyui-color-info-dark)
+  );
+  color: var(--ohmyui-color-info-text);
+  box-shadow: 0 2px 8px var(--ohmyui-color-info-shadow);
+}
+.ohmyui-tabs--pill .ohmyui-tabs__tab--active .ohmyui-tabs__badge {
+  background: rgba(255, 255, 255, 0.3);
+  color: inherit;
+}
+.ohmyui-tabs--card .ohmyui-tabs__tab--active {
+  background: var(--ohmyui-tabs-card-bg-active);
+  border-color: var(--ohmyui-tabs-card-border);
+  border-bottom-color: var(--ohmyui-tabs-card-bg-active);
+  color: var(--ohmyui-tabs-card-active-primary);
+  font-weight: 600;
+}
+.ohmyui-tabs--card.ohmyui-tabs--secondary .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-card-active-secondary);
+}
+.ohmyui-tabs--card.ohmyui-tabs--tertiary .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-card-active-tertiary);
+}
+.ohmyui-tabs--card.ohmyui-tabs--success .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-card-active-success);
+}
+.ohmyui-tabs--card.ohmyui-tabs--warning .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-card-active-warning);
+}
+.ohmyui-tabs--card.ohmyui-tabs--error .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-card-active-error);
+}
+.ohmyui-tabs--card.ohmyui-tabs--info .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-card-active-info);
+}
+.ohmyui-tabs--card .ohmyui-tabs__tab--active .ohmyui-tabs__badge {
+  background: var(--ohmyui-tabs-card-active-primary);
+  color: white;
+}
+.ohmyui-tabs--underline .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-primary);
+  font-weight: 700;
+}
+.ohmyui-tabs--underline.ohmyui-tabs--secondary .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-secondary);
+}
+.ohmyui-tabs--underline.ohmyui-tabs--success .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-success);
+}
+.ohmyui-tabs--underline.ohmyui-tabs--warning .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-warning);
+}
+.ohmyui-tabs--underline.ohmyui-tabs--error .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-error);
+}
+.ohmyui-tabs--underline.ohmyui-tabs--info .ohmyui-tabs__tab--active {
+  color: var(--ohmyui-tabs-line-active-info);
+}
+.ohmyui-tabs--underline .ohmyui-tabs__tab--active .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-primary);
+  left: 0;
+  right: 0;
+}
+.ohmyui-tabs--underline.ohmyui-tabs--secondary
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-secondary);
+}
+.ohmyui-tabs--underline.ohmyui-tabs--success
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-success);
+}
+.ohmyui-tabs--underline.ohmyui-tabs--warning
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-warning);
+}
+.ohmyui-tabs--underline.ohmyui-tabs--error
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-error);
+}
+.ohmyui-tabs--underline.ohmyui-tabs--info
+  .ohmyui-tabs__tab--active
+  .ohmyui-tabs__indicator {
+  background: var(--ohmyui-tabs-line-active-info);
+}
+.ohmyui-tabs__tab--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }

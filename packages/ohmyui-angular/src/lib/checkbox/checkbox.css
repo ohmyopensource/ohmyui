@@ -1,33 +1,41 @@
 /**
- * @file checkbox.css
- * @description Styling for CheckboxComponent. Il vero <input type="checkbox">
- * resta interattivo (posizionato sopra il box visivo, opacity 0): tastiera,
- * screen reader e submit di form funzionano nativamente, senza reinventare
- * nulla. Consuma i design token generati da packages/tokens.
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file checkbox.css
+ * @description Styles of CheckboxComponent (`ohmyui-checkbox`): a checkbox
+ * with a label, a description and an error message, in eight accent variants
+ * and four sizes. The native input stays interactive and transparent above
+ * the visual box, so keyboard, screen readers and form submission work
+ * natively.
+ */
+
+/* Host */
 :host {
   display: inline-block;
-
-  /*
-   * Component-tier: il testo di errore/asterisco richiesto usa il ruolo
-   * "dark" della palette error come testo — stesso problema già visto per
-   * outline/flat di Button: in dark mode "dark" ridefinito è troppo scuro
-   * per restare leggibile come testo. Override sotto via :host-context.
-   */
-  --checkbox-error-text: var(--color-error-dark);
+  --ohmyui-checkbox-error-text: var(--ohmyui-color-error-dark);
 }
+
+/* Dark theme */
 :host-context(.dark-theme) {
-  --checkbox-error-text: var(--color-error-light);
+  --ohmyui-checkbox-error-text: var(--ohmyui-color-error-light);
 }
 
+/* Base */
 .ohmyui-checkbox {
   display: flex;
   flex-direction: column;
   gap: 0.35em;
 }
 
-/* Control row (input + box + label) */
+/* Control */
 .ohmyui-checkbox__control {
   position: relative;
   display: inline-flex;
@@ -36,11 +44,8 @@
   cursor: pointer;
   font-family: inherit;
 }
-.ohmyui-checkbox--label-left .ohmyui-checkbox__control {
-  flex-direction: row-reverse;
-}
 
-/* Native input: interactive, invisible, layered over the visual box */
+/* Input */
 .ohmyui-checkbox__input {
   position: absolute;
   top: 0;
@@ -49,27 +54,67 @@
   opacity: 0;
   cursor: pointer;
 }
-.ohmyui-checkbox--label-left .ohmyui-checkbox__input {
-  left: auto;
-  right: 0;
-}
 
-/* Visual box */
+/* Box */
 .ohmyui-checkbox__box {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border-radius: var(--border-radius-sm);
-  border: 1.5px solid var(--color-neutral-300);
+  border-radius: var(--ohmyui-radius-sm);
+  border: 1.5px solid var(--ohmyui-color-neutral-300);
   background: transparent;
   color: white;
   transition:
-    background var(--transition-duration-fast),
-    border-color var(--transition-duration-fast);
+    background var(--ohmyui-transition-duration-fast),
+    border-color var(--ohmyui-transition-duration-fast);
 }
 
-/* Sizes (box + native input hit target + label font-size) */
+/* Label */
+.ohmyui-checkbox__label {
+  color: var(--ohmyui-color-text-default);
+  line-height: 1.4;
+  padding-top: 0.05em;
+}
+.ohmyui-checkbox__required {
+  color: var(--ohmyui-checkbox-error-text);
+  margin-left: 0.15em;
+}
+
+/* Description */
+.ohmyui-checkbox__description {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ohmyui-color-text-muted);
+  padding-left: calc(18px + 0.6em);
+}
+
+/* Error */
+.ohmyui-checkbox__error {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ohmyui-checkbox-error-text);
+  padding-left: calc(18px + 0.6em);
+}
+
+/* Label positions */
+.ohmyui-checkbox--label-left .ohmyui-checkbox__control {
+  flex-direction: row-reverse;
+}
+.ohmyui-checkbox--label-left .ohmyui-checkbox__input {
+  left: auto;
+  right: 0;
+}
+.ohmyui-checkbox--label-left .ohmyui-checkbox__description {
+  padding-left: 0;
+  padding-right: calc(18px + 0.6em);
+}
+.ohmyui-checkbox--label-left .ohmyui-checkbox__error {
+  padding-left: 0;
+  padding-right: calc(18px + 0.6em);
+}
+
+/* Sizes */
 .ohmyui-checkbox--xs .ohmyui-checkbox__box,
 .ohmyui-checkbox--xs .ohmyui-checkbox__input {
   width: 14px;
@@ -103,153 +148,111 @@
   font-size: 1rem;
 }
 
-/* Label, description, error, required asterisk */
-.ohmyui-checkbox__label {
-  color: var(--color-text-default);
-  line-height: 1.4;
-  padding-top: 0.05em;
+/* States */
+.ohmyui-checkbox:not(.ohmyui-checkbox--disabled)
+  .ohmyui-checkbox__input:hover
+  ~ .ohmyui-checkbox__box {
+  border-color: var(--ohmyui-color-neutral-400);
 }
-.ohmyui-checkbox__required {
-  color: var(--checkbox-error-text);
-  margin-left: 0.15em;
-}
-.ohmyui-checkbox__description {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-  padding-left: calc(18px + 0.6em);
-}
-.ohmyui-checkbox--label-left .ohmyui-checkbox__description {
-  padding-left: 0;
-  padding-right: calc(18px + 0.6em);
-}
-.ohmyui-checkbox__error {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--checkbox-error-text);
-  padding-left: calc(18px + 0.6em);
-}
-.ohmyui-checkbox--label-left .ohmyui-checkbox__error {
-  padding-left: 0;
-  padding-right: calc(18px + 0.6em);
-}
-
-/* Checked / indeterminate — per variant */
-.ohmyui-checkbox--primary.ohmyui-checkbox--checked .ohmyui-checkbox__box,
-.ohmyui-checkbox--primary.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
-  background: var(--color-primary-dark);
-  border-color: var(--color-primary-dark);
-}
-.ohmyui-checkbox--secondary.ohmyui-checkbox--checked .ohmyui-checkbox__box,
-.ohmyui-checkbox--secondary.ohmyui-checkbox--indeterminate
-  .ohmyui-checkbox__box {
-  background: var(--color-secondary-dark);
-  border-color: var(--color-secondary-dark);
-}
-.ohmyui-checkbox--tertiary.ohmyui-checkbox--checked .ohmyui-checkbox__box,
-.ohmyui-checkbox--tertiary.ohmyui-checkbox--indeterminate
-  .ohmyui-checkbox__box {
-  background: var(--color-tertiary-dark);
-  border-color: var(--color-tertiary-dark);
-}
-.ohmyui-checkbox--success.ohmyui-checkbox--checked .ohmyui-checkbox__box,
-.ohmyui-checkbox--success.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
-  background: var(--color-success-dark);
-  border-color: var(--color-success-dark);
-}
-.ohmyui-checkbox--warning.ohmyui-checkbox--checked .ohmyui-checkbox__box,
-.ohmyui-checkbox--warning.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
-  background: var(--color-warning-dark);
-  border-color: var(--color-warning-dark);
-}
-.ohmyui-checkbox--error.ohmyui-checkbox--checked .ohmyui-checkbox__box,
-.ohmyui-checkbox--error.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
-  background: var(--color-error-dark);
-  border-color: var(--color-error-dark);
-}
-.ohmyui-checkbox--info.ohmyui-checkbox--checked .ohmyui-checkbox__box,
-.ohmyui-checkbox--info.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
-  background: var(--color-info-dark);
-  border-color: var(--color-info-dark);
-}
-.ohmyui-checkbox--neutral.ohmyui-checkbox--checked .ohmyui-checkbox__box,
-.ohmyui-checkbox--neutral.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
-  background: var(--color-neutral-700);
-  border-color: var(--color-neutral-700);
-}
-
-/*
- * Validation error — vince sempre sull'accent della variante, checked o no:
- * regola posizionata dopo i blocchi per-variant per avere la precedenza
- * (stessa specificità, l'ordine nel file decide).
- */
-.ohmyui-checkbox--error .ohmyui-checkbox__box {
-  border-color: var(--color-error-dark);
-}
-.ohmyui-checkbox--error.ohmyui-checkbox--checked .ohmyui-checkbox__box,
-.ohmyui-checkbox--error.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
-  background: var(--color-error-dark);
-  border-color: var(--color-error-dark);
-}
-
-/* Focus ring — per variant, sull'input nativo che riceve davvero il focus */
 .ohmyui-checkbox--primary
   .ohmyui-checkbox__input:focus-visible
   ~ .ohmyui-checkbox__box {
-  outline: 2px solid var(--color-primary-focus);
+  outline: 2px solid var(--ohmyui-color-primary-focus);
   outline-offset: 2px;
 }
 .ohmyui-checkbox--secondary
   .ohmyui-checkbox__input:focus-visible
   ~ .ohmyui-checkbox__box {
-  outline: 2px solid var(--color-secondary-focus);
+  outline: 2px solid var(--ohmyui-color-secondary-focus);
   outline-offset: 2px;
 }
 .ohmyui-checkbox--tertiary
   .ohmyui-checkbox__input:focus-visible
   ~ .ohmyui-checkbox__box {
-  outline: 2px solid var(--color-tertiary-focus);
+  outline: 2px solid var(--ohmyui-color-tertiary-focus);
   outline-offset: 2px;
 }
 .ohmyui-checkbox--success
   .ohmyui-checkbox__input:focus-visible
   ~ .ohmyui-checkbox__box {
-  outline: 2px solid var(--color-success-focus);
+  outline: 2px solid var(--ohmyui-color-success-focus);
   outline-offset: 2px;
 }
 .ohmyui-checkbox--warning
   .ohmyui-checkbox__input:focus-visible
   ~ .ohmyui-checkbox__box {
-  outline: 2px solid var(--color-warning-focus);
+  outline: 2px solid var(--ohmyui-color-warning-focus);
   outline-offset: 2px;
 }
 .ohmyui-checkbox--error
   .ohmyui-checkbox__input:focus-visible
   ~ .ohmyui-checkbox__box {
-  outline: 2px solid var(--color-error-focus);
+  outline: 2px solid var(--ohmyui-color-error-focus);
   outline-offset: 2px;
 }
 .ohmyui-checkbox--info
   .ohmyui-checkbox__input:focus-visible
   ~ .ohmyui-checkbox__box {
-  outline: 2px solid var(--color-info-focus);
+  outline: 2px solid var(--ohmyui-color-info-focus);
   outline-offset: 2px;
 }
 .ohmyui-checkbox--neutral
   .ohmyui-checkbox__input:focus-visible
   ~ .ohmyui-checkbox__box {
-  outline: 2px solid var(--color-neutral-400);
+  outline: 2px solid var(--ohmyui-color-neutral-400);
   outline-offset: 2px;
 }
-
-/* Hover (interactive, not disabled) */
-.ohmyui-checkbox:not(.ohmyui-checkbox--disabled)
-  .ohmyui-checkbox__input:hover
-  ~ .ohmyui-checkbox__box {
-  border-color: var(--color-neutral-400);
+.ohmyui-checkbox--primary.ohmyui-checkbox--checked .ohmyui-checkbox__box,
+.ohmyui-checkbox--primary.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
+  background: var(--ohmyui-color-primary-dark);
+  border-color: var(--ohmyui-color-primary-dark);
 }
-
-/* Disabled */
+.ohmyui-checkbox--secondary.ohmyui-checkbox--checked .ohmyui-checkbox__box,
+.ohmyui-checkbox--secondary.ohmyui-checkbox--indeterminate
+  .ohmyui-checkbox__box {
+  background: var(--ohmyui-color-secondary-dark);
+  border-color: var(--ohmyui-color-secondary-dark);
+}
+.ohmyui-checkbox--tertiary.ohmyui-checkbox--checked .ohmyui-checkbox__box,
+.ohmyui-checkbox--tertiary.ohmyui-checkbox--indeterminate
+  .ohmyui-checkbox__box {
+  background: var(--ohmyui-color-tertiary-dark);
+  border-color: var(--ohmyui-color-tertiary-dark);
+}
+.ohmyui-checkbox--success.ohmyui-checkbox--checked .ohmyui-checkbox__box,
+.ohmyui-checkbox--success.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
+  background: var(--ohmyui-color-success-dark);
+  border-color: var(--ohmyui-color-success-dark);
+}
+.ohmyui-checkbox--warning.ohmyui-checkbox--checked .ohmyui-checkbox__box,
+.ohmyui-checkbox--warning.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
+  background: var(--ohmyui-color-warning-dark);
+  border-color: var(--ohmyui-color-warning-dark);
+}
+.ohmyui-checkbox--error.ohmyui-checkbox--checked .ohmyui-checkbox__box,
+.ohmyui-checkbox--error.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
+  background: var(--ohmyui-color-error-dark);
+  border-color: var(--ohmyui-color-error-dark);
+}
+.ohmyui-checkbox--info.ohmyui-checkbox--checked .ohmyui-checkbox__box,
+.ohmyui-checkbox--info.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
+  background: var(--ohmyui-color-info-dark);
+  border-color: var(--ohmyui-color-info-dark);
+}
+.ohmyui-checkbox--neutral.ohmyui-checkbox--checked .ohmyui-checkbox__box,
+.ohmyui-checkbox--neutral.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
+  background: var(--ohmyui-color-neutral-700);
+  border-color: var(--ohmyui-color-neutral-700);
+}
+/* Keep after the checked rules: the error color wins over the variant. */
+.ohmyui-checkbox--error .ohmyui-checkbox__box {
+  border-color: var(--ohmyui-color-error-dark);
+}
+.ohmyui-checkbox--error.ohmyui-checkbox--checked .ohmyui-checkbox__box,
+.ohmyui-checkbox--error.ohmyui-checkbox--indeterminate .ohmyui-checkbox__box {
+  background: var(--ohmyui-color-error-dark);
+  border-color: var(--ohmyui-color-error-dark);
+}
 .ohmyui-checkbox--disabled .ohmyui-checkbox__control {
   cursor: not-allowed;
   opacity: 0.6;

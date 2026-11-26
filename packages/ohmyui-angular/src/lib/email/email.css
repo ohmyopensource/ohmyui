@@ -1,42 +1,52 @@
 /**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+/**
  * @file email.css
- * @description Styling for EmailComponent including color variants, sizing
- * system, icon layout, and hover/underline interaction states.
- * Consuma i design token generati da packages/tokens.
+ * @description Styles of EmailComponent (`ohmyui-email`): a mailto link
+ * with an optional leading icon, in four color variants and three sizes,
+ * with an optional underline on hover.
  */
 
 /* Host */
 :host {
   display: contents;
-
-  /*
-   * Component-tier: usati solo dal colore di BASE (non hover) di primary/
-   * secondary. Usano il ruolo "dark" della palette (pensato per contrasto
-   * su sfondo chiaro), che in dark mode ridefinito diventa troppo scuro per
-   * restare leggibile come testo — override sotto via :host-context.
-   * L'hover invece usa già il ruolo "text", genuinamente theme-aware
-   * (definito diversamente per light/dark in packages/tokens): non
-   * necessita di alcun fix.
-   */
-  --email-primary-color: var(--color-primary-dark);
-  --email-secondary-color: var(--color-secondary-dark);
+  --ohmyui-email-primary-color: var(--ohmyui-color-primary-dark);
+  --ohmyui-email-secondary-color: var(--ohmyui-color-secondary-dark);
 }
+
+/* Dark theme */
 :host-context(.dark-theme) {
-  --email-primary-color: var(--color-primary-light);
-  --email-secondary-color: var(--color-secondary-light);
+  --ohmyui-email-primary-color: var(--ohmyui-color-primary-light);
+  --ohmyui-email-secondary-color: var(--ohmyui-color-secondary-light);
 }
 
-/* Base Link */
+/* Base */
 .ohmyui-email-link {
   display: inline-flex;
   align-items: center;
   gap: 0.35em;
   font-weight: 500;
   text-decoration: none;
-  transition: color var(--transition-duration-normal) var(--transition-easing-ease-in-out);
+  transition: color var(--ohmyui-transition-duration-normal)
+    var(--ohmyui-transition-easing-ease-in-out);
 }
 
-/* Size Variants */
+/* Icon */
+.ohmyui-email-link__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Sizes */
 .ohmyui-email-link--sm {
   font-size: 0.75rem;
 }
@@ -47,42 +57,33 @@
   font-size: 1rem;
 }
 
-/* Icon */
-.ohmyui-email-link__icon {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-/* Color Variants */
+/* Variants */
 .ohmyui-email-link--primary {
-  color: var(--email-primary-color);
+  color: var(--ohmyui-email-primary-color);
 }
 .ohmyui-email-link--secondary {
-  color: var(--email-secondary-color);
+  color: var(--ohmyui-email-secondary-color);
 }
 .ohmyui-email-link--neutral {
-  color: var(--color-neutral-600);
+  color: var(--ohmyui-color-neutral-600);
 }
 .ohmyui-email-link--ghost {
-  color: var(--color-neutral-500);
+  color: var(--ohmyui-color-neutral-500);
 }
 
-/* Hover */
+/* States */
 .ohmyui-email-link--primary:hover {
-  color: var(--color-primary-text);
+  color: var(--ohmyui-color-primary-text);
 }
 .ohmyui-email-link--secondary:hover {
-  color: var(--color-secondary-text);
+  color: var(--ohmyui-color-secondary-text);
 }
 .ohmyui-email-link--neutral:hover {
-  color: var(--color-neutral-900);
+  color: var(--ohmyui-color-neutral-900);
 }
 .ohmyui-email-link--ghost:hover {
-  color: var(--color-neutral-700);
+  color: var(--ohmyui-color-neutral-700);
 }
-
-/* Underline on hover */
 .ohmyui-email-link--underline:hover .ohmyui-email-link__text {
   text-decoration: underline;
 }

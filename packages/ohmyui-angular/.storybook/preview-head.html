@@ -1,8 +1,24 @@
+<!--
+  Copyright 2026 The OhMyOpenSource! Authors
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+  SPDX-License-Identifier: MPL-2.0
+-->
+
+<!--
+  @file preview-head.html
+  @description Loads the design tokens and the fonts in the Storybook
+  preview, and applies the body and heading fonts.
+-->
+
 <link rel="stylesheet" href="/tokens/variables.css" />
 <link rel="stylesheet" href="/tokens/fonts/fonts.css" />
 <style>
   body {
-    font-family: var(--font-family-body);
+    font-family: var(--ohmyui-font-family-body);
   }
   h1,
   h2,
@@ -10,6 +26,6 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-family-heading);
+    font-family: var(--ohmyui-font-family-heading);
   }
 </style>

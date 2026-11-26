@@ -1,327 +1,301 @@
-/* ─────────────────────────────────────────────
-   OhMyUI — Accordion
-   ───────────────────────────────────────────── */
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
 
+/**
+ * @file accordion.css
+ * @description Styles of AccordionComponent (`ohmyui-accordion`): a list of
+ * collapsible items in four variants (default, bordered, filled, ghost) and
+ * three sizes. In the bordered and filled variants the items form a single
+ * block. The dark colors follow the system color scheme.
+ */
+
+/* Base */
 .ohmyui-accordion {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
+/* Item */
 .ohmyui-accordion__item {
   overflow: hidden;
 }
 
-.ohmyui-accordion__item--disabled {
-  opacity: 0.45;
-  pointer-events: none;
-}
-
-/* ── Trigger ─────────────────────────────────── */
-
+/* Trigger */
 .ohmyui-accordion__trigger {
   display: flex;
   align-items: center;
-  gap: var(--spacing-3);
+  gap: var(--ohmyui-spacing-3);
   width: 100%;
   background: none;
   border: none;
   cursor: pointer;
   text-align: left;
-  font-family: var(--font-family-body);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-neutral-800);
+  font-family: var(--ohmyui-font-family-body);
+  font-weight: var(--ohmyui-font-weight-semibold);
+  color: var(--ohmyui-color-neutral-800);
   transition:
-    background-color var(--transition-duration-fast)
-      var(--transition-easing-ease-out),
-    color var(--transition-duration-fast) var(--transition-easing-ease-out);
+    background-color var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-out),
+    color var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-out);
 }
 
-.ohmyui-accordion__trigger:focus-visible {
-  outline: none;
-  box-shadow: var(--shadow-focus-primary);
-}
-
+/* Title */
 .ohmyui-accordion__title {
   flex: 1;
-  line-height: var(--font-line-height-tight);
+  line-height: var(--ohmyui-font-line-height-tight);
 }
 
-/* ── Chevron ─────────────────────────────────── */
-
+/* Chevron */
 .ohmyui-accordion__chevron {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--color-neutral-500);
-  transition: transform var(--transition-duration-normal)
-    var(--transition-easing-spring);
+  color: var(--ohmyui-color-neutral-500);
+  transition: transform var(--ohmyui-transition-duration-normal)
+    var(--ohmyui-transition-easing-spring);
 }
 
-.ohmyui-accordion__item--open .ohmyui-accordion__chevron {
-  transform: rotate(180deg);
-}
-
-/* ── Panel ───────────────────────────────────── */
-
+/* Panel */
 .ohmyui-accordion__panel {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ohmyui-accordion__panel--open {
-  grid-template-rows: 1fr;
-}
-
+/* Content */
 .ohmyui-accordion__content {
   min-height: 0;
   overflow: hidden;
 }
-
 .ohmyui-accordion__content-inner {
-  font-family: var(--font-family-body);
-  color: var(--color-neutral-600);
-  line-height: var(--font-line-height-normal);
+  font-family: var(--ohmyui-font-family-body);
+  color: var(--ohmyui-color-neutral-600);
+  line-height: var(--ohmyui-font-line-height-normal);
 }
 
-/* ── Sizes ───────────────────────────────────── */
-
+/* Sizes */
 .ohmyui-accordion--sm .ohmyui-accordion__trigger {
-  padding: var(--spacing-2-5) var(--spacing-3);
-  font-size: var(--font-size-sm);
+  padding: var(--ohmyui-spacing-2-5) var(--ohmyui-spacing-3);
+  font-size: var(--ohmyui-font-size-sm);
 }
 .ohmyui-accordion--sm .ohmyui-accordion__content-inner {
-  padding: var(--spacing-1) var(--spacing-3) var(--spacing-2-5);
-  font-size: var(--font-size-sm);
+  padding: var(--ohmyui-spacing-1) var(--ohmyui-spacing-3)
+    var(--ohmyui-spacing-2-5);
+  font-size: var(--ohmyui-font-size-sm);
 }
-
 .ohmyui-accordion--md .ohmyui-accordion__trigger {
-  padding: var(--spacing-3-5) var(--spacing-4);
-  font-size: var(--font-size-md);
+  padding: var(--ohmyui-spacing-3-5) var(--ohmyui-spacing-4);
+  font-size: var(--ohmyui-font-size-md);
 }
 .ohmyui-accordion--md .ohmyui-accordion__content-inner {
-  padding: var(--spacing-1) var(--spacing-4) var(--spacing-3-5);
-  font-size: var(--font-size-md);
+  padding: var(--ohmyui-spacing-1) var(--ohmyui-spacing-4)
+    var(--ohmyui-spacing-3-5);
+  font-size: var(--ohmyui-font-size-md);
 }
-
 .ohmyui-accordion--lg .ohmyui-accordion__trigger {
-  padding: var(--spacing-5) var(--spacing-6);
-  font-size: var(--font-size-lg);
+  padding: var(--ohmyui-spacing-5) var(--ohmyui-spacing-6);
+  font-size: var(--ohmyui-font-size-lg);
 }
 .ohmyui-accordion--lg .ohmyui-accordion__content-inner {
-  padding: var(--spacing-1) var(--spacing-6) var(--spacing-5);
-  font-size: var(--font-size-lg);
+  padding: var(--ohmyui-spacing-1) var(--ohmyui-spacing-6)
+    var(--ohmyui-spacing-5);
+  font-size: var(--ohmyui-font-size-lg);
 }
 
-/* ════════════════════════════════════════════════
-   VARIANT — Default
-   ════════════════════════════════════════════════ */
-
+/* Variants */
 .ohmyui-accordion--default .ohmyui-accordion__item {
-  border-bottom: var(--border-width-xs) solid var(--color-neutral-200);
+  border-bottom: var(--ohmyui-border-width-xs) solid
+    var(--ohmyui-color-neutral-200);
 }
 .ohmyui-accordion--default .ohmyui-accordion__item:first-child {
-  border-top: var(--border-width-xs) solid var(--color-neutral-200);
+  border-top: var(--ohmyui-border-width-xs) solid
+    var(--ohmyui-color-neutral-200);
 }
-.ohmyui-accordion--default .ohmyui-accordion__trigger:hover {
-  background-color: var(--color-neutral-50);
-}
-.ohmyui-accordion--default
-  .ohmyui-accordion__item--open
-  .ohmyui-accordion__trigger {
-  color: var(--color-primary-700);
-}
-
-/* ════════════════════════════════════════════════
-   VARIANT — Bordered
-   Single block with border — items are glued together,
-   only first and last get rounded corners.
-   ════════════════════════════════════════════════ */
-
 .ohmyui-accordion--bordered {
-  border: var(--border-width-xs) solid var(--color-neutral-200);
-  border-radius: var(--radius-lg);
+  border: var(--ohmyui-border-width-xs) solid var(--ohmyui-color-neutral-200);
+  border-radius: var(--ohmyui-radius-md);
   overflow: hidden;
 }
-
 .ohmyui-accordion--bordered .ohmyui-accordion__item {
-  border-bottom: var(--border-width-xs) solid var(--color-neutral-200);
+  border-bottom: var(--ohmyui-border-width-xs) solid
+    var(--ohmyui-color-neutral-200);
 }
-
 .ohmyui-accordion--bordered .ohmyui-accordion__item:last-child {
   border-bottom: none;
 }
-
-.ohmyui-accordion--bordered .ohmyui-accordion__trigger:hover {
-  background-color: var(--color-neutral-50);
-}
-
-.ohmyui-accordion--bordered .ohmyui-accordion__item--open {
-  box-shadow: inset 3px 0 0 0 var(--color-primary-500);
-}
-
-.ohmyui-accordion--bordered
-  .ohmyui-accordion__item--open
-  .ohmyui-accordion__trigger {
-  color: var(--color-primary-700);
-}
-
-.ohmyui-accordion--bordered .ohmyui-accordion__panel--open {
-  border-top: var(--border-width-xs) solid var(--color-neutral-200);
-}
-
-/* ════════════════════════════════════════════════
-   VARIANT — Filled
-   Same as bordered — one block, glued together.
-   ════════════════════════════════════════════════ */
-
 .ohmyui-accordion--filled {
-  border-radius: var(--radius-lg);
+  border-radius: var(--ohmyui-radius-md);
   overflow: hidden;
-  background-color: var(--color-neutral-100);
+  background-color: var(--ohmyui-color-neutral-100);
 }
-
 .ohmyui-accordion--filled .ohmyui-accordion__item {
-  border-bottom: var(--border-width-xs) solid var(--color-neutral-200);
+  border-bottom: var(--ohmyui-border-width-xs) solid
+    var(--ohmyui-color-neutral-200);
 }
-
 .ohmyui-accordion--filled .ohmyui-accordion__item:last-child {
   border-bottom: none;
 }
 
+/* States */
+.ohmyui-accordion--default .ohmyui-accordion__trigger:hover {
+  background-color: var(--ohmyui-color-neutral-50);
+}
+.ohmyui-accordion--bordered .ohmyui-accordion__trigger:hover {
+  background-color: var(--ohmyui-color-neutral-50);
+}
 .ohmyui-accordion--filled .ohmyui-accordion__trigger:hover {
-  background-color: var(--color-neutral-200);
+  background-color: var(--ohmyui-color-neutral-200);
 }
-
-.ohmyui-accordion--filled .ohmyui-accordion__item--open {
-  background-color: var(--color-primary-50);
-}
-
-.ohmyui-accordion--filled
-  .ohmyui-accordion__item--open
-  .ohmyui-accordion__trigger {
-  color: var(--color-primary-700);
-}
-
-.ohmyui-accordion--filled
-  .ohmyui-accordion__item--open
-  .ohmyui-accordion__content-inner {
-  color: var(--color-primary-800);
-}
-
-/* ════════════════════════════════════════════════
-   VARIANT — Ghost
-   ════════════════════════════════════════════════ */
-
 .ohmyui-accordion--ghost .ohmyui-accordion__trigger:hover {
-  color: var(--color-primary-600);
+  color: var(--ohmyui-color-primary-600);
 }
 .ohmyui-accordion--ghost
   .ohmyui-accordion__trigger:hover
   .ohmyui-accordion__chevron {
-  color: var(--color-primary-500);
+  color: var(--ohmyui-color-primary-500);
+}
+.ohmyui-accordion__trigger:focus-visible {
+  outline: none;
+  box-shadow: var(--ohmyui-shadow-focus-primary);
+}
+.ohmyui-accordion__item--open .ohmyui-accordion__chevron {
+  transform: rotate(180deg);
+}
+.ohmyui-accordion__panel--open {
+  grid-template-rows: 1fr;
+}
+.ohmyui-accordion--default
+  .ohmyui-accordion__item--open
+  .ohmyui-accordion__trigger {
+  color: var(--ohmyui-color-primary-700);
+}
+.ohmyui-accordion--bordered .ohmyui-accordion__item--open {
+  box-shadow: inset 3px 0 0 0 var(--ohmyui-color-primary-500);
+}
+.ohmyui-accordion--bordered
+  .ohmyui-accordion__item--open
+  .ohmyui-accordion__trigger {
+  color: var(--ohmyui-color-primary-700);
+}
+.ohmyui-accordion--bordered .ohmyui-accordion__panel--open {
+  border-top: var(--ohmyui-border-width-xs) solid
+    var(--ohmyui-color-neutral-200);
+}
+.ohmyui-accordion--filled .ohmyui-accordion__item--open {
+  background-color: var(--ohmyui-color-primary-50);
+}
+.ohmyui-accordion--filled
+  .ohmyui-accordion__item--open
+  .ohmyui-accordion__trigger {
+  color: var(--ohmyui-color-primary-700);
+}
+.ohmyui-accordion--filled
+  .ohmyui-accordion__item--open
+  .ohmyui-accordion__content-inner {
+  color: var(--ohmyui-color-primary-800);
 }
 .ohmyui-accordion--ghost
   .ohmyui-accordion__item--open
   .ohmyui-accordion__trigger {
-  color: var(--color-primary-600);
+  color: var(--ohmyui-color-primary-600);
 }
 .ohmyui-accordion--ghost
   .ohmyui-accordion__item--open
   .ohmyui-accordion__chevron {
-  color: var(--color-primary-500);
+  color: var(--ohmyui-color-primary-500);
+}
+.ohmyui-accordion__item--disabled {
+  opacity: 0.45;
+  pointer-events: none;
 }
 
-/* ════════════════════════════════════════════════
-   DARK MODE
-   ════════════════════════════════════════════════ */
-
+/* System color scheme */
 @media (prefers-color-scheme: dark) {
   .ohmyui-accordion__trigger {
-    color: var(--color-neutral-100);
+    color: var(--ohmyui-color-neutral-100);
   }
   .ohmyui-accordion__chevron {
-    color: var(--color-neutral-400);
+    color: var(--ohmyui-color-neutral-400);
   }
   .ohmyui-accordion__content-inner {
-    color: var(--color-neutral-400);
+    color: var(--ohmyui-color-neutral-400);
   }
-
-  /* Default */
   .ohmyui-accordion--default .ohmyui-accordion__item {
-    border-color: var(--color-neutral-700);
+    border-color: var(--ohmyui-color-neutral-700);
   }
   .ohmyui-accordion--default .ohmyui-accordion__trigger:hover {
-    background-color: var(--color-neutral-800);
+    background-color: var(--ohmyui-color-neutral-800);
   }
   .ohmyui-accordion--default
     .ohmyui-accordion__item--open
     .ohmyui-accordion__trigger {
-    color: var(--color-primary-300);
+    color: var(--ohmyui-color-primary-300);
   }
-
-  /* Bordered */
   .ohmyui-accordion--bordered {
-    border-color: var(--color-neutral-700);
-    background-color: var(--color-neutral-800);
+    border-color: var(--ohmyui-color-neutral-700);
+    background-color: var(--ohmyui-color-neutral-800);
   }
   .ohmyui-accordion--bordered .ohmyui-accordion__item {
-    border-color: var(--color-neutral-700);
+    border-color: var(--ohmyui-color-neutral-700);
   }
   .ohmyui-accordion--bordered .ohmyui-accordion__trigger:hover {
-    background-color: var(--color-neutral-700);
+    background-color: var(--ohmyui-color-neutral-700);
   }
   .ohmyui-accordion--bordered .ohmyui-accordion__item--open {
-    box-shadow: inset 3px 0 0 0 var(--color-primary-400);
+    box-shadow: inset 3px 0 0 0 var(--ohmyui-color-primary-400);
   }
   .ohmyui-accordion--bordered
     .ohmyui-accordion__item--open
     .ohmyui-accordion__trigger {
-    color: var(--color-primary-300);
+    color: var(--ohmyui-color-primary-300);
   }
   .ohmyui-accordion--bordered .ohmyui-accordion__panel--open {
-    border-color: var(--color-neutral-700);
+    border-color: var(--ohmyui-color-neutral-700);
   }
-
-  /* Filled */
   .ohmyui-accordion--filled {
-    background-color: var(--color-neutral-700);
+    background-color: var(--ohmyui-color-neutral-700);
   }
   .ohmyui-accordion--filled .ohmyui-accordion__item {
-    border-color: var(--color-neutral-600);
+    border-color: var(--ohmyui-color-neutral-600);
   }
   .ohmyui-accordion--filled .ohmyui-accordion__trigger:hover {
-    background-color: var(--color-neutral-600);
+    background-color: var(--ohmyui-color-neutral-600);
   }
   .ohmyui-accordion--filled .ohmyui-accordion__item--open {
-    background-color: var(--color-primary-900);
+    background-color: var(--ohmyui-color-primary-900);
   }
   .ohmyui-accordion--filled
     .ohmyui-accordion__item--open
     .ohmyui-accordion__trigger {
-    color: var(--color-primary-200);
-    background-color: var(--color-primary-900);
+    color: var(--ohmyui-color-primary-200);
+    background-color: var(--ohmyui-color-primary-900);
   }
   .ohmyui-accordion--filled
     .ohmyui-accordion__item--open
     .ohmyui-accordion__content-inner {
-    color: var(--color-primary-300);
+    color: var(--ohmyui-color-primary-300);
   }
-
-  /* Ghost */
   .ohmyui-accordion--ghost .ohmyui-accordion__trigger:hover {
-    color: var(--color-primary-300);
+    color: var(--ohmyui-color-primary-300);
   }
   .ohmyui-accordion--ghost
     .ohmyui-accordion__item--open
     .ohmyui-accordion__trigger {
-    color: var(--color-primary-300);
+    color: var(--ohmyui-color-primary-300);
   }
   .ohmyui-accordion--ghost
     .ohmyui-accordion__item--open
     .ohmyui-accordion__chevron {
-    color: var(--color-primary-400);
+    color: var(--ohmyui-color-primary-400);
   }
 }

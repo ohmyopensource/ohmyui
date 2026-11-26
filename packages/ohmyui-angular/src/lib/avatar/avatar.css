@@ -1,11 +1,40 @@
-/* ─────────────────────────────────────────────
-   OhMyUI — Avatar
-   ───────────────────────────────────────────── */
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
 
-/* ── Outer wrapper ───────────────────────────── */
-/* Handles relative positioning for the status dot.
-   overflow:hidden lives only on the inner avatar. */
+/**
+ * @file avatar.css
+ * @description Styles of AvatarComponent (`ohmyui-avatar`): an image,
+ * initials or an icon in a circle or a square, in five sizes and six colors,
+ * with an optional ring and an online, offline or busy status dot. The dot
+ * sits on the outer wrapper, so the overflow of the avatar never clips it.
+ * The dark colors follow the system color scheme.
+ */
 
+/* Base */
+.ohmyui-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--ohmyui-font-family-body);
+  font-weight: var(--ohmyui-font-weight-semibold);
+  transition:
+    box-shadow var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-out),
+    border-color var(--ohmyui-transition-duration-fast)
+      var(--ohmyui-transition-easing-ease-out);
+}
+
+/* Wrapper */
 .ohmyui-avatar__wrapper {
   position: relative;
   display: inline-flex;
@@ -13,6 +42,38 @@
   vertical-align: middle;
 }
 
+/* Image */
+.ohmyui-avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Initials */
+.ohmyui-avatar__initials {
+  line-height: 1;
+  user-select: none;
+}
+
+/* Icon */
+.ohmyui-avatar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Status */
+.ohmyui-avatar__status {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  border-radius: var(--ohmyui-radius-full);
+  border: 2px solid var(--ohmyui-color-neutral-0);
+  z-index: 1;
+}
+
+/* Sizes */
 .ohmyui-avatar__wrapper--xs {
   width: 24px;
   height: 24px;
@@ -33,126 +94,21 @@
   width: 64px;
   height: 64px;
 }
-
-/* ── Inner avatar ────────────────────────────── */
-
-.ohmyui-avatar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: var(--font-family-body);
-  font-weight: var(--font-weight-semibold);
-  transition:
-    box-shadow var(--transition-duration-fast) var(--transition-easing-ease-out),
-    border-color var(--transition-duration-fast)
-      var(--transition-easing-ease-out);
-}
-
-/* ── Shapes ──────────────────────────────────── */
-
-.ohmyui-avatar--circle {
-  border-radius: var(--radius-full);
-}
-.ohmyui-avatar--square {
-  border-radius: var(--radius-md);
-}
-
-/* ── Sizes ───────────────────────────────────── */
-
 .ohmyui-avatar--xs {
-  font-size: var(--font-size-xs);
+  font-size: var(--ohmyui-font-size-xs);
 }
 .ohmyui-avatar--sm {
-  font-size: var(--font-size-xs);
+  font-size: var(--ohmyui-font-size-xs);
 }
 .ohmyui-avatar--md {
-  font-size: var(--font-size-sm);
+  font-size: var(--ohmyui-font-size-sm);
 }
 .ohmyui-avatar--lg {
-  font-size: var(--font-size-md);
+  font-size: var(--ohmyui-font-size-md);
 }
 .ohmyui-avatar--xl {
-  font-size: var(--font-size-lg);
+  font-size: var(--ohmyui-font-size-lg);
 }
-
-/* ── Colors ──────────────────────────────────── */
-
-.ohmyui-avatar--color-primary {
-  background-color: var(--color-primary-200);
-  color: var(--color-primary-800);
-}
-.ohmyui-avatar--color-teal {
-  background-color: var(--color-teal-200);
-  color: var(--color-teal-800);
-}
-.ohmyui-avatar--color-success {
-  background-color: var(--color-success-200);
-  color: var(--color-success-800);
-}
-.ohmyui-avatar--color-warning {
-  background-color: var(--color-warning-200);
-  color: var(--color-warning-800);
-}
-.ohmyui-avatar--color-error {
-  background-color: var(--color-error-200);
-  color: var(--color-error-800);
-}
-.ohmyui-avatar--color-neutral {
-  background-color: var(--color-neutral-200);
-  color: var(--color-neutral-700);
-}
-
-/* ── Ring (outer border) ─────────────────────── */
-
-.ohmyui-avatar--ring-primary {
-  box-shadow: 0 0 0 3px var(--color-primary-500);
-}
-.ohmyui-avatar--ring-teal {
-  box-shadow: 0 0 0 3px var(--color-teal-500);
-}
-.ohmyui-avatar--ring-success {
-  box-shadow: 0 0 0 3px var(--color-success-500);
-}
-.ohmyui-avatar--ring-warning {
-  box-shadow: 0 0 0 3px var(--color-warning-500);
-}
-.ohmyui-avatar--ring-error {
-  box-shadow: 0 0 0 3px var(--color-error-500);
-}
-.ohmyui-avatar--ring-neutral {
-  box-shadow: 0 0 0 3px var(--color-neutral-400);
-}
-.ohmyui-avatar--ring-white {
-  box-shadow: 0 0 0 3px var(--color-neutral-0);
-}
-
-/* ── Image ───────────────────────────────────── */
-
-.ohmyui-avatar__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* ── Initials ────────────────────────────────── */
-
-.ohmyui-avatar__initials {
-  line-height: 1;
-  user-select: none;
-}
-
-/* ── Icon (lucide) ───────────────────────────── */
-
-.ohmyui-avatar__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .ohmyui-avatar--xs .ohmyui-avatar__icon svg {
   width: 12px;
   height: 12px;
@@ -173,19 +129,6 @@
   width: 32px;
   height: 32px;
 }
-
-/* ── Status dot ──────────────────────────────── */
-/* Lives on the wrapper — never clipped by overflow:hidden */
-
-.ohmyui-avatar__status {
-  position: absolute;
-  bottom: 1px;
-  right: 1px;
-  border-radius: var(--radius-full);
-  border: 2px solid var(--color-neutral-0);
-  z-index: 1;
-}
-
 .ohmyui-avatar__wrapper--xs .ohmyui-avatar__status {
   width: 7px;
   height: 7px;
@@ -207,47 +150,101 @@
   height: 15px;
 }
 
+/* Shapes */
+.ohmyui-avatar--circle {
+  border-radius: var(--ohmyui-radius-full);
+}
+.ohmyui-avatar--square {
+  border-radius: var(--ohmyui-radius-md);
+}
+
+/* Colors */
+.ohmyui-avatar--color-primary {
+  background-color: var(--ohmyui-color-primary-200);
+  color: var(--ohmyui-color-primary-800);
+}
+.ohmyui-avatar--color-teal {
+  background-color: var(--ohmyui-color-teal-200);
+  color: var(--ohmyui-color-teal-800);
+}
+.ohmyui-avatar--color-success {
+  background-color: var(--ohmyui-color-success-200);
+  color: var(--ohmyui-color-success-800);
+}
+.ohmyui-avatar--color-warning {
+  background-color: var(--ohmyui-color-warning-200);
+  color: var(--ohmyui-color-warning-800);
+}
+.ohmyui-avatar--color-error {
+  background-color: var(--ohmyui-color-error-200);
+  color: var(--ohmyui-color-error-800);
+}
+.ohmyui-avatar--color-neutral {
+  background-color: var(--ohmyui-color-neutral-200);
+  color: var(--ohmyui-color-neutral-700);
+}
+
+/* Rings */
+.ohmyui-avatar--ring-primary {
+  box-shadow: 0 0 0 3px var(--ohmyui-color-primary-500);
+}
+.ohmyui-avatar--ring-teal {
+  box-shadow: 0 0 0 3px var(--ohmyui-color-teal-500);
+}
+.ohmyui-avatar--ring-success {
+  box-shadow: 0 0 0 3px var(--ohmyui-color-success-500);
+}
+.ohmyui-avatar--ring-warning {
+  box-shadow: 0 0 0 3px var(--ohmyui-color-warning-500);
+}
+.ohmyui-avatar--ring-error {
+  box-shadow: 0 0 0 3px var(--ohmyui-color-error-500);
+}
+.ohmyui-avatar--ring-neutral {
+  box-shadow: 0 0 0 3px var(--ohmyui-color-neutral-400);
+}
+.ohmyui-avatar--ring-white {
+  box-shadow: 0 0 0 3px var(--ohmyui-color-neutral-0);
+}
+
+/* Statuses */
 .ohmyui-avatar__status--online {
-  background-color: var(--color-success-500);
+  background-color: var(--ohmyui-color-success-500);
 }
 .ohmyui-avatar__status--offline {
-  background-color: var(--color-neutral-400);
+  background-color: var(--ohmyui-color-neutral-400);
 }
 .ohmyui-avatar__status--busy {
-  background-color: var(--color-error-500);
+  background-color: var(--ohmyui-color-error-500);
 }
 
-/* ════════════════════════════════════════════════
-   DARK MODE
-   ════════════════════════════════════════════════ */
-
+/* System color scheme */
 @media (prefers-color-scheme: dark) {
   .ohmyui-avatar--color-primary {
-    background-color: var(--color-primary-800);
-    color: var(--color-primary-200);
+    background-color: var(--ohmyui-color-primary-800);
+    color: var(--ohmyui-color-primary-200);
   }
   .ohmyui-avatar--color-teal {
-    background-color: var(--color-teal-800);
-    color: var(--color-teal-200);
+    background-color: var(--ohmyui-color-teal-800);
+    color: var(--ohmyui-color-teal-200);
   }
   .ohmyui-avatar--color-success {
-    background-color: var(--color-success-800);
-    color: var(--color-success-200);
+    background-color: var(--ohmyui-color-success-800);
+    color: var(--ohmyui-color-success-200);
   }
   .ohmyui-avatar--color-warning {
-    background-color: var(--color-warning-800);
-    color: var(--color-warning-200);
+    background-color: var(--ohmyui-color-warning-800);
+    color: var(--ohmyui-color-warning-200);
   }
   .ohmyui-avatar--color-error {
-    background-color: var(--color-error-800);
-    color: var(--color-error-200);
+    background-color: var(--ohmyui-color-error-800);
+    color: var(--ohmyui-color-error-200);
   }
   .ohmyui-avatar--color-neutral {
-    background-color: var(--color-neutral-700);
-    color: var(--color-neutral-200);
+    background-color: var(--ohmyui-color-neutral-700);
+    color: var(--ohmyui-color-neutral-200);
   }
-
   .ohmyui-avatar__status {
-    border-color: var(--color-neutral-800);
+    border-color: var(--ohmyui-color-neutral-800);
   }
 }
