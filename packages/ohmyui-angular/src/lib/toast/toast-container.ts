@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file toast-container.ts
+ * @description ToastContainerComponent (`ohmyui-toast-container`): the stacks
+ * of the toasts of ToastService, one for each screen position in use.
+ */
+
 import { Component, inject } from '@angular/core';
 import { ToastService, ToastPosition, Toast } from './toast.service';
 import { ToastItemComponent } from './toast-item';

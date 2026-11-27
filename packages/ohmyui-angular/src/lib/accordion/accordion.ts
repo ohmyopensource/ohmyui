@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file accordion.ts
+ * @description AccordionComponent (`ohmyui-accordion`): a list of collapsible
+ * items with an optional badge, in four variants and three sizes, with one or
+ * several items open at a time.
+ */
+
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BadgeComponent, BadgeVariant } from '../badge/badge';
 import { LucideChevronDown } from '@lucide/angular';

@@ -8,6 +8,12 @@
   SPDX-License-Identifier: MPL-2.0
 -->
 
+<!--
+  @file embed.html
+  @description Template of EmbedComponent: the loading overlay, the error
+  message with a link to the source and the iframe.
+-->
+
 <div [class]="wrapperClass" [style.height.px]="height || null">
   <!-- Loading overlay -->
   @if (state === 'loading') {

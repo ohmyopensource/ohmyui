@@ -8,6 +8,12 @@
   SPDX-License-Identifier: MPL-2.0
 -->
 
+<!--
+  @file accordion.html
+  @description Template of AccordionComponent: a header button and a collapsible
+  panel for each item.
+-->
+
 <div [class]="getWrapperClass()">
   @for (item of items; track trackById($index, item)) {
   <div [class]="getItemClass(item)">

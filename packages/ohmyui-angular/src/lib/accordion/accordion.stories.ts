@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file accordion.stories.ts
+ * @description Storybook stories of AccordionComponent: variants, sizes, single
+ * and multi mode, disabled items, badges and combined examples.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { AccordionComponent, AccordionItem } from './accordion';
 

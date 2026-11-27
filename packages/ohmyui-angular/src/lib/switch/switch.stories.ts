@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file switch.stories.ts
+ * @description Storybook stories of SwitchComponent: off and on, disabled,
+ * sizes, statuses, a label that changes with the state, a hint and a switch
+ * without a label.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { SwitchComponent } from './switch';
 

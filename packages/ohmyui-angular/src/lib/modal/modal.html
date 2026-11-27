@@ -8,6 +8,12 @@
   SPDX-License-Identifier: MPL-2.0
 -->
 
+<!--
+  @file modal.html
+  @description Template of ModalComponent: the overlay, the panel with header,
+  body and footer, projected or with confirm and cancel buttons.
+-->
+
 @if (isVisible) {
 <div [class]="overlayClass" (click)="onOverlayClick()" aria-hidden="true"></div>
 

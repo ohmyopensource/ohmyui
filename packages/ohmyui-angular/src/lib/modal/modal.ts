@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file modal.ts
+ * @description ModalComponent (`ohmyui-modal`): a dialog over an overlay, in
+ * five sizes and five positions, with a title, a close button, closing on
+ * overlay click and Escape, and a projected or predefined footer.
+ */
+
 import {
   Component,
   Input,

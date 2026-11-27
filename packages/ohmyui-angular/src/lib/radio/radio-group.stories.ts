@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file radio-group.stories.ts
+ * @description Storybook stories of RadioGroupComponent: orientations, sizes, a
+ * preselected value, the disabled, error and success states, and option hints.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { RadioGroupComponent } from './radio-group';
 import type { RadioOption } from './radio-group';

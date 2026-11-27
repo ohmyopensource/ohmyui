@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file image.stories.ts
+ * @description Storybook stories of ImageComponent: the loading, loaded and
+ * error states, variants, shapes, ratios, fit modes, the caption and the long
+ * description.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { ImageComponent } from './image';
 

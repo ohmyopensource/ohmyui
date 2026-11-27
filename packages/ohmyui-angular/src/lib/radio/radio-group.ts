@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file radio-group.ts
+ * @description RadioGroupComponent (`ohmyui-radio-group`): a group of radio
+ * options with a label, a hint for the group and for each option, in three
+ * sizes, vertical or horizontal, with error and success states.
+ */
+
 import {
   Component,
   Input,

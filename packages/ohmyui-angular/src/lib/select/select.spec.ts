@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file select.spec.ts
+ * @description Unit tests of SelectComponent: the defaults, opening and
+ * closing, single and multiple selection, disabled options, clearing, the
+ * displayed label, search and closing on Escape.
+ */
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { SelectComponent } from './select';

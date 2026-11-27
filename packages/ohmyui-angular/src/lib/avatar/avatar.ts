@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file avatar.ts
+ * @description AvatarComponent (`ohmyui-avatar`): an image, initials or an icon
+ * in a circle or a square, in five sizes and six colors, with an optional ring
+ * and status dot.
+ */
+
 import { Component, Input, OnChanges } from '@angular/core';
 import { LucideUser } from '@lucide/angular';
 

@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file toast.service.ts
+ * @description ToastService: shows and dismisses success, error, warning, info
+ * and neutral toasts, with a title, a message, a duration and a screen
+ * position, and sets the default duration and position.
+ */
+
 import { Injectable, signal } from '@angular/core';
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'neutral';

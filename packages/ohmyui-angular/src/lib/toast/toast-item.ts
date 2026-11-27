@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file toast-item.ts
+ * @description ToastItemComponent (`ohmyui-toast-item`): a toast with an icon,
+ * a title, a message, a close button and a progress bar, which closes when its
+ * duration runs out.
+ */
+
 import {
   Component,
   Input,

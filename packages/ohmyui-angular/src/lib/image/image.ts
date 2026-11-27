@@ -8,6 +8,14 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file image.ts
+ * @description ImageComponent (`ohmyui-image`): an image in a figure with a
+ * fixed aspect ratio, a loading overlay, a placeholder when it cannot be
+ * loaded, an optional caption and a long description for screen readers, in
+ * five variants and three shapes.
+ */
+
 import { Component, Input, OnChanges } from '@angular/core';
 import { LucideLoader, LucideImageOff } from '@lucide/angular';
 

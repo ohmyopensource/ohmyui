@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file toast.stories.ts
+ * @description Storybook stories of the toasts: types, content, a persistent
+ * toast and a toast without a close button.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { ToastItemComponent } from './toast-item';
 import type { Toast } from './toast.service';

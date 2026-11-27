@@ -8,6 +8,12 @@
   SPDX-License-Identifier: MPL-2.0
 -->
 
+<!--
+  @file image.html
+  @description Template of ImageComponent: the hidden long description, the
+  image, the loading overlay, the error placeholder and the caption.
+-->
+
 <figure [class]="wrapperClass" [attr.role]="caption ? 'figure' : null">
   <!-- Hidden long description for screen readers -->
   @if (description) {

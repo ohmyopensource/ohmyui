@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file embed.ts
+ * @description EmbedComponent (`ohmyui-embed`): an iframe in a fixed aspect
+ * ratio or height, with a loading overlay, an error message and sandbox and
+ * permission settings, in five variants and two shapes.
+ */
+
 import { Component, Input, OnChanges, inject } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LucideLoader, LucideFrame } from '@lucide/angular';

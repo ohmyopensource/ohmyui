@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file switch.ts
+ * @description SwitchComponent (`ohmyui-switch`): an on/off toggle with a
+ * label, which can change with the state, and an optional hint, in three sizes,
+ * with error and success states.
+ */
+
 import {
   Component,
   Input,

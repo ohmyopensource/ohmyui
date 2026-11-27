@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file embed.stories.ts
+ * @description Storybook stories of EmbedComponent: video, map and code
+ * examples, the error states, variants, sandbox levels and a custom height.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { EmbedComponent } from './embed';
 

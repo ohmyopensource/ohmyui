@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file avatar.stories.ts
+ * @description Storybook stories of AvatarComponent: image, initials and icon,
+ * the fallback when the image fails, sizes, shapes, colors, rings and statuses.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { AvatarComponent } from './avatar';
 

@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file image.spec.ts
+ * @description Unit tests of ImageComponent: the defaults, the loading, loaded
+ * and error states, the CSS classes and the id of the long description.
+ */
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ImageComponent } from './image';

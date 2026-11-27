@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file select.stories.ts
+ * @description Storybook stories of SelectComponent: variants, sizes, statuses,
+ * the disabled and loading states, a preselected value, clear button, search,
+ * multiple selection, option groups and combined examples.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { SelectComponent } from './select';
 import type { SelectOption } from './select';

@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file modal.spec.ts
+ * @description Unit tests of ModalComponent: the defaults, opening, the panel
+ * classes, the exit animation and the closing rules.
+ */
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { ModalComponent } from './modal';

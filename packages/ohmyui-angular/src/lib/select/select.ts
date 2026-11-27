@@ -8,6 +8,14 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file select.ts
+ * @description SelectComponent (`ohmyui-select`): a custom dropdown with a
+ * label, a hint, search, option groups, a clear button and single or multiple
+ * selection, in three variants and five sizes, with loading, error and success
+ * states.
+ */
+
 import {
   Component,
   Input,

@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file embed.spec.ts
+ * @description Unit tests of EmbedComponent: the defaults, the loading, loaded
+ * and error states, the sandbox and allow attributes and the CSS classes.
+ */
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { EmbedComponent } from './embed';

@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file modal.stories.ts
+ * @description Storybook stories of ModalComponent: predefined dialogs, custom
+ * actions, positions, a fullscreen and a non-closable dialog, and a trigger
+ * button.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { ModalComponent } from './modal';
 import { ButtonComponent } from '../button/button';

@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file accordion.spec.ts
+ * @description Unit tests of AccordionComponent: the defaults, opening and
+ * closing items in single and multi mode, disabled items, the items open by
+ * default and the CSS classes.
+ */
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { AccordionComponent, AccordionItem } from './accordion';
