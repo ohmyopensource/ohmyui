@@ -11,12 +11,17 @@
 /**
  * @file preview.ts
  * @description Storybook preview parameters of the Angular library: the control
- * matchers and the order of the sidebar sections, Components before Drafts.
+ * matchers, the order of the sidebar sections, Components before Drafts, and
+ * the language selector of the toolbar.
  */
 
 import type { Preview } from '@storybook/angular';
+import { localeDecorators, localeGlobalTypes } from './locale';
 
 const preview: Preview = {
+  globalTypes: localeGlobalTypes,
+  initialGlobals: { locale: 'en' },
+  decorators: localeDecorators,
   parameters: {
     controls: {
       matchers: {
