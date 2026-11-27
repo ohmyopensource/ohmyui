@@ -75,19 +75,5 @@
       "hover-bg": { "value": "rgba(122, 200, 240, 0.1)", "type": "color" },
       "focus": { "value": "rgba(122, 200, 240, 0.3)", "type": "color" }
     }
-  },
-  "shadow": {
-    "focus-primary": {
-      "value": "0 0 0 3px {color.primary.focus}",
-      "type": "shadow"
-    },
-    "focus-error": {
-      "value": "0 0 0 3px {color.error.focus}",
-      "type": "shadow"
-    },
-    "focus-success": {
-      "value": "0 0 0 3px {color.success.focus}",
-      "type": "shadow"
-    }
   }
 }

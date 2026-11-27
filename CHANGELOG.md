@@ -53,6 +53,11 @@ number.
   focus colors of the semantic tokens (`--ohmyui-color-primary-focus`,
   `--ohmyui-color-error-focus` and `--ohmyui-color-success-focus`), also in the
   dark theme. Before, they kept the colors of an earlier palette.
+- Dark theme: the semantic tokens that point to the palette, such as
+  `--ohmyui-color-text-default` and `--ohmyui-color-border-default`, take the
+  dark value also when the `dark-theme` class is on an element other than the
+  root, such as `<body>`. Before, they kept the light value there: for example,
+  the labels of Checkbox stayed dark on the dark background.
 
 ## [0.1.0] - 2026-11-24
 
