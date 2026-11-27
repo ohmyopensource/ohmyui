@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LucideSearch, LucideMail, LucideEuro } from '@lucide/angular';
 import { InputComponent } from './input';
@@ -8,7 +18,17 @@ const meta: Meta<InputComponent> = {
   argTypes: {
     type: {
       control: 'select',
-      options: ['text', 'email', 'password', 'tel', 'number', 'url', 'search', 'textarea', 'select'],
+      options: [
+        'text',
+        'email',
+        'password',
+        'tel',
+        'number',
+        'url',
+        'search',
+        'textarea',
+        'select',
+      ],
     },
     variant: {
       control: 'select',
@@ -40,19 +60,39 @@ export const Text: Story = {
   args: { label: 'Nome', type: 'text', placeholder: 'Il tuo nome' },
 };
 export const Email: Story = {
-  args: { label: 'Email', type: 'email', placeholder: 'nome@esempio.it', iconLeft: LucideMail.icon },
+  args: {
+    label: 'Email',
+    type: 'email',
+    placeholder: 'nome@esempio.it',
+    iconLeft: LucideMail.icon,
+  },
 };
 export const Password: Story = {
-  args: { label: 'Password', type: 'password', placeholder: 'Almeno 8 caratteri' },
+  args: {
+    label: 'Password',
+    type: 'password',
+    placeholder: 'Almeno 8 caratteri',
+  },
 };
 export const Number: Story = {
   args: { label: 'Quantità', type: 'number', placeholder: '0' },
 };
 export const Search: Story = {
-  args: { label: 'Cerca', type: 'search', placeholder: 'Cerca nel sito...', iconLeft: LucideSearch.icon, clearable: true },
+  args: {
+    label: 'Cerca',
+    type: 'search',
+    placeholder: 'Cerca nel sito...',
+    iconLeft: LucideSearch.icon,
+    clearable: true,
+  },
 };
 export const Textarea: Story = {
-  args: { label: 'Messaggio', type: 'textarea', placeholder: 'Scrivi qui...', rows: 4 },
+  args: {
+    label: 'Messaggio',
+    type: 'textarea',
+    placeholder: 'Scrivi qui...',
+    rows: 4,
+  },
 };
 export const Select: Story = {
   args: {
@@ -84,7 +124,11 @@ export const SizeLg: Story = {
 /* ── Validation ──────────────────────────────── */
 export const WithError: Story = {
   name: 'Validation / Error',
-  args: { label: 'Email', type: 'email', errorMessage: 'Inserisci un indirizzo email valido.' },
+  args: {
+    label: 'Email',
+    type: 'email',
+    errorMessage: 'Inserisci un indirizzo email valido.',
+  },
 };
 export const WithSuccess: Story = {
   name: 'Validation / Success',
@@ -92,7 +136,11 @@ export const WithSuccess: Story = {
 };
 export const WithHint: Story = {
   name: 'Validation / Hint',
-  args: { label: 'Password', type: 'password', hint: 'Almeno 8 caratteri, una maiuscola e un numero.' },
+  args: {
+    label: 'Password',
+    type: 'password',
+    hint: 'Almeno 8 caratteri, una maiuscola e un numero.',
+  },
 };
 
 /* ── Prefix / Suffix / Icons ─────────────────── */
@@ -104,21 +152,42 @@ export const WithSuffix: Story = {
 };
 export const WithIconLeft: Story = {
   name: 'With icon (left)',
-  args: { label: 'Prezzo', type: 'number', iconLeft: LucideEuro.icon, placeholder: '0.00' },
+  args: {
+    label: 'Prezzo',
+    type: 'number',
+    iconLeft: LucideEuro.icon,
+    placeholder: '0.00',
+  },
 };
 export const Clearable: Story = {
-  args: { label: 'Ricerca', clearable: true, placeholder: 'Scrivi per vedere il pulsante Svuota' },
+  args: {
+    label: 'Ricerca',
+    clearable: true,
+    placeholder: 'Scrivi per vedere il pulsante Svuota',
+  },
 };
 
 /* ── States ──────────────────────────────────── */
 export const Disabled: Story = {
-  args: { label: 'Campo disabilitato', disabled: true, placeholder: 'Non modificabile' },
+  args: {
+    label: 'Campo disabilitato',
+    disabled: true,
+    placeholder: 'Non modificabile',
+  },
 };
 export const Readonly: Story = {
-  args: { label: 'Campo in sola lettura', readonly: true, placeholder: 'Valore fisso' },
+  args: {
+    label: 'Campo in sola lettura',
+    readonly: true,
+    placeholder: 'Valore fisso',
+  },
 };
 export const Required: Story = {
-  args: { label: 'Campo obbligatorio', required: true, placeholder: 'Compila questo campo' },
+  args: {
+    label: 'Campo obbligatorio',
+    required: true,
+    placeholder: 'Compila questo campo',
+  },
 };
 
 /* ── Accessibility ────────────────────────────── */
@@ -129,14 +198,18 @@ export const AccessibleMinZero: Story = {
     docs: {
       description: {
         story:
-          "Bug corretto in fase di porting: l'originale calcolava l'attributo `min` con `min || null`, e in JavaScript `0 || null` vale `null` — un `min={0}` (caso comunissimo: quantità minima zero) spariva silenziosamente. Ora il controllo è `min !== '' ? min : null`, che distingue correttamente \"non impostato\" da \"impostato a zero\".",
+          'Bug corretto in fase di porting: l\'originale calcolava l\'attributo `min` con `min || null`, e in JavaScript `0 || null` vale `null` — un `min={0}` (caso comunissimo: quantità minima zero) spariva silenziosamente. Ora il controllo è `min !== \'\' ? min : null`, che distingue correttamente "non impostato" da "impostato a zero".',
       },
     },
   },
 };
 export const AccessibleErrorAnnounced: Story = {
   name: 'Accessibility / Error is announced and linked',
-  args: { label: 'Email', type: 'email', errorMessage: 'Formato email non valido.' },
+  args: {
+    label: 'Email',
+    type: 'email',
+    errorMessage: 'Formato email non valido.',
+  },
   parameters: {
     docs: {
       description: {
@@ -148,7 +221,11 @@ export const AccessibleErrorAnnounced: Story = {
 };
 export const AccessiblePasswordToggle: Story = {
   name: 'Accessibility / Password visibility has a real label',
-  args: { label: 'Password', type: 'password', placeholder: 'Digita la password per testare il toggle' },
+  args: {
+    label: 'Password',
+    type: 'password',
+    placeholder: 'Digita la password per testare il toggle',
+  },
   parameters: {
     docs: {
       description: {

@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TextComponent } from './text';
@@ -152,7 +162,9 @@ describe('TextComponent', () => {
   });
 
   it('should NOT include extra class when extraClass is empty', () => {
-    expect(component.hostClasses.split(' ').filter((c) => c === '')).toHaveLength(0);
+    expect(
+      component.hostClasses.split(' ').filter((c) => c === ''),
+    ).toHaveLength(0);
   });
   it('should append extraClass to hostClasses', () => {
     fixture.componentRef.setInput('extraClass', 'my-custom-class');

@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { PaginationComponent } from './pagination';
 
@@ -7,7 +17,15 @@ const meta: Meta<PaginationComponent> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'success', 'warning', 'error', 'info'],
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'success',
+        'warning',
+        'error',
+        'info',
+      ],
     },
     emphasis: { control: 'select', options: ['filled', 'soft', 'minimal'] },
     size: { control: 'select', options: ['xs', 'sm', 'md', 'lg'] },
@@ -71,7 +89,12 @@ export const SizeLg: Story = {
 /* ── Ellipsis behavior ───────────────────────── */
 export const ManyPages: Story = {
   name: 'Many pages (ellipsis in the middle)',
-  args: { totalItems: 5000, pageSize: 10, currentPage: 250, maxVisiblePages: 7 },
+  args: {
+    totalItems: 5000,
+    pageSize: 10,
+    currentPage: 250,
+    maxVisiblePages: 7,
+  },
 };
 export const NearStart: Story = {
   name: 'Near start (ellipsis only on the right)',
@@ -79,7 +102,12 @@ export const NearStart: Story = {
 };
 export const NearEnd: Story = {
   name: 'Near end (ellipsis only on the left)',
-  args: { totalItems: 5000, pageSize: 10, currentPage: 499, maxVisiblePages: 7 },
+  args: {
+    totalItems: 5000,
+    pageSize: 10,
+    currentPage: 499,
+    maxVisiblePages: 7,
+  },
 };
 export const FewPages: Story = {
   name: 'Few pages (no ellipsis needed)',
@@ -89,7 +117,12 @@ export const FewPages: Story = {
 /* ── Features ────────────────────────────────── */
 export const WithJumpToPage: Story = {
   name: 'With jump-to-page',
-  args: { totalItems: 5000, pageSize: 10, currentPage: 250, showJumpToPage: true },
+  args: {
+    totalItems: 5000,
+    pageSize: 10,
+    currentPage: 250,
+    showJumpToPage: true,
+  },
 };
 export const NoPageSizeSelector: Story = {
   name: 'Without page size selector',
@@ -129,7 +162,7 @@ export const AccessibleTypeSafety: Story = {
     docs: {
       description: {
         story:
-          "L'originale importava il tipo `ButtonVariant` (11 valori) dal componente Button, ma il CSS di Pagination implementa lo stile \"active\" solo per 7 di quei valori — impostare `variant=\"ghost\"` avrebbe compilato senza errori ma senza alcun effetto visivo. Il tipo `PaginationVariant`, locale a questo componente, espone solo le varianti realmente supportate dal CSS.",
+          'L\'originale importava il tipo `ButtonVariant` (11 valori) dal componente Button, ma il CSS di Pagination implementa lo stile "active" solo per 7 di quei valori — impostare `variant="ghost"` avrebbe compilato senza errori ma senza alcun effetto visivo. Il tipo `PaginationVariant`, locale a questo componente, espone solo le varianti realmente supportate dal CSS.',
       },
     },
   },

@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LinkComponent } from './link';
 
@@ -25,7 +35,11 @@ type Story = StoryObj<LinkComponent>;
 
 /* ── Playground ──────────────────────────────── */
 export const Playground: Story = {
-  args: { mode: 'external', href: 'https://github.com/ohmyopensource', label: 'Vai su GitHub' },
+  args: {
+    mode: 'external',
+    href: 'https://github.com/ohmyopensource',
+    label: 'Vai su GitHub',
+  },
 };
 
 /* ── Mode ────────────────────────────────────── */
@@ -33,7 +47,11 @@ export const Internal: Story = {
   args: { mode: 'internal', href: '/docs', label: 'Leggi la documentazione' },
 };
 export const External: Story = {
-  args: { mode: 'external', href: 'https://github.com/ohmyopensource', label: 'Vai su GitHub' },
+  args: {
+    mode: 'external',
+    href: 'https://github.com/ohmyopensource',
+    label: 'Vai su GitHub',
+  },
 };
 
 /* ── Variants ────────────────────────────────── */
@@ -41,7 +59,12 @@ export const Primary: Story = {
   args: { mode: 'external', href: '#', variant: 'primary', label: 'Primary' },
 };
 export const Secondary: Story = {
-  args: { mode: 'external', href: '#', variant: 'secondary', label: 'Secondary' },
+  args: {
+    mode: 'external',
+    href: '#',
+    variant: 'secondary',
+    label: 'Secondary',
+  },
 };
 export const Neutral: Story = {
   args: { mode: 'external', href: '#', variant: 'neutral', label: 'Neutral' },

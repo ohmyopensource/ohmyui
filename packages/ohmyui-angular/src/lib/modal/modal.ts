@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import {
   Component,
   Input,
@@ -38,11 +48,7 @@ export class ModalComponent implements OnChanges, OnDestroy {
   @Input() cancelLabel = 'Cancel';
   /** Variant for the confirm button */
   @Input() confirmVariant:
-    | 'primary'
-    | 'confirm'
-    | 'danger'
-    | 'warning'
-    | 'info' = 'primary';
+    'primary' | 'confirm' | 'danger' | 'warning' | 'info' = 'primary';
 
   @Output() closed = new EventEmitter<void>();
   @Output() confirmed = new EventEmitter<void>();

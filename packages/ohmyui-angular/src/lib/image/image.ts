@@ -1,12 +1,18 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import { Component, Input, OnChanges } from '@angular/core';
 import { LucideLoader, LucideImageOff } from '@lucide/angular';
 
 export type ImageVariant =
-  | 'flat'
-  | 'bordered'
-  | 'shadow'
-  | 'shadow-md'
-  | 'shadow-lg';
+  'flat' | 'bordered' | 'shadow' | 'shadow-md' | 'shadow-lg';
 export type ImageShape = 'square' | 'rounded' | 'circle';
 export type ImageRatio = '1/1' | '4/3' | '16/9' | '3/4' | 'auto';
 export type ImageFit = 'cover' | 'contain';

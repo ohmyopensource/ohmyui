@@ -1,4 +1,14 @@
 <!--
+  Copyright 2026 The OhMyOpenSource! Authors
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+  SPDX-License-Identifier: MPL-2.0
+-->
+
+<!--
 @file pagination.html
 @description Template for PaginationComponent handling page navigation UI,
 including page size selector, page controls, range info, and optional
@@ -7,34 +17,41 @@ jump-to-page input.
 <nav
   [ngClass]="hostClasses"
   [attr.aria-label]="'Navigazione pagine'"
-  [attr.aria-disabled]="disabled ? 'true' : null">
+  [attr.aria-disabled]="disabled ? 'true' : null"
+>
   <!-- Page size selector -->
   @if (showPageSizeSelector) {
-    <label class="ohmyui-pagination__size-label">
-      <span class="ohmyui-pagination__size-text">Righe</span>
-      <select
-        class="ohmyui-pagination__size-select"
-        [disabled]="disabled"
-        [value]="pageSize"
-        (change)="onPageSizeChange($event)">
-        @for (opt of pageSizeOptions; track opt) {
-          <option [value]="opt" [selected]="opt === pageSize">{{ opt }}</option>
-        }
-      </select>
-    </label>
+  <label class="ohmyui-pagination__size-label">
+    <span class="ohmyui-pagination__size-text">Righe</span>
+    <select
+      class="ohmyui-pagination__size-select"
+      [disabled]="disabled"
+      [value]="pageSize"
+      (change)="onPageSizeChange($event)"
+    >
+      @for (opt of pageSizeOptions; track opt) {
+      <option [value]="opt" [selected]="opt === pageSize">{{ opt }}</option>
+      }
+    </select>
+  </label>
   }
   <!-- Navigation controls -->
-  <div class="ohmyui-pagination__controls" role="group" aria-label="Controlli pagina">
+  <div
+    class="ohmyui-pagination__controls"
+    role="group"
+    aria-label="Controlli pagina"
+  >
     <!-- First page -->
     @if (showFirstLast) {
-      <button
-        class="ohmyui-pagination__btn ohmyui-pagination__btn--icon ohmyui-pagination__btn--first-last"
-        type="button"
-        [disabled]="isFirst || disabled"
-        [attr.aria-label]="'Prima pagina'"
-        (click)="goFirst()">
-        <svg [lucideIcon]="iconFirst" [size]="iconSize"></svg>
-      </button>
+    <button
+      class="ohmyui-pagination__btn ohmyui-pagination__btn--icon ohmyui-pagination__btn--first-last"
+      type="button"
+      [disabled]="isFirst || disabled"
+      [attr.aria-label]="'Prima pagina'"
+      (click)="goFirst()"
+    >
+      <svg [lucideIcon]="iconFirst" [size]="iconSize"></svg>
+    </button>
     }
     <!-- Previous page -->
     <button
@@ -42,29 +59,35 @@ jump-to-page input.
       type="button"
       [disabled]="isFirst || disabled"
       [attr.aria-label]="'Pagina precedente'"
-      (click)="goPrev()">
+      (click)="goPrev()"
+    >
       <svg [lucideIcon]="iconPrev" [size]="iconSize"></svg>
     </button>
     <!-- Page list -->
     <div class="ohmyui-pagination__pages" role="list">
-      @for (item of pageItems; track trackByItem($index, item)) {
-        @if (isPageItem(item)) {
-          <button
-            class="ohmyui-pagination__btn ohmyui-pagination__btn--page"
-            [class.ohmyui-pagination__btn--active]="item.value === currentPage"
-            type="button"
-            role="listitem"
-            [disabled]="disabled"
-            [attr.aria-label]="'Pagina ' + item.value"
-            [attr.aria-current]="item.value === currentPage ? 'page' : null"
-            (click)="goTo(item.value)">
-            {{ item.value }}
-          </button>
-        }
-        @if (isEllipsis(item)) {
-          <span class="ohmyui-pagination__ellipsis" role="listitem" aria-hidden="true"> &hellip; </span>
-        }
-      }
+      @for (item of pageItems; track trackByItem($index, item)) { @if
+      (isPageItem(item)) {
+      <button
+        class="ohmyui-pagination__btn ohmyui-pagination__btn--page"
+        [class.ohmyui-pagination__btn--active]="item.value === currentPage"
+        type="button"
+        role="listitem"
+        [disabled]="disabled"
+        [attr.aria-label]="'Pagina ' + item.value"
+        [attr.aria-current]="item.value === currentPage ? 'page' : null"
+        (click)="goTo(item.value)"
+      >
+        {{ item.value }}
+      </button>
+      } @if (isEllipsis(item)) {
+      <span
+        class="ohmyui-pagination__ellipsis"
+        role="listitem"
+        aria-hidden="true"
+      >
+        &hellip;
+      </span>
+      } }
     </div>
     <!-- Mobile page indicator -->
     <span class="ohmyui-pagination__mobile-info" aria-live="polite">
@@ -76,46 +99,52 @@ jump-to-page input.
       type="button"
       [disabled]="isLast || disabled"
       [attr.aria-label]="'Pagina successiva'"
-      (click)="goNext()">
+      (click)="goNext()"
+    >
       <svg [lucideIcon]="iconNext" [size]="iconSize"></svg>
     </button>
     <!-- Last page -->
     @if (showFirstLast) {
-      <button
-        class="ohmyui-pagination__btn ohmyui-pagination__btn--icon ohmyui-pagination__btn--first-last"
-        type="button"
-        [disabled]="isLast || disabled"
-        [attr.aria-label]="'Ultima pagina'"
-        (click)="goLast()">
-        <svg [lucideIcon]="iconLast" [size]="iconSize"></svg>
-      </button>
+    <button
+      class="ohmyui-pagination__btn ohmyui-pagination__btn--icon ohmyui-pagination__btn--first-last"
+      type="button"
+      [disabled]="isLast || disabled"
+      [attr.aria-label]="'Ultima pagina'"
+      (click)="goLast()"
+    >
+      <svg [lucideIcon]="iconLast" [size]="iconSize"></svg>
+    </button>
     }
   </div>
   <!-- Jump to page -->
   @if (showJumpToPage) {
-    <label class="ohmyui-pagination__jump">
-      <span class="ohmyui-pagination__jump-text">Vai a</span>
-      <input
-        class="ohmyui-pagination__jump-input"
-        type="number"
-        [min]="1"
-        [max]="totalPages"
-        [disabled]="disabled"
-        [(ngModel)]="jumpValue"
-        (keydown)="onJumpKeydown($event)"
-        (blur)="onJump()"
-        [attr.aria-label]="'Vai alla pagina'" />
-    </label>
+  <label class="ohmyui-pagination__jump">
+    <span class="ohmyui-pagination__jump-text">Vai a</span>
+    <input
+      class="ohmyui-pagination__jump-input"
+      type="number"
+      [min]="1"
+      [max]="totalPages"
+      [disabled]="disabled"
+      [(ngModel)]="jumpValue"
+      (keydown)="onJumpKeydown($event)"
+      (blur)="onJump()"
+      [attr.aria-label]="'Vai alla pagina'"
+    />
+  </label>
   }
   <!-- Info range -->
   @if (showInfo && totalItems > 0) {
-    <span class="ohmyui-pagination__info">
-      <span class="ohmyui-pagination__info-range">{{ rangeStart }}–{{ rangeEnd }}</span>
-      di
-      <span class="ohmyui-pagination__info-total">{{ totalItems }}</span>
-    </span>
-  }
-  @if (showInfo && totalItems === 0) {
-    <span class="ohmyui-pagination__info ohmyui-pagination__info--empty"> Nessun risultato </span>
+  <span class="ohmyui-pagination__info">
+    <span class="ohmyui-pagination__info-range"
+      >{{ rangeStart }}–{{ rangeEnd }}</span
+    >
+    di
+    <span class="ohmyui-pagination__info-total">{{ totalItems }}</span>
+  </span>
+  } @if (showInfo && totalItems === 0) {
+  <span class="ohmyui-pagination__info ohmyui-pagination__info--empty">
+    Nessun risultato
+  </span>
   }
 </nav>

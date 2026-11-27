@@ -1,26 +1,36 @@
 <!--
+  Copyright 2026 The OhMyOpenSource! Authors
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+  SPDX-License-Identifier: MPL-2.0
+-->
+
+<!--
 @file link.html
 @description Template for LinkComponent rendering either an internal
 Angular router link or an external hyperlink, with an optional trailing
 icon shown only for external links.
 -->
 @if (mode === 'internal') {
-  <a [routerLink]="href" [ngClass]="linkClasses">
-    <span class="ohmyui-inline-link__text">{{ label }}</span>
-  </a>
-}
-@if (mode === 'external') {
-  <a
-    [href]="href"
-    [target]="target"
-    [rel]="externalRel"
-    [ngClass]="linkClasses"
-    [attr.aria-label]="accessibleLabel">
-    <span class="ohmyui-inline-link__text">{{ label }}</span>
-    @if (displayExternalIcon) {
-      <span class="ohmyui-inline-link__icon" aria-hidden="true">
-        <svg [lucideIcon]="externalIcon" [size]="iconSize"></svg>
-      </span>
-    }
-  </a>
+<a [routerLink]="href" [ngClass]="linkClasses">
+  <span class="ohmyui-inline-link__text">{{ label }}</span>
+</a>
+} @if (mode === 'external') {
+<a
+  [href]="href"
+  [target]="target"
+  [rel]="externalRel"
+  [ngClass]="linkClasses"
+  [attr.aria-label]="accessibleLabel"
+>
+  <span class="ohmyui-inline-link__text">{{ label }}</span>
+  @if (displayExternalIcon) {
+  <span class="ohmyui-inline-link__icon" aria-hidden="true">
+    <svg [lucideIcon]="externalIcon" [size]="iconSize"></svg>
+  </span>
+  }
+</a>
 }

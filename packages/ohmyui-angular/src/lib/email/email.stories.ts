@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { EmailComponent } from './email';
 
@@ -88,7 +98,7 @@ export const AccessibleAriaLabel: Story = {
     docs: {
       description: {
         story:
-          "L'`aria-label` include sempre l'indirizzo email completo (\"Invia email a support@ohmyopensource.dev\"), anche quando il testo visibile è un `label` generico come \"Contattaci\" — uno screen reader annuncia comunque a chi si sta scrivendo, non solo l'azione.",
+          'L\'`aria-label` include sempre l\'indirizzo email completo ("Invia email a support@ohmyopensource.dev"), anche quando il testo visibile è un `label` generico come "Contattaci" — uno screen reader annuncia comunque a chi si sta scrivendo, non solo l\'azione.',
       },
     },
   },
@@ -100,7 +110,7 @@ export const AccessibleIconDecorative: Story = {
     docs: {
       description: {
         story:
-          'L\'icona della busta ha `aria-hidden="true"`: è puramente decorativa. Il significato del link passa interamente dal testo e dall\'`aria-label`, non dall\'icona.',
+          "L'icona della busta ha `aria-hidden=\"true\"`: è puramente decorativa. Il significato del link passa interamente dal testo e dall'`aria-label`, non dall'icona.",
       },
     },
   },

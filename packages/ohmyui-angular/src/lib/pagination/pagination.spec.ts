@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaginationComponent } from './pagination';
@@ -67,7 +77,9 @@ describe('PaginationComponent', () => {
       component.currentPage = 2;
       component.maxVisiblePages = 5;
       const items = component.pageItems;
-      expect(items.map((i) => (component.isPageItem(i) ? i.value : 'ellipsis'))).toEqual([1, 2, 3, 4]);
+      expect(
+        items.map((i) => (component.isPageItem(i) ? i.value : 'ellipsis')),
+      ).toEqual([1, 2, 3, 4]);
     });
 
     it('should show only a right ellipsis when near the start', () => {
@@ -76,7 +88,9 @@ describe('PaginationComponent', () => {
       component.currentPage = 2;
       component.maxVisiblePages = 5;
       const items = component.pageItems;
-      expect(items.map((i) => (component.isPageItem(i) ? i.value : 'ellipsis'))).toEqual([1, 2, 3, 4, 'ellipsis', 20]);
+      expect(
+        items.map((i) => (component.isPageItem(i) ? i.value : 'ellipsis')),
+      ).toEqual([1, 2, 3, 4, 'ellipsis', 20]);
     });
 
     it('should show only a left ellipsis when near the end', () => {
@@ -85,7 +99,9 @@ describe('PaginationComponent', () => {
       component.currentPage = 19;
       component.maxVisiblePages = 5;
       const items = component.pageItems;
-      expect(items.map((i) => (component.isPageItem(i) ? i.value : 'ellipsis'))).toEqual([1, 'ellipsis', 17, 18, 19, 20]);
+      expect(
+        items.map((i) => (component.isPageItem(i) ? i.value : 'ellipsis')),
+      ).toEqual([1, 'ellipsis', 17, 18, 19, 20]);
     });
 
     it('should show both ellipses when in the middle of a long range', () => {
@@ -94,15 +110,9 @@ describe('PaginationComponent', () => {
       component.currentPage = 10;
       component.maxVisiblePages = 5;
       const items = component.pageItems;
-      expect(items.map((i) => (component.isPageItem(i) ? i.value : 'ellipsis'))).toEqual([
-        1,
-        'ellipsis',
-        9,
-        10,
-        11,
-        'ellipsis',
-        20,
-      ]);
+      expect(
+        items.map((i) => (component.isPageItem(i) ? i.value : 'ellipsis')),
+      ).toEqual([1, 'ellipsis', 9, 10, 11, 'ellipsis', 20]);
     });
 
     it('should always include the first and last page', () => {

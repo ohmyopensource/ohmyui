@@ -1,4 +1,14 @@
 /**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+/**
  * @file text.ts
  * @description Flexible typography component that standardizes text rendering
  * across the application. Supports multiple semantic HTML elements, design-
@@ -11,7 +21,13 @@
  * del CONSUMER, non del proprio, quindi l'incapsulamento emulato (che scopa
  * solo il proprio template) non potrebbe mai funzionare qui.
  */
-import { Component, Input, ChangeDetectionStrategy, HostBinding, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  HostBinding,
+  ViewEncapsulation,
+} from '@angular/core';
 
 /** Defines the available typography variants mapped to design system styles. */
 export type TextVariant =
@@ -44,7 +60,8 @@ export type TextColor =
   | 'white'
   | 'inherit';
 /** Defines font weight options aligned with the design system typography scale. */
-export type TextWeight = 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold';
+export type TextWeight =
+  'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold';
 /** Defines text alignment options. */
 export type TextAlign = 'left' | 'center' | 'right' | 'justify';
 
@@ -98,7 +115,11 @@ export class TextComponent {
    */
   @HostBinding('class')
   get hostClasses(): string {
-    const c: string[] = ['ohmyui-text', `ohmyui-text--${this.variant}`, `ohmyui-text--color-${this.color}`];
+    const c: string[] = [
+      'ohmyui-text',
+      `ohmyui-text--${this.variant}`,
+      `ohmyui-text--color-${this.color}`,
+    ];
     if (this.weight) c.push(`ohmyui-text--weight-${this.weight}`);
     if (this.align) c.push(`ohmyui-text--align-${this.align}`);
     if (this.italic) c.push('ohmyui-text--italic');

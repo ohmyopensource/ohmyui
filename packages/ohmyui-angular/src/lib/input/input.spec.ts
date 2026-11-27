@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InputComponent } from './input';
@@ -22,7 +32,9 @@ describe('InputComponent', () => {
   it('should default to text type, primary variant, md size, fullWidth true', () => {
     fixture.detectChanges();
     expect(component.type).toBe('text');
-    expect(component.fieldClasses).toContain('ohmyui-input-wrapper__field--primary');
+    expect(component.fieldClasses).toContain(
+      'ohmyui-input-wrapper__field--primary',
+    );
     expect(component.fieldClasses).toContain('ohmyui-input-wrapper__field--md');
     expect(component.fullWidth).toBe(true);
   });
@@ -32,14 +44,16 @@ describe('InputComponent', () => {
       component.type = 'number';
       component.min = 0;
       fixture.detectChanges();
-      const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+      const input: HTMLInputElement =
+        fixture.nativeElement.querySelector('input');
       expect(input.getAttribute('min')).toBe('0');
     });
 
     it('should omit the min attribute when min is not set (empty string default)', () => {
       component.type = 'number';
       fixture.detectChanges();
-      const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+      const input: HTMLInputElement =
+        fixture.nativeElement.querySelector('input');
       expect(input.getAttribute('min')).toBeNull();
     });
 
@@ -47,7 +61,8 @@ describe('InputComponent', () => {
       component.type = 'number';
       component.max = 0;
       fixture.detectChanges();
-      const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+      const input: HTMLInputElement =
+        fixture.nativeElement.querySelector('input');
       expect(input.getAttribute('max')).toBe('0');
     });
   });
@@ -126,7 +141,8 @@ describe('InputComponent', () => {
       const onChange = vi.fn();
       component.registerOnChange(onChange);
       fixture.detectChanges();
-      const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+      const input: HTMLInputElement =
+        fixture.nativeElement.querySelector('input');
       input.value = 'nuovo valore';
       input.dispatchEvent(new Event('input'));
       expect(onChange).toHaveBeenCalledWith('nuovo valore');
@@ -135,7 +151,8 @@ describe('InputComponent', () => {
       const onTouched = vi.fn();
       component.registerOnTouched(onTouched);
       fixture.detectChanges();
-      const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+      const input: HTMLInputElement =
+        fixture.nativeElement.querySelector('input');
       input.dispatchEvent(new FocusEvent('blur'));
       expect(onTouched).toHaveBeenCalled();
     });

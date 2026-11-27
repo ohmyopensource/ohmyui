@@ -1,3 +1,15 @@
+// Copyright 2026 The OhMyOpenSource! Authors
+//
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+//
+// SPDX-License-Identifier: MPL-2.0
+
+// @file button.dart
+// @description Button widget (`OhMyUIButton`): a button in three variants and
+// three sizes, with a disabled state.
+
 import 'package:flutter/material.dart';
 import '../../tokens/tokens.dart';
 

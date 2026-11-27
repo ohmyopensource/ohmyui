@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckboxComponent } from './checkbox';
@@ -35,7 +45,9 @@ describe('CheckboxComponent', () => {
   it('should update checked and emit checkedChange on native change event', () => {
     fixture.detectChanges();
     const emitSpy = vi.spyOn(component.checkedChange, 'emit');
-    const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
+    const input: HTMLInputElement = fixture.nativeElement.querySelector(
+      'input[type="checkbox"]',
+    );
     input.checked = true;
     input.dispatchEvent(new Event('change'));
 
@@ -46,7 +58,9 @@ describe('CheckboxComponent', () => {
   it('should resolve indeterminate to false on user interaction', () => {
     component.indeterminate = true;
     fixture.detectChanges();
-    const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
+    const input: HTMLInputElement = fixture.nativeElement.querySelector(
+      'input[type="checkbox"]',
+    );
     input.checked = true;
     input.dispatchEvent(new Event('change'));
 
@@ -56,7 +70,9 @@ describe('CheckboxComponent', () => {
   it('should sync the indeterminate DOM property on the native input', () => {
     fixture.detectChanges();
     component.indeterminate = true;
-    const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
+    const input: HTMLInputElement = fixture.nativeElement.querySelector(
+      'input[type="checkbox"]',
+    );
     expect(input.indeterminate).toBe(true);
   });
 
@@ -74,7 +90,9 @@ describe('CheckboxComponent', () => {
     const onChange = vi.fn();
     component.registerOnChange(onChange);
     fixture.detectChanges();
-    const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
+    const input: HTMLInputElement = fixture.nativeElement.querySelector(
+      'input[type="checkbox"]',
+    );
     input.checked = true;
     input.dispatchEvent(new Event('change'));
 
@@ -85,7 +103,9 @@ describe('CheckboxComponent', () => {
     const onTouched = vi.fn();
     component.registerOnTouched(onTouched);
     fixture.detectChanges();
-    const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
+    const input: HTMLInputElement = fixture.nativeElement.querySelector(
+      'input[type="checkbox"]',
+    );
     input.dispatchEvent(new Event('blur'));
 
     expect(onTouched).toHaveBeenCalled();
@@ -94,7 +114,9 @@ describe('CheckboxComponent', () => {
   it('should mark aria-invalid when in error state', () => {
     component.error = true;
     fixture.detectChanges();
-    const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
+    const input: HTMLInputElement = fixture.nativeElement.querySelector(
+      'input[type="checkbox"]',
+    );
     expect(input.getAttribute('aria-invalid')).toBe('true');
   });
 });

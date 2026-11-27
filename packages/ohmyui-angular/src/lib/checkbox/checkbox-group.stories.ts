@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { CheckboxGroupComponent } from './checkbox-group';
@@ -105,7 +115,10 @@ export const WithError: Story = {
 /* ── Accessibility ────────────────────────────── */
 export const AccessibleFieldset: Story = {
   name: 'Accessibility / Native fieldset semantics',
-  args: { label: 'Preferenze notifiche', description: 'Scegli come vuoi essere contattato.' },
+  args: {
+    label: 'Preferenze notifiche',
+    description: 'Scegli come vuoi essere contattato.',
+  },
   render: (args) => ({
     props: args,
     template: `

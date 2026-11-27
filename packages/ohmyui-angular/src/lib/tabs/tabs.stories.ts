@@ -1,5 +1,20 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
-import { LucideHouse, LucideSettings, LucideBell, LucideUser } from '@lucide/angular';
+import {
+  LucideHouse,
+  LucideSettings,
+  LucideBell,
+  LucideUser,
+} from '@lucide/angular';
 import { TabsComponent, TabItem } from './tabs';
 
 const basicTabs: TabItem[] = [
@@ -25,10 +40,21 @@ const meta: Meta<TabsComponent> = {
   title: 'Components/Tabs',
   component: TabsComponent,
   argTypes: {
-    tabStyle: { control: 'select', options: ['line', 'pill', 'card', 'underline'] },
+    tabStyle: {
+      control: 'select',
+      options: ['line', 'pill', 'card', 'underline'],
+    },
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'success', 'warning', 'error', 'info'],
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'success',
+        'warning',
+        'error',
+        'info',
+      ],
     },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     fullWidth: { control: 'boolean' },
@@ -63,10 +89,20 @@ export const StyleUnderline: Story = {
 
 /* ── Variants ────────────────────────────────── */
 export const Success: Story = {
-  args: { tabs: basicTabs, activeTab: 'overview', tabStyle: 'line', variant: 'success' },
+  args: {
+    tabs: basicTabs,
+    activeTab: 'overview',
+    tabStyle: 'line',
+    variant: 'success',
+  },
 };
 export const Error: Story = {
-  args: { tabs: basicTabs, activeTab: 'overview', tabStyle: 'pill', variant: 'error' },
+  args: {
+    tabs: basicTabs,
+    activeTab: 'overview',
+    tabStyle: 'pill',
+    variant: 'error',
+  },
 };
 
 /* ── Sizes ───────────────────────────────────── */
@@ -115,14 +151,19 @@ export const AccessibleRovingTabindex: Story = {
     docs: {
       description: {
         story:
-          "Solo la tab attiva è raggiungibile premendo Tab da fuori il gruppo — le altre si raggiungono con le frecce una volta dentro, come da pattern WAI-ARIA \"tablist\". Se nessuna tab è attiva, il fallback è la prima tab abilitata: il gruppo non deve mai restare irraggiungibile da tastiera.",
+          'Solo la tab attiva è raggiungibile premendo Tab da fuori il gruppo — le altre si raggiungono con le frecce una volta dentro, come da pattern WAI-ARIA "tablist". Se nessuna tab è attiva, il fallback è la prima tab abilitata: il gruppo non deve mai restare irraggiungibile da tastiera.',
       },
     },
   },
 };
 export const AccessibleVariantAwareDarkMode: Story = {
   name: 'Accessibility / Dark mode respects the chosen variant',
-  args: { tabs: basicTabs, activeTab: 'overview', tabStyle: 'line', variant: 'success' },
+  args: {
+    tabs: basicTabs,
+    activeTab: 'overview',
+    tabStyle: 'line',
+    variant: 'success',
+  },
   parameters: {
     docs: {
       description: {

@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { TextComponent } from './text';
 
@@ -8,19 +18,47 @@ const meta: Meta<TextComponent> = {
     variant: {
       control: 'select',
       options: [
-        'display', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-        'body-lg', 'body', 'body-sm', 'caption', 'label', 'overline', 'code',
+        'display',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'body-lg',
+        'body',
+        'body-sm',
+        'caption',
+        'label',
+        'overline',
+        'code',
       ],
     },
     color: {
       control: 'select',
       options: [
-        'default', 'muted', 'subtle', 'primary', 'secondary', 'tertiary',
-        'success', 'warning', 'error', 'info', 'white', 'inherit',
+        'default',
+        'muted',
+        'subtle',
+        'primary',
+        'secondary',
+        'tertiary',
+        'success',
+        'warning',
+        'error',
+        'info',
+        'white',
+        'inherit',
       ],
     },
-    weight: { control: 'select', options: ['', 'normal', 'medium', 'semibold', 'bold', 'extrabold'] },
-    align: { control: 'select', options: ['', 'left', 'center', 'right', 'justify'] },
+    weight: {
+      control: 'select',
+      options: ['', 'normal', 'medium', 'semibold', 'bold', 'extrabold'],
+    },
+    align: {
+      control: 'select',
+      options: ['', 'left', 'center', 'right', 'justify'],
+    },
     italic: { control: 'boolean' },
     underline: { control: 'boolean' },
     truncate: { control: 'boolean' },
@@ -45,7 +83,9 @@ export const Playground: Story = {
 
 /* ── Variants (applicati al tag HTML semantico corretto) ────── */
 export const Display: Story = {
-  render: () => ({ template: `<div ohmyuiText variant="display">Display</div>` }),
+  render: () => ({
+    template: `<div ohmyuiText variant="display">Display</div>`,
+  }),
 };
 export const H1: Story = {
   render: () => ({ template: `<h1 ohmyuiText variant="h1">Heading 1</h1>` }),
@@ -58,26 +98,40 @@ export const H3: Story = {
 };
 export const BodyLg: Story = {
   name: 'Body / Large',
-  render: () => ({ template: `<p ohmyuiText variant="body-lg">Testo body più grande, per introduzioni.</p>` }),
+  render: () => ({
+    template: `<p ohmyuiText variant="body-lg">Testo body più grande, per introduzioni.</p>`,
+  }),
 };
 export const Body: Story = {
-  render: () => ({ template: `<p ohmyuiText variant="body">Testo body standard, per il contenuto principale.</p>` }),
+  render: () => ({
+    template: `<p ohmyuiText variant="body">Testo body standard, per il contenuto principale.</p>`,
+  }),
 };
 export const BodySm: Story = {
   name: 'Body / Small',
-  render: () => ({ template: `<p ohmyuiText variant="body-sm">Testo body più piccolo, per dettagli secondari.</p>` }),
+  render: () => ({
+    template: `<p ohmyuiText variant="body-sm">Testo body più piccolo, per dettagli secondari.</p>`,
+  }),
 };
 export const Caption: Story = {
-  render: () => ({ template: `<span ohmyuiText variant="caption">Didascalia dell'immagine</span>` }),
+  render: () => ({
+    template: `<span ohmyuiText variant="caption">Didascalia dell'immagine</span>`,
+  }),
 };
 export const Label: Story = {
-  render: () => ({ template: `<label ohmyuiText variant="label">Nome utente</label>` }),
+  render: () => ({
+    template: `<label ohmyuiText variant="label">Nome utente</label>`,
+  }),
 };
 export const Overline: Story = {
-  render: () => ({ template: `<span ohmyuiText variant="overline">Nuovo</span>` }),
+  render: () => ({
+    template: `<span ohmyuiText variant="overline">Nuovo</span>`,
+  }),
 };
 export const Code: Story = {
-  render: () => ({ template: `<span ohmyuiText variant="code">npm install ohmyui-angular</span>` }),
+  render: () => ({
+    template: `<span ohmyuiText variant="code">npm install ohmyui-angular</span>`,
+  }),
 };
 export const Blockquote: Story = {
   render: () => ({
@@ -88,20 +142,28 @@ export const Blockquote: Story = {
 /* ── Colors ──────────────────────────────────── */
 export const ColorPrimary: Story = {
   name: 'Color / Primary',
-  render: () => ({ template: `<p ohmyuiText variant="h3" color="primary">Testo primary</p>` }),
+  render: () => ({
+    template: `<p ohmyuiText variant="h3" color="primary">Testo primary</p>`,
+  }),
 };
 export const ColorError: Story = {
   name: 'Color / Error',
-  render: () => ({ template: `<p ohmyuiText variant="body" color="error">Questo campo è obbligatorio.</p>` }),
+  render: () => ({
+    template: `<p ohmyuiText variant="body" color="error">Questo campo è obbligatorio.</p>`,
+  }),
 };
 export const ColorMuted: Story = {
   name: 'Color / Muted',
-  render: () => ({ template: `<p ohmyuiText variant="body" color="muted">Testo secondario, meno prominente.</p>` }),
+  render: () => ({
+    template: `<p ohmyuiText variant="body" color="muted">Testo secondario, meno prominente.</p>`,
+  }),
 };
 
 /* ── Modifiers ───────────────────────────────── */
 export const Gradient: Story = {
-  render: () => ({ template: `<h1 ohmyuiText variant="display" [gradient]="true">Gradient text</h1>` }),
+  render: () => ({
+    template: `<h1 ohmyuiText variant="display" [gradient]="true">Gradient text</h1>`,
+  }),
 };
 export const Truncate: Story = {
   render: () => ({

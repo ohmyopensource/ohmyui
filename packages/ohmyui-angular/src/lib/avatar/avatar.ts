@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import { Component, Input, OnChanges } from '@angular/core';
 import { LucideUser } from '@lucide/angular';
 
@@ -6,12 +16,7 @@ export type AvatarShape = 'circle' | 'square';
 export type AvatarStatus = 'online' | 'offline' | 'busy' | 'none';
 export type AvatarVariant = 'image' | 'initials' | 'icon';
 export type AvatarColor =
-  | 'primary'
-  | 'teal'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'neutral';
+  'primary' | 'teal' | 'success' | 'warning' | 'error' | 'neutral';
 export type AvatarRing =
   | 'none'
   | 'primary'

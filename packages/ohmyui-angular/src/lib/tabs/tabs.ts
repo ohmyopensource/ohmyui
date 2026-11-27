@@ -1,4 +1,14 @@
 /**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+/**
  * @file tabs.ts
  * @description Reusable tabs component supporting multiple visual styles,
  * color variants, sizes, icons, badges, dark theme support, and controlled
@@ -26,7 +36,14 @@ export interface TabItem {
   disabled?: boolean;
 }
 /** Available color variants for active tab states and highlights. */
-export type TabVariant = 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'error' | 'info';
+export type TabVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info';
 /** Available tab sizes. */
 export type TabSize = 'sm' | 'md' | 'lg';
 /**
@@ -59,7 +76,9 @@ export type TabStyle = 'line' | 'pill' | 'card' | 'underline';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsComponent {
-  @ViewChildren('tabButton') private tabButtons?: QueryList<ElementRef<HTMLButtonElement>>;
+  @ViewChildren('tabButton') private tabButtons?: QueryList<
+    ElementRef<HTMLButtonElement>
+  >;
 
   /** Collection of tabs to render. */
   @Input() tabs: TabItem[] = [];
@@ -132,7 +151,12 @@ export class TabsComponent {
 
   /** Builds the CSS class list for a tab badge. */
   badgeClasses(tab: TabItem): string {
-    return ['ohmyui-tabs__badge', this.isActive(tab) ? 'ohmyui-tabs__badge--active' : ''].filter(Boolean).join(' ');
+    return [
+      'ohmyui-tabs__badge',
+      this.isActive(tab) ? 'ohmyui-tabs__badge--active' : '',
+    ]
+      .filter(Boolean)
+      .join(' ');
   }
 
   /** TrackBy function used by Angular to optimize @for rendering. */
@@ -148,7 +172,10 @@ export class TabsComponent {
   isTabStop(tab: TabItem): boolean {
     if (tab.disabled) return false;
     if (this.tabs.some((t) => this.isActive(t))) return this.isActive(tab);
-    return this.firstEnabledIndex() !== null && this.tabs[this.firstEnabledIndex() as number] === tab;
+    return (
+      this.firstEnabledIndex() !== null &&
+      this.tabs[this.firstEnabledIndex() as number] === tab
+    );
   }
 
   /**

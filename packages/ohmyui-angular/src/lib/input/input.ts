@@ -1,4 +1,14 @@
 /**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+/**
  * @file input.ts
  * @description
  * Highly configurable Angular form control supporting multiple input types
@@ -63,12 +73,7 @@ export type InputType =
 export type InputSize = 'sm' | 'md' | 'lg';
 /** Defines the visual accent variant used for focus, borders and states. */
 export type InputVariant =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'info';
+  'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info';
 /** Represents the semantic validation state of the input. */
 export type InputStatus = 'default' | 'success' | 'error';
 

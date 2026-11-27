@@ -1,4 +1,14 @@
 /**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+/**
  * @file checkbox-group.ts
  * @description Semantic wrapper for a group of related CheckboxComponent
  * instances, projected via <ng-content>. Uses a native <fieldset>/<legend>

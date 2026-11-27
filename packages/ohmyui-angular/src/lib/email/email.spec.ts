@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EmailComponent } from './email';
@@ -34,13 +44,17 @@ describe('EmailComponent', () => {
 
   it('should include subject in the mailto href when provided', () => {
     component.subject = 'Richiesta di supporto';
-    expect(component.mailtoHref).toBe('mailto:ciao@ohmyopensource.dev?subject=Richiesta+di+supporto');
+    expect(component.mailtoHref).toBe(
+      'mailto:ciao@ohmyopensource.dev?subject=Richiesta+di+supporto',
+    );
   });
 
   it('should include both subject and body in the mailto href when provided', () => {
     component.subject = 'Ciao';
     component.body = 'Ho una domanda';
-    expect(component.mailtoHref).toBe('mailto:ciao@ohmyopensource.dev?subject=Ciao&body=Ho+una+domanda');
+    expect(component.mailtoHref).toBe(
+      'mailto:ciao@ohmyopensource.dev?subject=Ciao&body=Ho+una+domanda',
+    );
   });
 
   it('should display the email address when no label is provided', () => {
@@ -62,17 +76,23 @@ describe('EmailComponent', () => {
     component.label = 'Contattaci';
     fixture.detectChanges();
     const anchor: HTMLAnchorElement = fixture.nativeElement.querySelector('a');
-    expect(anchor.getAttribute('aria-label')).toBe('Invia email a ciao@ohmyopensource.dev');
+    expect(anchor.getAttribute('aria-label')).toBe(
+      'Invia email a ciao@ohmyopensource.dev',
+    );
   });
 
   it('should not render the icon when showIcon is false', () => {
     component.showIcon = false;
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.ohmyui-email-link__icon')).toBeNull();
+    expect(
+      fixture.nativeElement.querySelector('.ohmyui-email-link__icon'),
+    ).toBeNull();
   });
 
   it('should render the icon when showIcon is true', () => {
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.ohmyui-email-link__icon')).not.toBeNull();
+    expect(
+      fixture.nativeElement.querySelector('.ohmyui-email-link__icon'),
+    ).not.toBeNull();
   });
 });

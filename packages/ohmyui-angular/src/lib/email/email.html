@@ -1,13 +1,27 @@
 <!--
+  Copyright 2026 The OhMyOpenSource! Authors
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+  SPDX-License-Identifier: MPL-2.0
+-->
+
+<!--
 @file email.html
 @description Template for EmailComponent rendering a mailto link with
 optional leading icon and accessible labeling.
 -->
-<a [href]="mailtoHref" [ngClass]="emailClasses" [attr.aria-label]="'Invia email a ' + email">
+<a
+  [href]="mailtoHref"
+  [ngClass]="emailClasses"
+  [attr.aria-label]="'Invia email a ' + email"
+>
   @if (showIcon) {
-    <span class="ohmyui-email-link__icon" aria-hidden="true">
-      <svg [lucideIcon]="mailIcon" [size]="iconSize"></svg>
-    </span>
+  <span class="ohmyui-email-link__icon" aria-hidden="true">
+    <svg [lucideIcon]="mailIcon" [size]="iconSize"></svg>
+  </span>
   }
   <span class="ohmyui-email-link__text">{{ displayLabel }}</span>
 </a>

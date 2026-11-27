@@ -1,3 +1,20 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+/**
+ * @file fonts.css
+ * @description Font faces of the OhMyUI! typefaces, Outfit for headings and
+ * Quicksand for body text, as variable fonts in WOFF2 with a TrueType fallback.
+ * Both fonts are licensed under the SIL Open Font License 1.1.
+ */
+
 @font-face {
   font-family: 'Outfit';
   src:

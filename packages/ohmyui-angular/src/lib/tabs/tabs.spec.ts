@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TabsComponent, TabItem } from './tabs';
@@ -60,14 +70,16 @@ describe('TabsComponent', () => {
 
   it('should render every tab button', () => {
     fixture.detectChanges();
-    const buttons = fixture.nativeElement.querySelectorAll('button[role="tab"]');
+    const buttons =
+      fixture.nativeElement.querySelectorAll('button[role="tab"]');
     expect(buttons.length).toBe(4);
   });
 
   describe('roving tabindex', () => {
     it('should set tabindex 0 only on the active tab', () => {
       fixture.detectChanges();
-      const buttons: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll('button[role="tab"]');
+      const buttons: NodeListOf<HTMLButtonElement> =
+        fixture.nativeElement.querySelectorAll('button[role="tab"]');
       expect(buttons[0].getAttribute('tabindex')).toBe('0');
       expect(buttons[1].getAttribute('tabindex')).toBe('-1');
       expect(buttons[3].getAttribute('tabindex')).toBe('-1');
@@ -76,7 +88,8 @@ describe('TabsComponent', () => {
     it('should fall back to the first enabled tab when none is active', () => {
       component.activeTab = 'nonexistent';
       fixture.detectChanges();
-      const buttons: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll('button[role="tab"]');
+      const buttons: NodeListOf<HTMLButtonElement> =
+        fixture.nativeElement.querySelectorAll('button[role="tab"]');
       expect(buttons[0].getAttribute('tabindex')).toBe('0');
     });
   });
@@ -86,7 +99,10 @@ describe('TabsComponent', () => {
       fixture.detectChanges();
       const emitSpy = vi.spyOn(component.tabChange, 'emit');
       // From index 1 (b), ArrowRight should skip disabled index 2 (c) and land on index 3 (d)
-      component.onKeydown(new KeyboardEvent('keydown', { key: 'ArrowRight' }), 1);
+      component.onKeydown(
+        new KeyboardEvent('keydown', { key: 'ArrowRight' }),
+        1,
+      );
       expect(emitSpy).toHaveBeenCalledWith('d');
     });
 
@@ -94,7 +110,10 @@ describe('TabsComponent', () => {
       fixture.detectChanges();
       const emitSpy = vi.spyOn(component.tabChange, 'emit');
       // From index 0 (a), ArrowLeft should wrap to the last enabled tab, index 3 (d)
-      component.onKeydown(new KeyboardEvent('keydown', { key: 'ArrowLeft' }), 0);
+      component.onKeydown(
+        new KeyboardEvent('keydown', { key: 'ArrowLeft' }),
+        0,
+      );
       expect(emitSpy).toHaveBeenCalledWith('d');
     });
 
@@ -117,7 +136,10 @@ describe('TabsComponent', () => {
       component.vertical = true;
       fixture.detectChanges();
       const emitSpy = vi.spyOn(component.tabChange, 'emit');
-      component.onKeydown(new KeyboardEvent('keydown', { key: 'ArrowDown' }), 0);
+      component.onKeydown(
+        new KeyboardEvent('keydown', { key: 'ArrowDown' }),
+        0,
+      );
       expect(emitSpy).toHaveBeenCalledWith('b');
     });
 
@@ -125,7 +147,10 @@ describe('TabsComponent', () => {
       component.vertical = true;
       fixture.detectChanges();
       const emitSpy = vi.spyOn(component.tabChange, 'emit');
-      component.onKeydown(new KeyboardEvent('keydown', { key: 'ArrowRight' }), 0);
+      component.onKeydown(
+        new KeyboardEvent('keydown', { key: 'ArrowRight' }),
+        0,
+      );
       expect(emitSpy).not.toHaveBeenCalled();
     });
 
@@ -141,6 +166,8 @@ describe('TabsComponent', () => {
     component.fullWidth = true;
     expect(component.tabClasses(tabs[0])).toContain('ohmyui-tabs__tab--active');
     expect(component.tabClasses(tabs[0])).toContain('ohmyui-tabs__tab--full');
-    expect(component.tabClasses(tabs[2])).toContain('ohmyui-tabs__tab--disabled');
+    expect(component.tabClasses(tabs[2])).toContain(
+      'ohmyui-tabs__tab--disabled',
+    );
   });
 });

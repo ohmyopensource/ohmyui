@@ -1,9 +1,27 @@
 /**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+/**
  * @file pagination.ts
  * @description Pagination component providing page navigation, page size control,
  * and intelligent page range rendering with ellipsis support.
  */
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -26,7 +44,14 @@ import {
  * regola CSS corrispondente). Tipo locale, ristretto a ciò che il CSS
  * supporta davvero.
  */
-export type PaginationVariant = 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'error' | 'info';
+export type PaginationVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info';
 /** Available pagination component sizes. */
 export type PaginationSize = 'xs' | 'sm' | 'md' | 'lg';
 /**
@@ -42,7 +67,8 @@ export type PaginationEmphasis = 'filled' | 'soft' | 'minimal';
  * by the user, or to an ellipsis placeholder used to indicate a skipped range
  * of pages in the pagination sequence.
  */
-export type PageItem = { type: 'page'; value: number } | { type: 'ellipsis'; id: string };
+export type PageItem =
+  { type: 'page'; value: number } | { type: 'ellipsis'; id: string };
 
 /**
  * Pagination component used to navigate large datasets in a structured and
@@ -117,7 +143,9 @@ export class PaginationComponent implements OnChanges {
   }
   /** Starting index of current page range (1-based). */
   get rangeStart(): number {
-    return this.totalItems === 0 ? 0 : (this.currentPage - 1) * this.pageSize + 1;
+    return this.totalItems === 0
+      ? 0
+      : (this.currentPage - 1) * this.pageSize + 1;
   }
   /** Ending index of current page range (1-based). */
   get rangeEnd(): number {
@@ -134,7 +162,10 @@ export class PaginationComponent implements OnChanges {
     const current = this.currentPage;
     const max = this.maxVisiblePages;
     if (total <= max) {
-      return this.range(1, total).map((v) => ({ type: 'page' as const, value: v }));
+      return this.range(1, total).map((v) => ({
+        type: 'page' as const,
+        value: v,
+      }));
     }
     const inner = max - 2;
     const half = Math.floor(inner / 2);
@@ -157,7 +188,12 @@ export class PaginationComponent implements OnChanges {
 
   /** Icon size based on component size. */
   get iconSize(): number {
-    const map: Record<PaginationSize, number> = { xs: 12, sm: 14, md: 16, lg: 18 };
+    const map: Record<PaginationSize, number> = {
+      xs: 12,
+      sm: 14,
+      md: 16,
+      lg: 18,
+    };
     return map[this.size];
   }
 

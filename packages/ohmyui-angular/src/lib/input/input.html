@@ -1,4 +1,14 @@
 <!--
+  Copyright 2026 The OhMyOpenSource! Authors
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+  SPDX-License-Identifier: MPL-2.0
+-->
+
+<!--
 @file input.html
 @description Template for InputComponent including label, input/textarea/
 select rendering, icon system, validation states, and accessibility support
@@ -8,141 +18,178 @@ select rendering, icon system, validation states, and accessibility support
 <div [class]="wrapperClasses">
   <!-- Label -->
   @if (label) {
-    <label [for]="inputId" class="ohmyui-input-wrapper__label" [class.ohmyui-input-wrapper__label--required]="required">
-      {{ label }}
-    </label>
+  <label
+    [for]="inputId"
+    class="ohmyui-input-wrapper__label"
+    [class.ohmyui-input-wrapper__label--required]="required"
+  >
+    {{ label }}
+  </label>
   }
   <!-- Field Container -->
   <div [class]="fieldClasses">
     <!-- Prefix -->
     @if (prefix) {
-      <span class="ohmyui-input-wrapper__prefix">{{ prefix }}</span>
+    <span class="ohmyui-input-wrapper__prefix">{{ prefix }}</span>
     }
     <!-- Left icon -->
     @if (iconLeft) {
-      <span class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--left" aria-hidden="true">
-        <svg [lucideIcon]="iconLeft" [size]="iconSize"></svg>
-      </span>
+    <span
+      class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--left"
+      aria-hidden="true"
+    >
+      <svg [lucideIcon]="iconLeft" [size]="iconSize"></svg>
+    </span>
     }
     <!-- Input Variants -->
     <!-- Text / Email / Password / Number -->
     @if (type !== 'textarea' && type !== 'select') {
-      <input
-        class="ohmyui-input-wrapper__input"
-        [id]="inputId"
-        [type]="effectiveType"
-        [placeholder]="placeholder"
-        [disabled]="disabled"
-        [readOnly]="readonly"
-        [required]="required"
-        [autocomplete]="autocomplete"
-        [attr.min]="min !== '' ? min : null"
-        [attr.max]="max !== '' ? max : null"
-        [attr.minlength]="minLength || null"
-        [attr.maxlength]="maxLength || null"
-        [attr.pattern]="pattern || null"
-        [attr.aria-label]="label || placeholder || null"
-        [attr.aria-invalid]="status === 'error' ? 'true' : null"
-        [attr.aria-describedby]="describedById"
-        [value]="value"
-        (input)="onInput($event)"
-        (focus)="onFocus($event)"
-        (blur)="onBlur($event)"
-        (keydown)="onKeydown($event)" />
+    <input
+      class="ohmyui-input-wrapper__input"
+      [id]="inputId"
+      [type]="effectiveType"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [readOnly]="readonly"
+      [required]="required"
+      [autocomplete]="autocomplete"
+      [attr.min]="min !== '' ? min : null"
+      [attr.max]="max !== '' ? max : null"
+      [attr.minlength]="minLength || null"
+      [attr.maxlength]="maxLength || null"
+      [attr.pattern]="pattern || null"
+      [attr.aria-label]="label || placeholder || null"
+      [attr.aria-invalid]="status === 'error' ? 'true' : null"
+      [attr.aria-describedby]="describedById"
+      [value]="value"
+      (input)="onInput($event)"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
+      (keydown)="onKeydown($event)"
+    />
     }
     <!-- Textarea -->
     @if (type === 'textarea') {
-      <textarea
-        class="ohmyui-input-wrapper__input ohmyui-input-wrapper__input--textarea"
-        [id]="inputId"
-        [placeholder]="placeholder"
-        [disabled]="disabled"
-        [readOnly]="readonly"
-        [required]="required"
-        [rows]="rows"
-        [attr.minlength]="minLength || null"
-        [attr.maxlength]="maxLength || null"
-        [attr.aria-label]="label || placeholder || null"
-        [attr.aria-invalid]="status === 'error' ? 'true' : null"
-        [attr.aria-describedby]="describedById"
-        (input)="onInput($event)"
-        (focus)="onFocus($event)"
-        (blur)="onBlur($event)"
-        >{{ value }}</textarea
-      >
+    <textarea
+      class="ohmyui-input-wrapper__input ohmyui-input-wrapper__input--textarea"
+      [id]="inputId"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [readOnly]="readonly"
+      [required]="required"
+      [rows]="rows"
+      [attr.minlength]="minLength || null"
+      [attr.maxlength]="maxLength || null"
+      [attr.aria-label]="label || placeholder || null"
+      [attr.aria-invalid]="status === 'error' ? 'true' : null"
+      [attr.aria-describedby]="describedById"
+      (input)="onInput($event)"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
+    >
+{{ value }}</textarea>
     }
     <!-- Select -->
     @if (type === 'select') {
-      <select
-        class="ohmyui-input-wrapper__input ohmyui-input-wrapper__input--select"
-        [id]="inputId"
-        [disabled]="disabled"
-        [required]="required"
-        [attr.aria-label]="label || null"
-        [attr.aria-invalid]="status === 'error' ? 'true' : null"
-        [attr.aria-describedby]="describedById"
-        [value]="value"
-        (change)="onInput($event)"
-        (focus)="onFocus($event)"
-        (blur)="onBlur($event)">
-        <option value="" disabled [selected]="!value">{{ selectPlaceholder }}</option>
-        @for (opt of options; track opt.value) {
-          <option [value]="opt.value" [disabled]="opt.disabled ?? false" [selected]="opt.value === value">
-            {{ opt.label }}
-          </option>
-        }
-      </select>
+    <select
+      class="ohmyui-input-wrapper__input ohmyui-input-wrapper__input--select"
+      [id]="inputId"
+      [disabled]="disabled"
+      [required]="required"
+      [attr.aria-label]="label || null"
+      [attr.aria-invalid]="status === 'error' ? 'true' : null"
+      [attr.aria-describedby]="describedById"
+      [value]="value"
+      (change)="onInput($event)"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
+    >
+      <option value="" disabled [selected]="!value">
+        {{ selectPlaceholder }}
+      </option>
+      @for (opt of options; track opt.value) {
+      <option
+        [value]="opt.value"
+        [disabled]="opt.disabled ?? false"
+        [selected]="opt.value === value"
+      >
+        {{ opt.label }}
+      </option>
+      }
+    </select>
     }
     <!-- Right Side Icon System -->
     <!-- Password toggle -->
     @if (showPasswordToggle) {
-      <button
-        class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right ohmyui-input-wrapper__icon--btn"
-        type="button"
-        [attr.aria-label]="showPassword() ? 'Nascondi password' : 'Mostra password'"
-        (click)="togglePassword()">
-        <svg [lucideIcon]="showPassword() ? iconEyeOff : iconEye" [size]="iconSize"></svg>
-      </button>
+    <button
+      class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right ohmyui-input-wrapper__icon--btn"
+      type="button"
+      [attr.aria-label]="showPassword() ? 'Nascondi password' : 'Mostra password'"
+      (click)="togglePassword()"
+    >
+      <svg
+        [lucideIcon]="showPassword() ? iconEyeOff : iconEye"
+        [size]="iconSize"
+      ></svg>
+    </button>
     }
     <!-- Clear button -->
     @if (showClearBtn && !showPasswordToggle) {
-      <button
-        class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right ohmyui-input-wrapper__icon--btn"
-        type="button"
-        aria-label="Svuota campo"
-        (click)="onClear()">
-        <svg [lucideIcon]="iconClear" [size]="iconSize"></svg>
-      </button>
+    <button
+      class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right ohmyui-input-wrapper__icon--btn"
+      type="button"
+      aria-label="Svuota campo"
+      (click)="onClear()"
+    >
+      <svg [lucideIcon]="iconClear" [size]="iconSize"></svg>
+    </button>
     }
     <!-- Right icon -->
     @if (iconRight && !showPasswordToggle && !showClearBtn) {
-      <span class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right" aria-hidden="true">
-        <svg [lucideIcon]="iconRight" [size]="iconSize"></svg>
-      </span>
+    <span
+      class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right"
+      aria-hidden="true"
+    >
+      <svg [lucideIcon]="iconRight" [size]="iconSize"></svg>
+    </span>
     }
     <!-- Success / error status -->
-    @if (status !== 'default' && !iconRight && !showPasswordToggle && !showClearBtn) {
-      <span class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right ohmyui-input-wrapper__icon--status" aria-hidden="true">
-        <svg [lucideIcon]="status === 'error' ? iconError : iconSuccess" [size]="iconSize"></svg>
-      </span>
+    @if (status !== 'default' && !iconRight && !showPasswordToggle &&
+    !showClearBtn) {
+    <span
+      class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right ohmyui-input-wrapper__icon--status"
+      aria-hidden="true"
+    >
+      <svg
+        [lucideIcon]="status === 'error' ? iconError : iconSuccess"
+        [size]="iconSize"
+      ></svg>
+    </span>
     }
     <!-- Suffix -->
     @if (suffix) {
-      <span class="ohmyui-input-wrapper__suffix">{{ suffix }}</span>
+    <span class="ohmyui-input-wrapper__suffix">{{ suffix }}</span>
     }
   </div>
   <!-- Feedback ( Hint / Error / Success ) -->
   @if (errorMessage) {
-    <span [id]="inputId + '-hint'" class="ohmyui-input-wrapper__hint ohmyui-input-wrapper__hint--error" role="alert">
-      {{ errorMessage }}
-    </span>
+  <span
+    [id]="inputId + '-hint'"
+    class="ohmyui-input-wrapper__hint ohmyui-input-wrapper__hint--error"
+    role="alert"
+  >
+    {{ errorMessage }}
+  </span>
   } @else if (successMessage) {
-    <span [id]="inputId + '-hint'" class="ohmyui-input-wrapper__hint ohmyui-input-wrapper__hint--success">
-      {{ successMessage }}
-    </span>
+  <span
+    [id]="inputId + '-hint'"
+    class="ohmyui-input-wrapper__hint ohmyui-input-wrapper__hint--success"
+  >
+    {{ successMessage }}
+  </span>
   } @else if (hint) {
-    <span [id]="inputId + '-hint'" class="ohmyui-input-wrapper__hint">
-      {{ hint }}
-    </span>
+  <span [id]="inputId + '-hint'" class="ohmyui-input-wrapper__hint">
+    {{ hint }}
+  </span>
   }
 </div>

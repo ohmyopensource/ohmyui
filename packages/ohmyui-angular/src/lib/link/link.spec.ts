@@ -1,3 +1,13 @@
+/**
+ * Copyright 2026 The OhMyOpenSource! Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
@@ -49,13 +59,17 @@ describe('LinkComponent', () => {
   it('should not render an icon element for internal links', () => {
     component.mode = 'internal';
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.ohmyui-inline-link__icon')).toBeNull();
+    expect(
+      fixture.nativeElement.querySelector('.ohmyui-inline-link__icon'),
+    ).toBeNull();
   });
 
   it('should render an icon element for external links with showExternalIcon true', () => {
     component.mode = 'external';
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.ohmyui-inline-link__icon')).not.toBeNull();
+    expect(
+      fixture.nativeElement.querySelector('.ohmyui-inline-link__icon'),
+    ).not.toBeNull();
   });
 
   it('should use noopener noreferrer rel only when target is _blank', () => {
@@ -68,7 +82,9 @@ describe('LinkComponent', () => {
     component.mode = 'external';
     component.target = '_blank';
     component.label = 'Vai su GitHub';
-    expect(component.accessibleLabel).toBe('Vai su GitHub (si apre in una nuova scheda)');
+    expect(component.accessibleLabel).toBe(
+      'Vai su GitHub (si apre in una nuova scheda)',
+    );
   });
 
   it('should return null accessibleLabel for internal links', () => {
@@ -85,6 +101,8 @@ describe('LinkComponent', () => {
   it('should render the label text', () => {
     component.label = 'Leggi la documentazione';
     fixture.detectChanges();
-    expect(fixture.nativeElement.textContent).toContain('Leggi la documentazione');
+    expect(fixture.nativeElement.textContent).toContain(
+      'Leggi la documentazione',
+    );
   });
 });
