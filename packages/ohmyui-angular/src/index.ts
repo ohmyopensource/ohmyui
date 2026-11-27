@@ -24,3 +24,10 @@ export * from './lib/link/link';
 export * from './lib/pagination/pagination';
 export * from './lib/tabs/tabs';
 export * from './lib/text/text';
+export {
+  OhmyuiI18n,
+  provideOhmyuiI18n,
+  type OhmyuiI18nConfig,
+  type OhmyuiMessagesOverride,
+} from './lib/i18n/i18n';
+export type { OhmyuiLocale, OhmyuiMessages } from './lib/i18n/messages';

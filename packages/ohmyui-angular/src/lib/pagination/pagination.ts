@@ -24,6 +24,7 @@ import {
   ChangeDetectionStrategy,
   OnChanges,
   SimpleChanges,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -35,6 +36,8 @@ import {
   LucideDynamicIcon,
   LucideIconData,
 } from '@lucide/angular';
+import { OhmyuiI18n, interpolate } from '../i18n/i18n';
+import { OhmyuiMessages } from '../i18n/messages';
 
 /** Color of the current page in a pagination. */
 export type PaginationVariant =
@@ -71,6 +74,8 @@ export type PageItem =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginationComponent implements OnChanges {
+  private readonly i18n = inject(OhmyuiI18n);
+
   /** Icon of the first page button. */
   readonly iconFirst: LucideIconData = LucideChevronsLeft.icon;
   /** Icon of the previous page button. */
@@ -194,6 +199,20 @@ export class PaginationComponent implements OnChanges {
       lg: 18,
     };
     return map[this.size];
+  }
+
+  /** Texts of the pagination in the current language. */
+  get texts(): OhmyuiMessages['pagination'] {
+    return this.i18n.messages().pagination;
+  }
+
+  /**
+   * Accessible label of the button of a page, in the current language.
+   *
+   * @param page Page of the button.
+   */
+  pageLabel(page: number): string {
+    return interpolate(this.texts.page, { page });
   }
 
   /** CSS classes of the navigation element. */

@@ -52,14 +52,15 @@ pnpm install
 
 ### Commands
 
-| Command                               | What it does                                                             |
-| ------------------------------------- | ------------------------------------------------------------------------ |
-| `pnpm nx storybook ohmyui-angular`    | Starts Storybook for the Angular components (it builds the tokens first) |
-| `pnpm nx storybook ohmyui-react`      | Starts Storybook for the React components                                |
-| `pnpm nx test ohmyui-angular`         | Runs the unit tests of the Angular library                               |
-| `pnpm nx build ohmyui-angular`        | Builds the Angular library and checks every template in strict mode      |
-| `pnpm nx build ohmyui-tokens`         | Generates the CSS and Dart tokens in `packages/ohmyui-tokens/build`      |
-| `pnpm nx run-many -t lint test build` | Runs lint, tests and builds of every project, as the CI does             |
+| Command                               | What it does                                                                   |
+| ------------------------------------- | ------------------------------------------------------------------------------ |
+| `pnpm nx storybook ohmyui-angular`    | Starts Storybook for the Angular components (it builds the tokens first)       |
+| `pnpm nx storybook ohmyui-react`      | Starts Storybook for the React components                                      |
+| `pnpm nx test ohmyui-angular`         | Runs the unit tests of the Angular library                                     |
+| `pnpm nx build ohmyui-angular`        | Builds the Angular library and checks every template in strict mode            |
+| `pnpm nx build ohmyui-tokens`         | Generates the CSS and Dart tokens in `packages/ohmyui-tokens/build`            |
+| `pnpm nx run ohmyui-i18n:generate`    | Writes the translations of `packages/ohmyui-i18n/src` into the Angular library |
+| `pnpm nx run-many -t lint test build` | Runs lint, tests and builds of every project, as the CI does                   |
 
 For the Flutter package, run `flutter analyze` and `flutter test` in `packages/ohmyui_flutter`.
 
@@ -71,15 +72,17 @@ For the Flutter package, run `flutter analyze` and `flutter test` in `packages/o
    - `<component>.stories.ts`: stories under `Components/<Name>`, with a `Playground` story first;
    - `<component>.spec.ts`: unit tests.
 2. Style it only with the design tokens. For the dark theme use `:host-context(.dark-theme)`, never `prefers-color-scheme`.
-3. Export the component and its public types from `packages/ohmyui-angular/src/index.ts`.
-4. Run `pnpm nx run-many -t lint test build`. Storybook does not check templates strictly: only the library build catches template errors.
-5. Describe the change for users of the library under `## [Unreleased]` in `CHANGELOG.md`.
+3. Write no interface text in the component, not even an `aria-label`: add it to `packages/ohmyui-i18n/src/en.json` and `it.json`, under the name of the component, run `pnpm nx run ohmyui-i18n:generate` and read it from `OhmyuiI18n`.
+4. Export the component and its public types from `packages/ohmyui-angular/src/index.ts`.
+5. Run `pnpm nx run-many -t lint test build`. Storybook does not check templates strictly: only the library build catches template errors.
+6. Describe the change for users of the library under `## [Unreleased]` in `CHANGELOG.md`.
 
 ---
 
 ## Key rules
 
 - **Use design tokens** — never hardcode colors, spacing or typography. Use the `--ohmyui-*` custom properties in CSS and `OhMyUITokens.*` in Dart.
+- **Translate every text** — the texts of the components live in `packages/ohmyui-i18n/src`, in English and Italian.
 - **One component per PR** — keep PRs focused and easy to review.
 - **Follow commit conventions** — see [commit conventions](https://github.com/ohmyopensource/ohmyopensource-guidelines/blob/main/git/commit-conventions.md).
 - **Never push to `main` or `dev` directly** — always open a Pull Request.

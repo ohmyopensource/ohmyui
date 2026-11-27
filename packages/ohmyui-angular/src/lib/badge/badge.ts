@@ -21,9 +21,11 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideDynamicIcon, LucideIconData, LucideX } from '@lucide/angular';
+import { OhmyuiI18n, interpolate } from '../i18n/i18n';
 
 /** Color variant of a badge. */
 export type BadgeVariant =
@@ -55,6 +57,8 @@ export type BadgeIconPosition = 'left' | 'right';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeComponent {
+  private readonly i18n = inject(OhmyuiI18n);
+
   /** Icon of the remove button. */
   readonly closeIcon = LucideX;
 
@@ -100,6 +104,14 @@ export class BadgeComponent {
   get closeSize(): number {
     const map: Record<BadgeSize, number> = { xs: 9, sm: 10, md: 11, lg: 12 };
     return map[this.size];
+  }
+
+  /** Accessible label of the remove button, in the current language. */
+  get removeLabel(): string {
+    const texts = this.i18n.messages().badge;
+    return this.label
+      ? interpolate(texts.remove, { label: this.label })
+      : texts.removeUnlabeled;
   }
 
   /** Text of the counter, capped at `maxCount+`. */

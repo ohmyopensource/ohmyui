@@ -83,7 +83,7 @@ describe('EmailComponent', () => {
     fixture.detectChanges();
     const anchor: HTMLAnchorElement = fixture.nativeElement.querySelector('a');
     expect(anchor.getAttribute('aria-label')).toBe(
-      'Invia email a ciao@ohmyopensource.dev',
+      'Send an email to ciao@ohmyopensource.dev',
     );
   });
 

@@ -105,7 +105,7 @@
       (blur)="onBlur($event)"
     >
       <option value="" disabled [selected]="!value">
-        {{ selectPlaceholder }}
+        {{ selectPlaceholderText }}
       </option>
       @for (opt of options; track opt.value) {
       <option
@@ -123,7 +123,7 @@
     <button
       class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right ohmyui-input-wrapper__icon--btn"
       type="button"
-      [attr.aria-label]="showPassword() ? 'Nascondi password' : 'Mostra password'"
+      [attr.aria-label]="passwordToggleLabel"
       (click)="togglePassword()"
     >
       <svg
@@ -137,7 +137,7 @@
     <button
       class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right ohmyui-input-wrapper__icon--btn"
       type="button"
-      aria-label="Svuota campo"
+      [attr.aria-label]="clearLabel"
       (click)="onClear()"
     >
       <svg [lucideIcon]="iconClear" [size]="iconSize"></svg>

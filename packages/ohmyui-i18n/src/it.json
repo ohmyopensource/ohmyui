@@ -1,0 +1,35 @@
+{
+  "badge": {
+    "remove": "Rimuovi {label}",
+    "removeUnlabeled": "Rimuovi"
+  },
+  "email": {
+    "send": "Invia email a {email}"
+  },
+  "input": {
+    "selectPlaceholder": "Seleziona",
+    "showPassword": "Mostra password",
+    "hidePassword": "Nascondi password",
+    "clear": "Svuota campo"
+  },
+  "link": {
+    "opensInNewTab": "{label} (si apre in una nuova scheda)"
+  },
+  "pagination": {
+    "label": "Navigazione pagine",
+    "rows": "Righe",
+    "controls": "Controlli pagina",
+    "firstPage": "Prima pagina",
+    "previousPage": "Pagina precedente",
+    "page": "Pagina {page}",
+    "nextPage": "Pagina successiva",
+    "lastPage": "Ultima pagina",
+    "goTo": "Vai a",
+    "goToPage": "Vai alla pagina",
+    "of": "di",
+    "noResults": "Nessun risultato"
+  },
+  "tabs": {
+    "label": "Navigazione tab"
+  }
+}

@@ -17,13 +17,13 @@
 
 <nav
   [ngClass]="hostClasses"
-  [attr.aria-label]="'Navigazione pagine'"
+  [attr.aria-label]="texts.label"
   [attr.aria-disabled]="disabled ? 'true' : null"
 >
   <!-- Page size selector -->
   @if (showPageSizeSelector) {
   <label class="ohmyui-pagination__size-label">
-    <span class="ohmyui-pagination__size-text">Righe</span>
+    <span class="ohmyui-pagination__size-text">{{ texts.rows }}</span>
     <select
       class="ohmyui-pagination__size-select"
       [disabled]="disabled"
@@ -40,7 +40,7 @@
   <div
     class="ohmyui-pagination__controls"
     role="group"
-    aria-label="Controlli pagina"
+    [attr.aria-label]="texts.controls"
   >
     <!-- First page -->
     @if (showFirstLast) {
@@ -48,7 +48,7 @@
       class="ohmyui-pagination__btn ohmyui-pagination__btn--icon ohmyui-pagination__btn--first-last"
       type="button"
       [disabled]="isFirst || disabled"
-      [attr.aria-label]="'Prima pagina'"
+      [attr.aria-label]="texts.firstPage"
       (click)="goFirst()"
     >
       <svg [lucideIcon]="iconFirst" [size]="iconSize"></svg>
@@ -59,7 +59,7 @@
       class="ohmyui-pagination__btn ohmyui-pagination__btn--icon"
       type="button"
       [disabled]="isFirst || disabled"
-      [attr.aria-label]="'Pagina precedente'"
+      [attr.aria-label]="texts.previousPage"
       (click)="goPrev()"
     >
       <svg [lucideIcon]="iconPrev" [size]="iconSize"></svg>
@@ -74,7 +74,7 @@
         type="button"
         role="listitem"
         [disabled]="disabled"
-        [attr.aria-label]="'Pagina ' + item.value"
+        [attr.aria-label]="pageLabel(item.value)"
         [attr.aria-current]="item.value === currentPage ? 'page' : null"
         (click)="goTo(item.value)"
       >
@@ -99,7 +99,7 @@
       class="ohmyui-pagination__btn ohmyui-pagination__btn--icon"
       type="button"
       [disabled]="isLast || disabled"
-      [attr.aria-label]="'Pagina successiva'"
+      [attr.aria-label]="texts.nextPage"
       (click)="goNext()"
     >
       <svg [lucideIcon]="iconNext" [size]="iconSize"></svg>
@@ -110,7 +110,7 @@
       class="ohmyui-pagination__btn ohmyui-pagination__btn--icon ohmyui-pagination__btn--first-last"
       type="button"
       [disabled]="isLast || disabled"
-      [attr.aria-label]="'Ultima pagina'"
+      [attr.aria-label]="texts.lastPage"
       (click)="goLast()"
     >
       <svg [lucideIcon]="iconLast" [size]="iconSize"></svg>
@@ -120,7 +120,7 @@
   <!-- Jump to page -->
   @if (showJumpToPage) {
   <label class="ohmyui-pagination__jump">
-    <span class="ohmyui-pagination__jump-text">Vai a</span>
+    <span class="ohmyui-pagination__jump-text">{{ texts.goTo }}</span>
     <input
       class="ohmyui-pagination__jump-input"
       type="number"
@@ -130,7 +130,7 @@
       [(ngModel)]="jumpValue"
       (keydown)="onJumpKeydown($event)"
       (blur)="onJump()"
-      [attr.aria-label]="'Vai alla pagina'"
+      [attr.aria-label]="texts.goToPage"
     />
   </label>
   }
@@ -140,12 +140,12 @@
     <span class="ohmyui-pagination__info-range"
       >{{ rangeStart }}–{{ rangeEnd }}</span
     >
-    di
+    {{ texts.of }}
     <span class="ohmyui-pagination__info-total">{{ totalItems }}</span>
   </span>
   } @if (showInfo && totalItems === 0) {
   <span class="ohmyui-pagination__info ohmyui-pagination__info--empty">
-    Nessun risultato
+    {{ texts.noResults }}
   </span>
   }
 </nav>

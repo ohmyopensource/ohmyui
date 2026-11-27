@@ -17,7 +17,7 @@
 <div
   [class]="wrapperClasses"
   role="tablist"
-  [attr.aria-label]="'Navigazione tab'"
+  [attr.aria-label]="listLabel"
   [attr.aria-orientation]="vertical ? 'vertical' : 'horizontal'"
 >
   @for (tab of tabs; track trackById($index, tab)) {

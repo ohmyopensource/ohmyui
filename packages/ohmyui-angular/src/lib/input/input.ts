@@ -43,6 +43,7 @@ import {
   LucideCircleAlert,
   LucideCircleCheck,
 } from '@lucide/angular';
+import { OhmyuiI18n } from '../i18n/i18n';
 
 let nextInputId = 0;
 
@@ -99,6 +100,7 @@ export interface InputSelectOption {
 })
 export class InputComponent implements ControlValueAccessor {
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly i18n = inject(OhmyuiI18n);
   /** Icon of the button that shows the password. */
   readonly iconEye: LucideIconData = LucideEye.icon;
   /** Icon of the button that hides the password. */
@@ -129,8 +131,11 @@ export class InputComponent implements ControlValueAccessor {
   @Input() successMessage = '';
   /** Options of a select. */
   @Input() options: InputSelectOption[] = [];
-  /** Text of the empty first option of a select. */
-  @Input() selectPlaceholder = 'Seleziona';
+  /**
+   * Text of the empty first option of a select. When empty, the text of the
+   * current language is used.
+   */
+  @Input() selectPlaceholder = '';
   /** Color of the border and the focus ring when focused. */
   @Input() variant: InputVariant = 'primary';
   /** Size of the field. */
@@ -293,6 +298,24 @@ export class InputComponent implements ControlValueAccessor {
   /** Whether the password toggle is shown. */
   get showPasswordToggle(): boolean {
     return this.type === 'password';
+  }
+
+  /** Text of the empty first option of a select. */
+  get selectPlaceholderText(): string {
+    return (
+      this.selectPlaceholder || this.i18n.messages().input.selectPlaceholder
+    );
+  }
+
+  /** Accessible label of the password toggle, in the current language. */
+  get passwordToggleLabel(): string {
+    const texts = this.i18n.messages().input;
+    return this.showPassword() ? texts.hidePassword : texts.showPassword;
+  }
+
+  /** Accessible label of the clear button, in the current language. */
+  get clearLabel(): string {
+    return this.i18n.messages().input.clear;
   }
 
   /**

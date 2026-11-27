@@ -19,6 +19,13 @@ number.
   `--ohmyui-input-select-arrow`, `--ohmyui-text-code-bg`), so they can be
   customized for each theme.
 - `--ohmyui-font-weight-extrabold` (800) completes the font weight scale.
+- Translations of the texts that the Angular components write themselves, such
+  as the labels for screen readers and the texts of Pagination, in English and
+  Italian. The texts are in English by default;
+  `provideOhmyuiI18n({ locale: 'it' })` in the providers of the application
+  switches them to Italian, its `messages` option replaces single texts for
+  each language, and `OhmyuiI18n.setLocale()` changes the language while the
+  application runs.
 
 ### Changed
 
@@ -38,6 +45,11 @@ number.
   `--ohmyui-font-size-6xl`, are in `rem` instead of `px`, so text follows the
   font size set in the browser. With the default root font size of 16px the
   sizes do not change (`xs` is `0.6875rem`, that is 11px).
+- Badge, Email, Input, Link, Pagination and Tabs write their own texts in
+  English by default instead of Italian: the labels for screen readers, the
+  placeholder of the select of Input and the texts of Pagination. The
+  `selectPlaceholder` input of Input is empty by default, so the text of the
+  current language is used.
 - `--ohmyui-font-family-mono` is the monospace font of the operating system
   (`ui-monospace`, SF Mono, Menlo, Consolas or Liberation Mono, with
   `monospace` as the last fallback) instead of JetBrains Mono, which the

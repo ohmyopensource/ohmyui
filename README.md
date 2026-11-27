@@ -9,6 +9,7 @@ OhMyUI! is the design system of OhMyOpenSource!. This repository is an Nx monore
 | Package                          | Folder                    | Contents                                                                                                                        |
 | -------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `@ohmyopensource/ohmyui-tokens`  | `packages/ohmyui-tokens`  | Design tokens generated with Style Dictionary: CSS custom properties for the light and dark theme, Dart constants and the fonts |
+| `ohmyui-i18n`                    | `packages/ohmyui-i18n`    | Texts of the components in English and Italian, the single source of the translations of every library; not published           |
 | `@ohmyopensource/ohmyui-angular` | `packages/ohmyui-angular` | Angular components                                                                                                              |
 | `ohmyui-react`                   | `packages/ohmyui-react`   | React components, at an early stage: Button and Badge                                                                           |
 | `ohmyui_flutter`                 | `packages/ohmyui_flutter` | Flutter widgets, at an early stage: Button and Badge                                                                            |

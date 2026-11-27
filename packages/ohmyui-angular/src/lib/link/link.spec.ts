@@ -87,10 +87,8 @@ describe('LinkComponent', () => {
   it('should return an accessible label mentioning the new tab for external + _blank', () => {
     component.mode = 'external';
     component.target = '_blank';
-    component.label = 'Vai su GitHub';
-    expect(component.accessibleLabel).toBe(
-      'Vai su GitHub (si apre in una nuova scheda)',
-    );
+    component.label = 'GitHub';
+    expect(component.accessibleLabel).toBe('GitHub (opens in a new tab)');
   });
 
   it('should return null accessibleLabel for internal links', () => {

@@ -15,10 +15,16 @@
  * icon for external links.
  */
 
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideDynamicIcon, LucideIconData, LucideLink } from '@lucide/angular';
+import { OhmyuiI18n, interpolate } from '../i18n/i18n';
 
 /**
  * Kind of link: a router link (`internal`) or a link to another site
@@ -45,6 +51,8 @@ export type LinkSize = 'sm' | 'md' | 'lg';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
+  private readonly i18n = inject(OhmyuiI18n);
+
   /** Icon shown after the text of an external link. */
   readonly externalIcon: LucideIconData = LucideLink.icon;
 
@@ -90,11 +98,14 @@ export class LinkComponent {
 
   /**
    * Accessible label of an external link that opens a new tab: the label
-   * followed by a note about the new tab. Null for the other links.
+   * followed by a note about the new tab, in the current language. Null for
+   * the other links.
    */
   get accessibleLabel(): string | null {
     if (this.mode === 'external' && this.target === '_blank') {
-      return `${this.label} (si apre in una nuova scheda)`;
+      return interpolate(this.i18n.messages().link.opensInNewTab, {
+        label: this.label,
+      });
     }
     return null;
   }

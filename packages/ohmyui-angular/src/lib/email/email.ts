@@ -15,9 +15,15 @@
  * three sizes.
  */
 
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideDynamicIcon, LucideIconData, LucideMail } from '@lucide/angular';
+import { OhmyuiI18n, interpolate } from '../i18n/i18n';
 
 /** Color variant of an email link. */
 export type EmailVariant = 'primary' | 'secondary' | 'neutral' | 'ghost';
@@ -37,6 +43,8 @@ export type EmailSize = 'sm' | 'md' | 'lg';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmailComponent {
+  private readonly i18n = inject(OhmyuiI18n);
+
   /** Envelope icon shown before the text. */
   readonly mailIcon: LucideIconData = LucideMail.icon;
 
@@ -66,6 +74,11 @@ export class EmailComponent {
   /** Visible text: the label, or the address. */
   get displayLabel(): string {
     return this.label || this.email;
+  }
+
+  /** Accessible label with the full address, in the current language. */
+  get accessibleLabel(): string {
+    return interpolate(this.i18n.messages().email.send, { email: this.email });
   }
 
   /** `mailto:` URL with the subject and body, if set. */

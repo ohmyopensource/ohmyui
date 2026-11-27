@@ -24,9 +24,11 @@ import {
   ViewChildren,
   QueryList,
   ElementRef,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideDynamicIcon, LucideIconData } from '@lucide/angular';
+import { OhmyuiI18n } from '../i18n/i18n';
 
 /** Tab of a tab list. */
 export interface TabItem {
@@ -76,6 +78,8 @@ export type TabStyle = 'line' | 'pill' | 'card' | 'underline';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsComponent {
+  private readonly i18n = inject(OhmyuiI18n);
+
   @ViewChildren('tabButton') private tabButtons?: QueryList<
     ElementRef<HTMLButtonElement>
   >;
@@ -117,6 +121,11 @@ export class TabsComponent {
   /** Size in pixels of the icons for the current size. */
   get iconSize(): number {
     return { sm: 14, md: 16, lg: 18 }[this.size];
+  }
+
+  /** Accessible label of the tab list, in the current language. */
+  get listLabel(): string {
+    return this.i18n.messages().tabs.label;
   }
 
   /** CSS classes of the tab list. */
