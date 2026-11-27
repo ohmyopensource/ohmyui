@@ -43,12 +43,12 @@ const meta: Meta<PaginationComponent> = {
 export default meta;
 type Story = StoryObj<PaginationComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 export const Playground: Story = {
   args: { totalItems: 237, pageSize: 10, currentPage: 4 },
 };
 
-/* ── Variants ────────────────────────────────── */
+/* Variants */
 export const Primary: Story = {
   args: { totalItems: 237, currentPage: 4, variant: 'primary' },
 };
@@ -62,7 +62,7 @@ export const Error: Story = {
   args: { totalItems: 237, currentPage: 4, variant: 'error' },
 };
 
-/* ── Emphasis ────────────────────────────────── */
+/* Emphasis */
 export const EmphasisFilled: Story = {
   name: 'Emphasis / Filled',
   args: { totalItems: 237, currentPage: 4, emphasis: 'filled' },
@@ -76,7 +76,7 @@ export const EmphasisMinimal: Story = {
   args: { totalItems: 237, currentPage: 4, emphasis: 'minimal' },
 };
 
-/* ── Sizes ───────────────────────────────────── */
+/* Sizes */
 export const SizeXs: Story = {
   name: 'Size / XS',
   args: { totalItems: 237, currentPage: 4, size: 'xs' },
@@ -86,7 +86,7 @@ export const SizeLg: Story = {
   args: { totalItems: 237, currentPage: 4, size: 'lg' },
 };
 
-/* ── Ellipsis behavior ───────────────────────── */
+/* Ellipsis behavior */
 export const ManyPages: Story = {
   name: 'Many pages (ellipsis in the middle)',
   args: {
@@ -114,7 +114,7 @@ export const FewPages: Story = {
   args: { totalItems: 35, pageSize: 10, currentPage: 2 },
 };
 
-/* ── Features ────────────────────────────────── */
+/* Features */
 export const WithJumpToPage: Story = {
   name: 'With jump-to-page',
   args: {
@@ -133,7 +133,7 @@ export const NoFirstLast: Story = {
   args: { totalItems: 237, currentPage: 4, showFirstLast: false },
 };
 
-/* ── States ──────────────────────────────────── */
+/* States */
 export const Disabled: Story = {
   args: { totalItems: 237, currentPage: 4, disabled: true },
 };
@@ -142,7 +142,7 @@ export const EmptyResults: Story = {
   args: { totalItems: 0, currentPage: 1 },
 };
 
-/* ── Accessibility ────────────────────────────── */
+/* Accessibility */
 export const AccessibleCurrentPage: Story = {
   name: 'Accessibility / Current page is announced',
   args: { totalItems: 237, currentPage: 4 },

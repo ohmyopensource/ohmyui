@@ -9,11 +9,11 @@
 -->
 
 <!--
-@file link.html
-@description Template for LinkComponent rendering either an internal
-Angular router link or an external hyperlink, with an optional trailing
-icon shown only for external links.
+  @file link.html
+  @description Template of LinkComponent: an internal router link or an external
+  link, with the trailing icon only on external links.
 -->
+
 @if (mode === 'internal') {
 <a [routerLink]="href" [ngClass]="linkClasses">
   <span class="ohmyui-inline-link__text">{{ label }}</span>

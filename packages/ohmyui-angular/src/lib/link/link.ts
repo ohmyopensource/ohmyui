@@ -10,29 +10,31 @@
 
 /**
  * @file link.ts
- * @description Reusable inline link component for standalone or in-text
- * references, supporting internal routing, external navigation, and an
- * optional trailing external-link icon.
+ * @description LinkComponent (`ohmyui-link`): an inline link, internal or
+ * external, in four color variants and three sizes, with an optional trailing
+ * icon for external links.
  */
+
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LucideDynamicIcon, LucideIconData, LucideLink } from '@lucide/angular';
 
-/** Operating mode of the link. */
+/**
+ * Kind of link: a router link (`internal`) or a link to another site
+ * (`external`).
+ */
 export type LinkMode = 'internal' | 'external';
-/** Available visual variants for the link text color. */
+/** Color variant of a link. */
 export type LinkVariant = 'primary' | 'secondary' | 'neutral' | 'ghost';
-/** Available sizes for the link text and icon. */
+/** Size of a link. */
 export type LinkSize = 'sm' | 'md' | 'lg';
 
 /**
- * Inline link component used for standalone references or links embedded
- * within body text, such as "visit our GitHub" or "read the FAQ".
+ * Inline link, on its own or inside body text.
  *
- * NOTA: importando RouterModule, ohmyui-angular acquisisce una dipendenza
- * da @angular/router anche per chi usa solo mode="external" — stesso
- * compromesso già segnalato per Button (mode="link-internal").
+ * It imports RouterModule for internal links, so it requires `@angular/router`
+ * even when only `mode="external"` is used.
  */
 @Component({
   selector: 'ohmyui-link',
@@ -43,52 +45,52 @@ export type LinkSize = 'sm' | 'md' | 'lg';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
+  /** Icon shown after the text of an external link. */
   readonly externalIcon: LucideIconData = LucideLink.icon;
 
   /**
-   * Destination of the link. Used as routerLink when mode is 'internal',
-   * or as href when mode is 'external'.
+   * Destination of the link: the router path when `mode` is `internal`, or
+   * the URL when `mode` is `external`.
    */
   @Input({ required: true }) href = '';
-  /** Text displayed inside the link. */
+  /** Text of the link. */
   @Input() label = '';
-  /** Operating mode of the link. */
+  /** Kind of link. */
   @Input() mode: LinkMode = 'internal';
-  /** Navigation target used for external links. */
+  /** Browsing context of an external link. */
   @Input() target: '_self' | '_blank' = '_blank';
-  /** Visual variant applied to the link text color. */
+  /** Color variant. */
   @Input() variant: LinkVariant = 'primary';
-  /** Size applied to text and icon. */
+  /** Size of the text and the icon. */
   @Input() size: LinkSize = 'md';
   /**
-   * Shows the trailing external-link icon. Defaults to true for external
-   * links and is ignored for internal links.
+   * Whether an external link shows the trailing icon. Internal links never
+   * show it.
    */
   @Input() showExternalIcon = true;
 
-  /** Returns the icon size in pixels according to the configured size. */
+  /** Size in pixels of the icon for the current size. */
   get iconSize(): number {
     const map: Record<LinkSize, number> = { sm: 11, md: 13, lg: 15 };
     return map[this.size];
   }
 
-  /** Indicates whether the trailing external icon should be rendered. */
+  /** Whether the trailing icon is shown. */
   get displayExternalIcon(): boolean {
     return this.mode === 'external' && this.showExternalIcon;
   }
 
   /**
-   * Returns the appropriate rel attribute for external links opened in a
-   * new tab, preventing reverse tabnabbing.
+   * `rel` of an external link: `noopener noreferrer` when it opens a new tab,
+   * against reverse tabnabbing.
    */
   get externalRel(): string {
     return this.target === '_blank' ? 'noopener noreferrer' : '';
   }
 
   /**
-   * Returns an accessible label warning screen reader users that the link
-   * opens in a new tab, when applicable. Appended to the visible label via
-   * aria-label so the announcement stays accurate even if `label` changes.
+   * Accessible label of an external link that opens a new tab: the label
+   * followed by a note about the new tab. Null for the other links.
    */
   get accessibleLabel(): string | null {
     if (this.mode === 'external' && this.target === '_blank') {
@@ -97,7 +99,7 @@ export class LinkComponent {
     return null;
   }
 
-  /** Builds the CSS class map applied to the link element. */
+  /** CSS classes of the link element. */
   get linkClasses(): Record<string, boolean> {
     return {
       'ohmyui-inline-link': true,

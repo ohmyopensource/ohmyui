@@ -42,7 +42,7 @@ const meta: Meta<EmbedComponent> = {
 export default meta;
 type Story = StoryObj<EmbedComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 
 export const Playground: Story = {
   args: {
@@ -56,7 +56,7 @@ export const Playground: Story = {
   },
 };
 
-/* ── Real world examples ─────────────────────── */
+/* Real world examples */
 
 export const YouTubeEmbed: Story = {
   name: 'Example / YouTube',
@@ -99,7 +99,7 @@ export const CodeSandbox: Story = {
   },
 };
 
-/* ── States ──────────────────────────────────── */
+/* States */
 
 export const ErrorState: Story = {
   name: 'State / Error',
@@ -125,7 +125,7 @@ export const NoSrc: Story = {
   },
 };
 
-/* ── Variants ────────────────────────────────── */
+/* Variants */
 
 export const Flat: Story = {
   name: 'Variant / Flat',
@@ -163,7 +163,7 @@ export const ShadowLg: Story = {
   },
 };
 
-/* ── Sandbox levels ──────────────────────────── */
+/* Sandbox levels */
 
 export const SandboxStrict: Story = {
   name: 'Sandbox / Strict',
@@ -188,7 +188,7 @@ export const SandboxFull: Story = {
   },
 };
 
-/* ── Custom height ───────────────────────────── */
+/* Custom height */
 
 export const CustomHeight: Story = {
   name: 'Feature / Custom height',

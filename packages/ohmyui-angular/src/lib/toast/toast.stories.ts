@@ -35,7 +35,7 @@ const meta: Meta<ToastItemComponent> = {
 export default meta;
 type Story = StoryObj<ToastItemComponent>;
 
-/* ── Types ───────────────────────────────────── */
+/* Types */
 
 export const Success: Story = {
   name: 'Type / Success',
@@ -92,7 +92,7 @@ export const Neutral: Story = {
   },
 };
 
-/* ── Content ─────────────────────────────────── */
+/* Content */
 
 export const TitleOnly: Story = {
   name: 'Content / Title only',
@@ -111,7 +111,7 @@ export const MessageOnly: Story = {
   },
 };
 
-/* ── Features ────────────────────────────────── */
+/* Features */
 
 export const Persistent: Story = {
   name: 'Feature / Persistent (no timer)',

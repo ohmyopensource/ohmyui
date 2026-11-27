@@ -10,22 +10,23 @@
 
 /**
  * @file email.ts
- * @description Reusable mailto link component with optional leading icon,
- * consistent OhMyUI! styling, and automatic accessibility attributes.
+ * @description EmailComponent (`ohmyui-email`): a mailto link with an optional
+ * envelope icon and prefilled subject and body, in four color variants and
+ * three sizes.
  */
+
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideDynamicIcon, LucideIconData, LucideMail } from '@lucide/angular';
 
-/** Available visual variants for the email link. */
+/** Color variant of an email link. */
 export type EmailVariant = 'primary' | 'secondary' | 'neutral' | 'ghost';
-/** Available sizes for the email link text and icon. */
+/** Size of an email link. */
 export type EmailSize = 'sm' | 'md' | 'lg';
 
 /**
- * Mailto link component used to render an email address consistently
- * across the application, with optional icon, subject/body prefill,
- * and accessible labeling.
+ * Mailto link. Its accessible label always contains the full address, even
+ * with a custom label.
  */
 @Component({
   selector: 'ohmyui-email',
@@ -36,40 +37,38 @@ export type EmailSize = 'sm' | 'md' | 'lg';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmailComponent {
+  /** Envelope icon shown before the text. */
   readonly mailIcon: LucideIconData = LucideMail.icon;
 
-  /**
-   * Email address used to build the mailto link and as displayed text
-   * when no custom label is provided.
-   */
+  /** Email address of the link, also shown when `label` is empty. */
   @Input({ required: true }) email = '';
-  /** Optional custom label displayed instead of the raw email address. */
+  /** Text shown instead of the address. */
   @Input() label = '';
-  /** Optional subject prefilled in the mailto link. */
+  /** Subject prefilled in the email. */
   @Input() subject = '';
-  /** Optional body prefilled in the mailto link. */
+  /** Body prefilled in the email. */
   @Input() body = '';
-  /** Visual variant applied to the link text and icon color. */
+  /** Color variant. */
   @Input() variant: EmailVariant = 'primary';
-  /** Size applied to text and icon. */
+  /** Size of the text and the icon. */
   @Input() size: EmailSize = 'md';
-  /** Shows the leading mail icon. */
+  /** Whether the envelope icon is shown. */
   @Input() showIcon = true;
-  /** Applies an underline on hover instead of always-on underline. */
+  /** Whether the text is underlined on hover. */
   @Input() underline = true;
 
-  /** Returns the icon size in pixels according to the configured size. */
+  /** Size in pixels of the icon for the current size. */
   get iconSize(): number {
     const map: Record<EmailSize, number> = { sm: 12, md: 14, lg: 16 };
     return map[this.size];
   }
 
-  /** Returns the text displayed inside the link. */
+  /** Visible text: the label, or the address. */
   get displayLabel(): string {
     return this.label || this.email;
   }
 
-  /** Builds the mailto href, including optional subject and body query params. */
+  /** `mailto:` URL with the subject and body, if set. */
   get mailtoHref(): string {
     const params = new URLSearchParams();
     if (this.subject) params.set('subject', this.subject);
@@ -78,7 +77,7 @@ export class EmailComponent {
     return `mailto:${this.email}${query ? '?' + query : ''}`;
   }
 
-  /** Builds the CSS class map applied to the link element. */
+  /** CSS classes of the link element. */
   get emailClasses(): Record<string, boolean> {
     return {
       'ohmyui-email-link': true,

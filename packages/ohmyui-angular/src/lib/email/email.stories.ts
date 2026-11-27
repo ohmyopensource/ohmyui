@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file email.stories.ts
+ * @description Storybook stories of EmailComponent: variants, sizes, custom
+ * label, icon, underline, prefilled subject and body, and the accessibility
+ * notes.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { EmailComponent } from './email';
 
@@ -34,83 +41,83 @@ const meta: Meta<EmailComponent> = {
 export default meta;
 type Story = StoryObj<EmailComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 export const Playground: Story = {
-  args: { email: 'ciao@ohmyopensource.dev', variant: 'primary', size: 'md' },
+  args: { email: 'hello@example.com', variant: 'primary', size: 'md' },
 };
 
-/* ── Variants ────────────────────────────────── */
+/* Variants */
 export const Primary: Story = {
-  args: { email: 'ciao@ohmyopensource.dev', variant: 'primary' },
+  args: { email: 'hello@example.com', variant: 'primary' },
 };
 export const Secondary: Story = {
-  args: { email: 'ciao@ohmyopensource.dev', variant: 'secondary' },
+  args: { email: 'hello@example.com', variant: 'secondary' },
 };
 export const Neutral: Story = {
-  args: { email: 'ciao@ohmyopensource.dev', variant: 'neutral' },
+  args: { email: 'hello@example.com', variant: 'neutral' },
 };
 export const Ghost: Story = {
-  args: { email: 'ciao@ohmyopensource.dev', variant: 'ghost' },
+  args: { email: 'hello@example.com', variant: 'ghost' },
 };
 
-/* ── Sizes ───────────────────────────────────── */
+/* Sizes */
 export const SizeSm: Story = {
   name: 'Size / SM',
-  args: { email: 'ciao@ohmyopensource.dev', size: 'sm' },
+  args: { email: 'hello@example.com', size: 'sm' },
 };
 export const SizeMd: Story = {
   name: 'Size / MD',
-  args: { email: 'ciao@ohmyopensource.dev', size: 'md' },
+  args: { email: 'hello@example.com', size: 'md' },
 };
 export const SizeLg: Story = {
   name: 'Size / LG',
-  args: { email: 'ciao@ohmyopensource.dev', size: 'lg' },
+  args: { email: 'hello@example.com', size: 'lg' },
 };
 
-/* ── States ──────────────────────────────────── */
+/* States */
 export const WithLabel: Story = {
   name: 'With custom label',
-  args: { email: 'support@ohmyopensource.dev', label: 'Contatta il supporto' },
+  args: { email: 'support@example.com', label: 'Contact support' },
 };
 export const NoIcon: Story = {
   name: 'Without icon',
-  args: { email: 'ciao@ohmyopensource.dev', showIcon: false },
+  args: { email: 'hello@example.com', showIcon: false },
 };
 export const NoUnderline: Story = {
   name: 'Without hover underline',
-  args: { email: 'ciao@ohmyopensource.dev', underline: false },
+  args: { email: 'hello@example.com', underline: false },
 };
 export const WithSubjectAndBody: Story = {
   name: 'With prefilled subject/body',
   args: {
-    email: 'support@ohmyopensource.dev',
-    label: 'Richiedi assistenza',
-    subject: 'Richiesta di supporto',
-    body: 'Ciao, ho bisogno di aiuto con...',
+    email: 'support@example.com',
+    label: 'Ask for help',
+    subject: 'Support request',
+    body: 'Hi, I need help with...',
   },
 };
 
-/* ── Accessibility ────────────────────────────── */
+/* Accessibility */
 export const AccessibleAriaLabel: Story = {
   name: 'Accessibility / Full address always announced',
-  args: { email: 'support@ohmyopensource.dev', label: 'Contattaci' },
+  args: { email: 'support@example.com', label: 'Contact us' },
   parameters: {
     docs: {
       description: {
         story:
-          'L\'`aria-label` include sempre l\'indirizzo email completo ("Invia email a support@ohmyopensource.dev"), anche quando il testo visibile è un `label` generico come "Contattaci" — uno screen reader annuncia comunque a chi si sta scrivendo, non solo l\'azione.',
+          'The `aria-label` always includes the full email address, also when the visible text is a generic `label` such as "Contact us": screen readers announce who you are writing to, not only the action.',
       },
     },
   },
 };
 export const AccessibleIconDecorative: Story = {
   name: 'Accessibility / Icon is decorative only',
-  args: { email: 'ciao@ohmyopensource.dev' },
+  args: { email: 'hello@example.com' },
   parameters: {
     docs: {
       description: {
         story:
-          "L'icona della busta ha `aria-hidden=\"true\"`: è puramente decorativa. Il significato del link passa interamente dal testo e dall'`aria-label`, non dall'icona.",
+          'The envelope icon has `aria-hidden="true"`: it is decorative. The meaning of the link comes entirely from the text and the `aria-label`, not from the icon.',
       },
     },
   },

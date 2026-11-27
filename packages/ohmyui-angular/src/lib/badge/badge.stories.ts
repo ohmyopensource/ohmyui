@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file badge.stories.ts
+ * @description Storybook stories of BadgeComponent: variants, sizes, shapes,
+ * icons, the count, removable and dot states, and the accessibility notes.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LucideHeart, LucideStar } from '@lucide/angular';
 import { BadgeComponent } from './badge';
@@ -163,12 +169,12 @@ export const DotOnly: Story = {
 /* Accessibility */
 export const AccessibleDotOnly: Story = {
   name: 'Accessibility / Dot without visible text',
-  args: { variant: 'success', dot: true, ariaLabel: 'Stato: online' },
+  args: { variant: 'success', dot: true, ariaLabel: 'Status: online' },
   parameters: {
     docs: {
       description: {
         story:
-          'Un badge "dot-only" non ha testo visibile: il componente calcola `aria-label` come `ariaLabel || label || null`, quindi senza un `ariaLabel` esplicito il badge risulterebbe invisibile a uno screen reader. Impostare sempre `ariaLabel` quando si usa `dot` senza `label`.',
+          'A dot-only badge has no visible text. The component sets `aria-label` to `ariaLabel || label || null`, so without an explicit `ariaLabel` a screen reader has nothing to announce. Always set `ariaLabel` when you use `dot` without `label`.',
       },
     },
   },
@@ -180,31 +186,31 @@ export const AccessibleRemovable: Story = {
     docs: {
       description: {
         story:
-          'Quando `removable` è true, il badge riceve `role="status"` per annunciare eventuali cambiamenti agli screen reader. Il pulsante di rimozione ha un `aria-label` dedicato ("Rimuovi " + label), indipendente dal testo visivo (una semplice "×").',
+          'When `removable` is true, the badge gets `role="status"`, so screen readers announce its changes. The remove button has its own `aria-label`, which names the badge it removes, independent of the visible "×".',
       },
     },
   },
 };
 export const AccessibleCount: Story = {
   name: 'Accessibility / Descriptive label for counters',
-  args: { variant: 'error', count: 12, ariaLabel: '12 notifiche non lette' },
+  args: { variant: 'error', count: 12, ariaLabel: '12 unread notifications' },
   parameters: {
     docs: {
       description: {
         story:
-          'In modalità contatore il testo visivo è solo il numero ("12"). Un numero isolato non è sempre comprensibile fuori contesto: fornire un `ariaLabel` descrittivo (es. "12 notifiche non lette") rende l\'annuncio dello screen reader autoesplicativo.',
+          'In count mode the visible text is only the number ("12"), which is not always clear out of context. A descriptive `ariaLabel`, such as "12 unread notifications", makes the screen reader announcement self-explanatory.',
       },
     },
   },
 };
 export const AccessibleIcon: Story = {
   name: 'Accessibility / Icon is decorative only',
-  args: { variant: 'warning', label: 'In revisione', icon: LucideStar.icon },
+  args: { variant: 'warning', label: 'In review', icon: LucideStar.icon },
   parameters: {
     docs: {
       description: {
         story:
-          'L\'icona è sempre marcata `aria-hidden="true"` nel template: è puramente decorativa. Il significato deve passare sempre dal testo (`label`) o da `ariaLabel` — mai affidarsi all\'icona da sola per comunicare informazioni.',
+          'The icon always has `aria-hidden="true"` in the template: it is decorative. The meaning must come from the text (`label`) or from `ariaLabel`; never rely on the icon alone.',
       },
     },
   },

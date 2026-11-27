@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file badge.spec.ts
+ * @description Unit tests of BadgeComponent: the defaults, the label, the count
+ * mode and its cap, the dot-only mode and the removed event.
+ */
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BadgeComponent } from './badge';

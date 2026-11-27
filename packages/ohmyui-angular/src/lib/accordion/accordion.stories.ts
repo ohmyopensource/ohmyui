@@ -98,7 +98,7 @@ const itemsWithDisabled: AccordionItem[] = [
   },
 ];
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 
 export const Playground: Story = {
   args: {
@@ -110,7 +110,7 @@ export const Playground: Story = {
   },
 };
 
-/* ── Variants ────────────────────────────────── */
+/* Variants */
 
 export const Default: Story = {
   name: 'Variant / Default',
@@ -142,7 +142,7 @@ export const Ghost: Story = {
   args: { items: baseItems, variant: 'ghost', size: 'md', defaultOpen: ['1'] },
 };
 
-/* ── Sizes ───────────────────────────────────── */
+/* Sizes */
 
 export const SizeSm: Story = {
   name: 'Size / SM',
@@ -174,7 +174,7 @@ export const SizeLg: Story = {
   },
 };
 
-/* ── Behavior ────────────────────────────────── */
+/* Behavior */
 
 export const SingleOpen: Story = {
   name: 'Behavior / Single open',
@@ -213,7 +213,7 @@ export const WithDisabled: Story = {
   },
 };
 
-/* ── Features ────────────────────────────────── */
+/* Features */
 
 export const WithBadges: Story = {
   name: 'Feature / With badges',
@@ -225,7 +225,7 @@ export const WithBadges: Story = {
   },
 };
 
-/* ── Combined ────────────────────────────────── */
+/* Combined */
 
 export const FilledMulti: Story = {
   name: 'Combined / Filled + Multi',

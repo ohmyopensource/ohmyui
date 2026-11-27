@@ -9,11 +9,13 @@
 -->
 
 <!--
-@file button.html
-@description Template for ButtonComponent providing multiple rendering
-modes, interactive states, icon support, and accessibility features.
+  @file button.html
+  @description Template of ButtonComponent: a native button, an internal router
+  link or an external link, which share the same content: spinner, check icon,
+  icons and label.
 -->
-<!-- Native Button -->
+
+<!-- Native button -->
 @if (mode === 'button') {
 <button
   [type]="type"
@@ -28,7 +30,8 @@ modes, interactive states, icon support, and accessibility features.
   <ng-container *ngTemplateOutlet="btnContent" />
 </button>
 }
-<!-- Internal Router Link -->
+
+<!-- Internal router link -->
 @if (mode === 'link-internal') {
 <a
   role="button"
@@ -47,7 +50,8 @@ modes, interactive states, icon support, and accessibility features.
   <ng-container *ngTemplateOutlet="btnContent" />
 </a>
 }
-<!-- External Link -->
+
+<!-- External link -->
 @if (mode === 'link-external') {
 <a
   role="button"
@@ -67,31 +71,32 @@ modes, interactive states, icon support, and accessibility features.
   <ng-container *ngTemplateOutlet="btnContent" />
 </a>
 }
-<!-- Shared Button Content -->
+
+<!-- Shared content -->
 <ng-template #btnContent>
-  <!-- Loading State -->
+  <!-- Loading state -->
   @if (loading) {
   <span class="ohmyui-btn__spinner" aria-hidden="true">
     <svg [lucideIcon]="loaderIcon" [size]="iconSize"></svg>
   </span>
   }
-  <!-- Success State -->
+  <!-- Succeeded state -->
   @if (succeeded && !loading) {
   <span class="ohmyui-btn__icon ohmyui-btn__icon--left" aria-hidden="true">
     <svg [lucideIcon]="succeededIcon" [size]="iconSize"></svg>
   </span>
   }
-  <!-- Leading Icon -->
+  <!-- Leading icon -->
   @if (icon && !loading && !succeeded && iconPosition === 'left') {
   <span class="ohmyui-btn__icon ohmyui-btn__icon--left" aria-hidden="true">
     <svg [lucideIcon]="icon" [size]="iconSize"></svg>
   </span>
   }
-  <!-- Button Label -->
+  <!-- Label -->
   @if (!iconOnly) {
   <span class="ohmyui-btn__label">{{ displayLabel }}</span>
   }
-  <!-- Trailing Icon -->
+  <!-- Trailing icon -->
   @if (icon && !loading && !succeeded && iconPosition === 'right') {
   <span class="ohmyui-btn__icon ohmyui-btn__icon--right" aria-hidden="true">
     <svg [lucideIcon]="icon" [size]="iconSize"></svg>

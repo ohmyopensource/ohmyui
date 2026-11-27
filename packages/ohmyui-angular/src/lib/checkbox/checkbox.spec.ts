@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file checkbox.spec.ts
+ * @description Unit tests of CheckboxComponent: the defaults, the label, the
+ * checked state and its event, the indeterminate state, the
+ * ControlValueAccessor methods and the error state.
+ */
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckboxComponent } from './checkbox';

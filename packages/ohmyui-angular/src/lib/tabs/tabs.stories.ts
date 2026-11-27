@@ -64,12 +64,12 @@ const meta: Meta<TabsComponent> = {
 export default meta;
 type Story = StoryObj<TabsComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 export const Playground: Story = {
   args: { tabs: basicTabs, activeTab: 'overview', tabStyle: 'line' },
 };
 
-/* ── Styles ──────────────────────────────────── */
+/* Styles */
 export const StyleLine: Story = {
   name: 'Style / Line',
   args: { tabs: basicTabs, activeTab: 'overview', tabStyle: 'line' },
@@ -87,7 +87,7 @@ export const StyleUnderline: Story = {
   args: { tabs: basicTabs, activeTab: 'overview', tabStyle: 'underline' },
 };
 
-/* ── Variants ────────────────────────────────── */
+/* Variants */
 export const Success: Story = {
   args: {
     tabs: basicTabs,
@@ -105,7 +105,7 @@ export const Error: Story = {
   },
 };
 
-/* ── Sizes ───────────────────────────────────── */
+/* Sizes */
 export const SizeSm: Story = {
   name: 'Size / SM',
   args: { tabs: basicTabs, activeTab: 'overview', size: 'sm' },
@@ -115,7 +115,7 @@ export const SizeLg: Story = {
   args: { tabs: basicTabs, activeTab: 'overview', size: 'lg' },
 };
 
-/* ── Features ────────────────────────────────── */
+/* Features */
 export const WithIconsAndBadge: Story = {
   name: 'With icons and badge',
   args: { tabs: iconTabs, activeTab: 'home', tabStyle: 'pill' },
@@ -131,7 +131,7 @@ export const WithDisabledTab: Story = {
   args: { tabs: withDisabled, activeTab: 'overview' },
 };
 
-/* ── Accessibility ────────────────────────────── */
+/* Accessibility */
 export const AccessibleKeyboardNav: Story = {
   name: 'Accessibility / Arrow key navigation',
   args: { tabs: basicTabs, activeTab: 'overview' },

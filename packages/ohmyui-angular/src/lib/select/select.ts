@@ -79,7 +79,7 @@ export class SelectComponent implements OnChanges {
   hintId = `ohmyui-select-hint-${Math.random().toString(36).slice(2, 7)}`;
   listboxId = `ohmyui-select-listbox-${Math.random().toString(36).slice(2, 7)}`;
 
-  /* ── Computed ─────────────────────────────── */
+  /* Computed */
 
   get selectedValues(): string[] {
     if (this.multiple) return Array.isArray(this.value) ? this.value : [];
@@ -131,7 +131,7 @@ export class SelectComponent implements OnChanges {
       .join(' ');
   }
 
-  /* ── Methods ──────────────────────────────── */
+  /* Methods */
 
   ngOnChanges(): void {
     if (!this.multiple && Array.isArray(this.value)) {

@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file checkbox-group.stories.ts
+ * @description Storybook stories of CheckboxGroupComponent: orientation,
+ * disabled and error states, and the accessibility notes.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { CheckboxGroupComponent } from './checkbox-group';
@@ -34,9 +40,9 @@ const meta: Meta<CheckboxGroupComponent> = {
 export default meta;
 type Story = StoryObj<CheckboxGroupComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 export const Playground: Story = {
-  args: { label: 'Preferenze notifiche', orientation: 'vertical' },
+  args: { label: 'Notification preferences', orientation: 'vertical' },
   render: (args) => ({
     props: args,
     template: `
@@ -45,43 +51,43 @@ export const Playground: Story = {
         [required]="required" [disabled]="disabled" [error]="error" [errorMessage]="errorMessage">
         <ohmyui-checkbox label="Email" [checked]="true"></ohmyui-checkbox>
         <ohmyui-checkbox label="SMS"></ohmyui-checkbox>
-        <ohmyui-checkbox label="Notifiche push"></ohmyui-checkbox>
+        <ohmyui-checkbox label="Push notifications"></ohmyui-checkbox>
       </ohmyui-checkbox-group>
     `,
   }),
 };
 
-/* ── Orientation ─────────────────────────────── */
+/* Orientation */
 export const Vertical: Story = {
-  args: { label: 'Interessi', orientation: 'vertical' },
+  args: { label: 'Interests', orientation: 'vertical' },
   render: (args) => ({
     props: args,
     template: `
       <ohmyui-checkbox-group [label]="label" [orientation]="orientation">
         <ohmyui-checkbox label="Design" [checked]="true"></ohmyui-checkbox>
-        <ohmyui-checkbox label="Sviluppo" [checked]="true"></ohmyui-checkbox>
+        <ohmyui-checkbox label="Development" [checked]="true"></ohmyui-checkbox>
         <ohmyui-checkbox label="Marketing"></ohmyui-checkbox>
       </ohmyui-checkbox-group>
     `,
   }),
 };
 export const Horizontal: Story = {
-  args: { label: 'Interessi', orientation: 'horizontal' },
+  args: { label: 'Interests', orientation: 'horizontal' },
   render: (args) => ({
     props: args,
     template: `
       <ohmyui-checkbox-group [label]="label" [orientation]="orientation">
         <ohmyui-checkbox label="Design" [checked]="true"></ohmyui-checkbox>
-        <ohmyui-checkbox label="Sviluppo" [checked]="true"></ohmyui-checkbox>
+        <ohmyui-checkbox label="Development" [checked]="true"></ohmyui-checkbox>
         <ohmyui-checkbox label="Marketing"></ohmyui-checkbox>
       </ohmyui-checkbox-group>
     `,
   }),
 };
 
-/* ── States ──────────────────────────────────── */
+/* States */
 export const Disabled: Story = {
-  args: { label: 'Preferenze', disabled: true },
+  args: { label: 'Preferences', disabled: true },
   render: (args) => ({
     props: args,
     template: `
@@ -95,9 +101,9 @@ export const Disabled: Story = {
 export const WithError: Story = {
   name: 'With error',
   args: {
-    label: "Seleziona almeno un'opzione",
+    label: 'Select at least one option',
     error: true,
-    errorMessage: 'Devi selezionare almeno una preferenza.',
+    errorMessage: 'You must select at least one preference.',
     required: true,
   },
   render: (args) => ({
@@ -112,12 +118,12 @@ export const WithError: Story = {
   }),
 };
 
-/* ── Accessibility ────────────────────────────── */
+/* Accessibility */
 export const AccessibleFieldset: Story = {
   name: 'Accessibility / Native fieldset semantics',
   args: {
-    label: 'Preferenze notifiche',
-    description: 'Scegli come vuoi essere contattato.',
+    label: 'Notification preferences',
+    description: 'Choose how you want to be contacted.',
   },
   render: (args) => ({
     props: args,
@@ -132,14 +138,14 @@ export const AccessibleFieldset: Story = {
     docs: {
       description: {
         story:
-          'Il gruppo usa un vero `<fieldset>`/`<legend>` nativo: uno screen reader annuncia automaticamente il nome del gruppo quando il focus entra su una qualsiasi checkbox al suo interno, senza bisogno di `aria-labelledby` manuale su ciascun input.',
+          'The group uses a real native `<fieldset>` and `<legend>`: when focus enters any checkbox in it, screen readers announce the name of the group, with no `aria-labelledby` needed on each input.',
       },
     },
   },
 };
 export const AccessibleDisabledCascade: Story = {
   name: 'Accessibility / Disabled cascades to every checkbox',
-  args: { label: 'Preferenze (bloccate)', disabled: true },
+  args: { label: 'Preferences (locked)', disabled: true },
   render: (args) => ({
     props: args,
     template: `
@@ -154,7 +160,7 @@ export const AccessibleDisabledCascade: Story = {
     docs: {
       description: {
         story:
-          '`disabled` sul gruppo disabilita ogni checkbox proiettata automaticamente, via comportamento nativo di `<fieldset disabled>` — non serve propagare manualmente lo stato a ciascun figlio con del codice.',
+          '`disabled` on the group disables every projected checkbox through the native behavior of `<fieldset disabled>`, with no code to pass the state to each child.',
       },
     },
   },

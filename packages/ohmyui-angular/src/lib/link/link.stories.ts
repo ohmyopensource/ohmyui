@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file link.stories.ts
+ * @description Storybook stories of LinkComponent: internal and external modes,
+ * variants, sizes, the external link icon, the target and the accessibility
+ * notes.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LinkComponent } from './link';
 
@@ -33,28 +40,28 @@ const meta: Meta<LinkComponent> = {
 export default meta;
 type Story = StoryObj<LinkComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 export const Playground: Story = {
   args: {
     mode: 'external',
     href: 'https://github.com/ohmyopensource',
-    label: 'Vai su GitHub',
+    label: 'Go to GitHub',
   },
 };
 
-/* ── Mode ────────────────────────────────────── */
+/* Mode */
 export const Internal: Story = {
-  args: { mode: 'internal', href: '/docs', label: 'Leggi la documentazione' },
+  args: { mode: 'internal', href: '/docs', label: 'Read the documentation' },
 };
 export const External: Story = {
   args: {
     mode: 'external',
     href: 'https://github.com/ohmyopensource',
-    label: 'Vai su GitHub',
+    label: 'Go to GitHub',
   },
 };
 
-/* ── Variants ────────────────────────────────── */
+/* Variants */
 export const Primary: Story = {
   args: { mode: 'external', href: '#', variant: 'primary', label: 'Primary' },
 };
@@ -73,7 +80,7 @@ export const Ghost: Story = {
   args: { mode: 'external', href: '#', variant: 'ghost', label: 'Ghost' },
 };
 
-/* ── Sizes ───────────────────────────────────── */
+/* Sizes */
 export const SizeSm: Story = {
   name: 'Size / SM',
   args: { mode: 'external', href: '#', size: 'sm', label: 'Small' },
@@ -87,13 +94,13 @@ export const SizeLg: Story = {
   args: { mode: 'external', href: '#', size: 'lg', label: 'Large' },
 };
 
-/* ── States ──────────────────────────────────── */
+/* States */
 export const NoExternalIcon: Story = {
   name: 'External without icon',
   args: {
     mode: 'external',
     href: 'https://github.com/ohmyopensource',
-    label: 'Vai su GitHub',
+    label: 'Go to GitHub',
     showExternalIcon: false,
   },
 };
@@ -102,20 +109,20 @@ export const SameTab: Story = {
   args: {
     mode: 'external',
     href: 'https://github.com/ohmyopensource',
-    label: 'Vai su GitHub',
+    label: 'Go to GitHub',
     target: '_self',
   },
 };
 
-/* ── Accessibility ────────────────────────────── */
+/* Accessibility */
 export const AccessibleInternalNoIcon: Story = {
   name: 'Accessibility / Internal links never show the external icon',
-  args: { mode: 'internal', href: '/docs', label: 'Leggi la documentazione' },
+  args: { mode: 'internal', href: '/docs', label: 'Read the documentation' },
   parameters: {
     docs: {
       description: {
         story:
-          "Nella versione originale l'icona \"link esterno\" veniva mostrata anche sui link interni (bug nel template, il flag `displayExternalIcon` era calcolato ma mai usato) — un link di navigazione interna con l'icona di link esterno confonde l'utente, facendogli credere che stia per lasciare il sito. Corretto: l'icona ora compare solo quando `mode` è `external`.",
+          'An internal link never shows the external link icon: the icon appears only when `mode` is `external`, so users do not think they are about to leave the site.',
       },
     },
   },
@@ -125,14 +132,14 @@ export const AccessibleNewTabAnnouncement: Story = {
   args: {
     mode: 'external',
     href: 'https://github.com/ohmyopensource',
-    label: 'Vai su GitHub',
+    label: 'Go to GitHub',
     target: '_blank',
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Quando un link esterno apre `target="_blank"`, riceve un `aria-label` che include "(si apre in una nuova scheda)" — uno screen reader avvisa l\'utente prima del click, non solo dopo. Aggiunto in fase di porting: l\'originale non lo prevedeva.',
+          'When an external link opens with `target="_blank"`, it gets an `aria-label` that says it opens in a new tab, so screen readers warn users before the click, not after.',
       },
     },
   },

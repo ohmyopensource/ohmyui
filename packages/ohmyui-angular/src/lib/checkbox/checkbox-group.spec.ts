@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file checkbox-group.spec.ts
+ * @description Unit tests of CheckboxGroupComponent: the legend, the projected
+ * checkboxes, the disabled state passed down by the fieldset and the error
+ * message.
+ */
+
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';

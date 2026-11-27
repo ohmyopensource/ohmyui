@@ -10,17 +10,16 @@
 
 /**
  * @file text.ts
- * @description Flexible typography component that standardizes text rendering
- * across the application. Supports multiple semantic HTML elements, design-
- * system typography variants, color tokens, and layout modifiers such as
- * alignment, truncation, wrapping, and line clamping.
+ * @description TextComponent (`[ohmyuiText]`): the typography scale, from
+ * display to caption, with color, weight, alignment, decoration, truncation,
+ * line clamp and gradient modifiers.
  *
- * Applicato come attributo su elementi HTML semantici (h1[ohmyuiText],
- * p[ohmyuiText], ecc.) invece che come tag custom: per questo usa
- * ViewEncapsulation.None — gli stili si applicano a elementi del template
- * del CONSUMER, non del proprio, quindi l'incapsulamento emulato (che scopa
- * solo il proprio template) non potrebbe mai funzionare qui.
+ * It is applied as an attribute on semantic HTML elements (`h1[ohmyuiText]`,
+ * `p[ohmyuiText]` and so on) rather than as a custom tag. Its styles target
+ * elements of the consumer's template, which emulated encapsulation cannot
+ * reach, so the component uses `ViewEncapsulation.None`.
  */
+
 import {
   Component,
   Input,
@@ -29,7 +28,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-/** Defines the available typography variants mapped to design system styles. */
+/** Step of the typography scale. */
 export type TextVariant =
   | 'display'
   | 'h1'
@@ -45,7 +44,7 @@ export type TextVariant =
   | 'label'
   | 'overline'
   | 'code';
-/** Defines the semantic color palette tokens available for text styling. */
+/** Text color, from the semantic tokens. */
 export type TextColor =
   | 'default'
   | 'muted'
@@ -59,12 +58,13 @@ export type TextColor =
   | 'info'
   | 'white'
   | 'inherit';
-/** Defines font weight options aligned with the design system typography scale. */
+/** Font weight. */
 export type TextWeight =
   'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold';
-/** Defines text alignment options. */
+/** Text alignment. */
 export type TextAlign = 'left' | 'center' | 'right' | 'justify';
 
+/** Typography styles applied to a semantic HTML element. */
 @Component({
   selector:
     'h1[ohmyuiText], h2[ohmyuiText], h3[ohmyuiText], h4[ohmyuiText], ' +
@@ -79,40 +79,33 @@ export type TextAlign = 'left' | 'center' | 'right' | 'justify';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextComponent {
-  /** Visual typography variant (maps to design system scale) */
+  /** Step of the typography scale. */
   @Input() variant: TextVariant = 'body';
-  /** Semantic or brand color token */
+  /** Text color. */
   @Input() color: TextColor = 'default';
-  /** Optional font weight override */
+  /** Font weight. When empty, the weight of the variant is used. */
   @Input() weight: TextWeight | '' = '';
-  /** Optional text alignment override */
+  /** Text alignment. When empty, the text inherits it. */
   @Input() align: TextAlign | '' = '';
-  /** Applies italic styling */
+  /** Whether the text is italic. */
   @Input() italic = false;
-  /** Applies underline decoration */
+  /** Whether the text is underlined. */
   @Input() underline = false;
-  /** Enables text truncation (ellipsis) */
+  /** Whether the text stays on one line and ends with an ellipsis. */
   @Input() truncate = false;
-  /** Prevents line wrapping */
+  /** Whether the text stays on one line. */
   @Input() noWrap = false;
-  /** Applies gradient text styling (if supported by theme) */
-  @Input() gradient = false;
-  /** Limits number of visible lines using CSS line-clamp */
-  @Input() lineClamp = 0;
   /**
-   * Allows injecting additional custom CSS classes.
-   * Use sparingly to avoid breaking design system consistency.
+   * Whether the text is filled with a gradient of its color, primary by
+   * default.
    */
+  @Input() gradient = false;
+  /** Maximum number of visible lines, from 1 to 6. 0 shows every line. */
+  @Input() lineClamp = 0;
+  /** Extra CSS classes added to the element. */
   @Input() extraClass = '';
 
-  /**
-   * Computes host CSS classes based on component inputs.
-   * This is the core mechanism that maps API → design system styles.
-   *
-   * NOTA: il tema scuro non è più pilotato da un @Input booleano (rimosso
-   * per coerenza con gli altri componenti) — le regole `.dark-theme ...` in
-   * text.css si attivano da sole in base alla classe globale sull'app.
-   */
+  /** CSS classes of the host element. */
   @HostBinding('class')
   get hostClasses(): string {
     const c: string[] = [

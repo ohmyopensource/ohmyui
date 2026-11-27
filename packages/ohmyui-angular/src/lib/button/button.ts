@@ -10,17 +10,12 @@
 
 /**
  * @file button.ts
- * @description
- * Reusable standalone button component for Angular applications.
- *
- * Supports multiple visual variants, sizes, icon rendering, loading states,
- * success states, accessibility features, internal routing, external links,
- * and ripple animations.
- *
- * The component follows a design-system-oriented approach and can be used
- * as a standard button, Angular router link, or external hyperlink while
- * preserving a consistent user experience.
+ * @description ButtonComponent (`ohmyui-button`): a button, an internal router
+ * link or an external link with the same look, in eleven variants, four sizes
+ * and five corner radii, with icons, a ripple, and loading and succeeded
+ * states.
  */
+
 import {
   Component,
   Input,
@@ -39,7 +34,7 @@ import {
   LucideCircleCheck,
 } from '@lucide/angular';
 
-/** Available visual variants for the button component. */
+/** Color variant of a button. */
 export type ButtonVariant =
   | 'primary'
   | 'secondary'
@@ -52,34 +47,27 @@ export type ButtonVariant =
   | 'outline'
   | 'outline-error'
   | 'flat';
-/** Available button sizes. */
+/** Size of a button. */
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg';
-/** Available button rounded styles. */
+/** Corner radius of a button. */
 export type ButtonRounded = 'none' | 'sm' | 'md' | 'lg' | 'full';
 /**
- * Supported operating modes.
- * - button: standard HTML button
- * - link-internal: Angular Router navigation
- * - link-external: external hyperlink
+ * Element rendered by a button: a native `<button>` (`button`), a router link
+ * (`link-internal`) or a link to another site (`link-external`).
  */
 export type ButtonMode = 'button' | 'link-internal' | 'link-external';
-/** Native HTML button types. */
+/** Type of the native `<button>`. */
 export type ButtonType = 'button' | 'submit' | 'reset';
-/** Icon placement relative to the label. */
+/** Side of the label where the icon sits. */
 export type ButtonIconPosition = 'left' | 'right';
-/** Visual style applied when the component enters the succeeded state. */
+/** Look of a button in the succeeded state. */
 export type ButtonSucceededStyle = 'filled' | 'ghost';
 
 /**
- * Design-system button component.
+ * Button, internal router link or external link with the same look.
  *
- * Provides a unified API for rendering buttons, internal Angular links
- * and external hyperlinks.
- *
- * NOTA: importando RouterModule, ohmyui-angular acquisisce una dipendenza
- * da @angular/router anche per i consumer che usano solo mode="button".
- * Segnalato perché è un cambiamento nella superficie di dipendenze della
- * libreria rispetto alla versione precedente del componente.
+ * It imports RouterModule for internal links, so it requires `@angular/router`
+ * even when only `mode="button"` is used.
  */
 @Component({
   selector: 'ohmyui-button',
@@ -91,99 +79,79 @@ export type ButtonSucceededStyle = 'filled' | 'ghost';
 })
 export class ButtonComponent {
   private renderer = inject(Renderer2);
+  /** Icon of the loading state. */
   readonly loaderIcon: LucideIconData = LucideLoaderCircle.icon;
+  /** Icon of the succeeded state. */
   readonly succeededIcon: LucideIconData = LucideCircleCheck.icon;
 
-  /** Text displayed inside the button. */
+  /** Text of the button. */
   @Input() label = '';
-  /** Visual variant used to determine the button appearance. */
+  /** Color variant. */
   @Input() variant: ButtonVariant = 'primary';
-  /** Size of the button and its internal content. */
+  /** Size of the button. */
   @Input() size: ButtonSize = 'md';
-  /** Rounded style of the button. */
+  /** Corner radius. */
   @Input() rounded: ButtonRounded = 'md';
-  /** Expands the button to occupy the full width of its parent container. */
+  /** Whether the button fills the width of its container. */
   @Input() fullWidth = false;
-  /** Lucide icon component displayed inside the button. */
+  /** Lucide icon shown next to the label. */
   @Input() icon: LucideIconData | null = null;
-  /** Position of the icon relative to the label. */
+  /** Side of the label where the icon sits. */
   @Input() iconPosition: ButtonIconPosition = 'left';
   /**
-   * Enables icon-only mode. When enabled, the label is visually hidden and
-   * the button is rendered as a square icon button. An ariaLabel value
-   * should always be provided.
+   * Whether the button shows only the icon, as a square. Set `ariaLabel` too:
+   * the button has no visible text.
    */
   @Input() iconOnly = false;
-  /** Disables user interaction with the component. */
+  /** Whether the button is disabled. */
   @Input() disabled = false;
-  /** Displays a loading indicator and prevents user interaction while active. */
+  /** Whether the button shows a spinner and ignores clicks. */
   @Input() loading = false;
   /**
-   * Indicates that the associated action completed successfully. When
-   * enabled, the component displays a success state and becomes
-   * non-interactive.
+   * Whether the action of the button completed successfully. The button
+   * then shows a check icon and ignores clicks.
    */
   @Input() succeeded = false;
-  /** Visual style applied when the component is in the succeeded state. */
+  /** Look of the button in the succeeded state. */
   @Input() succeededStyle: ButtonSucceededStyle = 'filled';
-  /**
-   * Alternative label displayed while the component is in the succeeded
-   * state. If not provided, the default label is used.
-   */
+  /** Text shown in the succeeded state. When empty, the label is kept. */
   @Input() succeededLabel = '';
-  /**
-   * Operating mode of the component. Determines whether the component
-   * behaves as a native button, an Angular router link, or an external
-   * hyperlink.
-   */
+  /** Element rendered: a native button, a router link or an external link. */
   @Input() mode: ButtonMode = 'button';
-  /** Native HTML button type. */
+  /** Type of the native button, used when `mode` is `button`. */
   @Input() type: ButtonType = 'button';
   /**
-   * Navigation destination. Used as routerLink when mode is 'link-internal',
-   * or as href when mode is 'link-external'.
+   * Destination of the link: the router path, with an optional query string,
+   * when `mode` is `link-internal`, or the URL when `mode` is `link-external`.
    */
   @Input() href = '';
-  /** Navigation target used for external links. */
+  /** Browsing context of an external link. */
   @Input() target: '_self' | '_blank' = '_self';
-  /**
-   * Accessible label announced by assistive technologies. Required when
-   * iconOnly is enabled.
-   */
+  /** Accessible label. When empty, the visible text is used. */
   @Input() ariaLabel = '';
 
-  /**
-   * Emitted when the button is activated by the user. Emission occurs only
-   * when mode is 'button', and disabled/loading/succeeded are all false.
-   */
+  /** Emitted on click, unless the button is disabled, loading or succeeded. */
   @Output() clicked = new EventEmitter<MouseEvent>();
 
-  /** Returns the icon size in pixels according to the configured button size. */
+  /** Size in pixels of the icon for the current size. */
   get iconSize(): number {
     const map: Record<ButtonSize, number> = { xs: 14, sm: 16, md: 18, lg: 20 };
     return map[this.size];
   }
 
-  /**
-   * Determines whether the component should be considered non-interactive.
-   * A button becomes inert when disabled, loading, or succeeded.
-   */
+  /** Whether the button ignores clicks: disabled, loading or succeeded. */
   get isInert(): boolean {
     return this.disabled || this.loading || this.succeeded;
   }
 
-  /**
-   * Returns the effective label displayed by the component. When the
-   * button is in the succeeded state, the success label takes precedence
-   * if provided.
-   */
+  /** Visible text: the succeeded label in the succeeded state, if set. */
   get displayLabel(): string {
     return this.succeeded && this.succeededLabel
       ? this.succeededLabel
       : this.label;
   }
 
-  /** Returns the CSS classes required for the current button configuration. */
+  /** CSS classes of the button element. */
   get classes(): Record<string, boolean> {
     return {
       'ohmyui-btn': true,
@@ -204,25 +172,19 @@ export class ButtonComponent {
   }
 
   /**
-   * Returns the appropriate rel attribute for external links, preventing
-   * reverse tabnabbing when opening links in a new browser tab.
+   * `rel` of an external link: `noopener noreferrer` when it opens a new tab,
+   * against reverse tabnabbing.
    */
   get externalRel(): string {
     return this.target === '_blank' ? 'noopener noreferrer' : '';
   }
 
-  /**
-   * Returns the path portion of `href`, stripped of any query string, for
-   * use with routerLink when mode is 'link-internal'.
-   */
+  /** Path of `href` without the query string, for `routerLink`. */
   get routerPath(): string {
     return (this.href ?? '').split('?')[0];
   }
 
-  /**
-   * Parses the query string portion of `href` (if present) into an object
-   * suitable for routerLink's [queryParams] binding.
-   */
+  /** Query string of `href` as an object for `queryParams`, or null. */
   get routerQueryParams(): Record<string, string> | null {
     const queryIndex = (this.href ?? '').indexOf('?');
     if (queryIndex === -1) return null;
@@ -235,8 +197,8 @@ export class ButtonComponent {
   }
 
   /**
-   * Handles button click events. Prevents interaction when the component
-   * is disabled, loading, or already succeeded.
+   * Emits `clicked`, or stops the click when the button is disabled, loading
+   * or succeeded.
    */
   onButtonClick(event: MouseEvent): void {
     if (this.isInert) {
@@ -248,8 +210,8 @@ export class ButtonComponent {
   }
 
   /**
-   * Creates and manages the ripple animation originating from the user's
-   * click position. No ripple is generated when the component is inert.
+   * Starts the ripple animation from the click position, unless the button
+   * ignores clicks.
    */
   onRipple(event: MouseEvent): void {
     if (this.isInert) return;

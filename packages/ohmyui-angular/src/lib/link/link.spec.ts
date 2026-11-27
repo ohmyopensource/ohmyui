@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file link.spec.ts
+ * @description Unit tests of LinkComponent: the defaults, the external link
+ * icon, the rel of links that open a new tab and the accessible label.
+ */
+
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';

@@ -54,7 +54,7 @@ const grouped: SelectOption[] = [
   { value: 'mongo', label: 'MongoDB', group: 'Database' },
 ];
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 
 export const Playground: Story = {
   args: {
@@ -70,7 +70,7 @@ export const Playground: Story = {
   },
 };
 
-/* ── Variants ────────────────────────────────── */
+/* Variants */
 
 export const Default: Story = {
   name: 'Variant / Default',
@@ -87,7 +87,7 @@ export const Ghost: Story = {
   args: { options: fruits, label: 'Ghost', variant: 'ghost', size: 'md' },
 };
 
-/* ── Sizes ───────────────────────────────────── */
+/* Sizes */
 
 export const SizeXs: Story = {
   name: 'Size / XS',
@@ -110,7 +110,7 @@ export const SizeXl: Story = {
   args: { options: fruits, label: 'Extra large', size: 'xl' },
 };
 
-/* ── Status ──────────────────────────────────── */
+/* Status */
 
 export const StatusError: Story = {
   name: 'Status / Error',
@@ -135,7 +135,7 @@ export const StatusSuccess: Story = {
   },
 };
 
-/* ── States ──────────────────────────────────── */
+/* States */
 
 export const Disabled: Story = {
   name: 'State / Disabled',
@@ -157,7 +157,7 @@ export const WithValue: Story = {
   args: { options: fruits, label: 'Pre-selected', value: 'banana', size: 'md' },
 };
 
-/* ── Features ────────────────────────────────── */
+/* Features */
 
 export const Clearable: Story = {
   name: 'Feature / Clearable',
@@ -225,7 +225,7 @@ export const WithHint: Story = {
   },
 };
 
-/* ── Combined ────────────────────────────────── */
+/* Combined */
 
 export const SearchableMultiple: Story = {
   name: 'Combined / Searchable + Multiple',

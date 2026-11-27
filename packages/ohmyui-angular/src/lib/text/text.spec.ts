@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file text.spec.ts
+ * @description Unit tests of TextComponent: the input defaults and the host
+ * classes for variants, colors, weights, alignment, modifiers, line clamp and
+ * extra classes.
+ */
+
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TextComponent } from './text';

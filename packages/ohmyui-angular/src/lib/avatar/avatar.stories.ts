@@ -47,7 +47,7 @@ const meta: Meta<AvatarComponent> = {
 export default meta;
 type Story = StoryObj<AvatarComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 
 export const Playground: Story = {
   args: {
@@ -60,7 +60,7 @@ export const Playground: Story = {
   },
 };
 
-/* ── Content variants ────────────────────────── */
+/* Content variants */
 
 export const WithImage: Story = {
   name: 'Content / Image',
@@ -92,7 +92,7 @@ export const ImageFallback: Story = {
   },
 };
 
-/* ── Sizes ───────────────────────────────────── */
+/* Sizes */
 
 export const SizeXs: Story = {
   name: 'Size / XS',
@@ -115,7 +115,7 @@ export const SizeXl: Story = {
   args: { src: 'https://i.pravatar.cc/150?img=1', size: 'xl', shape: 'circle' },
 };
 
-/* ── Shapes ──────────────────────────────────── */
+/* Shapes */
 
 export const ShapeCircle: Story = {
   name: 'Shape / Circle',
@@ -134,7 +134,7 @@ export const ShapeSquare: Story = {
   },
 };
 
-/* ── Colors (initials) ───────────────────────── */
+/* Colors (initials) */
 
 export const ColorPrimary: Story = {
   name: 'Color / Primary',
@@ -161,7 +161,7 @@ export const ColorNeutral: Story = {
   args: { name: 'John Doe', size: 'md', shape: 'circle', color: 'neutral' },
 };
 
-/* ── Ring ────────────────────────────────────── */
+/* Ring */
 
 export const RingPrimary: Story = {
   name: 'Ring / Primary',
@@ -218,7 +218,7 @@ export const RingNeutral: Story = {
   },
 };
 
-/* ── Status ──────────────────────────────────── */
+/* Status */
 
 export const StatusOnline: Story = {
   name: 'Status / Online',
@@ -268,7 +268,7 @@ export const StatusWithSquare: Story = {
   },
 };
 
-/* ── Ring + Status combined ──────────────────── */
+/* Ring + Status combined */
 
 export const RingAndStatus: Story = {
   name: 'Combined / Ring + Status',

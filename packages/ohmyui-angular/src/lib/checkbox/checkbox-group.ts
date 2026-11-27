@@ -10,21 +10,23 @@
 
 /**
  * @file checkbox-group.ts
- * @description Semantic wrapper for a group of related CheckboxComponent
- * instances, projected via <ng-content>. Uses a native <fieldset>/<legend>
- * pair: group label, description, and validation error are wired with
- * proper ARIA associations, and `disabled` cascades to every projected
- * checkbox automatically via native <fieldset disabled> behavior — no
- * manual prop-drilling to child components required.
+ * @description CheckboxGroupComponent (`ohmyui-checkbox-group`): a native
+ * `<fieldset>` with a `<legend>` that groups the projected checkboxes, with
+ * description, error message and vertical or horizontal layout.
  */
+
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/** Layout direction for the checkboxes projected inside the group. */
+/** Direction of the checkboxes in a group. */
 export type CheckboxGroupOrientation = 'vertical' | 'horizontal';
 
 let nextCheckboxGroupId = 0;
 
+/**
+ * Group of related checkboxes. `disabled` disables every checkbox inside it
+ * through the native `<fieldset>`.
+ */
 @Component({
   selector: 'ohmyui-checkbox-group',
   standalone: true,
@@ -34,24 +36,25 @@ let nextCheckboxGroupId = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxGroupComponent {
+  /** Id of the group, unique on the page. */
   readonly groupId = `ohmyui-checkbox-group-${++nextCheckboxGroupId}`;
 
-  /** Group label, rendered as a <legend>. */
+  /** Name of the group, shown in the `<legend>`. */
   @Input() label = '';
-  /** Optional helper text displayed below the label. */
+  /** Help text below the name of the group. */
   @Input() description = '';
-  /** Layout direction for the projected checkboxes. */
+  /** Direction of the checkboxes. */
   @Input() orientation: CheckboxGroupOrientation = 'vertical';
-  /** Marks the group as required in a form. */
+  /** Whether the group is required in its form. */
   @Input() required = false;
-  /** Disables every checkbox projected inside the group (native cascade via <fieldset>). */
+  /** Whether every checkbox in the group is disabled. */
   @Input() disabled = false;
-  /** Displays validation error styling and message for the whole group. */
+  /** Whether the group shows the error state. */
   @Input() error = false;
-  /** Error message displayed below the group when `error` is true. */
+  /** Message shown below the group when `error` is true. */
   @Input() errorMessage = '';
 
-  /** Returns the CSS classes required for the current group configuration. */
+  /** CSS classes of the group element. */
   get classes(): Record<string, boolean> {
     return {
       'ohmyui-checkbox-group': true,

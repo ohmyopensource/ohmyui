@@ -9,12 +9,12 @@
 -->
 
 <!--
-@file checkbox.html
-@description Template for CheckboxComponent. Uses a real native
-<input type="checkbox"> (visually customized, not visually hidden) so
-keyboard interaction, screen readers, and native form submission work
-without any custom re-implementation.
+  @file checkbox.html
+  @description Template of CheckboxComponent: the native input, which stays
+  interactive over the custom box, with the label, the description and the error
+  message.
 -->
+
 <div [ngClass]="classes">
   <label [for]="inputId" class="ohmyui-checkbox__control">
     <input

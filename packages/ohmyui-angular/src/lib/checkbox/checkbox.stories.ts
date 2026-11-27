@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file checkbox.stories.ts
+ * @description Storybook stories of CheckboxComponent: variants, sizes, states,
+ * description, error, label position and the accessibility notes.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { CheckboxComponent } from './checkbox';
 
@@ -46,17 +52,17 @@ const meta: Meta<CheckboxComponent> = {
 export default meta;
 type Story = StoryObj<CheckboxComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 export const Playground: Story = {
   args: {
     variant: 'primary',
     size: 'md',
-    label: 'Accetto i termini di servizio',
+    label: 'I accept the terms of service',
     checked: true,
   },
 };
 
-/* ── Variants ────────────────────────────────── */
+/* Variants */
 export const Primary: Story = {
   args: { variant: 'primary', label: 'Primary', checked: true },
 };
@@ -82,7 +88,7 @@ export const Neutral: Story = {
   args: { variant: 'neutral', label: 'Neutral', checked: true },
 };
 
-/* ── Sizes ───────────────────────────────────── */
+/* Sizes */
 export const SizeXs: Story = {
   name: 'Size / XS',
   args: { variant: 'primary', size: 'xs', label: 'Extra small', checked: true },
@@ -100,21 +106,21 @@ export const SizeLg: Story = {
   args: { variant: 'primary', size: 'lg', label: 'Large', checked: true },
 };
 
-/* ── States ──────────────────────────────────── */
+/* States */
 export const Unchecked: Story = {
-  args: { variant: 'primary', label: 'Non selezionato' },
+  args: { variant: 'primary', label: 'Unchecked' },
 };
 export const Indeterminate: Story = {
-  args: { variant: 'primary', label: 'Seleziona tutto', indeterminate: true },
+  args: { variant: 'primary', label: 'Select all', indeterminate: true },
 };
 export const Disabled: Story = {
-  args: { variant: 'primary', label: 'Disabilitato', disabled: true },
+  args: { variant: 'primary', label: 'Disabled', disabled: true },
 };
 export const DisabledChecked: Story = {
   name: 'Disabled (checked)',
   args: {
     variant: 'primary',
-    label: 'Disabilitato e selezionato',
+    label: 'Disabled and checked',
     disabled: true,
     checked: true,
   },
@@ -123,17 +129,17 @@ export const WithDescription: Story = {
   name: 'With description',
   args: {
     variant: 'primary',
-    label: 'Notifiche email',
-    description: 'Ricevi un riepilogo settimanale via email.',
+    label: 'Email notifications',
+    description: 'Get a weekly summary by email.',
   },
 };
 export const WithError: Story = {
   name: 'With error',
   args: {
     variant: 'primary',
-    label: 'Accetto i termini',
+    label: 'I accept the terms',
     error: true,
-    errorMessage: 'Devi accettare i termini per continuare.',
+    errorMessage: 'You must accept the terms to continue.',
     required: true,
   },
 };
@@ -141,21 +147,21 @@ export const LabelLeft: Story = {
   name: 'Label position / Left',
   args: {
     variant: 'primary',
-    label: 'Etichetta a sinistra',
+    label: 'Label on the left',
     labelPosition: 'left',
     checked: true,
   },
 };
 
-/* ── Accessibility ────────────────────────────── */
+/* Accessibility */
 export const AccessibleRequired: Story = {
   name: 'Accessibility / Required field',
-  args: { variant: 'primary', label: 'Accetto i termini', required: true },
+  args: { variant: 'primary', label: 'I accept the terms', required: true },
   parameters: {
     docs: {
       description: {
         story:
-          "L'attributo `required` viene passato al vero `<input>` nativo (non solo mostrato visivamente con l'asterisco): la validazione del form la gestisce il browser, non serve reimplementarla.",
+          'The `required` attribute goes to the real native `<input>`, not only to the asterisk on screen: the browser handles form validation, with nothing to reimplement.',
       },
     },
   },
@@ -164,27 +170,27 @@ export const AccessibleError: Story = {
   name: 'Accessibility / Error announces via aria-invalid',
   args: {
     variant: 'primary',
-    label: 'Accetto i termini',
+    label: 'I accept the terms',
     error: true,
-    errorMessage: 'Campo obbligatorio.',
+    errorMessage: 'This field is required.',
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Quando `error` è true, il campo riceve `aria-invalid="true"` e viene collegato al messaggio di errore tramite `aria-describedby` (con `role="alert"` sul messaggio) — uno screen reader annuncia sia l\'invalidità sia il motivo, non solo un cambio di colore del bordo.',
+          'When `error` is true, the field gets `aria-invalid="true"` and is linked to the error message through `aria-describedby`, and the message has `role="alert"`. Screen readers announce both that the field is invalid and why, not only a change of border color.',
       },
     },
   },
 };
 export const AccessibleIndeterminate: Story = {
   name: 'Accessibility / Indeterminate is not a form value',
-  args: { variant: 'primary', label: 'Seleziona tutto', indeterminate: true },
+  args: { variant: 'primary', label: 'Select all', indeterminate: true },
   parameters: {
     docs: {
       description: {
         story:
-          '`indeterminate` è puramente visivo (proprietà DOM, non attributo HTML, sincronizzata via ViewChild): non esiste un "terzo stato" nel valore inviato dal form — resta sempre `checked` true/false. Interagire con la checkbox (click o tastiera) risolve sempre lo stato indeterminate, comportamento nativo dei browser.',
+          '`indeterminate` is only visual: it is a DOM property, not an HTML attribute. The value sent with the form has no third state and stays `checked` true or false. A click or a key press on the checkbox always clears the indeterminate state, as browsers do natively.',
       },
     },
   },

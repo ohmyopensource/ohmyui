@@ -41,7 +41,7 @@ const meta: Meta<ModalComponent> = {
 export default meta;
 type Story = StoryObj<ModalComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 
 export const Playground: Story = {
   args: {
@@ -86,7 +86,7 @@ export const Playground: Story = {
   }),
 };
 
-/* ── Predefined patterns ─────────────────────── */
+/* Predefined patterns */
 
 export const InfoModal: Story = {
   name: 'Pattern / Info',
@@ -175,7 +175,7 @@ export const WarningModal: Story = {
   }),
 };
 
-/* ── Custom slot actions ─────────────────────── */
+/* Custom slot actions */
 
 export const CustomActions: Story = {
   name: 'Pattern / Custom actions',
@@ -202,7 +202,7 @@ export const CustomActions: Story = {
   }),
 };
 
-/* ── Positions ───────────────────────────────── */
+/* Positions */
 
 export const PositionTop: Story = {
   name: 'Position / Top',
@@ -267,7 +267,7 @@ export const Fullscreen: Story = {
   }),
 };
 
-/* ── Behavior ────────────────────────────────── */
+/* Behavior */
 
 export const NotClosable: Story = {
   name: 'Behavior / Required action',
@@ -294,7 +294,7 @@ export const NotClosable: Story = {
   }),
 };
 
-/* ── Trigger example ─────────────────────────── */
+/* Trigger example */
 
 export const WithTrigger: Story = {
   name: 'Usage / Opened by button',

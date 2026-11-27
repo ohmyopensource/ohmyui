@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file text.stories.ts
+ * @description Storybook stories of TextComponent: typography variants, colors,
+ * modifiers and the accessibility notes.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { TextComponent } from './text';
 
@@ -70,18 +76,18 @@ const meta: Meta<TextComponent> = {
 export default meta;
 type Story = StoryObj<TextComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 export const Playground: Story = {
   args: { variant: 'body', color: 'default' },
   render: (args) => ({
     props: args,
     template: `<p ohmyuiText [variant]="variant" [color]="color" [weight]="weight" [align]="align">
-      Il design system OhMyUI! fornisce token e componenti coerenti su Angular, React e Flutter.
+      The OhMyUI! design system provides consistent tokens and components for Angular, React and Flutter.
     </p>`,
   }),
 };
 
-/* ── Variants (applicati al tag HTML semantico corretto) ────── */
+/* Variants */
 export const Display: Story = {
   render: () => ({
     template: `<div ohmyuiText variant="display">Display</div>`,
@@ -99,67 +105,67 @@ export const H3: Story = {
 export const BodyLg: Story = {
   name: 'Body / Large',
   render: () => ({
-    template: `<p ohmyuiText variant="body-lg">Testo body più grande, per introduzioni.</p>`,
+    template: `<p ohmyuiText variant="body-lg">Larger body text, for introductions.</p>`,
   }),
 };
 export const Body: Story = {
   render: () => ({
-    template: `<p ohmyuiText variant="body">Testo body standard, per il contenuto principale.</p>`,
+    template: `<p ohmyuiText variant="body">Standard body text, for the main content.</p>`,
   }),
 };
 export const BodySm: Story = {
   name: 'Body / Small',
   render: () => ({
-    template: `<p ohmyuiText variant="body-sm">Testo body più piccolo, per dettagli secondari.</p>`,
+    template: `<p ohmyuiText variant="body-sm">Smaller body text, for secondary details.</p>`,
   }),
 };
 export const Caption: Story = {
   render: () => ({
-    template: `<span ohmyuiText variant="caption">Didascalia dell'immagine</span>`,
+    template: `<span ohmyuiText variant="caption">Image caption</span>`,
   }),
 };
 export const Label: Story = {
   render: () => ({
-    template: `<label ohmyuiText variant="label">Nome utente</label>`,
+    template: `<label ohmyuiText variant="label">Username</label>`,
   }),
 };
 export const Overline: Story = {
   render: () => ({
-    template: `<span ohmyuiText variant="overline">Nuovo</span>`,
+    template: `<span ohmyuiText variant="overline">New</span>`,
   }),
 };
 export const Code: Story = {
   render: () => ({
-    template: `<span ohmyuiText variant="code">npm install ohmyui-angular</span>`,
+    template: `<span ohmyuiText variant="code">npm install @ohmyopensource/ohmyui-angular</span>`,
   }),
 };
 export const Blockquote: Story = {
   render: () => ({
-    template: `<blockquote ohmyuiText variant="body">"Un buon design system si nota quando smette di farsi notare."</blockquote>`,
+    template: `<blockquote ohmyuiText variant="body">"A good design system goes unnoticed."</blockquote>`,
   }),
 };
 
-/* ── Colors ──────────────────────────────────── */
+/* Colors */
 export const ColorPrimary: Story = {
   name: 'Color / Primary',
   render: () => ({
-    template: `<p ohmyuiText variant="h3" color="primary">Testo primary</p>`,
+    template: `<p ohmyuiText variant="h3" color="primary">Primary text</p>`,
   }),
 };
 export const ColorError: Story = {
   name: 'Color / Error',
   render: () => ({
-    template: `<p ohmyuiText variant="body" color="error">Questo campo è obbligatorio.</p>`,
+    template: `<p ohmyuiText variant="body" color="error">This field is required.</p>`,
   }),
 };
 export const ColorMuted: Story = {
   name: 'Color / Muted',
   render: () => ({
-    template: `<p ohmyuiText variant="body" color="muted">Testo secondario, meno prominente.</p>`,
+    template: `<p ohmyuiText variant="body" color="muted">Secondary, less prominent text.</p>`,
   }),
 };
 
-/* ── Modifiers ───────────────────────────────── */
+/* Modifiers */
 export const Gradient: Story = {
   render: () => ({
     template: `<h1 ohmyuiText variant="display" [gradient]="true">Gradient text</h1>`,
@@ -168,12 +174,12 @@ export const Gradient: Story = {
 export const Truncate: Story = {
   render: () => ({
     template: `<div style="width: 200px;">
-      <p ohmyuiText variant="body" [truncate]="true">Questo è un testo molto lungo che verrà troncato con i puntini di sospensione.</p>
+      <p ohmyuiText variant="body" [truncate]="true">This is a very long text that is truncated with an ellipsis.</p>
     </div>`,
   }),
 };
 export const LineClamp: Story = {
-  name: 'Line clamp (3 righe)',
+  name: 'Line clamp (3 lines)',
   render: () => ({
     template: `<div style="width: 300px;">
       <p ohmyuiText variant="body" [lineClamp]="3">
@@ -185,20 +191,20 @@ export const LineClamp: Story = {
   }),
 };
 
-/* ── Accessibility ────────────────────────────── */
+/* Accessibility */
 export const AccessibleSemanticTags: Story = {
   name: 'Accessibility / Real semantic tags, not divs everywhere',
   render: () => ({
     template: `
-      <h2 ohmyuiText variant="h2">Titolo di sezione</h2>
-      <p ohmyuiText variant="body">Il componente applica lo stile SOPRA il tag HTML che scegli tu — resta un vero &lt;h2&gt;, non un &lt;div&gt; con del CSS che sembra un titolo.</p>
+      <h2 ohmyuiText variant="h2">Section title</h2>
+      <p ohmyuiText variant="body">The component styles the HTML tag you choose: it stays a real &lt;h2&gt;, not a &lt;div&gt; with CSS that looks like a heading.</p>
     `,
   }),
   parameters: {
     docs: {
       description: {
         story:
-          "Il selettore è un attributo (`ohmyuiText`) applicabile a `h1`–`h6`, `p`, `span`, `label`, `blockquote`, ecc. — non un tag custom. Questo preserva la semantica HTML reale (struttura dei titoli per screen reader e SEO) invece di forzare tutto dentro `<div>` generici con l'aspetto visivo di un titolo ma nessun significato semantico.",
+          'The selector is an attribute (`ohmyuiText`) for `h1` to `h6`, `p`, `span`, `label`, `blockquote` and other elements, not a custom tag. This keeps the real HTML semantics, such as the heading structure that screen readers and search engines use, instead of generic `<div>` elements that only look like headings.',
       },
     },
   },

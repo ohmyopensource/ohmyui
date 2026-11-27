@@ -40,7 +40,7 @@ const IMG = 'https://picsum.photos/seed/ohmyui/800/600';
 const IMG_TALL = 'https://picsum.photos/seed/ohmyui2/600/800';
 const IMG_BROKEN = 'https://broken.invalid/img.jpg';
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 
 export const Playground: Story = {
   args: {
@@ -54,7 +54,7 @@ export const Playground: Story = {
   },
 };
 
-/* ── States ──────────────────────────────────── */
+/* States */
 
 export const Loaded: Story = {
   name: 'State / Loaded',
@@ -94,7 +94,7 @@ export const NoSrc: Story = {
   args: { src: '', alt: '', variant: 'flat', shape: 'rounded', ratio: '16/9' },
 };
 
-/* ── Variants ────────────────────────────────── */
+/* Variants */
 
 export const Flat: Story = {
   name: 'Variant / Flat',
@@ -151,7 +151,7 @@ export const ShadowLg: Story = {
   },
 };
 
-/* ── Shapes ──────────────────────────────────── */
+/* Shapes */
 
 export const ShapeSquare: Story = {
   name: 'Shape / Square',
@@ -186,7 +186,7 @@ export const ShapeCircle: Story = {
   },
 };
 
-/* ── Ratios ──────────────────────────────────── */
+/* Ratios */
 
 export const Ratio1x1: Story = {
   name: 'Ratio / 1:1',
@@ -232,7 +232,7 @@ export const Ratio3x4: Story = {
   },
 };
 
-/* ── Fit ─────────────────────────────────────── */
+/* Fit */
 
 export const FitCover: Story = {
   name: 'Fit / Cover',
@@ -258,7 +258,7 @@ export const FitContain: Story = {
   },
 };
 
-/* ── With caption ────────────────────────────── */
+/* With caption */
 
 export const WithCaption: Story = {
   name: 'Feature / With caption',
@@ -272,7 +272,7 @@ export const WithCaption: Story = {
   },
 };
 
-/* ── With description (SEO/a11y) ─────────────── */
+/* With description (SEO/a11y) */
 
 export const WithDescription: Story = {
   name: 'Feature / With aria description',

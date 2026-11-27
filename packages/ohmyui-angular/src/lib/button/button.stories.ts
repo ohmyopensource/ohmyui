@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file button.stories.ts
+ * @description Storybook stories of ButtonComponent: variants, sizes, corner
+ * radii, icons, the disabled, loading, full-width and succeeded states, and the
+ * accessibility notes.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LucidePlus, LucideTrash2, LucideDownload } from '@lucide/angular';
 import { ButtonComponent } from './button';
@@ -54,12 +61,12 @@ const meta: Meta<ButtonComponent> = {
 export default meta;
 type Story = StoryObj<ButtonComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 export const Playground: Story = {
   args: { variant: 'primary', size: 'md', rounded: 'md', label: 'Click me' },
 };
 
-/* ── Variants ────────────────────────────────── */
+/* Variants */
 export const Primary: Story = {
   args: { variant: 'primary', size: 'md', label: 'Primary' },
 };
@@ -95,7 +102,7 @@ export const Flat: Story = {
   args: { variant: 'flat', size: 'md', label: 'Learn more' },
 };
 
-/* ── Sizes ───────────────────────────────────── */
+/* Sizes */
 export const SizeXs: Story = {
   name: 'Size / XS',
   args: { variant: 'primary', size: 'xs', label: 'Extra small' },
@@ -113,7 +120,7 @@ export const SizeLg: Story = {
   args: { variant: 'primary', size: 'lg', label: 'Large' },
 };
 
-/* ── Rounded ─────────────────────────────────── */
+/* Rounded */
 export const RoundedNone: Story = {
   name: 'Rounded / None',
   args: { variant: 'primary', size: 'md', rounded: 'none', label: 'Sharp' },
@@ -135,7 +142,7 @@ export const RoundedFull: Story = {
   args: { variant: 'primary', size: 'md', rounded: 'full', label: 'Pill' },
 };
 
-/* ── Icons ───────────────────────────────────── */
+/* Icons */
 export const WithIconLeft: Story = {
   name: 'With icon (left)',
   args: {
@@ -160,11 +167,11 @@ export const IconOnly: Story = {
     variant: 'error',
     icon: LucideTrash2.icon,
     iconOnly: true,
-    ariaLabel: 'Elimina',
+    ariaLabel: 'Delete',
   },
 };
 
-/* ── States ──────────────────────────────────── */
+/* States */
 export const Disabled: Story = {
   args: { variant: 'primary', size: 'md', disabled: true, label: 'Disabled' },
 };
@@ -200,32 +207,32 @@ export const SucceededGhost: Story = {
   },
 };
 
-/* ── Accessibility ────────────────────────────── */
+/* Accessibility */
 export const AccessibleIconOnly: Story = {
   name: 'Accessibility / Icon-only requires ariaLabel',
   args: {
     variant: 'error',
     icon: LucideTrash2.icon,
     iconOnly: true,
-    ariaLabel: 'Elimina elemento',
+    ariaLabel: 'Delete item',
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Quando `iconOnly` è true, il `<span class="ohmyui-btn__label">` non viene renderizzato (nessun testo visibile). L\'`aria-label` diventa l\'unico modo per uno screen reader di capire cosa fa il bottone — va sempre fornito esplicitamente in questi casi.',
+          'When `iconOnly` is true, the label `<span class="ohmyui-btn__label">` is not rendered, so the button has no visible text. The `aria-label` is then the only way for a screen reader to tell what the button does: always provide it.',
       },
     },
   },
 };
 export const AccessibleLoading: Story = {
   name: 'Accessibility / Loading announces busy state',
-  args: { variant: 'primary', loading: true, label: 'Invio in corso...' },
+  args: { variant: 'primary', loading: true, label: 'Sending...' },
   parameters: {
     docs: {
       description: {
         story:
-          'Durante il `loading` il bottone riceve `aria-busy="true"` e `aria-disabled="true"`, e il click non emette `clicked` (guardia in `onButtonClick`). Lo spinner ha `aria-hidden="true"`: il significato passa dal testo del label, non dall\'icona animata.',
+          'While `loading` is true, the button gets `aria-busy="true"` and `aria-disabled="true"`, and a click does not emit `clicked`. The spinner has `aria-hidden="true"`: the meaning comes from the label, not from the animated icon.',
       },
     },
   },
@@ -242,7 +249,7 @@ export const AccessibleSucceeded: Story = {
     docs: {
       description: {
         story:
-          'In stato `succeeded` il bottone riceve `aria-pressed="true"`, diventando non interattivo (`pointer-events: none` in CSS, guardia in `isInert`). Il `succeededLabel`, se fornito, sostituisce il testo visibile e viene letto dallo screen reader al posto del label originale.',
+          'In the `succeeded` state the button gets `aria-pressed="true"` and no longer responds to clicks. When `succeededLabel` is set, it replaces the visible text, and screen readers announce it instead of the label.',
       },
     },
   },

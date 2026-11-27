@@ -8,6 +8,14 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file button.spec.ts
+ * @description Unit tests of ButtonComponent: the defaults, the label, the
+ * inert states (disabled, loading, succeeded), the clicked event, the succeeded
+ * label, the query params of router links, the rel of external links and the
+ * ripple.
+ */
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';

@@ -8,6 +8,12 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file email.spec.ts
+ * @description Unit tests of EmailComponent: the defaults, the mailto link with
+ * subject and body, the visible text, the accessible label and the icon.
+ */
+
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EmailComponent } from './email';

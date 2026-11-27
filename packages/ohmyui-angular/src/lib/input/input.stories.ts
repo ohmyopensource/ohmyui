@@ -50,12 +50,12 @@ const meta: Meta<InputComponent> = {
 export default meta;
 type Story = StoryObj<InputComponent>;
 
-/* ── Playground ──────────────────────────────── */
+/* Playground */
 export const Playground: Story = {
   args: { label: 'Nome utente', placeholder: 'mario_rossi', type: 'text' },
 };
 
-/* ── Types ───────────────────────────────────── */
+/* Types */
 export const Text: Story = {
   args: { label: 'Nome', type: 'text', placeholder: 'Il tuo nome' },
 };
@@ -107,7 +107,7 @@ export const Select: Story = {
   },
 };
 
-/* ── Sizes ───────────────────────────────────── */
+/* Sizes */
 export const SizeSm: Story = {
   name: 'Size / SM',
   args: { label: 'Small', size: 'sm', placeholder: 'Piccolo' },
@@ -121,7 +121,7 @@ export const SizeLg: Story = {
   args: { label: 'Large', size: 'lg', placeholder: 'Grande' },
 };
 
-/* ── Validation ──────────────────────────────── */
+/* Validation */
 export const WithError: Story = {
   name: 'Validation / Error',
   args: {
@@ -143,7 +143,7 @@ export const WithHint: Story = {
   },
 };
 
-/* ── Prefix / Suffix / Icons ─────────────────── */
+/* Prefix / Suffix / Icons */
 export const WithPrefix: Story = {
   args: { label: 'Sito web', prefix: 'https://', placeholder: 'tuosito.it' },
 };
@@ -167,7 +167,7 @@ export const Clearable: Story = {
   },
 };
 
-/* ── States ──────────────────────────────────── */
+/* States */
 export const Disabled: Story = {
   args: {
     label: 'Campo disabilitato',
@@ -190,7 +190,7 @@ export const Required: Story = {
   },
 };
 
-/* ── Accessibility ────────────────────────────── */
+/* Accessibility */
 export const AccessibleMinZero: Story = {
   name: 'Accessibility / min=0 is respected',
   args: { label: 'Quantità minima 0', type: 'number', min: 0, max: 10 },
