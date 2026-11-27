@@ -5,6 +5,7 @@
   "prefix": "lib",
   "projectType": "library",
   "tags": [],
+  "implicitDependencies": ["ohmyui-tokens"],
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
