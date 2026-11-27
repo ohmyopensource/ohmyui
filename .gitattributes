@@ -1,0 +1,10 @@
+# Store text files with LF line endings and check them out with LF on every
+# platform, as Prettier and the shell scripts expect.
+* text=auto eol=lf
+
+# Binary files
+*.ttf binary
+*.woff2 binary
+*.png binary
+*.jpg binary
+*.ico binary
