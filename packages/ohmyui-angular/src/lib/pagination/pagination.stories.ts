@@ -8,6 +8,14 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file pagination.stories.ts
+ * @description Storybook stories of PaginationComponent: variants, emphasis
+ * styles, sizes, the ellipses of long page lists, the jump-to-page field, the
+ * optional controls, the disabled and empty states, and the accessibility
+ * notes.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { PaginationComponent } from './pagination';
 
@@ -86,7 +94,7 @@ export const SizeLg: Story = {
   args: { totalItems: 237, currentPage: 4, size: 'lg' },
 };
 
-/* Ellipsis behavior */
+/* Ellipsis */
 export const ManyPages: Story = {
   name: 'Many pages (ellipsis in the middle)',
   args: {
@@ -150,19 +158,7 @@ export const AccessibleCurrentPage: Story = {
     docs: {
       description: {
         story:
-          'Il bottone della pagina corrente riceve `aria-current="page"` — uno screen reader annuncia qual è la pagina attiva senza dover dedurlo dallo stile visivo. Il gruppo di controlli ha `role="group"` con `aria-label` proprio, e ogni bottone icona ha un `aria-label` descrittivo ("Pagina precedente", non solo un\'icona muta).',
-      },
-    },
-  },
-};
-export const AccessibleTypeSafety: Story = {
-  name: 'Accessibility / Type restricted to visually supported variants',
-  args: { totalItems: 237, currentPage: 4, variant: 'primary' },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'L\'originale importava il tipo `ButtonVariant` (11 valori) dal componente Button, ma il CSS di Pagination implementa lo stile "active" solo per 7 di quei valori — impostare `variant="ghost"` avrebbe compilato senza errori ma senza alcun effetto visivo. Il tipo `PaginationVariant`, locale a questo componente, espone solo le varianti realmente supportate dal CSS.',
+          'The button of the current page has `aria-current="page"`, so screen readers announce the current page without relying on its look. The controls form a `role="group"` with its own `aria-label`, and every icon button has an `aria-label` that names its action.',
       },
     },
   },

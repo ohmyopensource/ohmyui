@@ -8,6 +8,14 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file input.spec.ts
+ * @description Unit tests of InputComponent: the defaults, the min and max
+ * attributes, the effective type, the validation status, the input, textarea
+ * and select fields, the Angular forms integration, the clear button, the
+ * password toggle and the inputEnter event.
+ */
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InputComponent } from './input';
@@ -39,7 +47,7 @@ describe('InputComponent', () => {
     expect(component.fullWidth).toBe(true);
   });
 
-  describe('min/max attribute (regression: 0 is a valid boundary, not "unset")', () => {
+  describe('min and max attributes', () => {
     it('should render min="0" on the native input, not omit it', () => {
       component.type = 'number';
       component.min = 0;

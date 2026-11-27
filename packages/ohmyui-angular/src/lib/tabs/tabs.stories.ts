@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file tabs.stories.ts
+ * @description Storybook stories of TabsComponent: styles, variants, sizes,
+ * icons and badges, full width, vertical layout, a disabled tab and the
+ * accessibility notes.
+ */
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import {
   LucideHouse,
@@ -18,22 +25,27 @@ import {
 import { TabsComponent, TabItem } from './tabs';
 
 const basicTabs: TabItem[] = [
-  { id: 'overview', label: 'Panoramica' },
-  { id: 'activity', label: 'Attività' },
-  { id: 'settings', label: 'Impostazioni' },
+  { id: 'overview', label: 'Overview' },
+  { id: 'activity', label: 'Activity' },
+  { id: 'settings', label: 'Settings' },
 ];
 
 const iconTabs: TabItem[] = [
   { id: 'home', label: 'Home', icon: LucideHouse.icon },
-  { id: 'notifications', label: 'Notifiche', icon: LucideBell.icon, badge: 3 },
-  { id: 'profile', label: 'Profilo', icon: LucideUser.icon },
-  { id: 'settings', label: 'Impostazioni', icon: LucideSettings.icon },
+  {
+    id: 'notifications',
+    label: 'Notifications',
+    icon: LucideBell.icon,
+    badge: 3,
+  },
+  { id: 'profile', label: 'Profile', icon: LucideUser.icon },
+  { id: 'settings', label: 'Settings', icon: LucideSettings.icon },
 ];
 
 const withDisabled: TabItem[] = [
-  { id: 'overview', label: 'Panoramica' },
-  { id: 'activity', label: 'Attività', disabled: true },
-  { id: 'settings', label: 'Impostazioni' },
+  { id: 'overview', label: 'Overview' },
+  { id: 'activity', label: 'Activity', disabled: true },
+  { id: 'settings', label: 'Settings' },
 ];
 
 const meta: Meta<TabsComponent> = {
@@ -139,7 +151,7 @@ export const AccessibleKeyboardNav: Story = {
     docs: {
       description: {
         story:
-          "Aggiunto in fase di porting — l'originale gestiva solo il click. Con il focus su una tab: Freccia destra/sinistra passa alla tab successiva/precedente (giù/su se `vertical`), Home/End saltano rispettivamente alla prima/ultima tab abilitata. Le tab disabilitate vengono saltate automaticamente. Attivazione automatica: spostare il focus seleziona subito la tab, senza bisogno di premere Invio.",
+          'With the focus on a tab, the right and left arrows move to the next and previous tab (down and up when `vertical`), Home and End to the first and last enabled tab. Disabled tabs are skipped. Moving the focus also selects the tab, with no Enter needed, as in the WAI-ARIA tabs pattern with automatic activation.',
       },
     },
   },
@@ -151,24 +163,7 @@ export const AccessibleRovingTabindex: Story = {
     docs: {
       description: {
         story:
-          'Solo la tab attiva è raggiungibile premendo Tab da fuori il gruppo — le altre si raggiungono con le frecce una volta dentro, come da pattern WAI-ARIA "tablist". Se nessuna tab è attiva, il fallback è la prima tab abilitata: il gruppo non deve mai restare irraggiungibile da tastiera.',
-      },
-    },
-  },
-};
-export const AccessibleVariantAwareDarkMode: Story = {
-  name: 'Accessibility / Dark mode respects the chosen variant',
-  args: {
-    tabs: basicTabs,
-    activeTab: 'overview',
-    tabStyle: 'line',
-    variant: 'success',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Bug corretto in fase di porting: nell\'originale, in dark mode il testo della tab attiva tornava sempre "primary" indipendentemente dalla variante scelta (un solo override CSS non scoped alla variante). Ora ogni variante mantiene il proprio colore anche in dark mode.',
+          'Only the active tab is reached with the Tab key from outside the list; the arrow keys reach the others, as in the WAI-ARIA tabs pattern. Without an active tab, the first enabled tab takes its place, so the list is always reachable from the keyboard.',
       },
     },
   },

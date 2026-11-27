@@ -10,9 +10,12 @@
 
 /**
  * @file pagination.ts
- * @description Pagination component providing page navigation, page size control,
- * and intelligent page range rendering with ellipsis support.
+ * @description PaginationComponent (`ohmyui-pagination`): page navigation with
+ * first, previous, next and last buttons, a page size selector, a jump-to-page
+ * field and a range summary, in seven variants, three emphasis styles and four
+ * sizes.
  */
+
 import {
   Component,
   Input,
@@ -33,17 +36,7 @@ import {
   LucideIconData,
 } from '@lucide/angular';
 
-/**
- * Available visual accent variants for the active page indicator.
- *
- * NOTA: l'originale importava ButtonVariant dal componente Button, che ha
- * 11 varianti (incluse ghost/outline/outline-error/flat) — ma il CSS di
- * Pagination implementa lo stile "active" solo per queste 7. Riusare il
- * tipo di Button avrebbe permesso di impostare variant="ghost" senza
- * errori di compilazione, ma senza alcun effetto visivo reale (nessuna
- * regola CSS corrispondente). Tipo locale, ristretto a ciò che il CSS
- * supporta davvero.
- */
+/** Color of the current page in a pagination. */
 export type PaginationVariant =
   | 'primary'
   | 'secondary'
@@ -52,29 +45,22 @@ export type PaginationVariant =
   | 'warning'
   | 'error'
   | 'info';
-/** Available pagination component sizes. */
+/** Size of a pagination. */
 export type PaginationSize = 'xs' | 'sm' | 'md' | 'lg';
 /**
- * Visual emphasis applied to the active page indicator. It defines how strongly
- * the current page is highlighted within the pagination controls, ranging from
- * a fully filled and elevated style to a minimal text-only representation without
- * any background or shadow.
+ * Emphasis of the current page: a filled button with a shadow (`filled`), a
+ * tinted button (`soft`) or colored text only (`minimal`).
  */
 export type PaginationEmphasis = 'filled' | 'soft' | 'minimal';
-/**
- * Representation of a pagination entry used to render the navigation structure.
- * Each item corresponds either to an actual page number that can be selected
- * by the user, or to an ellipsis placeholder used to indicate a skipped range
- * of pages in the pagination sequence.
- */
+/** Entry of the page list: a page or an ellipsis for skipped pages. */
 export type PageItem =
   { type: 'page'; value: number } | { type: 'ellipsis'; id: string };
 
 /**
- * Pagination component used to navigate large datasets in a structured and
- * predictable way. It supports configurable page size, dynamic page range
- * rendering with ellipsis compression, and optional controls such as jump-to-page,
- * first/last navigation, and page size selection.
+ * Page navigation for a list split into pages.
+ *
+ * It does not change `currentPage` and `pageSize` itself: update them from
+ * `pageChange` and `pageSizeChange`.
  */
 @Component({
   selector: 'ohmyui-pagination',
@@ -85,77 +71,90 @@ export type PageItem =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginationComponent implements OnChanges {
+  /** Icon of the first page button. */
   readonly iconFirst: LucideIconData = LucideChevronsLeft.icon;
+  /** Icon of the previous page button. */
   readonly iconPrev: LucideIconData = LucideChevronLeft.icon;
+  /** Icon of the next page button. */
   readonly iconNext: LucideIconData = LucideChevronRight.icon;
+  /** Icon of the last page button. */
   readonly iconLast: LucideIconData = LucideChevronsRight.icon;
 
-  /** Total number of items in the dataset. */
+  /** Total number of items. */
   @Input() totalItems = 0;
   /** Number of items per page. */
   @Input() pageSize = 10;
-  /** Current page (1-based index). */
+  /** Current page, starting from 1. */
   @Input() currentPage = 1;
-  /** Available page size options. */
+  /** Choices of the page size selector. */
   @Input() pageSizeOptions: number[] = [10, 25, 50, 100];
-  /** Maximum number of visible page buttons before ellipsis is used. */
+  /**
+   * Highest number of page buttons, first and last page included. Ellipses
+   * replace the other pages.
+   */
   @Input() maxVisiblePages = 5;
-  /** Whether to show page size selector. */
+  /** Whether the page size selector is shown. */
   @Input() showPageSizeSelector = true;
-  /** Whether to show pagination info (range + total). */
+  /** Whether the range summary is shown. */
   @Input() showInfo = true;
-  /** Whether to show first/last page buttons. */
+  /** Whether the first and last page buttons are shown. */
   @Input() showFirstLast = true;
-  /** Whether to show jump-to-page input. */
+  /** Whether the jump-to-page field is shown. */
   @Input() showJumpToPage = false;
-  /** Disables all pagination interactions. */
+  /** Whether every control is disabled. */
   @Input() disabled = false;
-  /** Visual variant aligned with the semantic palette. */
+  /** Color of the current page. */
   @Input() variant: PaginationVariant = 'primary';
-  /** Component size. */
+  /** Size of the pagination. */
   @Input() size: PaginationSize = 'md';
-  /** Active page emphasis style. */
+  /** Emphasis of the current page. */
   @Input() emphasis: PaginationEmphasis = 'filled';
   /**
-   * Whether to show first/last page buttons on mobile.
-   * Defaults to false to preserve space on small screens.
+   * Whether the first and last page buttons are also shown on small screens.
    */
   @Input() showFirstLastOnMobile = false;
 
-  /** Emitted when page changes. */
+  /**
+   * Emitted with the page to show: the chosen page, 1 after a page size
+   * change, or the last page when `currentPage` is past it.
+   */
   @Output() pageChange = new EventEmitter<number>();
-  /** Emitted when page size changes. */
+  /** Emitted with the page size chosen in the selector. */
   @Output() pageSizeChange = new EventEmitter<number>();
 
+  /** Value of the jump-to-page field. */
   jumpValue: number | null = null;
 
-  /** Total number of pages. */
+  /** Number of pages, at least 1. */
   get totalPages(): number {
     return Math.max(1, Math.ceil(this.totalItems / this.pageSize));
   }
-  /** Whether current page is the first page. */
+
+  /** Whether the current page is the first one. */
   get isFirst(): boolean {
     return this.currentPage <= 1;
   }
-  /** Whether current page is the last page. */
+
+  /** Whether the current page is the last one. */
   get isLast(): boolean {
     return this.currentPage >= this.totalPages;
   }
-  /** Starting index of current page range (1-based). */
+
+  /** Position of the first item of the current page, or 0 without items. */
   get rangeStart(): number {
     return this.totalItems === 0
       ? 0
       : (this.currentPage - 1) * this.pageSize + 1;
   }
-  /** Ending index of current page range (1-based). */
+
+  /** Position of the last item of the current page. */
   get rangeEnd(): number {
     return Math.min(this.currentPage * this.pageSize, this.totalItems);
   }
 
   /**
-   * Builds pagination structure with pages and ellipsis. Ensures first and
-   * last page are always visible and applies sliding window logic around
-   * current page.
+   * Entries of the page list: the first and last page, the pages around the
+   * current one, and an ellipsis for each range of skipped pages.
    */
   get pageItems(): PageItem[] {
     const total = this.totalPages;
@@ -186,7 +185,7 @@ export class PaginationComponent implements OnChanges {
     return items;
   }
 
-  /** Icon size based on component size. */
+  /** Size in pixels of the icons for the current size. */
   get iconSize(): number {
     const map: Record<PaginationSize, number> = {
       xs: 12,
@@ -197,7 +196,7 @@ export class PaginationComponent implements OnChanges {
     return map[this.size];
   }
 
-  /** Host CSS classes. */
+  /** CSS classes of the navigation element. */
   get hostClasses(): Record<string, boolean> {
     return {
       'ohmyui-pagination': true,
@@ -209,51 +208,66 @@ export class PaginationComponent implements OnChanges {
     };
   }
 
-  /** Synchronizes internal state when inputs change. */
+  /**
+   * Clears the jump-to-page field when the number of pages can change, and
+   * emits the last page when `currentPage` is past it.
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['totalItems'] || changes['pageSize']) {
       this.jumpValue = null;
     }
     if (this.currentPage > this.totalPages) {
+      // Defer the emit: the parent is still running change detection.
       setTimeout(() => this.goTo(this.totalPages));
     }
   }
 
-  /** Navigates to a specific page. */
+  /**
+   * Emits `pageChange` with the page, kept within the existing pages, unless
+   * it is the current page or the pagination is disabled.
+   *
+   * @param page Page to go to.
+   */
   goTo(page: number): void {
     if (this.disabled) return;
     const clamped = Math.max(1, Math.min(page, this.totalPages));
     if (clamped === this.currentPage) return;
     this.pageChange.emit(clamped);
   }
-  /** Navigates to first page. */
+
+  /** Goes to the first page. */
   goFirst(): void {
     this.goTo(1);
   }
-  /** Navigates to previous page. */
+
+  /** Goes to the previous page. */
   goPrev(): void {
     this.goTo(this.currentPage - 1);
   }
-  /** Navigates to next page. */
+
+  /** Goes to the next page. */
   goNext(): void {
     this.goTo(this.currentPage + 1);
   }
-  /** Navigates to last page. */
+
+  /** Goes to the last page. */
   goLast(): void {
     this.goTo(this.totalPages);
   }
 
-  /** Executes jump-to-page action. */
+  /** Goes to the page typed in the jump-to-page field and clears it. */
   onJump(): void {
     if (this.jumpValue == null) return;
     this.goTo(this.jumpValue);
     this.jumpValue = null;
   }
-  /** Handles keyboard interaction for jump input. */
+
+  /** Goes to the typed page on Enter. */
   onJumpKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter') this.onJump();
   }
-  /** Handles page size change. */
+
+  /** Emits `pageSizeChange` with the chosen size and `pageChange` with 1. */
   onPageSizeChange(event: Event): void {
     if (this.disabled) return;
     const value = Number((event.target as HTMLSelectElement).value);
@@ -261,21 +275,22 @@ export class PaginationComponent implements OnChanges {
     this.pageChange.emit(1);
   }
 
-  /** Type guard for ellipsis items. */
+  /** Whether the entry is an ellipsis. */
   isEllipsis(item: PageItem): item is { type: 'ellipsis'; id: string } {
     return item.type === 'ellipsis';
   }
-  /** Type guard for page items. */
+
+  /** Whether the entry is a page. */
   isPageItem(item: PageItem): item is { type: 'page'; value: number } {
     return item.type === 'page';
   }
 
-  /** Creates a numeric range. */
+  /** Integers from `from` to `to`, both included. */
   private range(from: number, to: number): number[] {
     return Array.from({ length: to - from + 1 }, (_, i) => from + i);
   }
 
-  /** TrackBy function for Angular rendering optimization. */
+  /** Tracking key of an entry of the page list. */
   trackByItem(_: number, item: PageItem): string {
     return item.type === 'page' ? `page-${item.value}` : `ellipsis-${item.id}`;
   }

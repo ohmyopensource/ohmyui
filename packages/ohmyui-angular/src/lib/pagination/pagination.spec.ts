@@ -8,6 +8,14 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file pagination.spec.ts
+ * @description Unit tests of PaginationComponent: the defaults, the number of
+ * pages, the range of the current page, the ellipses of the page list, page
+ * navigation, the page size change, the correction of a page past the last one
+ * and the jump-to-page field.
+ */
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaginationComponent } from './pagination';

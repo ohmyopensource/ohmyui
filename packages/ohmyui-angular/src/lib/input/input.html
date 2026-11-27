@@ -9,11 +9,12 @@
 -->
 
 <!--
-@file input.html
-@description Template for InputComponent including label, input/textarea/
-select rendering, icon system, validation states, and accessibility support
-(ARIA + hint system).
+  @file input.html
+  @description Template of InputComponent: the label, the field with prefix,
+  icons, buttons and suffix around a native input, textarea or select, and the
+  message below.
 -->
+
 <!-- Wrapper -->
 <div [class]="wrapperClasses">
   <!-- Label -->
@@ -26,7 +27,7 @@ select rendering, icon system, validation states, and accessibility support
     {{ label }}
   </label>
   }
-  <!-- Field Container -->
+  <!-- Field -->
   <div [class]="fieldClasses">
     <!-- Prefix -->
     @if (prefix) {
@@ -41,8 +42,7 @@ select rendering, icon system, validation states, and accessibility support
       <svg [lucideIcon]="iconLeft" [size]="iconSize"></svg>
     </span>
     }
-    <!-- Input Variants -->
-    <!-- Text / Email / Password / Number -->
+    <!-- Native input -->
     @if (type !== 'textarea' && type !== 'select') {
     <input
       class="ohmyui-input-wrapper__input"
@@ -118,7 +118,6 @@ select rendering, icon system, validation states, and accessibility support
       }
     </select>
     }
-    <!-- Right Side Icon System -->
     <!-- Password toggle -->
     @if (showPasswordToggle) {
     <button
@@ -153,7 +152,7 @@ select rendering, icon system, validation states, and accessibility support
       <svg [lucideIcon]="iconRight" [size]="iconSize"></svg>
     </span>
     }
-    <!-- Success / error status -->
+    <!-- Status icon -->
     @if (status !== 'default' && !iconRight && !showPasswordToggle &&
     !showClearBtn) {
     <span
@@ -171,7 +170,7 @@ select rendering, icon system, validation states, and accessibility support
     <span class="ohmyui-input-wrapper__suffix">{{ suffix }}</span>
     }
   </div>
-  <!-- Feedback ( Hint / Error / Success ) -->
+  <!-- Error, success or hint message -->
   @if (errorMessage) {
   <span
     [id]="inputId + '-hint'"

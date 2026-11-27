@@ -10,14 +10,12 @@
 
 /**
  * @file input.ts
- * @description
- * Highly configurable Angular form control supporting multiple input types
- * (text, textarea, select, password, etc.), validation states, icons,
- * prefix/suffix decorations, and full ControlValueAccessor integration.
- *
- * Designed for design system usage with consistent UI/UX behavior,
- * accessibility support, and dark mode compatibility.
+ * @description InputComponent (`ohmyui-input`): a text field, textarea or
+ * select with a label, icons, a prefix, a suffix, a clear button, a password
+ * toggle, a hint and validation messages, in six accent variants and three
+ * sizes, with support for Angular forms.
  */
+
 import {
   Component,
   Input,
@@ -46,18 +44,11 @@ import {
   LucideCircleCheck,
 } from '@lucide/angular';
 
-/**
- * Genera un id univoco per l'associazione label/input via un contatore
- * incrementale — stesso pattern già usato in CheckboxComponent. Sostituisce
- * l'import originale da '@shared/utils/crypto-rand', un path alias che
- * esiste in OMU ma non in questo workspace: nessuna utility esterna
- * necessaria per un semplice id sequenziale.
- */
 let nextInputId = 0;
 
 /**
- * Supported input rendering modes. Determines both HTML element type and
- * internal behavior (e.g. text field, textarea, select, password toggle).
+ * Kind of field: a native input of that type, a textarea (`textarea`) or a
+ * select (`select`).
  */
 export type InputType =
   | 'text'
@@ -69,25 +60,27 @@ export type InputType =
   | 'search'
   | 'textarea'
   | 'select';
-/** Defines the visual size scale of the input component. */
+/** Size of an input. */
 export type InputSize = 'sm' | 'md' | 'lg';
-/** Defines the visual accent variant used for focus, borders and states. */
+/** Color of the border and the focus ring of a focused input. */
 export type InputVariant =
   'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info';
-/** Represents the semantic validation state of the input. */
+/** Validation state of an input, set by its messages. */
 export type InputStatus = 'default' | 'success' | 'error';
 
-/** Option model used by select-type inputs. */
+/** Option of an input of type `select`. */
 export interface InputSelectOption {
+  /** Text of the option. */
   label: string;
+  /** Value of the option. */
   value: string | number;
+  /** Whether the option is disabled. */
   disabled?: boolean;
 }
 
 /**
- * A highly configurable form control supporting multiple input types,
- * validation states, icons, and full integration with Angular Forms API.
- * Implements ControlValueAccessor to behave as a native form control.
+ * Form field built on a native `<input>`, `<textarea>` or `<select>`, so
+ * keyboard, screen readers and form submission work as with any field.
  */
 @Component({
   selector: 'ohmyui-input',
@@ -106,112 +99,128 @@ export interface InputSelectOption {
 })
 export class InputComponent implements ControlValueAccessor {
   private readonly cdr = inject(ChangeDetectorRef);
+  /** Icon of the button that shows the password. */
   readonly iconEye: LucideIconData = LucideEye.icon;
+  /** Icon of the button that hides the password. */
   readonly iconEyeOff: LucideIconData = LucideEyeOff.icon;
+  /** Icon of the clear button. */
   readonly iconClear: LucideIconData = LucideX.icon;
+  /** Icon of the error state. */
   readonly iconError: LucideIconData = LucideCircleAlert.icon;
+  /** Icon of the success state. */
   readonly iconSuccess: LucideIconData = LucideCircleCheck.icon;
 
-  /** Defines the input type and its rendering behavior. */
+  /** Kind of field. */
   @Input() type: InputType = 'text';
-  /** Primary label displayed above the input field. */
+  /** Text of the label above the field. */
   @Input() label = '';
-  /** Placeholder text shown when the field is empty. */
+  /** Text shown in the empty field. */
   @Input() placeholder = '';
-  /** Helper text displayed below the input for guidance. */
+  /** Help text below the field. An error or success message replaces it. */
   @Input() hint = '';
-  /** Error message used to indicate invalid state. */
+  /**
+   * Error message below the field. When set, the field is in the error state.
+   */
   @Input() errorMessage = '';
-  /** Success message used to indicate valid state. */
+  /**
+   * Success message below the field. When set without an error message, the
+   * field is in the success state.
+   */
   @Input() successMessage = '';
-  /** Options used when rendering a select input. */
+  /** Options of a select. */
   @Input() options: InputSelectOption[] = [];
-  /** Placeholder displayed for select inputs. */
+  /** Text of the empty first option of a select. */
   @Input() selectPlaceholder = 'Seleziona';
-  /** Visual variant used for focus and semantic coloring. */
+  /** Color of the border and the focus ring when focused. */
   @Input() variant: InputVariant = 'primary';
-  /** Controls the size and density of the input field. */
+  /** Size of the field. */
   @Input() size: InputSize = 'md';
-  /** If true, input stretches to fill container width. */
+  /** Whether the field fills the width of its container. */
   @Input() fullWidth = true;
-  /** Icon displayed on the left side of the input. */
+  /** Lucide icon shown before the value. */
   @Input() iconLeft: LucideIconData | null = null;
   /**
-   * Icon displayed on the right side of the input.
-   * Ignored when conflicting behaviors (password/clearable) are active.
+   * Lucide icon shown after the value, in place of the status icon. The
+   * password toggle and the clear button hide it.
    */
   @Input() iconRight: LucideIconData | null = null;
-  /** Text prefix displayed inside the input (e.g. https://, €). */
+  /** Text shown before the value, such as `https://`. */
   @Input() prefix = '';
-  /** Text suffix displayed inside the input (e.g. kg, %). */
+  /** Text shown after the value, such as `kg`. */
   @Input() suffix = '';
-  /** Enables clear button when input has a value. */
+  /** Whether a clear button is shown when the field has a value. */
   @Input() clearable = false;
-  /** Disables user interaction with the input. */
+  /** Whether the field is disabled. */
   @Input() disabled = false;
-  /** Makes input read-only (value cannot be modified). */
+  /** Whether the field is read-only. */
   @Input() readonly = false;
-  /** Marks the field as required (UI-level indicator only). */
+  /** Whether the field is required in its form. */
   @Input() required = false;
-  /** Number of rows used when type is textarea. */
+  /** Number of visible lines of a textarea. */
   @Input() rows = 4;
-  /** Native HTML autocomplete attribute. */
+  /** `autocomplete` of the native field. */
   @Input() autocomplete = 'off';
-  /** Unique identifier used to bind label and input elements. */
+  /** Id of the native field, unique on the page by default. */
   @Input() inputId = `ohmyui-input-${++nextInputId}`;
-  /** Minimum numeric value (for number-based inputs). */
+  /** `min` of the native input. When empty, the attribute is left out. */
   @Input() min: string | number = '';
-  /** Maximum numeric value (for number-based inputs). */
+  /** `max` of the native input. When empty, the attribute is left out. */
   @Input() max: string | number = '';
-  /** Minimum allowed string length. */
+  /** Minimum number of characters. 0 sets no minimum. */
   @Input() minLength = 0;
-  /** Maximum allowed string length. */
+  /** Maximum number of characters. 0 sets no maximum. */
   @Input() maxLength = 0;
-  /** Regex pattern used for validation. */
+  /** `pattern` of the native input. When empty, the attribute is left out. */
   @Input() pattern = '';
 
-  /** Emitted whenever the input value changes. */
+  /** Emitted with the new value when the user changes it. */
   @Output() inputChange = new EventEmitter<string | number>();
-  /** Emitted when input receives focus. */
+  /** Emitted when the field receives focus. */
   @Output() inputFocus = new EventEmitter<FocusEvent>();
-  /** Emitted when input loses focus. */
+  /** Emitted when the field loses focus. */
   @Output() inputBlur = new EventEmitter<FocusEvent>();
-  /** Emitted when Enter key is pressed. */
+  /** Emitted when Enter is pressed in a native input. */
   @Output() inputEnter = new EventEmitter<KeyboardEvent>();
-  /** Emitted when the clear action is triggered. */
+  /** Emitted when the clear button is clicked. */
   @Output() cleared = new EventEmitter<void>();
 
-  /** Current value of the control. */
+  /** Current value. */
   value: string | number = '';
-  /** Tracks focus state for UI styling. */
+  /** Whether the field has focus. */
   isFocused = signal(false);
-  /** Controls password visibility toggle state. */
+  /** Whether the password is visible. */
   showPassword = signal(false);
 
-  // Placeholder no-op richiesti da ControlValueAccessor: Angular li sovrascrive
-  // con registerOnChange/registerOnTouched prima che vengano mai invocati
-  // realmente (stesso ragionamento di CheckboxComponent).
+  // Placeholders required by ControlValueAccessor: Angular replaces them
+  // through registerOnChange and registerOnTouched before they are called.
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onChange: (val: string | number) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouched: () => void = () => {};
 
+  /** Implemented as part of ControlValueAccessor. */
   writeValue(val: string | number | null): void {
     this.value = val ?? '';
     this.cdr.markForCheck();
   }
+
+  /** Implemented as part of ControlValueAccessor. */
   registerOnChange(fn: (val: string | number) => void): void {
     this.onChange = fn;
   }
+
+  /** Implemented as part of ControlValueAccessor. */
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
+
+  /** Implemented as part of ControlValueAccessor. */
   setDisabledState(disabled: boolean): void {
     this.disabled = disabled;
     this.cdr.markForCheck();
   }
 
-  /** Handles native input event and propagates value changes. */
+  /** Updates the value and emits `inputChange` when the user changes it. */
   onInput(event: Event): void {
     const val = (
       event.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -222,25 +231,25 @@ export class InputComponent implements ControlValueAccessor {
     this.cdr.markForCheck();
   }
 
-  /** Handles focus event and updates internal UI state. */
+  /** Marks the field as focused and emits `inputFocus`. */
   onFocus(event: FocusEvent): void {
     this.isFocused.set(true);
     this.inputFocus.emit(event);
   }
 
-  /** Handles blur event and marks control as touched. */
+  /** Marks the control as touched and emits `inputBlur`. */
   onBlur(event: FocusEvent): void {
     this.isFocused.set(false);
     this.onTouched();
     this.inputBlur.emit(event);
   }
 
-  /** Handles keyboard interaction (Enter key submission hook). */
+  /** Emits `inputEnter` on Enter. */
   onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter') this.inputEnter.emit(event);
   }
 
-  /** Clears the current input value and resets internal state. */
+  /** Clears the value and emits `cleared`. */
   onClear(): void {
     this.value = '';
     this.onChange('');
@@ -249,50 +258,46 @@ export class InputComponent implements ControlValueAccessor {
     this.cdr.markForCheck();
   }
 
-  /** Toggles password visibility for password input type. */
+  /** Shows or hides the password. */
   togglePassword(): void {
     this.showPassword.update((v) => !v);
   }
 
-  /**
-   * Resolves the effective input type based on component state.
-   *
-   * NOTA: l'originale aveva un terzo branch morto (textarea/select), mai
-   * raggiungibile: il template usa effectiveType solo sul tag <input>, che
-   * non viene mai renderizzato quando type è 'textarea'/'select' (rendono
-   * <textarea>/<select> invece, gestiti da branch separati). Rimosso.
-   */
+  /** `type` of the native input: `text` while the password is visible. */
   get effectiveType(): string {
     if (this.type === 'password')
       return this.showPassword() ? 'text' : 'password';
     return this.type;
   }
 
-  /** Computes the current validation status of the input. */
+  /**
+   * Validation state: `error` with an error message, otherwise `success` with
+   * a success message.
+   */
   get status(): InputStatus {
     if (this.errorMessage) return 'error';
     if (this.successMessage) return 'success';
     return 'default';
   }
 
-  /** Returns icon size based on configured input size. */
+  /** Size in pixels of the icons for the current size. */
   get iconSize(): number {
     return { sm: 14, md: 16, lg: 18 }[this.size];
   }
 
-  /** Determines whether the clear button should be visible. */
+  /** Whether the clear button is shown. */
   get showClearBtn(): boolean {
     return this.clearable && !!this.value && !this.disabled && !this.readonly;
   }
 
-  /** Determines whether password visibility toggle should be shown. */
+  /** Whether the password toggle is shown. */
   get showPasswordToggle(): boolean {
     return this.type === 'password';
   }
 
   /**
-   * Indica se esiste un messaggio (hint/error/success) da collegare via
-   * aria-describedby — condiviso da input, textarea e select.
+   * Id of the message below the field, for `aria-describedby`, or null
+   * without a message.
    */
   get describedById(): string | null {
     return this.hint || this.errorMessage || this.successMessage
@@ -300,7 +305,7 @@ export class InputComponent implements ControlValueAccessor {
       : null;
   }
 
-  /** Computes wrapper container classes. */
+  /** CSS classes of the wrapper element. */
   get wrapperClasses(): string {
     return [
       'ohmyui-input-wrapper',
@@ -310,7 +315,7 @@ export class InputComponent implements ControlValueAccessor {
       .join(' ');
   }
 
-  /** Computes input field classes based on state and configuration. */
+  /** CSS classes of the field element. */
   get fieldClasses(): string {
     return [
       'ohmyui-input-wrapper__field',

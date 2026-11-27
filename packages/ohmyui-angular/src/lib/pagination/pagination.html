@@ -9,11 +9,12 @@
 -->
 
 <!--
-@file pagination.html
-@description Template for PaginationComponent handling page navigation UI,
-including page size selector, page controls, range info, and optional
-jump-to-page input.
+  @file pagination.html
+  @description Template of PaginationComponent: the page size selector, the
+  navigation buttons around the page list and the compact indicator, the
+  jump-to-page field and the range summary.
 -->
+
 <nav
   [ngClass]="hostClasses"
   [attr.aria-label]="'Navigazione pagine'"
@@ -133,7 +134,7 @@ jump-to-page input.
     />
   </label>
   }
-  <!-- Info range -->
+  <!-- Range summary -->
   @if (showInfo && totalItems > 0) {
   <span class="ohmyui-pagination__info">
     <span class="ohmyui-pagination__info-range"

@@ -10,10 +10,11 @@
 
 /**
  * @file tabs.ts
- * @description Reusable tabs component supporting multiple visual styles,
- * color variants, sizes, icons, badges, dark theme support, and controlled
- * tab selection through input/output bindings.
+ * @description TabsComponent (`ohmyui-tabs`): a tab list in four styles (line,
+ * pill, card, underline), seven variants and three sizes, horizontal or
+ * vertical, with optional icons and badges and keyboard navigation.
  */
+
 import {
   Component,
   Input,
@@ -27,15 +28,20 @@ import {
 import { CommonModule } from '@angular/common';
 import { LucideDynamicIcon, LucideIconData } from '@lucide/angular';
 
-/** Represents a single tab configuration. */
+/** Tab of a tab list. */
 export interface TabItem {
+  /** Id of the tab, emitted by `tabChange`. */
   id: string;
+  /** Text of the tab. */
   label: string;
+  /** Lucide icon shown before the label. */
   icon?: LucideIconData;
+  /** Value shown in a badge after the label. */
   badge?: number | string;
+  /** Whether the tab is disabled. */
   disabled?: boolean;
 }
-/** Available color variants for active tab states and highlights. */
+/** Color of the active tab in a tab list. */
 export type TabVariant =
   | 'primary'
   | 'secondary'
@@ -44,28 +50,22 @@ export type TabVariant =
   | 'warning'
   | 'error'
   | 'info';
-/** Available tab sizes. */
+/** Size of a tab list. */
 export type TabSize = 'sm' | 'md' | 'lg';
 /**
- * Defines the visual presentation style of the tabs component.
- * - line: active indicator displayed as a bottom border
- * - pill: rounded filled active state
- * - card: card-like appearance with borders and background
- * - underline: text-focused style with animated underline
+ * Look of the tabs: a line under the active tab (`line`), a filled pill
+ * (`pill`), cards with border and background (`card`) or an animated
+ * underline under the text (`underline`).
  */
 export type TabStyle = 'line' | 'pill' | 'card' | 'underline';
 
 /**
- * Flexible tabs component used for navigation and content switching.
+ * Tab list for switching between views.
  *
- * Implementa il pattern WAI-ARIA "tabs" (automatic activation): le frecce
- * spostano il focus tra le tab abilitate e le attivano immediatamente,
- * Home/End saltano rispettivamente alla prima/ultima tab abilitata.
- * L'originale gestiva solo il click — la navigazione da tastiera è un
- * requisito standard per role="tablist", non un extra.
- *
- * Selection state is controlled externally through the activeTab input,
- * while tab changes are emitted via the tabChange output.
+ * It follows the WAI-ARIA tabs pattern with automatic activation: the arrow
+ * keys move the focus to the next or previous enabled tab and select it, Home
+ * and End to the first and last enabled tab. It does not change `activeTab`
+ * itself: update it from `tabChange`.
  */
 @Component({
   selector: 'ohmyui-tabs',
@@ -80,50 +80,46 @@ export class TabsComponent {
     ElementRef<HTMLButtonElement>
   >;
 
-  /** Collection of tabs to render. */
+  /** Tabs to show. */
   @Input() tabs: TabItem[] = [];
-  /**
-   * Identifier of the currently active tab.
-   * This value is controlled externally by the parent component.
-   */
+  /** Id of the active tab. */
   @Input() activeTab = '';
-  /** Visual style used to render tabs. */
+  /** Look of the tabs. */
   @Input() tabStyle: TabStyle = 'line';
-  /** Color variant applied to active states and highlights. */
+  /** Color of the active tab. */
   @Input() variant: TabVariant = 'primary';
-  /** Size applied to tabs, icons, and spacing. */
+  /** Size of the tabs. */
   @Input() size: TabSize = 'md';
-  /** Expands tabs to occupy the available width equally. */
+  /** Whether the tabs share the width of the container equally. */
   @Input() fullWidth = false;
-  /** Renders tabs stacked vertically instead of horizontally. */
+  /** Whether the tabs are stacked vertically. */
   @Input() vertical = false;
 
-  /**
-   * Emitted when the active tab changes.
-   * Contains the identifier of the selected tab.
-   */
+  /** Emitted with the id of the tab that the user selects. */
   @Output() tabChange = new EventEmitter<string>();
 
   /**
-   * Selects a tab and emits its identifier when the tab is enabled and
-   * differs from the current active tab.
+   * Emits `tabChange` with the id of the tab, unless it is disabled or
+   * already active.
+   *
+   * @param tab Tab to select.
    */
   selectTab(tab: TabItem): void {
     if (tab.disabled || tab.id === this.activeTab) return;
     this.tabChange.emit(tab.id);
   }
 
-  /** Checks whether the provided tab matches the currently active tab. */
+  /** Whether the tab is the active one. */
   isActive(tab: TabItem): boolean {
     return tab.id === this.activeTab;
   }
 
-  /** Resolves the icon size associated with the configured tab size. */
+  /** Size in pixels of the icons for the current size. */
   get iconSize(): number {
     return { sm: 14, md: 16, lg: 18 }[this.size];
   }
 
-  /** Builds the CSS class list applied to the tabs container. */
+  /** CSS classes of the tab list. */
   get wrapperClasses(): string {
     return [
       'ohmyui-tabs',
@@ -137,7 +133,7 @@ export class TabsComponent {
       .join(' ');
   }
 
-  /** Builds the CSS class list for an individual tab element. */
+  /** CSS classes of a tab. */
   tabClasses(tab: TabItem): string {
     return [
       'ohmyui-tabs__tab',
@@ -149,7 +145,7 @@ export class TabsComponent {
       .join(' ');
   }
 
-  /** Builds the CSS class list for a tab badge. */
+  /** CSS classes of the badge of a tab. */
   badgeClasses(tab: TabItem): string {
     return [
       'ohmyui-tabs__badge',
@@ -159,15 +155,14 @@ export class TabsComponent {
       .join(' ');
   }
 
-  /** TrackBy function used by Angular to optimize @for rendering. */
+  /** Tracking key of a tab. */
   trackById(_: number, tab: TabItem): string {
     return tab.id;
   }
 
   /**
-   * Determines the roving tabindex for a tab: 0 for the active tab (or,
-   * when no tab is active, the first enabled one — otherwise the whole
-   * tablist would be unreachable via Tab), -1 for every other tab.
+   * Whether the tab is reached with the Tab key: the active tab or, without
+   * one, the first enabled tab. The arrow keys reach the others.
    */
   isTabStop(tab: TabItem): boolean {
     if (tab.disabled) return false;
@@ -179,10 +174,11 @@ export class TabsComponent {
   }
 
   /**
-   * Handles keyboard navigation on a tab button, implementing the WAI-ARIA
-   * tablist pattern with automatic activation: arrow keys move focus AND
-   * select the tab immediately (no separate Enter/Space activation step),
-   * matching the behavior of lightweight, low-cost-to-switch tab groups.
+   * Moves the focus with the arrow keys, Home and End, and selects the
+   * focused tab.
+   *
+   * @param event Key press on a tab.
+   * @param index Index of the tab.
    */
   onKeydown(event: KeyboardEvent, index: number): void {
     const forward = this.vertical ? 'ArrowDown' : 'ArrowRight';
@@ -203,7 +199,9 @@ export class TabsComponent {
     }
   }
 
-  /** Finds the next enabled tab index, wrapping around, in the given direction. */
+  /**
+   * Index of the next enabled tab in the direction, wrapping around, or null.
+   */
   private nextEnabledIndex(from: number, direction: 1 | -1): number | null {
     const count = this.tabs.length;
     if (count === 0) return null;
@@ -214,13 +212,13 @@ export class TabsComponent {
     return null;
   }
 
-  /** Finds the first enabled tab index. */
+  /** Index of the first enabled tab, or null. */
   private firstEnabledIndex(): number | null {
     const idx = this.tabs.findIndex((t) => !t.disabled);
     return idx === -1 ? null : idx;
   }
 
-  /** Finds the last enabled tab index. */
+  /** Index of the last enabled tab, or null. */
   private lastEnabledIndex(): number | null {
     for (let i = this.tabs.length - 1; i >= 0; i--) {
       if (!this.tabs[i].disabled) return i;
@@ -228,7 +226,7 @@ export class TabsComponent {
     return null;
   }
 
-  /** Moves DOM focus to the tab at the given index and selects it. */
+  /** Focuses the tab at the index and selects it. */
   private focusAndSelect(index: number | null): void {
     if (index === null || !this.tabButtons) return;
     const target = this.tabButtons.get(index);

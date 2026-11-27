@@ -8,6 +8,13 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
+/**
+ * @file tabs.spec.ts
+ * @description Unit tests of TabsComponent: the defaults, tab selection, the
+ * active tab, the rendering of the tabs, the roving tabindex, keyboard
+ * navigation and the tab classes.
+ */
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TabsComponent, TabItem } from './tabs';
