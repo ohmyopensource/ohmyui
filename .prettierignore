@@ -5,3 +5,5 @@
 /.nx/workspace-data
 .angular
 pnpm-lock.yaml
+.dart_tool
+packages/ohmyui_flutter/build
