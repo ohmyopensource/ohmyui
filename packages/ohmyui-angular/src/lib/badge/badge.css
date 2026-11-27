@@ -22,6 +22,17 @@
   --ohmyui-badge-outline-color: var(--ohmyui-color-primary-dark);
   --ohmyui-badge-flat-color: var(--ohmyui-color-primary-dark);
   --ohmyui-badge-remove-hover-bg: rgba(0, 0, 0, 0.1);
+  --ohmyui-badge-border-width: 1.5px;
+  --ohmyui-badge-shadow-geometry: 0 2px 8px;
+  --ohmyui-badge-neutral-shadow: 0 2px 6px var(--ohmyui-color-ghost-shadow);
+  --ohmyui-badge-height-xs: 18px;
+  --ohmyui-badge-height-sm: 22px;
+  --ohmyui-badge-height-md: 26px;
+  --ohmyui-badge-height-lg: var(--ohmyui-spacing-8);
+  --ohmyui-badge-dot-size-xs: 5px;
+  --ohmyui-badge-dot-size-sm: var(--ohmyui-spacing-1-5);
+  --ohmyui-badge-dot-size-md: 7px;
+  --ohmyui-badge-dot-size-lg: var(--ohmyui-spacing-2);
 }
 
 /* Dark theme */
@@ -40,11 +51,11 @@
   justify-content: center;
   gap: 0.3em;
   font-family: inherit;
-  font-weight: 700;
+  font-weight: var(--ohmyui-font-weight-bold);
   letter-spacing: 0.03em;
   white-space: nowrap;
   line-height: 1;
-  border: 1.5px solid transparent;
+  border: var(--ohmyui-badge-border-width) solid transparent;
   cursor: default;
   user-select: none;
   transition:
@@ -107,43 +118,43 @@
 /* Sizes */
 .ohmyui-badge--xs {
   padding: 0.2em 0.55em;
-  font-size: 0.6rem;
-  min-height: 18px;
+  font-size: var(--ohmyui-font-size-2xs);
+  min-height: var(--ohmyui-badge-height-xs);
 }
 .ohmyui-badge--sm {
   padding: 0.25em 0.65em;
-  font-size: 0.7rem;
-  min-height: 22px;
+  font-size: var(--ohmyui-font-size-xs);
+  min-height: var(--ohmyui-badge-height-sm);
 }
 .ohmyui-badge--md {
   padding: 0.3em 0.8em;
-  font-size: 0.75rem;
-  min-height: 26px;
+  font-size: var(--ohmyui-font-size-sm);
+  min-height: var(--ohmyui-badge-height-md);
 }
 .ohmyui-badge--lg {
   padding: 0.4em 1em;
-  font-size: 0.85rem;
-  min-height: 32px;
+  font-size: var(--ohmyui-font-size-md);
+  min-height: var(--ohmyui-badge-height-lg);
 }
 .ohmyui-badge--xs
   .ohmyui-badge__dot:not(.ohmyui-badge--dot-only .ohmyui-badge__dot) {
-  width: 5px;
-  height: 5px;
+  width: var(--ohmyui-badge-dot-size-xs);
+  height: var(--ohmyui-badge-dot-size-xs);
 }
 .ohmyui-badge--sm
   .ohmyui-badge__dot:not(.ohmyui-badge--dot-only .ohmyui-badge__dot) {
-  width: 6px;
-  height: 6px;
+  width: var(--ohmyui-badge-dot-size-sm);
+  height: var(--ohmyui-badge-dot-size-sm);
 }
 .ohmyui-badge--md
   .ohmyui-badge__dot:not(.ohmyui-badge--dot-only .ohmyui-badge__dot) {
-  width: 7px;
-  height: 7px;
+  width: var(--ohmyui-badge-dot-size-md);
+  height: var(--ohmyui-badge-dot-size-md);
 }
 .ohmyui-badge--lg
   .ohmyui-badge__dot:not(.ohmyui-badge--dot-only .ohmyui-badge__dot) {
-  width: 8px;
-  height: 8px;
+  width: var(--ohmyui-badge-dot-size-lg);
+  height: var(--ohmyui-badge-dot-size-lg);
 }
 
 /* Dot only */
@@ -154,20 +165,20 @@
   box-shadow: none !important;
 }
 .ohmyui-badge--dot-only.ohmyui-badge--xs {
-  width: 8px;
-  height: 8px;
+  width: var(--ohmyui-spacing-2);
+  height: var(--ohmyui-spacing-2);
 }
 .ohmyui-badge--dot-only.ohmyui-badge--sm {
-  width: 10px;
-  height: 10px;
+  width: var(--ohmyui-spacing-2-5);
+  height: var(--ohmyui-spacing-2-5);
 }
 .ohmyui-badge--dot-only.ohmyui-badge--md {
-  width: 12px;
-  height: 12px;
+  width: var(--ohmyui-spacing-3);
+  height: var(--ohmyui-spacing-3);
 }
 .ohmyui-badge--dot-only.ohmyui-badge--lg {
-  width: 16px;
-  height: 16px;
+  width: var(--ohmyui-spacing-4);
+  height: var(--ohmyui-spacing-4);
 }
 .ohmyui-badge--dot-only .ohmyui-badge__dot {
   width: 100%;
@@ -191,7 +202,8 @@
   );
   color: var(--ohmyui-color-primary-text);
   border-color: var(--ohmyui-color-primary-dark);
-  box-shadow: 0 2px 8px var(--ohmyui-color-primary-shadow);
+  box-shadow: var(--ohmyui-badge-shadow-geometry)
+    var(--ohmyui-color-primary-shadow);
 }
 .ohmyui-badge--primary .ohmyui-badge__dot {
   background: var(--ohmyui-color-primary-dark);
@@ -204,7 +216,8 @@
   );
   color: var(--ohmyui-color-secondary-text);
   border-color: var(--ohmyui-color-secondary-dark);
-  box-shadow: 0 2px 8px var(--ohmyui-color-secondary-shadow);
+  box-shadow: var(--ohmyui-badge-shadow-geometry)
+    var(--ohmyui-color-secondary-shadow);
 }
 .ohmyui-badge--secondary .ohmyui-badge__dot {
   background: var(--ohmyui-color-secondary-dark);
@@ -217,7 +230,8 @@
   );
   color: var(--ohmyui-color-tertiary-text);
   border-color: var(--ohmyui-color-tertiary-dark);
-  box-shadow: 0 2px 8px var(--ohmyui-color-tertiary-shadow);
+  box-shadow: var(--ohmyui-badge-shadow-geometry)
+    var(--ohmyui-color-tertiary-shadow);
 }
 .ohmyui-badge--tertiary .ohmyui-badge__dot {
   background: var(--ohmyui-color-tertiary-dark);
@@ -230,7 +244,8 @@
   );
   color: var(--ohmyui-color-success-text);
   border-color: var(--ohmyui-color-success-dark);
-  box-shadow: 0 2px 8px var(--ohmyui-color-success-shadow);
+  box-shadow: var(--ohmyui-badge-shadow-geometry)
+    var(--ohmyui-color-success-shadow);
 }
 .ohmyui-badge--success .ohmyui-badge__dot {
   background: var(--ohmyui-color-success-dark);
@@ -243,7 +258,8 @@
   );
   color: var(--ohmyui-color-warning-text);
   border-color: var(--ohmyui-color-warning-dark);
-  box-shadow: 0 2px 8px var(--ohmyui-color-warning-shadow);
+  box-shadow: var(--ohmyui-badge-shadow-geometry)
+    var(--ohmyui-color-warning-shadow);
 }
 .ohmyui-badge--warning .ohmyui-badge__dot {
   background: var(--ohmyui-color-warning-dark);
@@ -256,7 +272,8 @@
   );
   color: var(--ohmyui-color-error-text);
   border-color: var(--ohmyui-color-error-dark);
-  box-shadow: 0 2px 8px var(--ohmyui-color-error-shadow);
+  box-shadow: var(--ohmyui-badge-shadow-geometry)
+    var(--ohmyui-color-error-shadow);
 }
 .ohmyui-badge--error .ohmyui-badge__dot {
   background: var(--ohmyui-color-error-dark);
@@ -269,7 +286,8 @@
   );
   color: var(--ohmyui-color-info-text);
   border-color: var(--ohmyui-color-info-dark);
-  box-shadow: 0 2px 8px var(--ohmyui-color-info-shadow);
+  box-shadow: var(--ohmyui-badge-shadow-geometry)
+    var(--ohmyui-color-info-shadow);
 }
 .ohmyui-badge--info .ohmyui-badge__dot {
   background: var(--ohmyui-color-info-dark);
@@ -282,7 +300,7 @@
   );
   color: var(--ohmyui-color-neutral-500);
   border-color: var(--ohmyui-color-neutral-300);
-  box-shadow: 0 2px 6px rgba(100, 110, 130, 0.15);
+  box-shadow: var(--ohmyui-badge-neutral-shadow);
 }
 .ohmyui-badge--neutral .ohmyui-badge__dot {
   background: var(--ohmyui-color-neutral-400);
@@ -321,7 +339,7 @@
   background: var(--ohmyui-badge-remove-hover-bg);
 }
 .ohmyui-badge__remove:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 1px;
+  outline: var(--ohmyui-border-width-sm) solid currentColor;
+  outline-offset: var(--ohmyui-spacing-px);
   opacity: 1;
 }

@@ -15,6 +15,7 @@
       }
     },
     "size": {
+      "2xs": { "value": "0.625rem", "type": "dimension" },
       "xs": { "value": "0.6875rem", "type": "dimension" },
       "sm": { "value": "0.8125rem", "type": "dimension" },
       "md": { "value": "0.9375rem", "type": "dimension" },

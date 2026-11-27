@@ -26,6 +26,13 @@ number.
   switches them to Italian, its `messages` option replaces single texts for
   each language, and `OhmyuiI18n.setLocale()` changes the language while the
   application runs.
+- `--ohmyui-font-size-2xs` (`0.625rem`, that is 10px) extends the font size
+  scale below `xs`.
+- Badge exposes its own measures as custom properties:
+  `--ohmyui-badge-height-xs` to `--ohmyui-badge-height-lg`,
+  `--ohmyui-badge-dot-size-xs` to `--ohmyui-badge-dot-size-lg`,
+  `--ohmyui-badge-border-width`, `--ohmyui-badge-shadow-geometry` and
+  `--ohmyui-badge-neutral-shadow`.
 
 ### Changed
 
@@ -54,6 +61,12 @@ number.
   (`ui-monospace`, SF Mono, Menlo, Consolas or Liberation Mono, with
   `monospace` as the last fallback) instead of JetBrains Mono, which the
   package does not bundle.
+- Badge takes its font sizes from the type scale: 10px (`2xs`), 11px (`xs`),
+  13px (`sm`) and 15px (`md`) for the sizes `xs`, `sm`, `md` and `lg`, instead
+  of 9.6, 11.2, 12 and 13.6px. Padding and spacing follow, as they are
+  proportional to the text. The shadow of the `neutral` variant uses
+  `--ohmyui-color-ghost-shadow`, so it is slightly lighter in the light theme
+  and follows the dark theme.
 
 ### Fixed
 

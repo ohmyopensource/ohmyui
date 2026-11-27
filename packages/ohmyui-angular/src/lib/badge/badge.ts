@@ -60,7 +60,7 @@ export class BadgeComponent {
   private readonly i18n = inject(OhmyuiI18n);
 
   /** Icon of the remove button. */
-  readonly closeIcon = LucideX;
+  readonly closeIcon: LucideIconData = LucideX.icon;
 
   /** Text of the badge. */
   @Input() label = '';
