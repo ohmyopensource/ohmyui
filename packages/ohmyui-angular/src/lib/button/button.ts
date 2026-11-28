@@ -23,6 +23,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   Renderer2,
+  DOCUMENT,
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -79,6 +80,7 @@ export type ButtonSucceededStyle = 'filled' | 'ghost';
 })
 export class ButtonComponent {
   private renderer = inject(Renderer2);
+  private readonly document = inject(DOCUMENT);
   /** Icon of the loading state. */
   readonly loaderIcon: LucideIconData = LucideLoaderCircle.icon;
   /** Icon of the succeeded state. */
@@ -136,6 +138,12 @@ export class ButtonComponent {
   /** Whether the button ignores clicks: disabled, loading or succeeded. */
   get isInert(): boolean {
     return this.disabled || this.loading || this.succeeded;
+  }
+
+  /** Whether the user asks the system to reduce motion. */
+  private get reducesMotion(): boolean {
+    const query = '(prefers-reduced-motion: reduce)';
+    return this.document.defaultView?.matchMedia?.(query).matches ?? false;
   }
 
   /** Visible text: the succeeded label in the succeeded state, if set. */
@@ -205,10 +213,10 @@ export class ButtonComponent {
 
   /**
    * Starts the ripple animation from the click position, unless the button
-   * ignores clicks.
+   * ignores clicks or the user asks the system to reduce motion.
    */
   onRipple(event: MouseEvent): void {
-    if (this.isInert) return;
+    if (this.isInert || this.reducesMotion) return;
     const btn = event.currentTarget as HTMLElement;
     btn
       .querySelectorAll('.ohmyui-btn__ripple')

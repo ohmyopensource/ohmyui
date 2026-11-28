@@ -403,3 +403,10 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ohmyui-tabs--underline .ohmyui-tabs__indicator {
+    transition-property: background;
+  }
+}

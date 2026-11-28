@@ -68,6 +68,16 @@ number.
   `--ohmyui-checkbox-box-border-hover` and `--ohmyui-checkbox-box-bg`.
 - Input exposes `--ohmyui-input-border-width`,
   `--ohmyui-input-focus-ring-width` and `--ohmyui-input-textarea-min-height`.
+- Button, Pagination and Tabs follow `prefers-reduced-motion: reduce`: Button
+  and Pagination do not move on hover and press, Button has no ripple and no
+  entrance animation for the succeeded state, and the indicator of the
+  `underline` tabs changes without growing. Color, shadow and opacity
+  transitions and the loading spinner stay.
+- Button exposes `--ohmyui-button-hover-transform`,
+  `--ohmyui-button-hover-transform-subtle` and
+  `--ohmyui-button-active-transform`, and Pagination exposes
+  `--ohmyui-pagination-hover-transform` and
+  `--ohmyui-pagination-active-transform`.
 
 ### Changed
 
@@ -185,6 +195,8 @@ number.
 - Input: the `success` and `error` variants color the field only when it has
   the focus, like the other variants. Before, the field looked validated. A
   field with an error or a success message keeps its border color on hover.
+- Pagination: on touch devices the buttons do not stay raised after a tap,
+  like Button.
 
 ## [0.1.0] - 2026-11-24
 

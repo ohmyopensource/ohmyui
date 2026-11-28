@@ -60,11 +60,8 @@
   border: var(--ohmyui-badge-border-width) solid transparent;
   cursor: default;
   user-select: none;
-  transition:
-    box-shadow var(--ohmyui-transition-duration-normal)
-      var(--ohmyui-transition-easing-ease-in-out),
-    transform var(--ohmyui-transition-duration-normal)
-      var(--ohmyui-transition-easing-ease-in-out);
+  transition: box-shadow var(--ohmyui-transition-duration-normal)
+    var(--ohmyui-transition-easing-ease-in-out);
 }
 
 /* Dot */

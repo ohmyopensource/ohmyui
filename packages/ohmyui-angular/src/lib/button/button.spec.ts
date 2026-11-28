@@ -16,7 +16,7 @@
  * ripple.
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from './button';
@@ -127,5 +127,42 @@ describe('ButtonComponent', () => {
     Object.defineProperty(event, 'currentTarget', { value: button });
     component.onRipple(event);
     expect(button.querySelector('.ohmyui-btn__ripple')).toBeNull();
+  });
+
+  describe('ripple and reduced motion', () => {
+    const view = document.defaultView as Window;
+
+    function clickRipple(): HTMLButtonElement {
+      fixture.detectChanges();
+      const button: HTMLButtonElement =
+        fixture.nativeElement.querySelector('button');
+      const event = new MouseEvent('click', { clientX: 10, clientY: 10 });
+      Object.defineProperty(event, 'currentTarget', { value: button });
+      component.onRipple(event);
+      return button;
+    }
+
+    function stubReducedMotion(matches: boolean): void {
+      Object.defineProperty(view, 'matchMedia', {
+        configurable: true,
+        value: vi.fn().mockReturnValue({ matches }),
+      });
+    }
+
+    afterEach(() => {
+      Reflect.deleteProperty(view, 'matchMedia');
+    });
+
+    it('should create a ripple on click', () => {
+      stubReducedMotion(false);
+      const button = clickRipple();
+      expect(button.querySelector('.ohmyui-btn__ripple')).not.toBeNull();
+    });
+
+    it('should not create a ripple when the user reduces motion', () => {
+      stubReducedMotion(true);
+      const button = clickRipple();
+      expect(button.querySelector('.ohmyui-btn__ripple')).toBeNull();
+    });
   });
 });
