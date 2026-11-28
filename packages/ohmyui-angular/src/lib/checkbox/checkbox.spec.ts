@@ -126,4 +126,14 @@ describe('CheckboxComponent', () => {
     );
     expect(input.getAttribute('aria-invalid')).toBe('true');
   });
+
+  it('should keep the error state apart from the error variant', () => {
+    component.variant = 'error';
+    expect(component.classes['ohmyui-checkbox--error']).toBe(true);
+    expect(component.classes['ohmyui-checkbox--invalid']).toBe(false);
+    component.variant = 'primary';
+    component.error = true;
+    expect(component.classes['ohmyui-checkbox--error']).toBeUndefined();
+    expect(component.classes['ohmyui-checkbox--invalid']).toBe(true);
+  });
 });

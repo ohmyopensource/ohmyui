@@ -35,9 +35,9 @@
     />
     <span class="ohmyui-checkbox__box" aria-hidden="true">
       @if (indeterminate) {
-      <svg [lucideIcon]="indeterminateIcon" [size]="iconSize"></svg>
+      <svg [lucideIcon]="indeterminateIcon"></svg>
       } @else if (checked) {
-      <svg [lucideIcon]="checkIcon" [size]="iconSize"></svg>
+      <svg [lucideIcon]="checkIcon"></svg>
       }
     </span>
     @if (label) {

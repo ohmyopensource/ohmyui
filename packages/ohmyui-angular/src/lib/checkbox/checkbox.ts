@@ -153,21 +153,10 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit {
       [`ohmyui-checkbox--${this.size}`]: true,
       'ohmyui-checkbox--label-left': this.labelPosition === 'left',
       'ohmyui-checkbox--disabled': this.disabled,
-      'ohmyui-checkbox--error': this.error,
+      'ohmyui-checkbox--invalid': this.error,
       'ohmyui-checkbox--checked': this.checked && !this.indeterminate,
       'ohmyui-checkbox--indeterminate': this.indeterminate,
     };
-  }
-
-  /** Size in pixels of the icon for the current size. */
-  get iconSize(): number {
-    const map: Record<CheckboxSize, number> = {
-      xs: 10,
-      sm: 12,
-      md: 14,
-      lg: 16,
-    };
-    return map[this.size];
   }
 
   /** Updates `checked` and emits `checkedChange` when the input changes. */
