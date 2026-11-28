@@ -122,6 +122,9 @@ number.
   the effect.
 - Text with `gradient` and the color `warning`, `error` or `info` fills the
   text with the gradient of that color instead of the primary one.
+- Badge shows the status dot next to the text (`dot`) at the size of the
+  badge: 5, 6, 7 and 8px for the sizes `xs` to `lg`. Before, the dot had no
+  size and did not show.
 
 ## [0.1.0] - 2026-11-24
 
