@@ -141,7 +141,7 @@ export const Code: Story = {
 };
 export const Blockquote: Story = {
   render: () => ({
-    template: `<blockquote ohmyuiText variant="body">"A good design system goes unnoticed."</blockquote>`,
+    template: `<blockquote ohmyuiText variant="blockquote">"A good design system goes unnoticed."</blockquote>`,
   }),
 };
 
@@ -169,6 +169,20 @@ export const ColorMuted: Story = {
 export const Gradient: Story = {
   render: () => ({
     template: `<h1 ohmyuiText variant="display" [gradient]="true">Gradient text</h1>`,
+  }),
+};
+export const GradientColors: Story = {
+  name: 'Gradient / Colors',
+  render: () => ({
+    template: `<div style="display: flex; flex-direction: column; gap: 8px;">
+      <p ohmyuiText variant="h3" [gradient]="true">Primary</p>
+      <p ohmyuiText variant="h3" [gradient]="true" color="secondary">Secondary</p>
+      <p ohmyuiText variant="h3" [gradient]="true" color="tertiary">Tertiary</p>
+      <p ohmyuiText variant="h3" [gradient]="true" color="success">Success</p>
+      <p ohmyuiText variant="h3" [gradient]="true" color="warning">Warning</p>
+      <p ohmyuiText variant="h3" [gradient]="true" color="error">Error</p>
+      <p ohmyuiText variant="h3" [gradient]="true" color="info">Info</p>
+    </div>`,
   }),
 };
 export const Truncate: Story = {

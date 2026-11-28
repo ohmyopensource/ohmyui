@@ -31,8 +31,9 @@ number.
 - Badge exposes its own measures as custom properties:
   `--ohmyui-badge-height-xs` to `--ohmyui-badge-height-lg`,
   `--ohmyui-badge-dot-size-xs` to `--ohmyui-badge-dot-size-lg`,
-  `--ohmyui-badge-border-width`, `--ohmyui-badge-shadow-geometry` and
-  `--ohmyui-badge-neutral-shadow`.
+  `--ohmyui-badge-border-width`, `--ohmyui-badge-shadow-geometry`,
+  `--ohmyui-badge-neutral-shadow`, `--ohmyui-badge-icon-size` and
+  `--ohmyui-badge-remove-icon-size`.
 - `--ohmyui-control-height-xs` to `--ohmyui-control-height-lg` (28, 34, 42 and
   52px) give the heights of the controls, and `--ohmyui-icon-size-2xs` to
   `--ohmyui-icon-size-xl` (from 10 to 20px, in steps of 2px) the sizes of the
@@ -44,6 +45,12 @@ number.
   `--ohmyui-button-focus-ring-width`, `--ohmyui-button-focus-ring-offset`,
   `--ohmyui-button-ripple-color`, `--ohmyui-button-ripple-color-subtle` and
   `--ohmyui-button-spinner-duration`.
+- `--ohmyui-typescale-*` give each style of Text, from `display` to
+  `blockquote`, its size range (`size-min` and `size-max`, or `size` for
+  `code`, relative to the surrounding text), weight, line height and letter
+  spacing, so that every platform can share the same type scale.
+- Text exposes `--ohmyui-text-gradient-start`, `--ohmyui-text-gradient-end`,
+  `--ohmyui-text-underline-offset` and `--ohmyui-text-blockquote-border-width`.
 
 ### Changed
 
@@ -78,6 +85,10 @@ number.
   proportional to the text. The shadow of the `neutral` variant uses
   `--ohmyui-color-ghost-shadow`, so it is slightly lighter in the light theme
   and follows the dark theme.
+- Badge sizes its icons in proportion to the text: `1em` for the icon and
+  `0.85em` for the remove icon. The icons of the sizes `md` and `lg` are 13
+  and 15px instead of 12 and 14px, and the remove icons stay within a pixel of
+  their previous size.
 - Button takes its font sizes from the type scale: 11px (`xs`), 13px (`sm`),
   15px (`md`) and 17px (`lg`) for the sizes of the same name, instead of 11.2,
   12.8, 14.4 and 16px. On screens up to 480px wide the text no longer shrinks
@@ -87,8 +98,8 @@ number.
 
 ### Removed
 
-- The `iconSize` getter of Button: the icons take their size from
-  `--ohmyui-icon-size-*` in the styles of the component.
+- The `iconSize` getter of Button and the `iconSize` and `closeSize` getters
+  of Badge: the icons take their size from the styles of the components.
 
 ### Fixed
 
@@ -109,6 +120,8 @@ number.
   and tablets, instead of on screens up to 480px wide. Before, a tap on a
   wider touch screen left the button lifted, and a narrow desktop window lost
   the effect.
+- Text with `gradient` and the color `warning`, `error` or `info` fills the
+  text with the gradient of that color instead of the primary one.
 
 ## [0.1.0] - 2026-11-24
 

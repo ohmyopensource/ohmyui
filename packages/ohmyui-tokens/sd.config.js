@@ -61,6 +61,7 @@ export default {
     'src/shadow.json',
     'src/spacing.json',
     'src/transition.json',
+    'src/typescale.json',
     'src/typography.json',
     'src/z-index.json',
   ],

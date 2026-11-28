@@ -1,0 +1,108 @@
+{
+  "typescale": {
+    "display": {
+      "sizeMin": { "value": "2.5rem", "type": "dimension" },
+      "sizeMax": { "value": "4.5rem", "type": "dimension" },
+      "weight": { "value": "800", "type": "fontWeight" },
+      "lineHeight": { "value": "1.1", "type": "number" },
+      "letterSpacing": { "value": "-0.03em", "type": "dimension" }
+    },
+    "h1": {
+      "sizeMin": { "value": "2rem", "type": "dimension" },
+      "sizeMax": { "value": "3.5rem", "type": "dimension" },
+      "weight": { "value": "700", "type": "fontWeight" },
+      "lineHeight": { "value": "1.15", "type": "number" },
+      "letterSpacing": { "value": "-0.025em", "type": "dimension" }
+    },
+    "h2": {
+      "sizeMin": { "value": "1.6rem", "type": "dimension" },
+      "sizeMax": { "value": "2.5rem", "type": "dimension" },
+      "weight": { "value": "700", "type": "fontWeight" },
+      "lineHeight": { "value": "1.2", "type": "number" },
+      "letterSpacing": { "value": "-0.02em", "type": "dimension" }
+    },
+    "h3": {
+      "sizeMin": { "value": "1.25rem", "type": "dimension" },
+      "sizeMax": { "value": "2rem", "type": "dimension" },
+      "weight": { "value": "700", "type": "fontWeight" },
+      "lineHeight": { "value": "1.25", "type": "number" },
+      "letterSpacing": { "value": "-0.015em", "type": "dimension" }
+    },
+    "h4": {
+      "sizeMin": { "value": "1.1rem", "type": "dimension" },
+      "sizeMax": { "value": "1.5rem", "type": "dimension" },
+      "weight": { "value": "700", "type": "fontWeight" },
+      "lineHeight": { "value": "1.3", "type": "number" },
+      "letterSpacing": { "value": "-0.01em", "type": "dimension" }
+    },
+    "h5": {
+      "sizeMin": { "value": "1rem", "type": "dimension" },
+      "sizeMax": { "value": "1.25rem", "type": "dimension" },
+      "weight": { "value": "600", "type": "fontWeight" },
+      "lineHeight": { "value": "1.35", "type": "number" },
+      "letterSpacing": { "value": "-0.005em", "type": "dimension" }
+    },
+    "h6": {
+      "sizeMin": { "value": "0.9rem", "type": "dimension" },
+      "sizeMax": { "value": "1.1rem", "type": "dimension" },
+      "weight": { "value": "600", "type": "fontWeight" },
+      "lineHeight": { "value": "1.4", "type": "number" },
+      "letterSpacing": { "value": "0em", "type": "dimension" }
+    },
+    "bodyLg": {
+      "sizeMin": { "value": "1rem", "type": "dimension" },
+      "sizeMax": { "value": "1.25rem", "type": "dimension" },
+      "weight": { "value": "400", "type": "fontWeight" },
+      "lineHeight": { "value": "1.7", "type": "number" },
+      "letterSpacing": { "value": "0em", "type": "dimension" }
+    },
+    "body": {
+      "sizeMin": { "value": "0.875rem", "type": "dimension" },
+      "sizeMax": { "value": "1rem", "type": "dimension" },
+      "weight": { "value": "400", "type": "fontWeight" },
+      "lineHeight": { "value": "1.6", "type": "number" },
+      "letterSpacing": { "value": "0em", "type": "dimension" }
+    },
+    "bodySm": {
+      "sizeMin": { "value": "0.8rem", "type": "dimension" },
+      "sizeMax": { "value": "0.9rem", "type": "dimension" },
+      "weight": { "value": "400", "type": "fontWeight" },
+      "lineHeight": { "value": "1.55", "type": "number" },
+      "letterSpacing": { "value": "0em", "type": "dimension" }
+    },
+    "caption": {
+      "sizeMin": { "value": "0.7rem", "type": "dimension" },
+      "sizeMax": { "value": "0.78rem", "type": "dimension" },
+      "weight": { "value": "400", "type": "fontWeight" },
+      "lineHeight": { "value": "1.5", "type": "number" },
+      "letterSpacing": { "value": "0.01em", "type": "dimension" }
+    },
+    "label": {
+      "sizeMin": { "value": "0.75rem", "type": "dimension" },
+      "sizeMax": { "value": "0.85rem", "type": "dimension" },
+      "weight": { "value": "600", "type": "fontWeight" },
+      "lineHeight": { "value": "1.4", "type": "number" },
+      "letterSpacing": { "value": "0.01em", "type": "dimension" }
+    },
+    "overline": {
+      "sizeMin": { "value": "0.65rem", "type": "dimension" },
+      "sizeMax": { "value": "0.75rem", "type": "dimension" },
+      "weight": { "value": "700", "type": "fontWeight" },
+      "lineHeight": { "value": "1.4", "type": "number" },
+      "letterSpacing": { "value": "0.1em", "type": "dimension" }
+    },
+    "code": {
+      "size": { "value": "0.875em", "type": "dimension" },
+      "weight": { "value": "400", "type": "fontWeight" },
+      "lineHeight": { "value": "1.6", "type": "number" },
+      "letterSpacing": { "value": "-0.01em", "type": "dimension" }
+    },
+    "blockquote": {
+      "sizeMin": { "value": "1rem", "type": "dimension" },
+      "sizeMax": { "value": "1.2rem", "type": "dimension" },
+      "weight": { "value": "400", "type": "fontWeight" },
+      "lineHeight": { "value": "1.7", "type": "number" },
+      "letterSpacing": { "value": "0em", "type": "dimension" }
+    }
+  }
+}

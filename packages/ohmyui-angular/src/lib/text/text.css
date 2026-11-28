@@ -34,6 +34,10 @@
   --ohmyui-text-warning-color: var(--ohmyui-color-warning-dark);
   --ohmyui-text-error-color: var(--ohmyui-color-error-dark);
   --ohmyui-text-info-color: var(--ohmyui-color-info-dark);
+  --ohmyui-text-gradient-start: var(--ohmyui-color-primary-light);
+  --ohmyui-text-gradient-end: var(--ohmyui-color-primary-dark);
+  --ohmyui-text-underline-offset: 3px;
+  --ohmyui-text-blockquote-border-width: 3px;
 }
 
 /* Dark theme */
@@ -64,118 +68,175 @@
 
 /* Variants */
 .ohmyui-text--display {
-  font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-size: clamp(
+    var(--ohmyui-typescale-display-size-min),
+    5vw + 1rem,
+    var(--ohmyui-typescale-display-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-display-weight);
+  line-height: var(--ohmyui-typescale-display-line-height);
+  letter-spacing: var(--ohmyui-typescale-display-letter-spacing);
   color: var(--ohmyui-color-neutral-900);
 }
 .ohmyui-text--h1 {
-  font-size: clamp(2rem, 3.5vw + 0.75rem, 3.5rem);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
+  font-size: clamp(
+    var(--ohmyui-typescale-h1-size-min),
+    3.5vw + 0.75rem,
+    var(--ohmyui-typescale-h1-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-h1-weight);
+  line-height: var(--ohmyui-typescale-h1-line-height);
+  letter-spacing: var(--ohmyui-typescale-h1-letter-spacing);
   color: var(--ohmyui-color-neutral-900);
 }
 .ohmyui-text--h2 {
-  font-size: clamp(1.6rem, 2.5vw + 0.5rem, 2.5rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-size: clamp(
+    var(--ohmyui-typescale-h2-size-min),
+    2.5vw + 0.5rem,
+    var(--ohmyui-typescale-h2-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-h2-weight);
+  line-height: var(--ohmyui-typescale-h2-line-height);
+  letter-spacing: var(--ohmyui-typescale-h2-letter-spacing);
   color: var(--ohmyui-color-neutral-900);
 }
 .ohmyui-text--h3 {
-  font-size: clamp(1.25rem, 1.8vw + 0.4rem, 2rem);
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
+  font-size: clamp(
+    var(--ohmyui-typescale-h3-size-min),
+    1.8vw + 0.4rem,
+    var(--ohmyui-typescale-h3-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-h3-weight);
+  line-height: var(--ohmyui-typescale-h3-line-height);
+  letter-spacing: var(--ohmyui-typescale-h3-letter-spacing);
   color: var(--ohmyui-color-neutral-900);
 }
 .ohmyui-text--h4 {
-  font-size: clamp(1.1rem, 1.2vw + 0.3rem, 1.5rem);
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  font-size: clamp(
+    var(--ohmyui-typescale-h4-size-min),
+    1.2vw + 0.3rem,
+    var(--ohmyui-typescale-h4-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-h4-weight);
+  line-height: var(--ohmyui-typescale-h4-line-height);
+  letter-spacing: var(--ohmyui-typescale-h4-letter-spacing);
   color: var(--ohmyui-color-neutral-900);
 }
 .ohmyui-text--h5 {
-  font-size: clamp(1rem, 0.8vw + 0.25rem, 1.25rem);
-  font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: -0.005em;
+  font-size: clamp(
+    var(--ohmyui-typescale-h5-size-min),
+    0.8vw + 0.25rem,
+    var(--ohmyui-typescale-h5-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-h5-weight);
+  line-height: var(--ohmyui-typescale-h5-line-height);
+  letter-spacing: var(--ohmyui-typescale-h5-letter-spacing);
   color: var(--ohmyui-color-neutral-900);
 }
 .ohmyui-text--h6 {
-  font-size: clamp(0.9rem, 0.5vw + 0.2rem, 1.1rem);
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: 0;
+  font-size: clamp(
+    var(--ohmyui-typescale-h6-size-min),
+    0.5vw + 0.2rem,
+    var(--ohmyui-typescale-h6-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-h6-weight);
+  line-height: var(--ohmyui-typescale-h6-line-height);
+  letter-spacing: var(--ohmyui-typescale-h6-letter-spacing);
   color: var(--ohmyui-color-neutral-900);
 }
 .ohmyui-text--body-lg {
-  font-size: clamp(1rem, 0.8vw + 0.3rem, 1.25rem);
-  font-weight: 400;
-  line-height: 1.7;
-  letter-spacing: 0;
+  font-size: clamp(
+    var(--ohmyui-typescale-body-lg-size-min),
+    0.8vw + 0.3rem,
+    var(--ohmyui-typescale-body-lg-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-body-lg-weight);
+  line-height: var(--ohmyui-typescale-body-lg-line-height);
+  letter-spacing: var(--ohmyui-typescale-body-lg-letter-spacing);
   color: var(--ohmyui-color-neutral-500);
 }
 .ohmyui-text--body {
-  font-size: clamp(0.875rem, 0.5vw + 0.2rem, 1rem);
-  font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: 0;
+  font-size: clamp(
+    var(--ohmyui-typescale-body-size-min),
+    0.5vw + 0.2rem,
+    var(--ohmyui-typescale-body-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-body-weight);
+  line-height: var(--ohmyui-typescale-body-line-height);
+  letter-spacing: var(--ohmyui-typescale-body-letter-spacing);
   color: var(--ohmyui-color-neutral-600);
 }
 .ohmyui-text--body-sm {
-  font-size: clamp(0.8rem, 0.3vw + 0.15rem, 0.9rem);
-  font-weight: 400;
-  line-height: 1.55;
-  letter-spacing: 0;
+  font-size: clamp(
+    var(--ohmyui-typescale-body-sm-size-min),
+    0.3vw + 0.15rem,
+    var(--ohmyui-typescale-body-sm-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-body-sm-weight);
+  line-height: var(--ohmyui-typescale-body-sm-line-height);
+  letter-spacing: var(--ohmyui-typescale-body-sm-letter-spacing);
   color: var(--ohmyui-color-neutral-500);
 }
 .ohmyui-text--caption {
-  font-size: clamp(0.7rem, 0.2vw + 0.1rem, 0.78rem);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.01em;
+  font-size: clamp(
+    var(--ohmyui-typescale-caption-size-min),
+    0.2vw + 0.1rem,
+    var(--ohmyui-typescale-caption-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-caption-weight);
+  line-height: var(--ohmyui-typescale-caption-line-height);
+  letter-spacing: var(--ohmyui-typescale-caption-letter-spacing);
   color: var(--ohmyui-text-caption-color);
 }
 .ohmyui-text--label {
-  font-size: clamp(0.75rem, 0.2vw + 0.1rem, 0.85rem);
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
+  font-size: clamp(
+    var(--ohmyui-typescale-label-size-min),
+    0.2vw + 0.1rem,
+    var(--ohmyui-typescale-label-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-label-weight);
+  line-height: var(--ohmyui-typescale-label-line-height);
+  letter-spacing: var(--ohmyui-typescale-label-letter-spacing);
   color: var(--ohmyui-color-neutral-600);
 }
 .ohmyui-text--overline {
-  font-size: clamp(0.65rem, 0.2vw + 0.1rem, 0.75rem);
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: 0.1em;
+  font-size: clamp(
+    var(--ohmyui-typescale-overline-size-min),
+    0.2vw + 0.1rem,
+    var(--ohmyui-typescale-overline-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-overline-weight);
+  line-height: var(--ohmyui-typescale-overline-line-height);
+  letter-spacing: var(--ohmyui-typescale-overline-letter-spacing);
   text-transform: uppercase;
   color: var(--ohmyui-text-overline-color);
 }
 .ohmyui-text--code {
   font-family: var(--ohmyui-font-family-mono);
-  font-size: 0.875em;
-  font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
+  font-size: var(--ohmyui-typescale-code-size);
+  font-weight: var(--ohmyui-typescale-code-weight);
+  line-height: var(--ohmyui-typescale-code-line-height);
+  letter-spacing: var(--ohmyui-typescale-code-letter-spacing);
   background: var(--ohmyui-text-code-bg);
   color: var(--ohmyui-text-code-color);
   padding: 0.1em 0.35em;
   border-radius: var(--ohmyui-radius-sm);
-  border: 1px solid var(--ohmyui-text-code-border);
+  border: var(--ohmyui-border-width-xs) solid var(--ohmyui-text-code-border);
 }
 .ohmyui-text--blockquote {
-  font-size: clamp(1rem, 0.8vw + 0.3rem, 1.2rem);
-  font-weight: 400;
+  font-size: clamp(
+    var(--ohmyui-typescale-blockquote-size-min),
+    0.8vw + 0.3rem,
+    var(--ohmyui-typescale-blockquote-size-max)
+  );
+  font-weight: var(--ohmyui-typescale-blockquote-weight);
   font-style: italic;
-  line-height: 1.7;
-  letter-spacing: 0;
+  line-height: var(--ohmyui-typescale-blockquote-line-height);
+  letter-spacing: var(--ohmyui-typescale-blockquote-letter-spacing);
   color: var(--ohmyui-text-blockquote-color);
-  border-left: 3px solid var(--ohmyui-text-blockquote-border);
-  padding-left: 1rem;
+  border-left: var(--ohmyui-text-blockquote-border-width) solid
+    var(--ohmyui-text-blockquote-border);
+  padding-left: var(--ohmyui-spacing-4);
 }
 
 /* Colors */
@@ -207,7 +268,7 @@
   color: var(--ohmyui-text-info-color) !important;
 }
 .ohmyui-text--color-white {
-  color: white !important;
+  color: var(--ohmyui-color-neutral-0) !important;
 }
 .ohmyui-text--color-inherit {
   color: inherit !important;
@@ -215,19 +276,19 @@
 
 /* Weights */
 .ohmyui-text--weight-normal {
-  font-weight: 400 !important;
+  font-weight: var(--ohmyui-font-weight-regular) !important;
 }
 .ohmyui-text--weight-medium {
-  font-weight: 500 !important;
+  font-weight: var(--ohmyui-font-weight-medium) !important;
 }
 .ohmyui-text--weight-semibold {
-  font-weight: 600 !important;
+  font-weight: var(--ohmyui-font-weight-semibold) !important;
 }
 .ohmyui-text--weight-bold {
-  font-weight: 700 !important;
+  font-weight: var(--ohmyui-font-weight-bold) !important;
 }
 .ohmyui-text--weight-extrabold {
-  font-weight: 800 !important;
+  font-weight: var(--ohmyui-font-weight-extrabold) !important;
 }
 
 /* Alignments */
@@ -252,7 +313,7 @@
 /* Underline */
 .ohmyui-text--underline {
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: var(--ohmyui-text-underline-offset);
 }
 
 /* Truncate */
@@ -302,8 +363,8 @@
 .ohmyui-text--gradient {
   background: linear-gradient(
     135deg,
-    var(--ohmyui-color-primary-light),
-    var(--ohmyui-color-primary-dark)
+    var(--ohmyui-text-gradient-start),
+    var(--ohmyui-text-gradient-end)
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -311,32 +372,26 @@
   color: transparent;
 }
 .ohmyui-text--gradient.ohmyui-text--color-secondary {
-  background: linear-gradient(
-    135deg,
-    var(--ohmyui-color-secondary-light),
-    var(--ohmyui-color-secondary-dark)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  --ohmyui-text-gradient-start: var(--ohmyui-color-secondary-light);
+  --ohmyui-text-gradient-end: var(--ohmyui-color-secondary-dark);
 }
 .ohmyui-text--gradient.ohmyui-text--color-tertiary {
-  background: linear-gradient(
-    135deg,
-    var(--ohmyui-color-tertiary-light),
-    var(--ohmyui-color-tertiary-dark)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  --ohmyui-text-gradient-start: var(--ohmyui-color-tertiary-light);
+  --ohmyui-text-gradient-end: var(--ohmyui-color-tertiary-dark);
 }
 .ohmyui-text--gradient.ohmyui-text--color-success {
-  background: linear-gradient(
-    135deg,
-    var(--ohmyui-color-success-light),
-    var(--ohmyui-color-success-dark)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  --ohmyui-text-gradient-start: var(--ohmyui-color-success-light);
+  --ohmyui-text-gradient-end: var(--ohmyui-color-success-dark);
+}
+.ohmyui-text--gradient.ohmyui-text--color-warning {
+  --ohmyui-text-gradient-start: var(--ohmyui-color-warning-light);
+  --ohmyui-text-gradient-end: var(--ohmyui-color-warning-dark);
+}
+.ohmyui-text--gradient.ohmyui-text--color-error {
+  --ohmyui-text-gradient-start: var(--ohmyui-color-error-light);
+  --ohmyui-text-gradient-end: var(--ohmyui-color-error-dark);
+}
+.ohmyui-text--gradient.ohmyui-text--color-info {
+  --ohmyui-text-gradient-start: var(--ohmyui-color-info-light);
+  --ohmyui-text-gradient-end: var(--ohmyui-color-info-dark);
 }
