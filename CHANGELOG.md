@@ -60,6 +60,7 @@ number.
 - Pagination exposes `--ohmyui-pagination-border-width`,
   `--ohmyui-pagination-shadow-geometry` and
   `--ohmyui-pagination-focus-ring-width`.
+- Link exposes `--ohmyui-link-icon-size`.
 
 ### Changed
 
@@ -112,12 +113,15 @@ number.
   and texts, instead of 12.8 or 13.6px (13.12px on screens up to 768px wide).
   The gaps take the nearest step of the spacing scale, for example 6px instead
   of 6.4px.
+- Link takes its font sizes from the type scale: 13, 15 and 17px for `sm`,
+  `md` and `lg`, instead of 12, 14 and 16px, and sizes its icon in proportion
+  to the text (`0.875em`).
 
 ### Removed
 
-- The `iconSize` getters of Button, Pagination and Tabs and the `iconSize` and
-  `closeSize` getters of Badge: the icons take their size from the styles of
-  the components.
+- The `iconSize` getters of Button, Link, Pagination and Tabs and the
+  `iconSize` and `closeSize` getters of Badge: the icons take their size from
+  the styles of the components.
 
 ### Fixed
 

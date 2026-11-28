@@ -20,6 +20,7 @@
   display: contents;
   --ohmyui-link-primary-color: var(--ohmyui-color-primary-dark);
   --ohmyui-link-secondary-color: var(--ohmyui-color-secondary-dark);
+  --ohmyui-link-icon-size: 0.875em;
 }
 
 /* Dark theme */
@@ -33,7 +34,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
-  font-weight: 500;
+  font-weight: var(--ohmyui-font-weight-medium);
   text-decoration: none;
   transition: color var(--ohmyui-transition-duration-normal)
     var(--ohmyui-transition-easing-ease-in-out);
@@ -53,16 +54,20 @@
   align-items: center;
   flex-shrink: 0;
 }
+.ohmyui-inline-link__icon svg {
+  width: var(--ohmyui-link-icon-size);
+  height: var(--ohmyui-link-icon-size);
+}
 
 /* Sizes */
 .ohmyui-inline-link--sm {
-  font-size: 0.75rem;
+  font-size: var(--ohmyui-font-size-sm);
 }
 .ohmyui-inline-link--md {
-  font-size: 0.875rem;
+  font-size: var(--ohmyui-font-size-md);
 }
 .ohmyui-inline-link--lg {
-  font-size: 1rem;
+  font-size: var(--ohmyui-font-size-lg);
 }
 
 /* Variants */

@@ -77,12 +77,6 @@ export class LinkComponent {
    */
   @Input() showExternalIcon = true;
 
-  /** Size in pixels of the icon for the current size. */
-  get iconSize(): number {
-    const map: Record<LinkSize, number> = { sm: 11, md: 13, lg: 15 };
-    return map[this.size];
-  }
-
   /** Whether the trailing icon is shown. */
   get displayExternalIcon(): boolean {
     return this.mode === 'external' && this.showExternalIcon;
