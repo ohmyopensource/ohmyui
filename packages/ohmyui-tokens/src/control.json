@@ -1,0 +1,10 @@
+{
+  "control": {
+    "height": {
+      "xs": { "value": "28px", "type": "dimension" },
+      "sm": { "value": "34px", "type": "dimension" },
+      "md": { "value": "42px", "type": "dimension" },
+      "lg": { "value": "52px", "type": "dimension" }
+    }
+  }
+}

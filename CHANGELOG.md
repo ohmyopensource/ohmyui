@@ -33,6 +33,17 @@ number.
   `--ohmyui-badge-dot-size-xs` to `--ohmyui-badge-dot-size-lg`,
   `--ohmyui-badge-border-width`, `--ohmyui-badge-shadow-geometry` and
   `--ohmyui-badge-neutral-shadow`.
+- `--ohmyui-control-height-xs` to `--ohmyui-control-height-lg` (28, 34, 42 and
+  52px) give the heights of the controls, and `--ohmyui-icon-size-2xs` to
+  `--ohmyui-icon-size-xl` (from 10 to 20px, in steps of 2px) the sizes of the
+  icons inside the components.
+- Button exposes its own measures as custom properties:
+  `--ohmyui-button-border-width`, `--ohmyui-button-shadow-geometry`,
+  `--ohmyui-button-shadow-geometry-hover`,
+  `--ohmyui-button-shadow-geometry-subtle`,
+  `--ohmyui-button-focus-ring-width`, `--ohmyui-button-focus-ring-offset`,
+  `--ohmyui-button-ripple-color`, `--ohmyui-button-ripple-color-subtle` and
+  `--ohmyui-button-spinner-duration`.
 
 ### Changed
 
@@ -67,6 +78,17 @@ number.
   proportional to the text. The shadow of the `neutral` variant uses
   `--ohmyui-color-ghost-shadow`, so it is slightly lighter in the light theme
   and follows the dark theme.
+- Button takes its font sizes from the type scale: 11px (`xs`), 13px (`sm`),
+  15px (`md`) and 17px (`lg`) for the sizes of the same name, instead of 11.2,
+  12.8, 14.4 and 16px. On screens up to 480px wide the text no longer shrinks
+  (`md` and `lg` were 13.6 and 15.2px there), and only the padding does.
+  Padding and spacing follow the text; the heights do not change. The ripple
+  lasts 500ms instead of 550ms, and the press feedback 50ms instead of 80ms.
+
+### Removed
+
+- The `iconSize` getter of Button: the icons take their size from
+  `--ohmyui-icon-size-*` in the styles of the component.
 
 ### Fixed
 
@@ -83,6 +105,10 @@ number.
   dark value also when the `dark-theme` class is on an element other than the
   root, such as `<body>`. Before, they kept the light value there: for example,
   the labels of Checkbox stayed dark on the dark background.
+- Button turns off the hover lift on devices that cannot hover, such as phones
+  and tablets, instead of on screens up to 480px wide. Before, a tap on a
+  wider touch screen left the button lifted, and a narrow desktop window lost
+  the effect.
 
 ## [0.1.0] - 2026-11-24
 

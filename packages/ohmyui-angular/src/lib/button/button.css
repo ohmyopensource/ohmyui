@@ -86,6 +86,15 @@
   --ohmyui-button-radius: var(--ohmyui-radius-md);
   --ohmyui-button-transition: var(--ohmyui-transition-duration-normal)
     var(--ohmyui-transition-easing-ease-in-out);
+  --ohmyui-button-border-width: 1.5px;
+  --ohmyui-button-shadow-geometry: 0 4px 14px;
+  --ohmyui-button-shadow-geometry-hover: 0 8px 24px;
+  --ohmyui-button-shadow-geometry-subtle: 0 2px 8px;
+  --ohmyui-button-focus-ring-width: 3px;
+  --ohmyui-button-focus-ring-offset: 3px;
+  --ohmyui-button-ripple-color: rgba(255, 255, 255, 0.35);
+  --ohmyui-button-ripple-color-subtle: rgba(80, 100, 130, 0.18);
+  --ohmyui-button-spinner-duration: 0.8s;
 }
 
 /* Dark theme */
@@ -104,11 +113,11 @@
   width: 100%;
   min-width: 0;
   font-family: inherit;
-  font-weight: 600;
+  font-weight: var(--ohmyui-font-weight-semibold);
   letter-spacing: 0.02em;
   white-space: nowrap;
   text-decoration: none;
-  line-height: 1;
+  line-height: var(--ohmyui-font-line-height-none);
   border: none;
   border-radius: var(--ohmyui-button-radius);
   outline: none;
@@ -130,6 +139,11 @@
   align-items: center;
   flex-shrink: 0;
 }
+.ohmyui-btn__icon svg,
+.ohmyui-btn__spinner svg {
+  width: var(--ohmyui-button-icon-size);
+  height: var(--ohmyui-button-icon-size);
+}
 
 /* Label */
 .ohmyui-btn__label {
@@ -144,7 +158,8 @@
 .ohmyui-btn__spinner {
   display: flex;
   align-items: center;
-  animation: ohmyui-btn-spin 0.8s linear infinite;
+  animation: ohmyui-btn-spin var(--ohmyui-button-spinner-duration)
+    var(--ohmyui-transition-easing-linear) infinite;
   flex-shrink: 0;
 }
 
@@ -153,31 +168,36 @@
   position: absolute;
   border-radius: 50%;
   transform: scale(0);
-  background: rgba(255, 255, 255, 0.35);
-  animation: ohmyui-btn-ripple 550ms linear forwards;
+  background: var(--ohmyui-button-ripple-color);
+  animation: ohmyui-btn-ripple var(--ohmyui-transition-duration-slower)
+    var(--ohmyui-transition-easing-linear) forwards;
   pointer-events: none;
 }
 
 /* Sizes */
 .ohmyui-btn--xs {
+  --ohmyui-button-icon-size: var(--ohmyui-icon-size-sm);
   padding: 0.35em 0.75em;
-  font-size: 0.7rem;
-  min-height: 28px;
+  font-size: var(--ohmyui-font-size-xs);
+  min-height: var(--ohmyui-control-height-xs);
 }
 .ohmyui-btn--sm {
+  --ohmyui-button-icon-size: var(--ohmyui-icon-size-md);
   padding: 0.45em 1em;
-  font-size: 0.8rem;
-  min-height: 34px;
+  font-size: var(--ohmyui-font-size-sm);
+  min-height: var(--ohmyui-control-height-sm);
 }
 .ohmyui-btn--md {
+  --ohmyui-button-icon-size: var(--ohmyui-icon-size-lg);
   padding: 0.6em 1.4em;
-  font-size: 0.9rem;
-  min-height: 42px;
+  font-size: var(--ohmyui-font-size-md);
+  min-height: var(--ohmyui-control-height-md);
 }
 .ohmyui-btn--lg {
+  --ohmyui-button-icon-size: var(--ohmyui-icon-size-xl);
   padding: 0.75em 1.8em;
-  font-size: 1rem;
-  min-height: 52px;
+  font-size: var(--ohmyui-font-size-lg);
+  min-height: var(--ohmyui-control-height-lg);
 }
 
 /* Rounded */
@@ -208,16 +228,16 @@
   padding: 0;
 }
 .ohmyui-btn--icon-only.ohmyui-btn--xs {
-  width: 28px;
+  width: var(--ohmyui-control-height-xs);
 }
 .ohmyui-btn--icon-only.ohmyui-btn--sm {
-  width: 34px;
+  width: var(--ohmyui-control-height-sm);
 }
 .ohmyui-btn--icon-only.ohmyui-btn--md {
-  width: 42px;
+  width: var(--ohmyui-control-height-md);
 }
 .ohmyui-btn--icon-only.ohmyui-btn--lg {
-  width: 52px;
+  width: var(--ohmyui-control-height-lg);
 }
 .ohmyui-btn--icon-only .ohmyui-btn__label {
   display: none;
@@ -231,7 +251,8 @@
     var(--ohmyui-button-primary-g2)
   );
   color: var(--ohmyui-button-primary-text);
-  box-shadow: 0 4px 14px var(--ohmyui-button-primary-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry)
+    var(--ohmyui-button-primary-shadow);
 }
 .ohmyui-btn--secondary {
   background: linear-gradient(
@@ -240,7 +261,8 @@
     var(--ohmyui-button-secondary-g2)
   );
   color: var(--ohmyui-button-secondary-text);
-  box-shadow: 0 4px 14px var(--ohmyui-button-secondary-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry)
+    var(--ohmyui-button-secondary-shadow);
 }
 .ohmyui-btn--tertiary {
   background: linear-gradient(
@@ -249,7 +271,8 @@
     var(--ohmyui-button-tertiary-g2)
   );
   color: var(--ohmyui-button-tertiary-text);
-  box-shadow: 0 4px 14px var(--ohmyui-button-tertiary-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry)
+    var(--ohmyui-button-tertiary-shadow);
 }
 .ohmyui-btn--success {
   background: linear-gradient(
@@ -258,7 +281,8 @@
     var(--ohmyui-button-success-g2)
   );
   color: var(--ohmyui-button-success-text);
-  box-shadow: 0 4px 14px var(--ohmyui-button-success-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry)
+    var(--ohmyui-button-success-shadow);
 }
 .ohmyui-btn--warning {
   background: linear-gradient(
@@ -267,7 +291,8 @@
     var(--ohmyui-button-warning-g2)
   );
   color: var(--ohmyui-button-warning-text);
-  box-shadow: 0 4px 14px var(--ohmyui-button-warning-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry)
+    var(--ohmyui-button-warning-shadow);
 }
 .ohmyui-btn--error {
   background: linear-gradient(
@@ -276,7 +301,8 @@
     var(--ohmyui-button-error-g2)
   );
   color: var(--ohmyui-button-error-text);
-  box-shadow: 0 4px 14px var(--ohmyui-button-error-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry)
+    var(--ohmyui-button-error-shadow);
 }
 .ohmyui-btn--info {
   background: linear-gradient(
@@ -285,25 +311,31 @@
     var(--ohmyui-button-info-g2)
   );
   color: var(--ohmyui-button-info-text);
-  box-shadow: 0 4px 14px var(--ohmyui-button-info-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry)
+    var(--ohmyui-button-info-shadow);
 }
 .ohmyui-btn--ghost {
   background: var(--ohmyui-button-ghost-g1);
   color: var(--ohmyui-button-ghost-text);
-  border: 1.5px solid var(--ohmyui-button-ghost-border);
-  box-shadow: 0 2px 8px var(--ohmyui-button-ghost-shadow);
+  border: var(--ohmyui-button-border-width) solid
+    var(--ohmyui-button-ghost-border);
+  box-shadow: var(--ohmyui-button-shadow-geometry-subtle)
+    var(--ohmyui-button-ghost-shadow);
 }
 .ohmyui-btn--outline {
   background: var(--ohmyui-button-outline-g1);
   color: var(--ohmyui-button-outline-text);
-  border: 1.5px solid var(--ohmyui-button-outline-border);
-  box-shadow: 0 2px 8px var(--ohmyui-button-outline-shadow);
+  border: var(--ohmyui-button-border-width) solid
+    var(--ohmyui-button-outline-border);
+  box-shadow: var(--ohmyui-button-shadow-geometry-subtle)
+    var(--ohmyui-button-outline-shadow);
 }
 .ohmyui-btn--outline-error {
   background: transparent;
   color: var(--ohmyui-color-error-dark);
-  border: 1.5px solid var(--ohmyui-color-error-dark);
-  box-shadow: 0 2px 8px var(--ohmyui-button-error-shadow);
+  border: var(--ohmyui-button-border-width) solid var(--ohmyui-color-error-dark);
+  box-shadow: var(--ohmyui-button-shadow-geometry-subtle)
+    var(--ohmyui-button-error-shadow);
 }
 .ohmyui-btn--flat {
   background: transparent;
@@ -314,7 +346,7 @@
 .ohmyui-btn--outline .ohmyui-btn__ripple,
 .ohmyui-btn--outline-error .ohmyui-btn__ripple,
 .ohmyui-btn--flat .ohmyui-btn__ripple {
-  background: rgba(80, 100, 130, 0.18);
+  background: var(--ohmyui-button-ripple-color-subtle);
 }
 
 /* States */
@@ -330,107 +362,125 @@
 .ohmyui-btn--error:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover,
 .ohmyui-btn--info:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
   filter: brightness(1.07);
-  transform: translateY(-2px);
+  transform: translateY(calc(-1 * var(--ohmyui-spacing-0-5)));
 }
 .ohmyui-btn--primary:not(.ohmyui-btn--disabled):not(
     .ohmyui-btn--loading
   ):hover {
-  box-shadow: 0 8px 24px var(--ohmyui-button-primary-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry-hover)
+    var(--ohmyui-button-primary-shadow);
 }
 .ohmyui-btn--secondary:not(.ohmyui-btn--disabled):not(
     .ohmyui-btn--loading
   ):hover {
-  box-shadow: 0 8px 24px var(--ohmyui-button-secondary-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry-hover)
+    var(--ohmyui-button-secondary-shadow);
 }
 .ohmyui-btn--tertiary:not(.ohmyui-btn--disabled):not(
     .ohmyui-btn--loading
   ):hover {
-  box-shadow: 0 8px 24px var(--ohmyui-button-tertiary-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry-hover)
+    var(--ohmyui-button-tertiary-shadow);
 }
 .ohmyui-btn--success:not(.ohmyui-btn--disabled):not(
     .ohmyui-btn--loading
   ):hover {
-  box-shadow: 0 8px 24px var(--ohmyui-button-success-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry-hover)
+    var(--ohmyui-button-success-shadow);
 }
 .ohmyui-btn--warning:not(.ohmyui-btn--disabled):not(
     .ohmyui-btn--loading
   ):hover {
-  box-shadow: 0 8px 24px var(--ohmyui-button-warning-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry-hover)
+    var(--ohmyui-button-warning-shadow);
 }
 .ohmyui-btn--error:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
-  box-shadow: 0 8px 24px var(--ohmyui-button-error-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry-hover)
+    var(--ohmyui-button-error-shadow);
 }
 .ohmyui-btn--info:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
-  box-shadow: 0 8px 24px var(--ohmyui-button-info-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry-hover)
+    var(--ohmyui-button-info-shadow);
 }
 .ohmyui-btn--ghost:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
   background: var(--ohmyui-button-ghost-hover-bg);
-  transform: translateY(-1px);
+  transform: translateY(calc(-1 * var(--ohmyui-spacing-px)));
 }
 .ohmyui-btn--outline:not(.ohmyui-btn--disabled):not(
     .ohmyui-btn--loading
   ):hover {
   background: var(--ohmyui-button-outline-hover-bg);
-  transform: translateY(-1px);
+  transform: translateY(calc(-1 * var(--ohmyui-spacing-px)));
 }
 .ohmyui-btn--outline-error:not(.ohmyui-btn--disabled):not(
     .ohmyui-btn--loading
   ):hover {
   background: var(--ohmyui-color-error-light);
-  transform: translateY(-1px);
+  transform: translateY(calc(-1 * var(--ohmyui-spacing-px)));
 }
 .ohmyui-btn--flat:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):hover {
   background: var(--ohmyui-button-flat-hover-bg);
 }
 .ohmyui-btn:not(.ohmyui-btn--disabled):not(.ohmyui-btn--loading):active {
-  transform: translateY(1px) scale(0.97);
+  transform: translateY(var(--ohmyui-spacing-px)) scale(0.97);
   filter: brightness(0.95);
   box-shadow: none !important;
-  transition-duration: 80ms;
+  transition-duration: var(--ohmyui-transition-duration-instant);
 }
 .ohmyui-btn--primary:focus-visible {
-  outline: 3px solid var(--ohmyui-button-primary-focus);
-  outline-offset: 3px;
+  outline: var(--ohmyui-button-focus-ring-width) solid
+    var(--ohmyui-button-primary-focus);
+  outline-offset: var(--ohmyui-button-focus-ring-offset);
 }
 .ohmyui-btn--secondary:focus-visible {
-  outline: 3px solid var(--ohmyui-button-secondary-focus);
-  outline-offset: 3px;
+  outline: var(--ohmyui-button-focus-ring-width) solid
+    var(--ohmyui-button-secondary-focus);
+  outline-offset: var(--ohmyui-button-focus-ring-offset);
 }
 .ohmyui-btn--tertiary:focus-visible {
-  outline: 3px solid var(--ohmyui-button-tertiary-focus);
-  outline-offset: 3px;
+  outline: var(--ohmyui-button-focus-ring-width) solid
+    var(--ohmyui-button-tertiary-focus);
+  outline-offset: var(--ohmyui-button-focus-ring-offset);
 }
 .ohmyui-btn--success:focus-visible {
-  outline: 3px solid var(--ohmyui-button-success-focus);
-  outline-offset: 3px;
+  outline: var(--ohmyui-button-focus-ring-width) solid
+    var(--ohmyui-button-success-focus);
+  outline-offset: var(--ohmyui-button-focus-ring-offset);
 }
 .ohmyui-btn--warning:focus-visible {
-  outline: 3px solid var(--ohmyui-button-warning-focus);
-  outline-offset: 3px;
+  outline: var(--ohmyui-button-focus-ring-width) solid
+    var(--ohmyui-button-warning-focus);
+  outline-offset: var(--ohmyui-button-focus-ring-offset);
 }
 .ohmyui-btn--error:focus-visible {
-  outline: 3px solid var(--ohmyui-button-error-focus);
-  outline-offset: 3px;
+  outline: var(--ohmyui-button-focus-ring-width) solid
+    var(--ohmyui-button-error-focus);
+  outline-offset: var(--ohmyui-button-focus-ring-offset);
 }
 .ohmyui-btn--info:focus-visible {
-  outline: 3px solid var(--ohmyui-button-info-focus);
-  outline-offset: 3px;
+  outline: var(--ohmyui-button-focus-ring-width) solid
+    var(--ohmyui-button-info-focus);
+  outline-offset: var(--ohmyui-button-focus-ring-offset);
 }
 .ohmyui-btn--ghost:focus-visible {
-  outline: 3px solid var(--ohmyui-button-ghost-focus);
-  outline-offset: 3px;
+  outline: var(--ohmyui-button-focus-ring-width) solid
+    var(--ohmyui-button-ghost-focus);
+  outline-offset: var(--ohmyui-button-focus-ring-offset);
 }
 .ohmyui-btn--outline:focus-visible {
-  outline: 3px solid var(--ohmyui-button-outline-focus);
-  outline-offset: 3px;
+  outline: var(--ohmyui-button-focus-ring-width) solid
+    var(--ohmyui-button-outline-focus);
+  outline-offset: var(--ohmyui-button-focus-ring-offset);
 }
 .ohmyui-btn--outline-error:focus-visible {
-  outline: 3px solid var(--ohmyui-button-error-focus);
-  outline-offset: 3px;
+  outline: var(--ohmyui-button-focus-ring-width) solid
+    var(--ohmyui-button-error-focus);
+  outline-offset: var(--ohmyui-button-focus-ring-offset);
 }
 .ohmyui-btn--flat:focus-visible {
-  outline: 3px solid var(--ohmyui-button-flat-focus);
-  outline-offset: 3px;
+  outline: var(--ohmyui-button-focus-ring-width) solid
+    var(--ohmyui-button-flat-focus);
+  outline-offset: var(--ohmyui-button-focus-ring-offset);
 }
 .ohmyui-btn--disabled,
 .ohmyui-btn[disabled] {
@@ -457,7 +507,8 @@
     var(--ohmyui-button-succeeded-g2)
   );
   color: var(--ohmyui-button-succeeded-text);
-  box-shadow: 0 4px 14px var(--ohmyui-button-succeeded-shadow);
+  box-shadow: var(--ohmyui-button-shadow-geometry)
+    var(--ohmyui-button-succeeded-shadow);
   cursor: not-allowed;
   pointer-events: none;
   animation: ohmyui-btn-succeeded-in var(--ohmyui-transition-duration-slow)
@@ -466,7 +517,8 @@
 .ohmyui-btn--succeeded-ghost {
   background: var(--ohmyui-button-succeeded-ghost-bg);
   color: var(--ohmyui-button-succeeded-ghost-text);
-  border: 1.5px solid var(--ohmyui-button-succeeded-ghost-border);
+  border: var(--ohmyui-button-border-width) solid
+    var(--ohmyui-button-succeeded-ghost-border);
   box-shadow: none;
   cursor: not-allowed;
   pointer-events: none;
@@ -478,18 +530,19 @@
 @media (max-width: 480px) {
   .ohmyui-btn--lg {
     padding: 0.65em 1.4em;
-    font-size: 0.95rem;
   }
   .ohmyui-btn--md {
     padding: 0.55em 1.1em;
-    font-size: 0.85rem;
   }
+}
+
+/* Touch devices */
+@media (hover: none) {
   .ohmyui-btn:hover {
     transform: none !important;
   }
   .ohmyui-btn:active {
     transform: scale(0.96) !important;
-    transition-duration: 60ms !important;
   }
 }
 

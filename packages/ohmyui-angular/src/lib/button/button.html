@@ -77,19 +77,19 @@
   <!-- Loading state -->
   @if (loading) {
   <span class="ohmyui-btn__spinner" aria-hidden="true">
-    <svg [lucideIcon]="loaderIcon" [size]="iconSize"></svg>
+    <svg [lucideIcon]="loaderIcon"></svg>
   </span>
   }
   <!-- Succeeded state -->
   @if (succeeded && !loading) {
   <span class="ohmyui-btn__icon ohmyui-btn__icon--left" aria-hidden="true">
-    <svg [lucideIcon]="succeededIcon" [size]="iconSize"></svg>
+    <svg [lucideIcon]="succeededIcon"></svg>
   </span>
   }
   <!-- Leading icon -->
   @if (icon && !loading && !succeeded && iconPosition === 'left') {
   <span class="ohmyui-btn__icon ohmyui-btn__icon--left" aria-hidden="true">
-    <svg [lucideIcon]="icon" [size]="iconSize"></svg>
+    <svg [lucideIcon]="icon"></svg>
   </span>
   }
   <!-- Label -->
@@ -99,7 +99,7 @@
   <!-- Trailing icon -->
   @if (icon && !loading && !succeeded && iconPosition === 'right') {
   <span class="ohmyui-btn__icon ohmyui-btn__icon--right" aria-hidden="true">
-    <svg [lucideIcon]="icon" [size]="iconSize"></svg>
+    <svg [lucideIcon]="icon"></svg>
   </span>
   }
 </ng-template>

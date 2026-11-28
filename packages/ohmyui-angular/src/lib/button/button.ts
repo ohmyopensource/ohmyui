@@ -133,12 +133,6 @@ export class ButtonComponent {
   /** Emitted on click, unless the button is disabled, loading or succeeded. */
   @Output() clicked = new EventEmitter<MouseEvent>();
 
-  /** Size in pixels of the icon for the current size. */
-  get iconSize(): number {
-    const map: Record<ButtonSize, number> = { xs: 14, sm: 16, md: 18, lg: 20 };
-    return map[this.size];
-  }
-
   /** Whether the button ignores clicks: disabled, loading or succeeded. */
   get isInert(): boolean {
     return this.disabled || this.loading || this.succeeded;

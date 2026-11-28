@@ -54,6 +54,8 @@ export default {
   source: [
     'src/border.json',
     'src/colors.json',
+    'src/control.json',
+    'src/icon.json',
     'src/radius.json',
     'src/semantic.json',
     'src/shadow.json',
