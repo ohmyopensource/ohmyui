@@ -26,7 +26,6 @@ import {
   ElementRef,
   inject,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { LucideDynamicIcon, LucideIconData } from '@lucide/angular';
 import { OhmyuiI18n } from '../i18n/i18n';
 
@@ -72,7 +71,7 @@ export type TabStyle = 'line' | 'pill' | 'card' | 'underline';
 @Component({
   selector: 'ohmyui-tabs',
   standalone: true,
-  imports: [CommonModule, LucideDynamicIcon],
+  imports: [LucideDynamicIcon],
   templateUrl: './tabs.html',
   styleUrl: './tabs.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -98,6 +97,11 @@ export class TabsComponent {
   @Input() fullWidth = false;
   /** Whether the tabs are stacked vertically. */
   @Input() vertical = false;
+  /**
+   * Accessible label of the tab list. When empty, the label of the current
+   * language is used.
+   */
+  @Input() ariaLabel = '';
 
   /** Emitted with the id of the tab that the user selects. */
   @Output() tabChange = new EventEmitter<string>();
@@ -118,14 +122,9 @@ export class TabsComponent {
     return tab.id === this.activeTab;
   }
 
-  /** Size in pixels of the icons for the current size. */
-  get iconSize(): number {
-    return { sm: 14, md: 16, lg: 18 }[this.size];
-  }
-
-  /** Accessible label of the tab list, in the current language. */
+  /** Accessible label of the tab list: `ariaLabel` or the current language. */
   get listLabel(): string {
-    return this.i18n.messages().tabs.label;
+    return this.ariaLabel || this.i18n.messages().tabs.label;
   }
 
   /** CSS classes of the tab list. */

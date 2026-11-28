@@ -51,6 +51,12 @@ number.
   spacing, so that every platform can share the same type scale.
 - Text exposes `--ohmyui-text-gradient-start`, `--ohmyui-text-gradient-end`,
   `--ohmyui-text-underline-offset` and `--ohmyui-text-blockquote-border-width`.
+- Tabs has an `ariaLabel` input for the label of the tab list, which
+  otherwise is the generic label of the current language, and exposes
+  `--ohmyui-tabs-border-width`, `--ohmyui-tabs-line-border-width`,
+  `--ohmyui-tabs-underline-border-width`, `--ohmyui-tabs-indicator-height`,
+  `--ohmyui-tabs-indicator-radius`, `--ohmyui-tabs-shadow-geometry` and
+  `--ohmyui-tabs-pill-badge-active-bg`.
 
 ### Changed
 
@@ -95,11 +101,15 @@ number.
   (`md` and `lg` were 13.6 and 15.2px there), and only the padding does.
   Padding and spacing follow the text; the heights do not change. The ripple
   lasts 500ms instead of 550ms, and the press feedback 50ms instead of 80ms.
+- Tabs takes its font sizes from the type scale: 13, 15 and 17px for `sm`,
+  `md` and `lg`, instead of 12.48, 14 and 16px. The padding follows the text,
+  so the tabs are 1 to 2.5px taller.
 
 ### Removed
 
-- The `iconSize` getter of Button and the `iconSize` and `closeSize` getters
-  of Badge: the icons take their size from the styles of the components.
+- The `iconSize` getters of Button and Tabs and the `iconSize` and `closeSize`
+  getters of Badge: the icons take their size from the styles of the
+  components.
 
 ### Fixed
 
@@ -125,6 +135,11 @@ number.
 - Badge shows the status dot next to the text (`dot`) at the size of the
   badge: 5, 6, 7 and 8px for the sizes `xs` to `lg`. Before, the dot had no
   size and did not show.
+- Tabs colors the active tab with every variant in every style. Before, the
+  indicator of `line` and `underline` was always primary, the text of
+  `underline` ignored `tertiary`, the badge of `line` ignored `tertiary` and
+  `warning`, and the badge of `card` was always primary. The hover colors of
+  the inactive tabs, which never applied, now apply.
 
 ## [0.1.0] - 2026-11-24
 

@@ -16,6 +16,7 @@
  */
 
 import type { Meta, StoryObj } from '@storybook/angular';
+import { useArgs } from 'storybook/preview-api';
 import {
   LucideHouse,
   LucideSettings,
@@ -71,6 +72,17 @@ const meta: Meta<TabsComponent> = {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     fullWidth: { control: 'boolean' },
     vertical: { control: 'boolean' },
+    ariaLabel: { control: 'text' },
+  },
+  render: (args) => {
+    // Update activeTab from the event: the component does not change it itself.
+    const [, updateArgs] = useArgs();
+    return {
+      props: {
+        ...args,
+        tabChange: (id: string) => updateArgs({ activeTab: id }),
+      },
+    };
   },
 };
 export default meta;

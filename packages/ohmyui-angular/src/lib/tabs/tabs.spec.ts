@@ -82,6 +82,20 @@ describe('TabsComponent', () => {
     expect(buttons.length).toBe(4);
   });
 
+  describe('accessible label', () => {
+    it('should label the tab list in the current language by default', () => {
+      fixture.detectChanges();
+      const list = fixture.nativeElement.querySelector('[role="tablist"]');
+      expect(list.getAttribute('aria-label')).toBe('Tabs');
+    });
+    it('should use ariaLabel when set', () => {
+      component.ariaLabel = 'Account sections';
+      fixture.detectChanges();
+      const list = fixture.nativeElement.querySelector('[role="tablist"]');
+      expect(list.getAttribute('aria-label')).toBe('Account sections');
+    });
+  });
+
   describe('roving tabindex', () => {
     it('should set tabindex 0 only on the active tab', () => {
       fixture.detectChanges();
