@@ -285,11 +285,6 @@ export class InputComponent implements ControlValueAccessor {
     return 'default';
   }
 
-  /** Size in pixels of the icons for the current size. */
-  get iconSize(): number {
-    return { sm: 14, md: 16, lg: 18 }[this.size];
-  }
-
   /** Whether the clear button is shown. */
   get showClearBtn(): boolean {
     return this.clearable && !!this.value && !this.disabled && !this.readonly;
@@ -344,7 +339,8 @@ export class InputComponent implements ControlValueAccessor {
       'ohmyui-input-wrapper__field',
       `ohmyui-input-wrapper__field--${this.size}`,
       `ohmyui-input-wrapper__field--${this.variant}`,
-      `ohmyui-input-wrapper__field--${this.status}`,
+      this.status === 'error' ? 'ohmyui-input-wrapper__field--invalid' : '',
+      this.status === 'success' ? 'ohmyui-input-wrapper__field--valid' : '',
       this.isFocused() ? 'ohmyui-input-wrapper__field--focused' : '',
       this.disabled ? 'ohmyui-input-wrapper__field--disabled' : '',
       this.readonly ? 'ohmyui-input-wrapper__field--readonly' : '',

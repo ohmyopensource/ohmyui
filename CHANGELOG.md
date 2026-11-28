@@ -66,6 +66,8 @@ number.
   `--ohmyui-checkbox-box-size-xs` to `--ohmyui-checkbox-box-size-lg` and the
   colors of the empty box: `--ohmyui-checkbox-box-border`,
   `--ohmyui-checkbox-box-border-hover` and `--ohmyui-checkbox-box-bg`.
+- Input exposes `--ohmyui-input-border-width`,
+  `--ohmyui-input-focus-ring-width` and `--ohmyui-input-textarea-min-height`.
 
 ### Changed
 
@@ -130,12 +132,19 @@ number.
   a 15px legend and a 13px description and error, instead of 14 and 12.8px.
   The error state of Checkbox has the class `ohmyui-checkbox--invalid`:
   `ohmyui-checkbox--error` is now only the class of the `error` variant.
+- Input takes its heights from `--ohmyui-control-height-*` and its font sizes
+  from the type scale: 13, 15 and 17px for `sm`, `md` and `lg`, instead of
+  12.8, 14 and 16px, and 13px for the label, the prefix, the suffix and the
+  hint, instead of 13.12 or 12px. The validation state has the classes
+  `ohmyui-input-wrapper__field--invalid` and
+  `ohmyui-input-wrapper__field--valid`: `--error` and `--success` are now only
+  the classes of the variants.
 
 ### Removed
 
-- The `iconSize` getters of Button, Checkbox, Email, Link, Pagination and Tabs
-  and the `iconSize` and `closeSize` getters of Badge: the icons take their
-  size from the styles of the components.
+- The `iconSize` getters of Button, Checkbox, Email, Input, Link, Pagination
+  and Tabs and the `iconSize` and `closeSize` getters of Badge: the icons take
+  their size from the styles of the components.
 
 ### Fixed
 
@@ -173,6 +182,9 @@ number.
   The description and the error line up with the box of every size, instead
   of the box of `md`, and the box keeps its color on hover when it is checked
   or in the error state.
+- Input: the `success` and `error` variants color the field only when it has
+  the focus, like the other variants. Before, the field looked validated. A
+  field with an error or a success message keeps its border color on hover.
 
 ## [0.1.0] - 2026-11-24
 

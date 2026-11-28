@@ -47,6 +47,29 @@ describe('InputComponent', () => {
     expect(component.fullWidth).toBe(true);
   });
 
+  it('should keep the validation state apart from the variant', () => {
+    component.variant = 'error';
+    expect(component.fieldClasses).toContain(
+      'ohmyui-input-wrapper__field--error',
+    );
+    expect(component.fieldClasses).not.toContain(
+      'ohmyui-input-wrapper__field--invalid',
+    );
+    component.variant = 'primary';
+    component.errorMessage = 'Required';
+    expect(component.fieldClasses).toContain(
+      'ohmyui-input-wrapper__field--invalid',
+    );
+    expect(component.fieldClasses).not.toContain(
+      'ohmyui-input-wrapper__field--error',
+    );
+    component.errorMessage = '';
+    component.successMessage = 'Looks good';
+    expect(component.fieldClasses).toContain(
+      'ohmyui-input-wrapper__field--valid',
+    );
+  });
+
   describe('min and max attributes', () => {
     it('should render min="0" on the native input, not omit it', () => {
       component.type = 'number';

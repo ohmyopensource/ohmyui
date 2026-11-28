@@ -39,7 +39,7 @@
       class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--left"
       aria-hidden="true"
     >
-      <svg [lucideIcon]="iconLeft" [size]="iconSize"></svg>
+      <svg [lucideIcon]="iconLeft"></svg>
     </span>
     }
     <!-- Native input -->
@@ -126,10 +126,7 @@
       [attr.aria-label]="passwordToggleLabel"
       (click)="togglePassword()"
     >
-      <svg
-        [lucideIcon]="showPassword() ? iconEyeOff : iconEye"
-        [size]="iconSize"
-      ></svg>
+      <svg [lucideIcon]="showPassword() ? iconEyeOff : iconEye"></svg>
     </button>
     }
     <!-- Clear button -->
@@ -140,7 +137,7 @@
       [attr.aria-label]="clearLabel"
       (click)="onClear()"
     >
-      <svg [lucideIcon]="iconClear" [size]="iconSize"></svg>
+      <svg [lucideIcon]="iconClear"></svg>
     </button>
     }
     <!-- Right icon -->
@@ -149,7 +146,7 @@
       class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right"
       aria-hidden="true"
     >
-      <svg [lucideIcon]="iconRight" [size]="iconSize"></svg>
+      <svg [lucideIcon]="iconRight"></svg>
     </span>
     }
     <!-- Status icon -->
@@ -159,10 +156,7 @@
       class="ohmyui-input-wrapper__icon ohmyui-input-wrapper__icon--right ohmyui-input-wrapper__icon--status"
       aria-hidden="true"
     >
-      <svg
-        [lucideIcon]="status === 'error' ? iconError : iconSuccess"
-        [size]="iconSize"
-      ></svg>
+      <svg [lucideIcon]="status === 'error' ? iconError : iconSuccess"></svg>
     </span>
     }
     <!-- Suffix -->
