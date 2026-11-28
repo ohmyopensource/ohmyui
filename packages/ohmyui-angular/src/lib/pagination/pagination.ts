@@ -190,17 +190,6 @@ export class PaginationComponent implements OnChanges {
     return items;
   }
 
-  /** Size in pixels of the icons for the current size. */
-  get iconSize(): number {
-    const map: Record<PaginationSize, number> = {
-      xs: 12,
-      sm: 14,
-      md: 16,
-      lg: 18,
-    };
-    return map[this.size];
-  }
-
   /** Texts of the pagination in the current language. */
   get texts(): OhmyuiMessages['pagination'] {
     return this.i18n.messages().pagination;

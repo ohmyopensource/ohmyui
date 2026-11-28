@@ -17,6 +17,7 @@
  */
 
 import type { Meta, StoryObj } from '@storybook/angular';
+import { useArgs } from 'storybook/preview-api';
 import { PaginationComponent } from './pagination';
 
 const meta: Meta<PaginationComponent> = {
@@ -46,6 +47,20 @@ const meta: Meta<PaginationComponent> = {
     showFirstLast: { control: 'boolean' },
     showJumpToPage: { control: 'boolean' },
     disabled: { control: 'boolean' },
+    showFirstLastOnMobile: { control: 'boolean' },
+  },
+  render: (args) => {
+    // Update the page and the page size from the events: the component does
+    // not change them itself.
+    const [, updateArgs] = useArgs();
+    return {
+      props: {
+        ...args,
+        pageChange: (page: number) => updateArgs({ currentPage: page }),
+        pageSizeChange: (size: number) =>
+          updateArgs({ pageSize: size, currentPage: 1 }),
+      },
+    };
   },
 };
 export default meta;

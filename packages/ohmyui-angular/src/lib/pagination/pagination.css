@@ -32,6 +32,10 @@
   --ohmyui-pagination-minimal-warning: var(--ohmyui-color-warning-dark);
   --ohmyui-pagination-minimal-error: var(--ohmyui-color-error-dark);
   --ohmyui-pagination-minimal-info: var(--ohmyui-color-info-dark);
+  --ohmyui-pagination-border-width: 1.5px;
+  --ohmyui-pagination-shadow-geometry: 0 2px 8px;
+  --ohmyui-pagination-focus-ring-width: 3px;
+  --ohmyui-pagination-first-last-mobile-display: inline-flex;
   /* Keep the arrow stroke equal to --ohmyui-color-neutral-400: a data URI
      cannot read custom properties. */
   --ohmyui-pagination-select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa0ad' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
@@ -61,10 +65,10 @@
   align-items: center;
   flex-wrap: wrap;
   flex-direction: row;
-  gap: 0.5rem;
+  gap: var(--ohmyui-spacing-2);
   width: 100%;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: var(--ohmyui-font-weight-medium);
   user-select: none;
 }
 
@@ -72,18 +76,20 @@
 .ohmyui-pagination__size-label {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
+  gap: var(--ohmyui-spacing-1-5);
+  font-size: var(--ohmyui-font-size-sm);
   color: var(--ohmyui-color-neutral-500);
 }
 .ohmyui-pagination__size-select {
   appearance: none;
   background: var(--ohmyui-pagination-field-bg);
-  border: 1.5px solid var(--ohmyui-pagination-field-border);
+  border: var(--ohmyui-pagination-border-width) solid
+    var(--ohmyui-pagination-field-border);
   border-radius: var(--ohmyui-radius-sm);
   color: var(--ohmyui-color-neutral-600);
   font-family: inherit;
-  font-weight: 600;
+  font-size: inherit;
+  font-weight: var(--ohmyui-font-weight-semibold);
   cursor: pointer;
   outline: none;
   transition:
@@ -101,7 +107,7 @@
 .ohmyui-pagination__controls {
   display: flex;
   align-items: center;
-  gap: 0.2rem;
+  gap: var(--ohmyui-spacing-1);
 }
 
 /* Button */
@@ -110,13 +116,13 @@
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1.5px solid transparent;
+  border: var(--ohmyui-pagination-border-width) solid transparent;
   border-radius: var(--ohmyui-radius-sm);
   color: var(--ohmyui-color-neutral-500);
   cursor: pointer;
   font-family: inherit;
-  font-weight: 600;
-  line-height: 1;
+  font-weight: var(--ohmyui-font-weight-semibold);
+  line-height: var(--ohmyui-font-line-height-none);
   outline: none;
   transition:
     background var(--ohmyui-transition-duration-fast)
@@ -133,6 +139,10 @@
 .ohmyui-pagination__btn--icon {
   padding: 0.4em;
 }
+.ohmyui-pagination__btn--icon svg {
+  width: var(--ohmyui-pagination-icon-size);
+  height: var(--ohmyui-pagination-icon-size);
+}
 .ohmyui-pagination__btn--page {
   min-width: 2.2em;
   padding: 0.35em 0.5em;
@@ -147,16 +157,16 @@
   justify-content: center;
   min-width: 2.2em;
   color: var(--ohmyui-pagination-ellipsis-color);
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  font-weight: var(--ohmyui-font-weight-bold);
+  letter-spacing: var(--ohmyui-font-letter-spacing-wider);
   cursor: default;
 }
 
 /* Mobile info */
 .ohmyui-pagination__mobile-info {
   display: none;
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: var(--ohmyui-font-size-sm);
+  font-weight: var(--ohmyui-font-weight-bold);
   color: var(--ohmyui-color-neutral-500);
   min-width: 4em;
   text-align: center;
@@ -166,19 +176,20 @@
 .ohmyui-pagination__jump {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
+  gap: var(--ohmyui-spacing-1-5);
+  font-size: var(--ohmyui-font-size-sm);
   color: var(--ohmyui-color-neutral-500);
 }
 .ohmyui-pagination__jump-input {
   width: 4em;
   padding: 0.3em 0.5em;
   background: var(--ohmyui-pagination-field-bg);
-  border: 1.5px solid var(--ohmyui-pagination-field-border);
+  border: var(--ohmyui-pagination-border-width) solid
+    var(--ohmyui-pagination-field-border);
   border-radius: var(--ohmyui-radius-sm);
   color: var(--ohmyui-color-neutral-600);
   font-family: inherit;
-  font-weight: 600;
+  font-weight: var(--ohmyui-font-weight-semibold);
   font-size: inherit;
   text-align: center;
   outline: none;
@@ -197,16 +208,16 @@
 
 /* Info */
 .ohmyui-pagination__info {
-  font-size: 0.8rem;
+  font-size: var(--ohmyui-font-size-sm);
   color: var(--ohmyui-color-neutral-500);
   white-space: nowrap;
   width: 100%;
   text-align: center;
-  margin-top: 0.2rem;
+  margin-top: var(--ohmyui-spacing-1);
 }
 .ohmyui-pagination__info-range,
 .ohmyui-pagination__info-total {
-  font-weight: 700;
+  font-weight: var(--ohmyui-font-weight-bold);
   color: var(--ohmyui-color-neutral-600);
 }
 .ohmyui-pagination__info--empty {
@@ -215,8 +226,9 @@
 
 /* Sizes */
 .ohmyui-pagination--xs {
-  font-size: 0.7rem;
-  gap: 0.3rem;
+  --ohmyui-pagination-icon-size: var(--ohmyui-icon-size-xs);
+  font-size: var(--ohmyui-font-size-xs);
+  gap: var(--ohmyui-spacing-1);
 }
 .ohmyui-pagination--xs .ohmyui-pagination__btn--icon {
   padding: 0.25em;
@@ -227,11 +239,12 @@
 }
 .ohmyui-pagination--xs .ohmyui-pagination__size-select,
 .ohmyui-pagination--xs .ohmyui-pagination__jump-input {
-  font-size: 0.7rem;
+  font-size: var(--ohmyui-font-size-xs);
 }
 .ohmyui-pagination--sm {
-  font-size: 0.8rem;
-  gap: 0.35rem;
+  --ohmyui-pagination-icon-size: var(--ohmyui-icon-size-sm);
+  font-size: var(--ohmyui-font-size-sm);
+  gap: var(--ohmyui-spacing-1-5);
 }
 .ohmyui-pagination--sm .ohmyui-pagination__btn--icon {
   padding: 0.3em;
@@ -242,14 +255,16 @@
 }
 .ohmyui-pagination--sm .ohmyui-pagination__size-select,
 .ohmyui-pagination--sm .ohmyui-pagination__jump-input {
-  font-size: 0.8rem;
+  font-size: var(--ohmyui-font-size-sm);
 }
 .ohmyui-pagination--md {
-  font-size: 0.875rem;
+  --ohmyui-pagination-icon-size: var(--ohmyui-icon-size-md);
+  font-size: var(--ohmyui-font-size-md);
 }
 .ohmyui-pagination--lg {
-  font-size: 1rem;
-  gap: 0.6rem;
+  --ohmyui-pagination-icon-size: var(--ohmyui-icon-size-lg);
+  font-size: var(--ohmyui-font-size-lg);
+  gap: var(--ohmyui-spacing-2-5);
 }
 .ohmyui-pagination--lg .ohmyui-pagination__btn--icon {
   padding: 0.5em;
@@ -259,189 +274,111 @@
   padding: 0.45em 0.6em;
 }
 
+/* Variants */
+.ohmyui-pagination--primary {
+  --ohmyui-pagination-active-light: var(--ohmyui-color-primary-light);
+  --ohmyui-pagination-active-dark: var(--ohmyui-color-primary-dark);
+  --ohmyui-pagination-active-text: var(--ohmyui-color-primary-text);
+  --ohmyui-pagination-active-shadow: var(--ohmyui-color-primary-shadow);
+  --ohmyui-pagination-active-minimal: var(--ohmyui-pagination-minimal-primary);
+}
+.ohmyui-pagination--secondary {
+  --ohmyui-pagination-active-light: var(--ohmyui-color-secondary-light);
+  --ohmyui-pagination-active-dark: var(--ohmyui-color-secondary-dark);
+  --ohmyui-pagination-active-text: var(--ohmyui-color-secondary-text);
+  --ohmyui-pagination-active-shadow: var(--ohmyui-color-secondary-shadow);
+  --ohmyui-pagination-active-minimal: var(
+    --ohmyui-pagination-minimal-secondary
+  );
+}
+.ohmyui-pagination--tertiary {
+  --ohmyui-pagination-active-light: var(--ohmyui-color-tertiary-light);
+  --ohmyui-pagination-active-dark: var(--ohmyui-color-tertiary-dark);
+  --ohmyui-pagination-active-text: var(--ohmyui-color-tertiary-text);
+  --ohmyui-pagination-active-shadow: var(--ohmyui-color-tertiary-shadow);
+  --ohmyui-pagination-active-minimal: var(--ohmyui-pagination-minimal-tertiary);
+}
+.ohmyui-pagination--success {
+  --ohmyui-pagination-active-light: var(--ohmyui-color-success-light);
+  --ohmyui-pagination-active-dark: var(--ohmyui-color-success-dark);
+  --ohmyui-pagination-active-text: var(--ohmyui-color-success-text);
+  --ohmyui-pagination-active-shadow: var(--ohmyui-color-success-shadow);
+  --ohmyui-pagination-active-minimal: var(--ohmyui-pagination-minimal-success);
+}
+.ohmyui-pagination--warning {
+  --ohmyui-pagination-active-light: var(--ohmyui-color-warning-light);
+  --ohmyui-pagination-active-dark: var(--ohmyui-color-warning-dark);
+  --ohmyui-pagination-active-text: var(--ohmyui-color-warning-text);
+  --ohmyui-pagination-active-shadow: var(--ohmyui-color-warning-shadow);
+  --ohmyui-pagination-active-minimal: var(--ohmyui-pagination-minimal-warning);
+}
+.ohmyui-pagination--error {
+  --ohmyui-pagination-active-light: var(--ohmyui-color-error-light);
+  --ohmyui-pagination-active-dark: var(--ohmyui-color-error-dark);
+  --ohmyui-pagination-active-text: var(--ohmyui-color-error-text);
+  --ohmyui-pagination-active-shadow: var(--ohmyui-color-error-shadow);
+  --ohmyui-pagination-active-minimal: var(--ohmyui-pagination-minimal-error);
+}
+.ohmyui-pagination--info {
+  --ohmyui-pagination-active-light: var(--ohmyui-color-info-light);
+  --ohmyui-pagination-active-dark: var(--ohmyui-color-info-dark);
+  --ohmyui-pagination-active-text: var(--ohmyui-color-info-text);
+  --ohmyui-pagination-active-shadow: var(--ohmyui-color-info-shadow);
+  --ohmyui-pagination-active-minimal: var(--ohmyui-pagination-minimal-info);
+}
+
+/* First and last on mobile */
+.ohmyui-pagination--hide-first-last-mobile {
+  --ohmyui-pagination-first-last-mobile-display: none;
+}
+
 /* States */
 .ohmyui-pagination__btn:not(:disabled):hover {
   background: var(--ohmyui-pagination-button-hover-bg);
   border-color: var(--ohmyui-pagination-button-hover-border);
   color: var(--ohmyui-pagination-button-hover-color);
-  transform: translateY(-1px);
+  transform: translateY(calc(-1 * var(--ohmyui-spacing-px)));
 }
 .ohmyui-pagination__btn:not(:disabled):active {
   transform: translateY(0) scale(0.95);
 }
 .ohmyui-pagination__size-select:focus {
   border-color: var(--ohmyui-color-primary-dark);
-  box-shadow: 0 0 0 3px var(--ohmyui-color-primary-focus);
+  box-shadow: var(--ohmyui-shadow-focus-primary);
 }
 .ohmyui-pagination__btn:focus-visible {
-  outline: 3px solid var(--ohmyui-color-primary-focus);
-  outline-offset: 2px;
+  outline: var(--ohmyui-pagination-focus-ring-width) solid
+    var(--ohmyui-color-primary-focus);
+  outline-offset: var(--ohmyui-spacing-0-5);
 }
 .ohmyui-pagination__jump-input:focus {
   border-color: var(--ohmyui-color-primary-dark);
-  box-shadow: 0 0 0 3px var(--ohmyui-color-primary-focus);
+  box-shadow: var(--ohmyui-shadow-focus-primary);
 }
-.ohmyui-pagination--primary .ohmyui-pagination__btn--active {
+/* Keep the soft and minimal rules after this one: they override it. */
+.ohmyui-pagination .ohmyui-pagination__btn--active {
   background: linear-gradient(
     135deg,
-    var(--ohmyui-color-primary-light),
-    var(--ohmyui-color-primary-dark)
+    var(--ohmyui-pagination-active-light),
+    var(--ohmyui-pagination-active-dark)
   );
-  border-color: var(--ohmyui-color-primary-dark);
-  color: var(--ohmyui-color-primary-text);
-  box-shadow: 0 2px 8px var(--ohmyui-color-primary-shadow);
+  border-color: var(--ohmyui-pagination-active-dark);
+  color: var(--ohmyui-pagination-active-text);
+  box-shadow: var(--ohmyui-pagination-shadow-geometry)
+    var(--ohmyui-pagination-active-shadow);
   cursor: default;
   pointer-events: none;
 }
-.ohmyui-pagination--secondary .ohmyui-pagination__btn--active {
-  background: linear-gradient(
-    135deg,
-    var(--ohmyui-color-secondary-light),
-    var(--ohmyui-color-secondary-dark)
-  );
-  border-color: var(--ohmyui-color-secondary-dark);
-  color: var(--ohmyui-color-secondary-text);
-  box-shadow: 0 2px 8px var(--ohmyui-color-secondary-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--tertiary .ohmyui-pagination__btn--active {
-  background: linear-gradient(
-    135deg,
-    var(--ohmyui-color-tertiary-light),
-    var(--ohmyui-color-tertiary-dark)
-  );
-  border-color: var(--ohmyui-color-tertiary-dark);
-  color: var(--ohmyui-color-tertiary-text);
-  box-shadow: 0 2px 8px var(--ohmyui-color-tertiary-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--success .ohmyui-pagination__btn--active {
-  background: linear-gradient(
-    135deg,
-    var(--ohmyui-color-success-light),
-    var(--ohmyui-color-success-dark)
-  );
-  border-color: var(--ohmyui-color-success-dark);
-  color: var(--ohmyui-color-success-text);
-  box-shadow: 0 2px 8px var(--ohmyui-color-success-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--warning .ohmyui-pagination__btn--active {
-  background: linear-gradient(
-    135deg,
-    var(--ohmyui-color-warning-light),
-    var(--ohmyui-color-warning-dark)
-  );
-  border-color: var(--ohmyui-color-warning-dark);
-  color: var(--ohmyui-color-warning-text);
-  box-shadow: 0 2px 8px var(--ohmyui-color-warning-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--error .ohmyui-pagination__btn--active {
-  background: linear-gradient(
-    135deg,
-    var(--ohmyui-color-error-light),
-    var(--ohmyui-color-error-dark)
-  );
-  border-color: var(--ohmyui-color-error-dark);
-  color: var(--ohmyui-color-error-text);
-  box-shadow: 0 2px 8px var(--ohmyui-color-error-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--info .ohmyui-pagination__btn--active {
-  background: linear-gradient(
-    135deg,
-    var(--ohmyui-color-info-light),
-    var(--ohmyui-color-info-dark)
-  );
-  border-color: var(--ohmyui-color-info-dark);
-  color: var(--ohmyui-color-info-text);
-  box-shadow: 0 2px 8px var(--ohmyui-color-info-shadow);
-  cursor: default;
-  pointer-events: none;
-}
-/* Keep the soft and minimal rules after the filled ones: they override them. */
 .ohmyui-pagination--soft .ohmyui-pagination__btn--active {
-  background: var(--ohmyui-color-primary-light);
-  border-color: var(--ohmyui-color-primary-dark);
-  color: var(--ohmyui-color-primary-text);
+  background: var(--ohmyui-pagination-active-light);
   box-shadow: none;
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--soft.ohmyui-pagination--secondary
-  .ohmyui-pagination__btn--active {
-  background: var(--ohmyui-color-secondary-light);
-  border-color: var(--ohmyui-color-secondary-dark);
-  color: var(--ohmyui-color-secondary-text);
-}
-.ohmyui-pagination--soft.ohmyui-pagination--tertiary
-  .ohmyui-pagination__btn--active {
-  background: var(--ohmyui-color-tertiary-light);
-  border-color: var(--ohmyui-color-tertiary-dark);
-  color: var(--ohmyui-color-tertiary-text);
-}
-.ohmyui-pagination--soft.ohmyui-pagination--success
-  .ohmyui-pagination__btn--active {
-  background: var(--ohmyui-color-success-light);
-  border-color: var(--ohmyui-color-success-dark);
-  color: var(--ohmyui-color-success-text);
-}
-.ohmyui-pagination--soft.ohmyui-pagination--warning
-  .ohmyui-pagination__btn--active {
-  background: var(--ohmyui-color-warning-light);
-  border-color: var(--ohmyui-color-warning-dark);
-  color: var(--ohmyui-color-warning-text);
-}
-.ohmyui-pagination--soft.ohmyui-pagination--error
-  .ohmyui-pagination__btn--active {
-  background: var(--ohmyui-color-error-light);
-  border-color: var(--ohmyui-color-error-dark);
-  color: var(--ohmyui-color-error-text);
-}
-.ohmyui-pagination--soft.ohmyui-pagination--info
-  .ohmyui-pagination__btn--active {
-  background: var(--ohmyui-color-info-light);
-  border-color: var(--ohmyui-color-info-dark);
-  color: var(--ohmyui-color-info-text);
 }
 .ohmyui-pagination--minimal .ohmyui-pagination__btn--active {
   background: transparent;
   border-color: transparent;
   box-shadow: none;
-  color: var(--ohmyui-pagination-minimal-primary);
-  font-weight: 800;
-  cursor: default;
-  pointer-events: none;
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--secondary
-  .ohmyui-pagination__btn--active {
-  color: var(--ohmyui-pagination-minimal-secondary);
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--tertiary
-  .ohmyui-pagination__btn--active {
-  color: var(--ohmyui-pagination-minimal-tertiary);
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--success
-  .ohmyui-pagination__btn--active {
-  color: var(--ohmyui-pagination-minimal-success);
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--warning
-  .ohmyui-pagination__btn--active {
-  color: var(--ohmyui-pagination-minimal-warning);
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--error
-  .ohmyui-pagination__btn--active {
-  color: var(--ohmyui-pagination-minimal-error);
-}
-.ohmyui-pagination--minimal.ohmyui-pagination--info
-  .ohmyui-pagination__btn--active {
-  color: var(--ohmyui-pagination-minimal-info);
+  color: var(--ohmyui-pagination-active-minimal);
+  font-weight: var(--ohmyui-font-weight-extrabold);
 }
 .ohmyui-pagination__btn:disabled {
   opacity: 0.35;
@@ -455,8 +392,8 @@
 /* Responsive */
 @media (max-width: 768px) {
   .ohmyui-pagination {
-    gap: 0.4rem;
-    font-size: 0.82rem;
+    gap: var(--ohmyui-spacing-1-5);
+    font-size: var(--ohmyui-font-size-sm);
   }
   .ohmyui-pagination__info {
     display: none;
@@ -468,7 +405,7 @@
 @media (max-width: 480px) {
   .ohmyui-pagination {
     justify-content: center;
-    gap: 0.4rem;
+    gap: var(--ohmyui-spacing-1-5);
   }
   .ohmyui-pagination__pages {
     display: none;
@@ -490,19 +427,19 @@
     display: none;
   }
   .ohmyui-pagination__controls {
-    gap: 0.6rem;
+    gap: var(--ohmyui-spacing-2-5);
   }
   .ohmyui-pagination__btn--icon {
     padding: 0.6em;
     min-width: 2.4em;
     min-height: 2.4em;
     background: var(--ohmyui-pagination-field-bg);
-    border: 1.5px solid var(--ohmyui-color-neutral-200);
+    border: var(--ohmyui-pagination-border-width) solid
+      var(--ohmyui-color-neutral-200);
     border-radius: var(--ohmyui-radius-sm);
     color: var(--ohmyui-color-neutral-600);
   }
-  .ohmyui-pagination--hide-first-last-mobile
-    .ohmyui-pagination__btn--first-last {
-    display: none;
+  .ohmyui-pagination__btn--first-last {
+    display: var(--ohmyui-pagination-first-last-mobile-display);
   }
 }

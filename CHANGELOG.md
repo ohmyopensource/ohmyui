@@ -57,6 +57,9 @@ number.
   `--ohmyui-tabs-underline-border-width`, `--ohmyui-tabs-indicator-height`,
   `--ohmyui-tabs-indicator-radius`, `--ohmyui-tabs-shadow-geometry` and
   `--ohmyui-tabs-pill-badge-active-bg`.
+- Pagination exposes `--ohmyui-pagination-border-width`,
+  `--ohmyui-pagination-shadow-geometry` and
+  `--ohmyui-pagination-focus-ring-width`.
 
 ### Changed
 
@@ -104,12 +107,17 @@ number.
 - Tabs takes its font sizes from the type scale: 13, 15 and 17px for `sm`,
   `md` and `lg`, instead of 12.48, 14 and 16px. The padding follows the text,
   so the tabs are 1 to 2.5px taller.
+- Pagination takes its font sizes from the type scale: 11, 13, 15 and 17px
+  for `xs` to `lg`, instead of 11.2, 12.8, 14 and 16px, and 13px for its labels
+  and texts, instead of 12.8 or 13.6px (13.12px on screens up to 768px wide).
+  The gaps take the nearest step of the spacing scale, for example 6px instead
+  of 6.4px.
 
 ### Removed
 
-- The `iconSize` getters of Button and Tabs and the `iconSize` and `closeSize`
-  getters of Badge: the icons take their size from the styles of the
-  components.
+- The `iconSize` getters of Button, Pagination and Tabs and the `iconSize` and
+  `closeSize` getters of Badge: the icons take their size from the styles of
+  the components.
 
 ### Fixed
 
@@ -140,6 +148,8 @@ number.
   `underline` ignored `tertiary`, the badge of `line` ignored `tertiary` and
   `warning`, and the badge of `card` was always primary. The hover colors of
   the inactive tabs, which never applied, now apply.
+- Pagination: the page size select of the sizes `md` and `lg` takes the font
+  size of its label instead of the default size of the browser.
 
 ## [0.1.0] - 2026-11-24
 

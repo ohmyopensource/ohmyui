@@ -51,7 +51,7 @@
       [attr.aria-label]="texts.firstPage"
       (click)="goFirst()"
     >
-      <svg [lucideIcon]="iconFirst" [size]="iconSize"></svg>
+      <svg [lucideIcon]="iconFirst"></svg>
     </button>
     }
     <!-- Previous page -->
@@ -62,7 +62,7 @@
       [attr.aria-label]="texts.previousPage"
       (click)="goPrev()"
     >
-      <svg [lucideIcon]="iconPrev" [size]="iconSize"></svg>
+      <svg [lucideIcon]="iconPrev"></svg>
     </button>
     <!-- Page list -->
     <div class="ohmyui-pagination__pages" role="list">
@@ -102,7 +102,7 @@
       [attr.aria-label]="texts.nextPage"
       (click)="goNext()"
     >
-      <svg [lucideIcon]="iconNext" [size]="iconSize"></svg>
+      <svg [lucideIcon]="iconNext"></svg>
     </button>
     <!-- Last page -->
     @if (showFirstLast) {
@@ -113,7 +113,7 @@
       [attr.aria-label]="texts.lastPage"
       (click)="goLast()"
     >
-      <svg [lucideIcon]="iconLast" [size]="iconSize"></svg>
+      <svg [lucideIcon]="iconLast"></svg>
     </button>
     }
   </div>
