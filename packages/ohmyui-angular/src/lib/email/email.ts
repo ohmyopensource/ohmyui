@@ -65,12 +65,6 @@ export class EmailComponent {
   /** Whether the text is underlined on hover. */
   @Input() underline = true;
 
-  /** Size in pixels of the icon for the current size. */
-  get iconSize(): number {
-    const map: Record<EmailSize, number> = { sm: 12, md: 14, lg: 16 };
-    return map[this.size];
-  }
-
   /** Visible text: the label, or the address. */
   get displayLabel(): string {
     return this.label || this.email;

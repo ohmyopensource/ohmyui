@@ -61,6 +61,7 @@ number.
   `--ohmyui-pagination-shadow-geometry` and
   `--ohmyui-pagination-focus-ring-width`.
 - Link exposes `--ohmyui-link-icon-size`.
+- Email exposes `--ohmyui-email-icon-size`.
 
 ### Changed
 
@@ -116,10 +117,13 @@ number.
 - Link takes its font sizes from the type scale: 13, 15 and 17px for `sm`,
   `md` and `lg`, instead of 12, 14 and 16px, and sizes its icon in proportion
   to the text (`0.875em`).
+- Email takes its font sizes from the type scale: 13, 15 and 17px for `sm`,
+  `md` and `lg`, instead of 12, 14 and 16px, and sizes its icon as the text
+  (`1em`), so the icon grows with it by 1px.
 
 ### Removed
 
-- The `iconSize` getters of Button, Link, Pagination and Tabs and the
+- The `iconSize` getters of Button, Email, Link, Pagination and Tabs and the
   `iconSize` and `closeSize` getters of Badge: the icons take their size from
   the styles of the components.
 

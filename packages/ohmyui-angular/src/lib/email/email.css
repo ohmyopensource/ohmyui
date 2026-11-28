@@ -20,6 +20,7 @@
   display: contents;
   --ohmyui-email-primary-color: var(--ohmyui-color-primary-dark);
   --ohmyui-email-secondary-color: var(--ohmyui-color-secondary-dark);
+  --ohmyui-email-icon-size: 1em;
 }
 
 /* Dark theme */
@@ -33,7 +34,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35em;
-  font-weight: 500;
+  font-weight: var(--ohmyui-font-weight-medium);
   text-decoration: none;
   transition: color var(--ohmyui-transition-duration-normal)
     var(--ohmyui-transition-easing-ease-in-out);
@@ -45,16 +46,20 @@
   align-items: center;
   flex-shrink: 0;
 }
+.ohmyui-email-link__icon svg {
+  width: var(--ohmyui-email-icon-size);
+  height: var(--ohmyui-email-icon-size);
+}
 
 /* Sizes */
 .ohmyui-email-link--sm {
-  font-size: 0.75rem;
+  font-size: var(--ohmyui-font-size-sm);
 }
 .ohmyui-email-link--md {
-  font-size: 0.875rem;
+  font-size: var(--ohmyui-font-size-md);
 }
 .ohmyui-email-link--lg {
-  font-size: 1rem;
+  font-size: var(--ohmyui-font-size-lg);
 }
 
 /* Variants */
