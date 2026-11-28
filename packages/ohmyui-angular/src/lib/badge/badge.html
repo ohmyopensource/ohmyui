@@ -30,7 +30,7 @@
   <!-- Left icon -->
   @if (icon && iconPosition === 'left' && !isCountMode) {
   <span class="ohmyui-badge__icon ohmyui-badge__icon--left" aria-hidden="true">
-    <svg [lucideIcon]="icon" [size]="iconSize"></svg>
+    <svg [lucideIcon]="icon"></svg>
   </span>
   }
   <!-- Content -->
@@ -42,7 +42,7 @@
   <!-- Right icon -->
   @if (icon && iconPosition === 'right' && !isCountMode) {
   <span class="ohmyui-badge__icon ohmyui-badge__icon--right" aria-hidden="true">
-    <svg [lucideIcon]="icon" [size]="iconSize"></svg>
+    <svg [lucideIcon]="icon"></svg>
   </span>
   }
   <!-- Remove action -->
@@ -53,7 +53,7 @@
     [attr.aria-label]="removeLabel"
     (click)="onRemove($event)"
   >
-    <svg [lucideIcon]="closeIcon" [size]="closeSize"></svg>
+    <svg [lucideIcon]="closeIcon"></svg>
   </button>
   }
 </span>

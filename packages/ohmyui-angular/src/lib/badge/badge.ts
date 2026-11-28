@@ -94,18 +94,6 @@ export class BadgeComponent {
   /** Emitted when the remove button is clicked. */
   @Output() removed = new EventEmitter<void>();
 
-  /** Size in pixels of the icon for the current size. */
-  get iconSize(): number {
-    const map: Record<BadgeSize, number> = { xs: 10, sm: 11, md: 12, lg: 14 };
-    return map[this.size];
-  }
-
-  /** Size in pixels of the remove icon for the current size. */
-  get closeSize(): number {
-    const map: Record<BadgeSize, number> = { xs: 9, sm: 10, md: 11, lg: 12 };
-    return map[this.size];
-  }
-
   /** Accessible label of the remove button, in the current language. */
   get removeLabel(): string {
     const texts = this.i18n.messages().badge;
